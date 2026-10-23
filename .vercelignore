@@ -19,7 +19,7 @@ adversarial*.json
 audit*.json
 challenger*.json
 
-# Top-level test scripts (assets/ scripts are preserved)
+# Top-level test scripts
 audit_*.js
 check_*.js
 test_*.js
@@ -28,11 +28,20 @@ inspect_*.js
 measure_*.js
 verify_*.js
 
-# Audit & benchmark PNG images
-*.png
+# Root-level audit & benchmark PNG images ONLY (never touch assets/textures!)
+/*.png
 
-# Exclude unnecessary models in assets/ if duplicates exist
+# Unused scratch models in assets
 assets/soldier.glb
 assets/horse.glb
 assets/queen.glb
 assets/elephant.glb
+
+# Explicitly ensure all runtime assets and textures are included!
+!assets/**
+!assets/textures/**
+!assets/textures/*.png
+!assets/*.glb
+!assets/*.js
+!assets/*.mp3
+!assets/*.ogg

@@ -3846,6 +3846,7 @@
     const stoneDarkEmis = StoneTextureManager.stoneDarkEmis;
 
     const lightTileMat = new THREE.MeshStandardMaterial({
+      color: 0xf5edd6, // Warm Makrana white marble base
       map: stoneLightDiff,
       normalMap: stoneLightNorm,
       normalScale: new THREE.Vector2(1.8, 1.8),
@@ -3854,10 +3855,11 @@
       metalness: 0.08,
       emissiveMap: stoneLightEmis,
       emissive: new THREE.Color(0xbfa15f),
-      emissiveIntensity: 0.65
+      emissiveIntensity: 0.25
     });
 
     const darkTileMat = new THREE.MeshStandardMaterial({
+      color: 0x221c18, // Deep royal Udaipur dark granite base
       map: stoneDarkDiff,
       normalMap: stoneDarkNorm,
       normalScale: new THREE.Vector2(1.8, 1.8),
@@ -3866,7 +3868,7 @@
       metalness: 0.14,
       emissiveMap: stoneDarkEmis,
       emissive: new THREE.Color(0xd94406),
-      emissiveIntensity: 0.60
+      emissiveIntensity: 0.20
     });
 
     // Stone Dais Base Plinth (Decoupled & recessed; top face at y = -0.060, tiles sole top surface at y = 0.000)
@@ -3899,17 +3901,22 @@
       }
     }
 
-    // Engraved Runic Grid Lines (Single seamless quad overlay, eliminating physical brass boxes & Z-fighting)
-    const runicGridTexture = StoneTextureManager.loader.load('assets/textures/runic_grid.png');
+    // Engraved Runic Grid Lines (Only visible when texture with alpha cutout is loaded, preventing solid black overlays)
+    let runicGridMesh = null;
+    const runicGridTexture = StoneTextureManager.loader.load('assets/textures/runic_grid.png', () => {
+      if (runicGridMesh) runicGridMesh.visible = true;
+    }, undefined, () => {
+      if (runicGridMesh) runicGridMesh.visible = false;
+    });
     runicGridTexture.encoding = THREE.sRGBEncoding;
     runicGridTexture.anisotropy = 16;
     const runicGridMat = new THREE.MeshStandardMaterial({
       map: runicGridTexture,
       transparent: true,
       opacity: 0.92,
-      color: 0x991b1b, // Dark blood-stained ancient runic red undertone
-      emissive: new THREE.Color(0x3f0713),
-      emissiveIntensity: 0.45,
+      color: 0xffffff, // Transparent alpha channel with gold/crimson filigree lines
+      emissive: new THREE.Color(0xbfa15f),
+      emissiveIntensity: 0.35,
       roughness: 0.38,
       metalness: 0.85,
       depthWrite: false,
@@ -3917,9 +3924,10 @@
       polygonOffsetFactor: -1.0,
       polygonOffsetUnits: -4.0
     });
-    const runicGridMesh = new THREE.Mesh(new THREE.PlaneGeometry(16.0, 16.0), runicGridMat);
+    runicGridMesh = new THREE.Mesh(new THREE.PlaneGeometry(16.0, 16.0), runicGridMat);
     runicGridMesh.rotation.x = -Math.PI / 2;
     runicGridMesh.position.set(0, 0.0015, 0);
+    runicGridMesh.visible = false; // Stay hidden until alpha texture loads successfully!
     battlefieldGroup.add(runicGridMesh);
 
     // -------------------------------------------------------------------------

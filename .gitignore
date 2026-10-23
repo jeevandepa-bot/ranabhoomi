@@ -26,3 +26,5 @@ Launcher.cs
 
 # Node modules if any
 node_modules/
+
+.vercel
