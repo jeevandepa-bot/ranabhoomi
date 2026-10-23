@@ -121,9 +121,93 @@
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
     ::-webkit-scrollbar-thumb { background: rgba(245, 158, 11, 0.35); border-radius: 9999px; }
+
+    /* Mobile Landscape Advisory Overlay & Responsive Polish */
+    #landscapeAdvisoryOverlay {
+      display: none;
+      background: radial-gradient(circle at 50% 40%, rgba(20, 24, 38, 0.96) 0%, rgba(9, 11, 18, 0.98) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    @media screen and (orientation: portrait) and (max-width: 920px) {
+      body:not(.portrait-override) #landscapeAdvisoryOverlay {
+        display: flex !important;
+      }
+    }
+    @keyframes phoneRotateAnim {
+      0%, 15% { transform: rotate(0deg); }
+      50%, 85% { transform: rotate(-90deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .phone-rotate-icon {
+      animation: phoneRotateAnim 2.8s ease-in-out infinite;
+      transform-origin: center center;
+    }
+
+    /* Mobile Touch Targets & Header Responsiveness (360px-430px & Landscape) */
+    @media screen and (max-width: 768px), screen and (max-height: 520px) {
+      .mobile-touch-btn {
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+      }
+      .mobile-scale-text {
+        font-size: 0.78rem !important;
+      }
+    }
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+      /* In mobile landscape, shrink top header and telemetry so battlefield has maximum viewable height */
+      #battlefieldHud {
+        padding: 0.35rem 0.75rem !important;
+      }
+      #unitTelemetryCard {
+        max-width: 22rem !important;
+        padding: 0.4rem 0.75rem !important;
+      }
+      #unitTelemetryDesc {
+        display: none !important; /* Hide long description in tight landscape to preserve chessboard clearance */
+      }
+    }
   </style>
 </head>
 <body class="relative w-full h-full select-none overflow-hidden">
+
+  <!-- Mobile Landscape Advisory Modal -->
+  <div id="landscapeAdvisoryOverlay" class="fixed inset-0 z-50 flex-col items-center justify-center p-6 text-center select-none">
+    <div class="relative max-w-sm p-6 rounded-2xl bg-gradient-to-b from-[#181c2a] to-[#0d101a] border border-amber-500/40 shadow-2xl shadow-black/90 regal-corner flex flex-col items-center">
+      
+      <!-- Animated Rotate Device Icon -->
+      <div class="relative w-24 h-24 mb-5 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full bg-amber-500/10 animate-ping"></div>
+        <div class="phone-rotate-icon w-14 h-20 rounded-xl border-2 border-amber-400 bg-slate-900/80 shadow-lg shadow-amber-500/20 flex flex-col items-center justify-between py-1.5 px-1">
+          <div class="w-4 h-1 rounded-full bg-amber-400/60"></div>
+          <div class="w-8 h-10 rounded border border-dashed border-amber-400/40 flex items-center justify-center text-amber-300 text-xs font-regal">3D</div>
+          <div class="w-2 h-2 rounded-full border border-amber-400"></div>
+        </div>
+        <svg class="absolute -top-1 -right-1 w-7 h-7 text-amber-400 animate-spin" style="animation-duration: 6s;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      </div>
+
+      <div class="inline-block px-3 py-1 mb-2 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 font-sanskrit text-xs tracking-wider">
+        रणभूमि // TACTICAL COMMAND
+      </div>
+      <h3 class="font-regal text-xl font-black text-amber-200 tracking-wider mb-2">ROTATE TO LANDSCAPE</h3>
+      <p class="text-xs text-slate-300 leading-relaxed mb-6 font-kinetic">
+        For the full 3D panoramic battlefield, cinematic camera controls, and tactical overview, please rotate your device to landscape mode.
+      </p>
+
+      <div class="flex flex-col w-full gap-2.5">
+        <button id="btnTryRotateLock" onclick="tryRequestLandscape()" class="w-full py-3 px-4 rounded-xl font-regal text-sm font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black shadow-lg shadow-amber-500/30 active:scale-95 transition-all">
+          🔄 Rotate &amp; Enter Battlefield
+        </button>
+        <button id="btnDismissPortrait" onclick="dismissLandscapeAdvisory()" class="w-full py-2 px-3 rounded-lg text-xs font-kinetic text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+          Continue in Portrait Anyway
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Royal Ranbhoomi 3D Asset & Audio Preloader -->
   <div id="loadingScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#090b12] transition-opacity duration-700">
@@ -280,7 +364,7 @@
     <!-- Bottom Tactical Bar: Selected Piece Info + Touch Orbit Pad -->
     <div class="max-w-7xl w-full mx-auto flex flex-wrap items-end justify-between gap-3">
       <!-- Selected Unit Telemetry Card -->
-      <div class="mg-panel regal-corner px-4 py-3 rounded-xl pointer-events-auto max-w-lg w-full sm:w-auto">
+      <div id="unitTelemetryCard" class="mg-panel regal-corner px-4 py-3 rounded-xl pointer-events-auto max-w-lg w-full sm:w-auto">
         <div class="flex items-center justify-between gap-4">
           <span id="unitTelemetryTag" class="text-[10px] font-kinetic uppercase tracking-[0.24em] text-amber-400">UNIT TELEMETRY // योद्धा विवरण</span>
           <span id="moveCountBadge" class="text-[10px] font-kinetic uppercase tracking-widest px-2 py-0.5 rounded bg-white/5 text-slate-300">TURN #1</span>
@@ -294,12 +378,12 @@
       <!-- On-Screen Camera Orbit Pad -->
       <div class="mg-panel px-3 py-2 rounded-xl pointer-events-auto flex items-center gap-1.5">
         <span class="text-[10px] font-kinetic uppercase tracking-widest text-amber-400 mr-1 hidden sm:inline">3D Cam:</span>
-        <button id="orbitLeftBtn" class="mg-btn w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center" title="Orbit Left">⟲</button>
-        <button id="orbitRightBtn" class="mg-btn w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center" title="Orbit Right">⟳</button>
-        <button id="pitchUpBtn" class="mg-btn w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center" title="Tilt Up">▲</button>
-        <button id="pitchDownBtn" class="mg-btn w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center" title="Tilt Down">▼</button>
-        <button id="zoomInBtn" class="mg-btn w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center" title="Zoom In">＋</button>
-        <button id="zoomOutBtn" class="mg-btn w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center" title="Zoom Out">－</button>
+        <button id="orbitLeftBtn" class="mg-btn mobile-touch-btn w-12 h-12 md:w-9 md:h-9 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center active:scale-95" title="Orbit Left">⟲</button>
+        <button id="orbitRightBtn" class="mg-btn mobile-touch-btn w-12 h-12 md:w-9 md:h-9 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center active:scale-95" title="Orbit Right">⟳</button>
+        <button id="pitchUpBtn" class="mg-btn mobile-touch-btn w-12 h-12 md:w-9 md:h-9 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center active:scale-95" title="Tilt Up">▲</button>
+        <button id="pitchDownBtn" class="mg-btn mobile-touch-btn w-12 h-12 md:w-9 md:h-9 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center active:scale-95" title="Tilt Down">▼</button>
+        <button id="zoomInBtn" class="mg-btn mobile-touch-btn w-12 h-12 md:w-9 md:h-9 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center active:scale-95" title="Zoom In">＋</button>
+        <button id="zoomOutBtn" class="mg-btn mobile-touch-btn w-12 h-12 md:w-9 md:h-9 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center active:scale-95" title="Zoom Out">－</button>
       </div>
     </div>
   </div>
@@ -6299,8 +6383,39 @@
       document.getElementById('specsModal').classList.add('hidden');
     });
 
-    // Window Resize
+    // Window Resize & Mobile Orientation Management
+    function tryRequestLandscape() {
+      try {
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(() => {});
+        }
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        }
+      } catch (e) {}
+    }
+    window.tryRequestLandscape = tryRequestLandscape;
+
+    function dismissLandscapeAdvisory() {
+      document.body.classList.add('portrait-override');
+    }
+    window.dismissLandscapeAdvisory = dismissLandscapeAdvisory;
+
+    window.addEventListener('orientationchange', () => {
+      if (window.innerWidth > window.innerHeight) {
+        document.body.classList.remove('portrait-override');
+      }
+      setTimeout(() => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }, 200);
+    });
+
     window.addEventListener('resize', () => {
+      if (window.innerWidth > window.innerHeight) {
+        document.body.classList.remove('portrait-override');
+      }
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
