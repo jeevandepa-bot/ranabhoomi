@@ -1,7 +1,7 @@
 const { spawn } = require('child_process');
 const fs = require('fs');
 
-async function shot(filename = 'current_battlefield_env.png') {
+async function shot(filename = 'current_battlefield_env.png', targetUrl = 'http://localhost:8080/index.html') {
   const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
   const chrome = spawn(chromePath, [
     '--headless=new',
@@ -9,7 +9,7 @@ async function shot(filename = 'current_battlefield_env.png') {
     '--disable-gpu-sandbox',
     '--window-size=1920,1080',
     '--user-data-dir=C:\\Users\\Jeevan\\AppData\\Local\\Temp\\chrome_debug_env',
-    'http://localhost:8080/index.html'
+    targetUrl
   ]);
 
   let res, tabs;
@@ -23,7 +23,7 @@ async function shot(filename = 'current_battlefield_env.png') {
     }
   }
 
-  const target = tabs.find(t => t.type === 'page' && t.url.includes('localhost:8080')) || tabs[0];
+  const target = tabs.find(t => t.type === 'page') || tabs[0];
   const ws = new WebSocket(target.webSocketDebuggerUrl);
   let id = 1;
   const p = new Map();
@@ -59,4 +59,5 @@ async function shot(filename = 'current_battlefield_env.png') {
 }
 
 const outFile = process.argv[2] || 'current_battlefield_env.png';
-shot(outFile);
+const targetUrl = process.argv[3] || 'http://localhost:8080/index.html';
+shot(outFile, targetUrl);
