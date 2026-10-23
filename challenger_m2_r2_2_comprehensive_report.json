@@ -1,0 +1,911 @@
+{
+  "timestamp": "2026-10-22T10:30:36.355Z",
+  "audit32": {
+    "totalUnits": 32,
+    "allFacingPass": true,
+    "whiteFacingFailures": 0,
+    "blackFacingFailures": 0,
+    "invertedScaleDetected": false,
+    "units": [
+      {
+        "id": 0,
+        "cell": "Unit_0",
+        "team": "White",
+        "type": "Rook",
+        "rootZ": 7,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Elephant_Tusk_R",
+          "deltaZ": -0.8828
+        },
+        "rearFeature": {
+          "name": "Elephant_Kada_3",
+          "deltaZ": -0.4698
+        },
+        "featureDeltaDiff": 0.413,
+        "minZMesh": {
+          "name": "Elephant_Tusk_R",
+          "deltaZ": -0.8828
+        },
+        "maxZMesh": {
+          "name": "Elephant_Kada_0",
+          "deltaZ": 0.4665
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 1,
+        "cell": "Unit_1",
+        "team": "White",
+        "type": "Pawn",
+        "rootZ": 5,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Padati_Dhal_CenterBoss",
+          "deltaZ": -0.2609
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "featureDeltaDiff": 0.355,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.2874
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 2,
+        "cell": "Unit_2",
+        "team": "Black",
+        "type": "Pawn",
+        "rootZ": -5,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Padati_Dhal",
+          "deltaZ": 0.222
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "featureDeltaDiff": 0.3161,
+        "minZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "maxZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": 0.2842
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 3,
+        "cell": "Unit_3",
+        "team": "Black",
+        "type": "Rook",
+        "rootZ": -7,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Elephant_Tusk_R",
+          "deltaZ": 0.8766
+        },
+        "rearFeature": {
+          "name": "Elephant_Kada_1",
+          "deltaZ": -0.4667
+        },
+        "featureDeltaDiff": 1.3433,
+        "minZMesh": {
+          "name": "Elephant_Kada_1",
+          "deltaZ": -0.4667
+        },
+        "maxZMesh": {
+          "name": "Elephant_Tusk_L",
+          "deltaZ": 0.8829
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 4,
+        "cell": "Unit_4",
+        "team": "White",
+        "type": "Knight",
+        "rootZ": 7,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Horse_LyreEar_L",
+          "deltaZ": -0.6844
+        },
+        "rearFeature": {
+          "name": "Horse_Body",
+          "deltaZ": 0.1455
+        },
+        "featureDeltaDiff": 0.8299,
+        "minZMesh": {
+          "name": "Horse_LyreEar_L",
+          "deltaZ": -0.6844
+        },
+        "maxZMesh": {
+          "name": "Horse_Body",
+          "deltaZ": 0.1455
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 5,
+        "cell": "Unit_5",
+        "team": "White",
+        "type": "Pawn",
+        "rootZ": 5,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Padati_Dhal_CenterBoss",
+          "deltaZ": -0.2719
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "featureDeltaDiff": 0.366,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.2758
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 6,
+        "cell": "Unit_6",
+        "team": "Black",
+        "type": "Pawn",
+        "rootZ": -5,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Padati_Dhal",
+          "deltaZ": 0.2205
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "featureDeltaDiff": 0.3146,
+        "minZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "maxZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": 0.2858
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 7,
+        "cell": "Unit_7",
+        "team": "Black",
+        "type": "Knight",
+        "rootZ": -7,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Horse_LyreEar_R",
+          "deltaZ": 0.6831
+        },
+        "rearFeature": {
+          "name": "Horse_Body",
+          "deltaZ": -0.1456
+        },
+        "featureDeltaDiff": 0.8287,
+        "minZMesh": {
+          "name": "Horse_Body",
+          "deltaZ": -0.1456
+        },
+        "maxZMesh": {
+          "name": "Horse_LyreEar_L",
+          "deltaZ": 0.6847
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 8,
+        "cell": "Unit_8",
+        "team": "White",
+        "type": "Bishop",
+        "rootZ": 7,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Chariot_Varutha",
+          "deltaZ": -0.6778
+        },
+        "rearFeature": {
+          "name": "Chariot_Flagstaff",
+          "deltaZ": 0.5905
+        },
+        "featureDeltaDiff": 1.2683,
+        "minZMesh": {
+          "name": "Chariot_Varutha",
+          "deltaZ": -0.6778
+        },
+        "maxZMesh": {
+          "name": "Chariot_Flagstaff",
+          "deltaZ": 0.5905
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 9,
+        "cell": "Unit_9",
+        "team": "White",
+        "type": "Pawn",
+        "rootZ": 5,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Padati_Dhal_CenterBoss",
+          "deltaZ": -0.2603
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "featureDeltaDiff": 0.3544,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.288
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 10,
+        "cell": "Unit_10",
+        "team": "Black",
+        "type": "Pawn",
+        "rootZ": -5,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Padati_Dhal",
+          "deltaZ": 0.23
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "featureDeltaDiff": 0.3241,
+        "minZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "maxZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": 0.2757
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 11,
+        "cell": "Unit_11",
+        "team": "Black",
+        "type": "Bishop",
+        "rootZ": -7,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Chariot_Varutha",
+          "deltaZ": 0.6778
+        },
+        "rearFeature": {
+          "name": "Chariot_Flagstaff",
+          "deltaZ": -0.6024
+        },
+        "featureDeltaDiff": 1.2802,
+        "minZMesh": {
+          "name": "Chariot_Flagstaff",
+          "deltaZ": -0.6024
+        },
+        "maxZMesh": {
+          "name": "Chariot_Varutha",
+          "deltaZ": 0.6778
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 12,
+        "cell": "Unit_12",
+        "team": "White",
+        "type": "Queen",
+        "rootZ": 7,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "unnamed",
+          "deltaZ": -0.4563
+        },
+        "rearFeature": {
+          "name": "Maharani_Mantle",
+          "deltaZ": 0.1255
+        },
+        "featureDeltaDiff": null,
+        "minZMesh": {
+          "name": "unnamed",
+          "deltaZ": -0.4563
+        },
+        "maxZMesh": {
+          "name": "Maharani_Mantle",
+          "deltaZ": 0.1255
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 13,
+        "cell": "Unit_13",
+        "team": "White",
+        "type": "Pawn",
+        "rootZ": 5,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Padati_Dhal_CenterBoss",
+          "deltaZ": -0.2678
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "featureDeltaDiff": 0.3619,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.2802
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 14,
+        "cell": "Unit_14",
+        "team": "Black",
+        "type": "Pawn",
+        "rootZ": -5,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Padati_Dhal",
+          "deltaZ": 0.2234
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "featureDeltaDiff": 0.3175,
+        "minZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "maxZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": 0.2827
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 15,
+        "cell": "Unit_15",
+        "team": "Black",
+        "type": "Queen",
+        "rootZ": -7,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "unnamed",
+          "deltaZ": 0.4559
+        },
+        "rearFeature": {
+          "name": "Maharani_Mantle",
+          "deltaZ": -0.1255
+        },
+        "featureDeltaDiff": null,
+        "minZMesh": {
+          "name": "Maharani_Mantle",
+          "deltaZ": -0.1255
+        },
+        "maxZMesh": {
+          "name": "unnamed",
+          "deltaZ": 0.4559
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 16,
+        "cell": "Unit_16",
+        "team": "White",
+        "type": "King",
+        "rootZ": 7,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "unnamed",
+          "deltaZ": -0.7032
+        },
+        "rearFeature": {
+          "name": "Chhatra_Finial",
+          "deltaZ": 0.1909
+        },
+        "featureDeltaDiff": null,
+        "minZMesh": {
+          "name": "unnamed",
+          "deltaZ": -0.7032
+        },
+        "maxZMesh": {
+          "name": "Chhatra_Staff",
+          "deltaZ": 0.2049
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 17,
+        "cell": "Unit_17",
+        "team": "White",
+        "type": "Pawn",
+        "rootZ": 5,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Padati_Dhal_CenterBoss",
+          "deltaZ": -0.2602
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "featureDeltaDiff": 0.3543,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.2881
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 18,
+        "cell": "Unit_18",
+        "team": "Black",
+        "type": "Pawn",
+        "rootZ": -5,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Padati_Dhal",
+          "deltaZ": 0.2171
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "featureDeltaDiff": 0.3112,
+        "minZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "maxZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": 0.2893
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 19,
+        "cell": "Unit_19",
+        "team": "Black",
+        "type": "King",
+        "rootZ": -7,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "unnamed",
+          "deltaZ": 0.703
+        },
+        "rearFeature": {
+          "name": "Chhatra_Staff",
+          "deltaZ": -0.2049
+        },
+        "featureDeltaDiff": null,
+        "minZMesh": {
+          "name": "Chhatra_Staff",
+          "deltaZ": -0.2049
+        },
+        "maxZMesh": {
+          "name": "unnamed",
+          "deltaZ": 0.703
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 20,
+        "cell": "Unit_20",
+        "team": "White",
+        "type": "Bishop",
+        "rootZ": 7,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Chariot_Varutha",
+          "deltaZ": -0.6778
+        },
+        "rearFeature": {
+          "name": "Chariot_Flagstaff",
+          "deltaZ": 0.5995
+        },
+        "featureDeltaDiff": 1.2773,
+        "minZMesh": {
+          "name": "Chariot_Varutha",
+          "deltaZ": -0.6778
+        },
+        "maxZMesh": {
+          "name": "Chariot_Flagstaff",
+          "deltaZ": 0.5995
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 21,
+        "cell": "Unit_21",
+        "team": "White",
+        "type": "Pawn",
+        "rootZ": 5,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Padati_Dhal_CenterBoss",
+          "deltaZ": -0.2641
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "featureDeltaDiff": 0.3582,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.284
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 22,
+        "cell": "Unit_22",
+        "team": "Black",
+        "type": "Pawn",
+        "rootZ": -5,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Padati_Dhal",
+          "deltaZ": 0.2184
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "featureDeltaDiff": 0.3125,
+        "minZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "maxZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": 0.2879
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 23,
+        "cell": "Unit_23",
+        "team": "Black",
+        "type": "Bishop",
+        "rootZ": -7,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Chariot_Varutha",
+          "deltaZ": 0.6778
+        },
+        "rearFeature": {
+          "name": "Chariot_Flagstaff",
+          "deltaZ": -0.5976
+        },
+        "featureDeltaDiff": 1.2754,
+        "minZMesh": {
+          "name": "Chariot_Flagstaff",
+          "deltaZ": -0.5976
+        },
+        "maxZMesh": {
+          "name": "Chariot_Varutha",
+          "deltaZ": 0.6778
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 24,
+        "cell": "Unit_24",
+        "team": "White",
+        "type": "Knight",
+        "rootZ": 7,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Horse_LyreEar_R",
+          "deltaZ": -0.6847
+        },
+        "rearFeature": {
+          "name": "Horse_Body",
+          "deltaZ": 0.1451
+        },
+        "featureDeltaDiff": 0.8298,
+        "minZMesh": {
+          "name": "Horse_LyreEar_R",
+          "deltaZ": -0.6847
+        },
+        "maxZMesh": {
+          "name": "Horse_Body",
+          "deltaZ": 0.1451
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 25,
+        "cell": "Unit_25",
+        "team": "White",
+        "type": "Pawn",
+        "rootZ": 5,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Padati_Dhal_CenterBoss",
+          "deltaZ": -0.2696
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "featureDeltaDiff": 0.3637,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.2782
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 26,
+        "cell": "Unit_26",
+        "team": "Black",
+        "type": "Pawn",
+        "rootZ": -5,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Padati_Dhal",
+          "deltaZ": 0.2254
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "featureDeltaDiff": 0.3195,
+        "minZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "maxZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": 0.2806
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 27,
+        "cell": "Unit_27",
+        "team": "Black",
+        "type": "Knight",
+        "rootZ": -7,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Horse_LyreEar_R",
+          "deltaZ": 0.6831
+        },
+        "rearFeature": {
+          "name": "Horse_Body",
+          "deltaZ": -0.1456
+        },
+        "featureDeltaDiff": 0.8287,
+        "minZMesh": {
+          "name": "Horse_Body",
+          "deltaZ": -0.1456
+        },
+        "maxZMesh": {
+          "name": "Horse_LyreEar_L",
+          "deltaZ": 0.6847
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 28,
+        "cell": "Unit_28",
+        "team": "White",
+        "type": "Rook",
+        "rootZ": 7,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Elephant_Tusk_R",
+          "deltaZ": -0.8817
+        },
+        "rearFeature": {
+          "name": "Elephant_Kada_3",
+          "deltaZ": -0.4675
+        },
+        "featureDeltaDiff": 0.4142,
+        "minZMesh": {
+          "name": "Elephant_Tusk_R",
+          "deltaZ": -0.8817
+        },
+        "maxZMesh": {
+          "name": "Elephant_Kada_0",
+          "deltaZ": 0.4642
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 29,
+        "cell": "Unit_29",
+        "team": "White",
+        "type": "Pawn",
+        "rootZ": 5,
+        "rootRotY": 3.1416,
+        "expectedEnemyDirZ": -1,
+        "frontFeature": {
+          "name": "Padati_Dhal_CenterBoss",
+          "deltaZ": -0.2594
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "featureDeltaDiff": 0.3535,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.289
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0941
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 30,
+        "cell": "Unit_30",
+        "team": "Black",
+        "type": "Pawn",
+        "rootZ": -5,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Padati_Dhal",
+          "deltaZ": 0.2235
+        },
+        "rearFeature": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "featureDeltaDiff": 0.3176,
+        "minZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0941
+        },
+        "maxZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": 0.2826
+        },
+        "frontCorrect": true
+      },
+      {
+        "id": 31,
+        "cell": "Unit_31",
+        "team": "Black",
+        "type": "Rook",
+        "rootZ": -7,
+        "rootRotY": 0,
+        "expectedEnemyDirZ": 1,
+        "frontFeature": {
+          "name": "Elephant_Tusk_L",
+          "deltaZ": 0.8768
+        },
+        "rearFeature": {
+          "name": "Elephant_Kada_0",
+          "deltaZ": -0.4665
+        },
+        "featureDeltaDiff": 1.3433,
+        "minZMesh": {
+          "name": "Elephant_Kada_0",
+          "deltaZ": -0.4665
+        },
+        "maxZMesh": {
+          "name": "Elephant_Tusk_R",
+          "deltaZ": 0.8828
+        },
+        "frontCorrect": true
+      }
+    ]
+  },
+  "combatScenarios": [
+    {
+      "name": "White Pawn Diagonal Capture e4xd5",
+      "attackerYawDuringCombat": 3.927,
+      "expectedCombatYaw": -2.3562,
+      "combatYawAligned": false,
+      "postKillYaw": 3.1416,
+      "expectedResetYaw": 3.1416,
+      "postKillYawReset": true,
+      "postDhalDeltaZ": -0.2363,
+      "postDhalFacingEnemy": true
+    },
+    {
+      "name": "Black Queen Orthogonal Recapture d8xd5",
+      "attackerYawDuringCombat": 0,
+      "expectedCombatYaw": 0,
+      "combatYawAligned": true,
+      "postKillYaw": 0,
+      "expectedResetYaw": 0,
+      "postKillYawReset": true,
+      "postFrontMeshMaxZ": {
+        "name": "",
+        "deltaZ": 0.3881
+      },
+      "postFrontFacingEnemy": true
+    },
+    {
+      "name": "White Knight Ballistic L-Move b1->c3",
+      "postMoveYaw": 3.1416,
+      "expectedResetYaw": 3.1416,
+      "postMoveYawReset": true,
+      "earDeltaZ": -0.6141,
+      "earFacingEnemy": true
+    }
+  ]
+}

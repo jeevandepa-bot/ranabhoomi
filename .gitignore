@@ -1,0 +1,28 @@
+# Chrome profile and debug caches
+.temp_chrome_profile_*
+.agents/
+__pycache__/
+
+# Test frame logs and visual regression renders
+orbit_frames/
+pure_board_frames/
+stress_frames/
+temp_frames/
+diff_*.png
+roi_*.png
+patch*.png
+comparison_*.png
+benchmark_*.png
+
+# Temporary and duplicate files
+temp_test.glb
+assets/soldier.glb
+assets/horse.glb
+assets/queen.glb
+assets/elephant.glb
+*.log
+Launcher.cs
+*.lnk
+
+# Node modules if any
+node_modules/

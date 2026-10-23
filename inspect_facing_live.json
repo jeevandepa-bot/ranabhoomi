@@ -1,0 +1,2872 @@
+{
+  "whitePawn": {
+    "rootZ": 5,
+    "rootRotY": 3.142,
+    "enemyDirZ": -1,
+    "minDeltaZMesh": {
+      "name": "Khanda_Tip",
+      "centerZ": 4.677,
+      "deltaZ": -0.323,
+      "minZ": 4.656,
+      "maxZ": 4.699
+    },
+    "maxDeltaZMesh": {
+      "name": "Padati_Plume",
+      "centerZ": 5.062,
+      "deltaZ": 0.062,
+      "minZ": 4.966,
+      "maxZ": 5.159
+    },
+    "allMeshes": [
+      {
+        "name": "Khanda_Tip",
+        "centerZ": 4.677,
+        "deltaZ": -0.323,
+        "minZ": 4.656,
+        "maxZ": 4.699
+      },
+      {
+        "name": "Padati_Dhal_CenterBoss",
+        "centerZ": 4.724,
+        "deltaZ": -0.276,
+        "minZ": 4.651,
+        "maxZ": 4.797
+      },
+      {
+        "name": "SuryaEmblem",
+        "centerZ": 4.725,
+        "deltaZ": -0.275,
+        "minZ": 4.562,
+        "maxZ": 4.888
+      },
+      {
+        "name": "Padati_Dhal_Boss_1",
+        "centerZ": 4.726,
+        "deltaZ": -0.274,
+        "minZ": 4.686,
+        "maxZ": 4.765
+      },
+      {
+        "name": "Padati_Dhal_Boss_0",
+        "centerZ": 4.728,
+        "deltaZ": -0.272,
+        "minZ": 4.689,
+        "maxZ": 4.768
+      },
+      {
+        "name": "Khanda_Blade",
+        "centerZ": 4.729,
+        "deltaZ": -0.271,
+        "minZ": 4.65,
+        "maxZ": 4.808
+      },
+      {
+        "name": "Padati_Dhal_Boss_2",
+        "centerZ": 4.733,
+        "deltaZ": -0.267,
+        "minZ": 4.694,
+        "maxZ": 4.772
+      },
+      {
+        "name": "Padati_Dhal_Boss_3",
+        "centerZ": 4.736,
+        "deltaZ": -0.264,
+        "minZ": 4.696,
+        "maxZ": 4.775
+      },
+      {
+        "name": "Khanda_Fuller",
+        "centerZ": 4.743,
+        "deltaZ": -0.257,
+        "minZ": 4.711,
+        "maxZ": 4.775
+      },
+      {
+        "name": "Padati_Dhal",
+        "centerZ": 4.766,
+        "deltaZ": -0.234,
+        "minZ": 4.728,
+        "maxZ": 4.803
+      },
+      {
+        "name": "Khanda_Guard",
+        "centerZ": 4.771,
+        "deltaZ": -0.229,
+        "minZ": 4.73,
+        "maxZ": 4.812
+      },
+      {
+        "name": "Khanda_Grip",
+        "centerZ": 4.775,
+        "deltaZ": -0.225,
+        "minZ": 4.746,
+        "maxZ": 4.803
+      },
+      {
+        "name": "Khanda_Pommel",
+        "centerZ": 4.778,
+        "deltaZ": -0.222,
+        "minZ": 4.712,
+        "maxZ": 4.844
+      },
+      {
+        "name": "Khanda_PommelSpike",
+        "centerZ": 4.78,
+        "deltaZ": -0.22,
+        "minZ": 4.76,
+        "maxZ": 4.8
+      },
+      {
+        "name": "Padati_ArmR",
+        "centerZ": 4.869,
+        "deltaZ": -0.131,
+        "minZ": 4.725,
+        "maxZ": 5.014
+      },
+      {
+        "name": "Padati_ArmL",
+        "centerZ": 4.874,
+        "deltaZ": -0.126,
+        "minZ": 4.723,
+        "maxZ": 5.025
+      },
+      {
+        "name": "Padati_Head",
+        "centerZ": 4.936,
+        "deltaZ": -0.064,
+        "minZ": 4.781,
+        "maxZ": 5.092
+      },
+      {
+        "name": "Padati_Helm",
+        "centerZ": 4.937,
+        "deltaZ": -0.063,
+        "minZ": 4.754,
+        "maxZ": 5.119
+      },
+      {
+        "name": "Padati_Kavacha",
+        "centerZ": 4.946,
+        "deltaZ": -0.054,
+        "minZ": 4.692,
+        "maxZ": 5.2
+      },
+      {
+        "name": "Padati_Neck",
+        "centerZ": 4.948,
+        "deltaZ": -0.052,
+        "minZ": 4.834,
+        "maxZ": 5.061
+      },
+      {
+        "name": "Padati_Leg_R",
+        "centerZ": 4.959,
+        "deltaZ": -0.041,
+        "minZ": 4.817,
+        "maxZ": 5.101
+      },
+      {
+        "name": "Padati_Leg_L",
+        "centerZ": 4.963,
+        "deltaZ": -0.037,
+        "minZ": 4.821,
+        "maxZ": 5.105
+      },
+      {
+        "name": "Padati_Dhoti",
+        "centerZ": 4.965,
+        "deltaZ": -0.035,
+        "minZ": 4.663,
+        "maxZ": 5.267
+      },
+      {
+        "name": "Padati_Kada_R",
+        "centerZ": 4.995,
+        "deltaZ": -0.005,
+        "minZ": 4.914,
+        "maxZ": 5.076
+      },
+      {
+        "name": "Padati_Kada_L",
+        "centerZ": 4.999,
+        "deltaZ": -0.001,
+        "minZ": 4.919,
+        "maxZ": 5.08
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 5,
+        "deltaZ": 0,
+        "minZ": 4.35,
+        "maxZ": 5.65
+      },
+      {
+        "name": "Padati_Plume",
+        "centerZ": 5.062,
+        "deltaZ": 0.062,
+        "minZ": 4.966,
+        "maxZ": 5.159
+      }
+    ]
+  },
+  "blackPawn": {
+    "rootZ": -5,
+    "rootRotY": 0,
+    "enemyDirZ": 1,
+    "minDeltaZMesh": {
+      "name": "Padati_Plume",
+      "centerZ": -5.062,
+      "deltaZ": -0.062,
+      "minZ": -5.159,
+      "maxZ": -4.965
+    },
+    "maxDeltaZMesh": {
+      "name": "Khanda_Tip",
+      "centerZ": -4.69,
+      "deltaZ": 0.31,
+      "minZ": -4.712,
+      "maxZ": -4.668
+    },
+    "allMeshes": [
+      {
+        "name": "Padati_Plume",
+        "centerZ": -5.062,
+        "deltaZ": -0.062,
+        "minZ": -5.159,
+        "maxZ": -4.965
+      },
+      {
+        "name": "Padati_Kada_R",
+        "centerZ": -5,
+        "deltaZ": 0,
+        "minZ": -5.081,
+        "maxZ": -4.919
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -5,
+        "deltaZ": 0,
+        "minZ": -5.65,
+        "maxZ": -4.35
+      },
+      {
+        "name": "Padati_Kada_L",
+        "centerZ": -4.995,
+        "deltaZ": 0.005,
+        "minZ": -5.076,
+        "maxZ": -4.914
+      },
+      {
+        "name": "Padati_Dhoti",
+        "centerZ": -4.965,
+        "deltaZ": 0.035,
+        "minZ": -5.268,
+        "maxZ": -4.662
+      },
+      {
+        "name": "Padati_Leg_R",
+        "centerZ": -4.964,
+        "deltaZ": 0.036,
+        "minZ": -5.106,
+        "maxZ": -4.821
+      },
+      {
+        "name": "Padati_Leg_L",
+        "centerZ": -4.958,
+        "deltaZ": 0.042,
+        "minZ": -5.101,
+        "maxZ": -4.816
+      },
+      {
+        "name": "Padati_Neck",
+        "centerZ": -4.948,
+        "deltaZ": 0.052,
+        "minZ": -5.061,
+        "maxZ": -4.834
+      },
+      {
+        "name": "Padati_Kavacha",
+        "centerZ": -4.946,
+        "deltaZ": 0.054,
+        "minZ": -5.201,
+        "maxZ": -4.691
+      },
+      {
+        "name": "Padati_Helm",
+        "centerZ": -4.937,
+        "deltaZ": 0.063,
+        "minZ": -5.12,
+        "maxZ": -4.754
+      },
+      {
+        "name": "Padati_Head",
+        "centerZ": -4.936,
+        "deltaZ": 0.064,
+        "minZ": -5.092,
+        "maxZ": -4.78
+      },
+      {
+        "name": "Padati_ArmR",
+        "centerZ": -4.881,
+        "deltaZ": 0.119,
+        "minZ": -5.026,
+        "maxZ": -4.736
+      },
+      {
+        "name": "Padati_ArmL",
+        "centerZ": -4.862,
+        "deltaZ": 0.138,
+        "minZ": -5.014,
+        "maxZ": -4.711
+      },
+      {
+        "name": "Khanda_PommelSpike",
+        "centerZ": -4.793,
+        "deltaZ": 0.207,
+        "minZ": -4.813,
+        "maxZ": -4.772
+      },
+      {
+        "name": "Khanda_Pommel",
+        "centerZ": -4.791,
+        "deltaZ": 0.209,
+        "minZ": -4.857,
+        "maxZ": -4.725
+      },
+      {
+        "name": "Khanda_Grip",
+        "centerZ": -4.787,
+        "deltaZ": 0.213,
+        "minZ": -4.816,
+        "maxZ": -4.759
+      },
+      {
+        "name": "Khanda_Guard",
+        "centerZ": -4.783,
+        "deltaZ": 0.217,
+        "minZ": -4.825,
+        "maxZ": -4.742
+      },
+      {
+        "name": "Khanda_Fuller",
+        "centerZ": -4.755,
+        "deltaZ": 0.245,
+        "minZ": -4.788,
+        "maxZ": -4.723
+      },
+      {
+        "name": "Padati_Dhal",
+        "centerZ": -4.754,
+        "deltaZ": 0.246,
+        "minZ": -4.792,
+        "maxZ": -4.715
+      },
+      {
+        "name": "Khanda_Blade",
+        "centerZ": -4.742,
+        "deltaZ": 0.258,
+        "minZ": -4.821,
+        "maxZ": -4.663
+      },
+      {
+        "name": "SuryaEmblem",
+        "centerZ": -4.725,
+        "deltaZ": 0.275,
+        "minZ": -4.889,
+        "maxZ": -4.561
+      },
+      {
+        "name": "Padati_Dhal_Boss_3",
+        "centerZ": -4.724,
+        "deltaZ": 0.276,
+        "minZ": -4.763,
+        "maxZ": -4.684
+      },
+      {
+        "name": "Padati_Dhal_Boss_0",
+        "centerZ": -4.721,
+        "deltaZ": 0.279,
+        "minZ": -4.761,
+        "maxZ": -4.682
+      },
+      {
+        "name": "Padati_Dhal_Boss_2",
+        "centerZ": -4.716,
+        "deltaZ": 0.284,
+        "minZ": -4.755,
+        "maxZ": -4.676
+      },
+      {
+        "name": "Padati_Dhal_Boss_1",
+        "centerZ": -4.714,
+        "deltaZ": 0.286,
+        "minZ": -4.753,
+        "maxZ": -4.674
+      },
+      {
+        "name": "Padati_Dhal_CenterBoss",
+        "centerZ": -4.712,
+        "deltaZ": 0.288,
+        "minZ": -4.785,
+        "maxZ": -4.639
+      },
+      {
+        "name": "Khanda_Tip",
+        "centerZ": -4.69,
+        "deltaZ": 0.31,
+        "minZ": -4.712,
+        "maxZ": -4.668
+      }
+    ]
+  },
+  "whiteRook": {
+    "rootZ": 7,
+    "rootRotY": 3.142,
+    "enemyDirZ": -1,
+    "minDeltaZMesh": {
+      "name": "Elephant_Tusk_R",
+      "centerZ": 6.106,
+      "deltaZ": -0.894,
+      "minZ": 5.837,
+      "maxZ": 6.376
+    },
+    "maxDeltaZMesh": {
+      "name": "Elephant_Kada_0",
+      "centerZ": 7.459,
+      "deltaZ": 0.459,
+      "minZ": 7.307,
+      "maxZ": 7.612
+    },
+    "allMeshes": [
+      {
+        "name": "Elephant_Tusk_R",
+        "centerZ": 6.106,
+        "deltaZ": -0.894,
+        "minZ": 5.837,
+        "maxZ": 6.376
+      },
+      {
+        "name": "Elephant_Tusk_L",
+        "centerZ": 6.107,
+        "deltaZ": -0.893,
+        "minZ": 5.838,
+        "maxZ": 6.377
+      },
+      {
+        "name": "Elephant_Ferrule_R",
+        "centerZ": 6.338,
+        "deltaZ": -0.662,
+        "minZ": 6.29,
+        "maxZ": 6.387
+      },
+      {
+        "name": "Elephant_Ferrule_L",
+        "centerZ": 6.339,
+        "deltaZ": -0.661,
+        "minZ": 6.291,
+        "maxZ": 6.387
+      },
+      {
+        "name": "Elephant_Eye_R",
+        "centerZ": 6.409,
+        "deltaZ": -0.591,
+        "minZ": 6.378,
+        "maxZ": 6.44
+      },
+      {
+        "name": "Elephant_Eye_L",
+        "centerZ": 6.41,
+        "deltaZ": -0.59,
+        "minZ": 6.379,
+        "maxZ": 6.441
+      },
+      {
+        "name": "Elephant_Chamfron",
+        "centerZ": 6.411,
+        "deltaZ": -0.589,
+        "minZ": 6.275,
+        "maxZ": 6.547
+      },
+      {
+        "name": "Elephant_Kada_3",
+        "centerZ": 6.534,
+        "deltaZ": -0.466,
+        "minZ": 6.381,
+        "maxZ": 6.686
+      },
+      {
+        "name": "Elephant_Kada_2",
+        "centerZ": 6.536,
+        "deltaZ": -0.464,
+        "minZ": 6.383,
+        "maxZ": 6.688
+      },
+      {
+        "name": "Howdah_Pillar_1",
+        "centerZ": 6.592,
+        "deltaZ": -0.408,
+        "minZ": 6.553,
+        "maxZ": 6.632
+      },
+      {
+        "name": "Howdah_Pillar_0",
+        "centerZ": 6.594,
+        "deltaZ": -0.406,
+        "minZ": 6.555,
+        "maxZ": 6.633
+      },
+      {
+        "name": "Howdah_Finial",
+        "centerZ": 6.924,
+        "deltaZ": -0.076,
+        "minZ": 6.867,
+        "maxZ": 6.982
+      },
+      {
+        "name": "Howdah_Dome",
+        "centerZ": 6.933,
+        "deltaZ": -0.067,
+        "minZ": 6.419,
+        "maxZ": 7.448
+      },
+      {
+        "name": "Howdah_Base",
+        "centerZ": 6.958,
+        "deltaZ": -0.042,
+        "minZ": 6.471,
+        "maxZ": 7.445
+      },
+      {
+        "name": "Elephant_Jhul",
+        "centerZ": 6.967,
+        "deltaZ": -0.033,
+        "minZ": 6.431,
+        "maxZ": 7.502
+      },
+      {
+        "name": "Elephant_Body",
+        "centerZ": 6.982,
+        "deltaZ": -0.018,
+        "minZ": 6.101,
+        "maxZ": 7.862
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7,
+        "deltaZ": 0,
+        "minZ": 6.09,
+        "maxZ": 7.91
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7.07,
+        "deltaZ": 0.07,
+        "minZ": 6.765,
+        "maxZ": 7.375
+      },
+      {
+        "name": "Howdah_Pillar_3",
+        "centerZ": 7.298,
+        "deltaZ": 0.298,
+        "minZ": 7.259,
+        "maxZ": 7.337
+      },
+      {
+        "name": "Howdah_Pillar_2",
+        "centerZ": 7.299,
+        "deltaZ": 0.299,
+        "minZ": 7.26,
+        "maxZ": 7.338
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7.304,
+        "deltaZ": 0.304,
+        "minZ": 7.262,
+        "maxZ": 7.345
+      },
+      {
+        "name": "Elephant_Kada_1",
+        "centerZ": 7.457,
+        "deltaZ": 0.457,
+        "minZ": 7.305,
+        "maxZ": 7.61
+      },
+      {
+        "name": "Elephant_Kada_0",
+        "centerZ": 7.459,
+        "deltaZ": 0.459,
+        "minZ": 7.307,
+        "maxZ": 7.612
+      }
+    ]
+  },
+  "blackRook": {
+    "rootZ": -7,
+    "rootRotY": 0,
+    "enemyDirZ": 1,
+    "minDeltaZMesh": {
+      "name": "Elephant_Kada_1",
+      "centerZ": -7.464,
+      "deltaZ": -0.464,
+      "minZ": -7.619,
+      "maxZ": -7.31
+    },
+    "maxDeltaZMesh": {
+      "name": "Elephant_Tusk_L",
+      "centerZ": -6.104,
+      "deltaZ": 0.896,
+      "minZ": -6.374,
+      "maxZ": -5.834
+    },
+    "allMeshes": [
+      {
+        "name": "Elephant_Kada_1",
+        "centerZ": -7.464,
+        "deltaZ": -0.464,
+        "minZ": -7.619,
+        "maxZ": -7.31
+      },
+      {
+        "name": "Elephant_Kada_0",
+        "centerZ": -7.452,
+        "deltaZ": -0.452,
+        "minZ": -7.607,
+        "maxZ": -7.298
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7.304,
+        "deltaZ": -0.304,
+        "minZ": -7.345,
+        "maxZ": -7.262
+      },
+      {
+        "name": "Howdah_Pillar_3",
+        "centerZ": -7.303,
+        "deltaZ": -0.303,
+        "minZ": -7.343,
+        "maxZ": -7.263
+      },
+      {
+        "name": "Howdah_Pillar_2",
+        "centerZ": -7.294,
+        "deltaZ": -0.294,
+        "minZ": -7.333,
+        "maxZ": -7.254
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7.07,
+        "deltaZ": -0.07,
+        "minZ": -7.374,
+        "maxZ": -6.765
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7,
+        "deltaZ": 0,
+        "minZ": -7.91,
+        "maxZ": -6.09
+      },
+      {
+        "name": "Elephant_Body",
+        "centerZ": -6.982,
+        "deltaZ": 0.018,
+        "minZ": -7.87,
+        "maxZ": -6.094
+      },
+      {
+        "name": "Elephant_Jhul",
+        "centerZ": -6.967,
+        "deltaZ": 0.033,
+        "minZ": -7.51,
+        "maxZ": -6.424
+      },
+      {
+        "name": "Howdah_Base",
+        "centerZ": -6.958,
+        "deltaZ": 0.042,
+        "minZ": -7.45,
+        "maxZ": -6.465
+      },
+      {
+        "name": "Howdah_Dome",
+        "centerZ": -6.933,
+        "deltaZ": 0.067,
+        "minZ": -7.453,
+        "maxZ": -6.413
+      },
+      {
+        "name": "Howdah_Finial",
+        "centerZ": -6.924,
+        "deltaZ": 0.076,
+        "minZ": -6.982,
+        "maxZ": -6.866
+      },
+      {
+        "name": "Howdah_Pillar_1",
+        "centerZ": -6.598,
+        "deltaZ": 0.402,
+        "minZ": -6.637,
+        "maxZ": -6.558
+      },
+      {
+        "name": "Howdah_Pillar_0",
+        "centerZ": -6.589,
+        "deltaZ": 0.411,
+        "minZ": -6.628,
+        "maxZ": -6.549
+      },
+      {
+        "name": "Elephant_Kada_3",
+        "centerZ": -6.541,
+        "deltaZ": 0.459,
+        "minZ": -6.695,
+        "maxZ": -6.386
+      },
+      {
+        "name": "Elephant_Kada_2",
+        "centerZ": -6.529,
+        "deltaZ": 0.471,
+        "minZ": -6.683,
+        "maxZ": -6.374
+      },
+      {
+        "name": "Elephant_Eye_R",
+        "centerZ": -6.412,
+        "deltaZ": 0.588,
+        "minZ": -6.444,
+        "maxZ": -6.381
+      },
+      {
+        "name": "Elephant_Chamfron",
+        "centerZ": -6.411,
+        "deltaZ": 0.589,
+        "minZ": -6.549,
+        "maxZ": -6.273
+      },
+      {
+        "name": "Elephant_Eye_L",
+        "centerZ": -6.406,
+        "deltaZ": 0.594,
+        "minZ": -6.438,
+        "maxZ": -6.375
+      },
+      {
+        "name": "Elephant_Ferrule_R",
+        "centerZ": -6.342,
+        "deltaZ": 0.658,
+        "minZ": -6.391,
+        "maxZ": -6.292
+      },
+      {
+        "name": "Elephant_Ferrule_L",
+        "centerZ": -6.336,
+        "deltaZ": 0.664,
+        "minZ": -6.385,
+        "maxZ": -6.287
+      },
+      {
+        "name": "Elephant_Tusk_R",
+        "centerZ": -6.11,
+        "deltaZ": 0.89,
+        "minZ": -6.38,
+        "maxZ": -5.84
+      },
+      {
+        "name": "Elephant_Tusk_L",
+        "centerZ": -6.104,
+        "deltaZ": 0.896,
+        "minZ": -6.374,
+        "maxZ": -5.834
+      }
+    ]
+  },
+  "whiteKnight": {
+    "rootZ": 7,
+    "rootRotY": 3.142,
+    "enemyDirZ": -1,
+    "minDeltaZMesh": {
+      "name": "Horse_LyreEar_R",
+      "centerZ": 6.292,
+      "deltaZ": -0.708,
+      "minZ": 6.262,
+      "maxZ": 6.322
+    },
+    "maxDeltaZMesh": {
+      "name": "Horse_Body",
+      "centerZ": 7.131,
+      "deltaZ": 0.131,
+      "minZ": 6.142,
+      "maxZ": 8.119
+    },
+    "allMeshes": [
+      {
+        "name": "Horse_LyreEar_R",
+        "centerZ": 6.292,
+        "deltaZ": -0.708,
+        "minZ": 6.262,
+        "maxZ": 6.322
+      },
+      {
+        "name": "Horse_LyreEar_L",
+        "centerZ": 6.293,
+        "deltaZ": -0.707,
+        "minZ": 6.263,
+        "maxZ": 6.323
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.465,
+        "deltaZ": -0.535,
+        "minZ": 6.425,
+        "maxZ": 6.506
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.568,
+        "deltaZ": -0.432,
+        "minZ": 6.372,
+        "maxZ": 6.763
+      },
+      {
+        "name": "Dhanush_Bow",
+        "centerZ": 6.632,
+        "deltaZ": -0.368,
+        "minZ": 6.565,
+        "maxZ": 6.698
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.663,
+        "deltaZ": -0.337,
+        "minZ": 6.591,
+        "maxZ": 6.735
+      },
+      {
+        "name": "Dhanush_String",
+        "centerZ": 6.685,
+        "deltaZ": -0.315,
+        "minZ": 6.667,
+        "maxZ": 6.703
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.762,
+        "deltaZ": -0.238,
+        "minZ": 6.554,
+        "maxZ": 6.97
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.771,
+        "deltaZ": -0.229,
+        "minZ": 6.767,
+        "maxZ": 6.775
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.789,
+        "deltaZ": -0.211,
+        "minZ": 6.742,
+        "maxZ": 6.836
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.826,
+        "deltaZ": -0.174,
+        "minZ": 6.779,
+        "maxZ": 6.873
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.832,
+        "deltaZ": -0.168,
+        "minZ": 6.786,
+        "maxZ": 6.879
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.839,
+        "deltaZ": -0.161,
+        "minZ": 6.792,
+        "maxZ": 6.886
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.844,
+        "deltaZ": -0.156,
+        "minZ": 6.787,
+        "maxZ": 6.901
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.845,
+        "deltaZ": -0.155,
+        "minZ": 6.799,
+        "maxZ": 6.892
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.898,
+        "deltaZ": -0.102,
+        "minZ": 6.82,
+        "maxZ": 6.975
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.902,
+        "deltaZ": -0.098,
+        "minZ": 6.767,
+        "maxZ": 7.037
+      },
+      {
+        "name": "Dragoon_Head",
+        "centerZ": 6.906,
+        "deltaZ": -0.094,
+        "minZ": 6.798,
+        "maxZ": 7.014
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.907,
+        "deltaZ": -0.093,
+        "minZ": 6.772,
+        "maxZ": 7.042
+      },
+      {
+        "name": "Dragoon_Leg_R",
+        "centerZ": 6.908,
+        "deltaZ": -0.092,
+        "minZ": 6.835,
+        "maxZ": 6.982
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.908,
+        "deltaZ": -0.092,
+        "minZ": 6.762,
+        "maxZ": 7.054
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.912,
+        "deltaZ": -0.088,
+        "minZ": 6.787,
+        "maxZ": 7.038
+      },
+      {
+        "name": "Dragoon_Leg_L",
+        "centerZ": 6.913,
+        "deltaZ": -0.087,
+        "minZ": 6.839,
+        "maxZ": 6.986
+      },
+      {
+        "name": "Dragoon_Torso",
+        "centerZ": 6.914,
+        "deltaZ": -0.086,
+        "minZ": 6.754,
+        "maxZ": 7.074
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.917,
+        "deltaZ": -0.083,
+        "minZ": 6.858,
+        "maxZ": 6.976
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.919,
+        "deltaZ": -0.081,
+        "minZ": 6.84,
+        "maxZ": 6.997
+      },
+      {
+        "name": "Dragoon_Pagri",
+        "centerZ": 6.92,
+        "deltaZ": -0.08,
+        "minZ": 6.779,
+        "maxZ": 7.061
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.921,
+        "deltaZ": -0.079,
+        "minZ": 6.766,
+        "maxZ": 7.076
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.922,
+        "deltaZ": -0.078,
+        "minZ": 6.862,
+        "maxZ": 6.981
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.923,
+        "deltaZ": -0.077,
+        "minZ": 6.845,
+        "maxZ": 7.002
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.932,
+        "deltaZ": -0.068,
+        "minZ": 6.814,
+        "maxZ": 7.05
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.934,
+        "deltaZ": -0.066,
+        "minZ": 6.779,
+        "maxZ": 7.089
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.939,
+        "deltaZ": -0.061,
+        "minZ": 6.822,
+        "maxZ": 7.057
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.942,
+        "deltaZ": -0.058,
+        "minZ": 6.727,
+        "maxZ": 7.157
+      },
+      {
+        "name": "Horse_Saddle",
+        "centerZ": 6.961,
+        "deltaZ": -0.039,
+        "minZ": 6.637,
+        "maxZ": 7.286
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.961,
+        "deltaZ": -0.039,
+        "minZ": 6.805,
+        "maxZ": 7.116
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.964,
+        "deltaZ": -0.036,
+        "minZ": 6.851,
+        "maxZ": 7.077
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.974,
+        "deltaZ": -0.026,
+        "minZ": 6.819,
+        "maxZ": 7.129
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7,
+        "deltaZ": 0,
+        "minZ": 6.19,
+        "maxZ": 7.81
+      },
+      {
+        "name": "Tarkash_Arrow_1",
+        "centerZ": 7.042,
+        "deltaZ": 0.042,
+        "minZ": 7.03,
+        "maxZ": 7.055
+      },
+      {
+        "name": "Tarkash_Arrow_2",
+        "centerZ": 7.042,
+        "deltaZ": 0.042,
+        "minZ": 7.03,
+        "maxZ": 7.054
+      },
+      {
+        "name": "Tarkash_Arrow_3",
+        "centerZ": 7.042,
+        "deltaZ": 0.042,
+        "minZ": 7.03,
+        "maxZ": 7.054
+      },
+      {
+        "name": "Tarkash_Arrow_0",
+        "centerZ": 7.043,
+        "deltaZ": 0.043,
+        "minZ": 7.031,
+        "maxZ": 7.055
+      },
+      {
+        "name": "Tarkash_Quiver",
+        "centerZ": 7.059,
+        "deltaZ": 0.059,
+        "minZ": 6.995,
+        "maxZ": 7.123
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7.092,
+        "deltaZ": 0.092,
+        "minZ": 6.876,
+        "maxZ": 7.308
+      },
+      {
+        "name": "Horse_Body",
+        "centerZ": 7.131,
+        "deltaZ": 0.131,
+        "minZ": 6.142,
+        "maxZ": 8.119
+      }
+    ]
+  },
+  "blackKnight": {
+    "rootZ": -7,
+    "rootRotY": 0,
+    "enemyDirZ": 1,
+    "minDeltaZMesh": {
+      "name": "Horse_Body",
+      "centerZ": -7.131,
+      "deltaZ": -0.131,
+      "minZ": -8.119,
+      "maxZ": -6.142
+    },
+    "maxDeltaZMesh": {
+      "name": "Horse_LyreEar_R",
+      "centerZ": -6.292,
+      "deltaZ": 0.708,
+      "minZ": -6.322,
+      "maxZ": -6.262
+    },
+    "allMeshes": [
+      {
+        "name": "Horse_Body",
+        "centerZ": -7.131,
+        "deltaZ": -0.131,
+        "minZ": -8.119,
+        "maxZ": -6.142
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7.092,
+        "deltaZ": -0.092,
+        "minZ": -7.308,
+        "maxZ": -6.876
+      },
+      {
+        "name": "Tarkash_Quiver",
+        "centerZ": -7.06,
+        "deltaZ": -0.06,
+        "minZ": -7.123,
+        "maxZ": -6.996
+      },
+      {
+        "name": "Tarkash_Arrow_0",
+        "centerZ": -7.043,
+        "deltaZ": -0.043,
+        "minZ": -7.055,
+        "maxZ": -7.031
+      },
+      {
+        "name": "Tarkash_Arrow_1",
+        "centerZ": -7.043,
+        "deltaZ": -0.043,
+        "minZ": -7.055,
+        "maxZ": -7.031
+      },
+      {
+        "name": "Tarkash_Arrow_2",
+        "centerZ": -7.042,
+        "deltaZ": -0.042,
+        "minZ": -7.054,
+        "maxZ": -7.03
+      },
+      {
+        "name": "Tarkash_Arrow_3",
+        "centerZ": -7.042,
+        "deltaZ": -0.042,
+        "minZ": -7.054,
+        "maxZ": -7.03
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7,
+        "deltaZ": 0,
+        "minZ": -7.81,
+        "maxZ": -6.19
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.974,
+        "deltaZ": 0.026,
+        "minZ": -7.13,
+        "maxZ": -6.819
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.964,
+        "deltaZ": 0.036,
+        "minZ": -7.077,
+        "maxZ": -6.851
+      },
+      {
+        "name": "Horse_Saddle",
+        "centerZ": -6.961,
+        "deltaZ": 0.039,
+        "minZ": -7.285,
+        "maxZ": -6.638
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.961,
+        "deltaZ": 0.039,
+        "minZ": -7.116,
+        "maxZ": -6.806
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.942,
+        "deltaZ": 0.058,
+        "minZ": -7.157,
+        "maxZ": -6.727
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.939,
+        "deltaZ": 0.061,
+        "minZ": -7.057,
+        "maxZ": -6.822
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.934,
+        "deltaZ": 0.066,
+        "minZ": -7.09,
+        "maxZ": -6.779
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.932,
+        "deltaZ": 0.068,
+        "minZ": -7.05,
+        "maxZ": -6.815
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.923,
+        "deltaZ": 0.077,
+        "minZ": -7.001,
+        "maxZ": -6.845
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.921,
+        "deltaZ": 0.079,
+        "minZ": -6.98,
+        "maxZ": -6.862
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.921,
+        "deltaZ": 0.079,
+        "minZ": -7.076,
+        "maxZ": -6.766
+      },
+      {
+        "name": "Dragoon_Pagri",
+        "centerZ": -6.92,
+        "deltaZ": 0.08,
+        "minZ": -7.061,
+        "maxZ": -6.779
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.919,
+        "deltaZ": 0.081,
+        "minZ": -6.997,
+        "maxZ": -6.84
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.917,
+        "deltaZ": 0.083,
+        "minZ": -6.976,
+        "maxZ": -6.858
+      },
+      {
+        "name": "Dragoon_Torso",
+        "centerZ": -6.914,
+        "deltaZ": 0.086,
+        "minZ": -7.074,
+        "maxZ": -6.755
+      },
+      {
+        "name": "Dragoon_Leg_L",
+        "centerZ": -6.912,
+        "deltaZ": 0.088,
+        "minZ": -6.986,
+        "maxZ": -6.839
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.912,
+        "deltaZ": 0.088,
+        "minZ": -7.037,
+        "maxZ": -6.787
+      },
+      {
+        "name": "Dragoon_Leg_R",
+        "centerZ": -6.908,
+        "deltaZ": 0.092,
+        "minZ": -6.982,
+        "maxZ": -6.835
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.908,
+        "deltaZ": 0.092,
+        "minZ": -7.054,
+        "maxZ": -6.763
+      },
+      {
+        "name": "Dragoon_Head",
+        "centerZ": -6.906,
+        "deltaZ": 0.094,
+        "minZ": -7.014,
+        "maxZ": -6.798
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.906,
+        "deltaZ": 0.094,
+        "minZ": -7.041,
+        "maxZ": -6.772
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.902,
+        "deltaZ": 0.098,
+        "minZ": -7.037,
+        "maxZ": -6.767
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.898,
+        "deltaZ": 0.102,
+        "minZ": -6.975,
+        "maxZ": -6.82
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.846,
+        "deltaZ": 0.154,
+        "minZ": -6.893,
+        "maxZ": -6.799
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.844,
+        "deltaZ": 0.156,
+        "minZ": -6.901,
+        "maxZ": -6.787
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.84,
+        "deltaZ": 0.16,
+        "minZ": -6.886,
+        "maxZ": -6.793
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.833,
+        "deltaZ": 0.167,
+        "minZ": -6.88,
+        "maxZ": -6.786
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.826,
+        "deltaZ": 0.174,
+        "minZ": -6.873,
+        "maxZ": -6.78
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.789,
+        "deltaZ": 0.211,
+        "minZ": -6.836,
+        "maxZ": -6.742
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.771,
+        "deltaZ": 0.229,
+        "minZ": -6.775,
+        "maxZ": -6.767
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.762,
+        "deltaZ": 0.238,
+        "minZ": -6.969,
+        "maxZ": -6.554
+      },
+      {
+        "name": "Dhanush_String",
+        "centerZ": -6.685,
+        "deltaZ": 0.315,
+        "minZ": -6.702,
+        "maxZ": -6.667
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.663,
+        "deltaZ": 0.337,
+        "minZ": -6.735,
+        "maxZ": -6.591
+      },
+      {
+        "name": "Dhanush_Bow",
+        "centerZ": -6.632,
+        "deltaZ": 0.368,
+        "minZ": -6.698,
+        "maxZ": -6.565
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.568,
+        "deltaZ": 0.432,
+        "minZ": -6.763,
+        "maxZ": -6.372
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.465,
+        "deltaZ": 0.535,
+        "minZ": -6.506,
+        "maxZ": -6.424
+      },
+      {
+        "name": "Horse_LyreEar_L",
+        "centerZ": -6.293,
+        "deltaZ": 0.707,
+        "minZ": -6.323,
+        "maxZ": -6.263
+      },
+      {
+        "name": "Horse_LyreEar_R",
+        "centerZ": -6.292,
+        "deltaZ": 0.708,
+        "minZ": -6.322,
+        "maxZ": -6.262
+      }
+    ]
+  },
+  "whiteBishop": {
+    "rootZ": 7,
+    "rootRotY": 3.142,
+    "enemyDirZ": -1,
+    "minDeltaZMesh": {
+      "name": "Chariot_Varutha",
+      "centerZ": 6.308,
+      "deltaZ": -0.692,
+      "minZ": 5.823,
+      "maxZ": 6.794
+    },
+    "maxDeltaZMesh": {
+      "name": "Chariot_Flagstaff",
+      "centerZ": 7.578,
+      "deltaZ": 0.578,
+      "minZ": 7.535,
+      "maxZ": 7.62
+    },
+    "allMeshes": [
+      {
+        "name": "Chariot_Varutha",
+        "centerZ": 6.308,
+        "deltaZ": -0.692,
+        "minZ": 5.823,
+        "maxZ": 6.794
+      },
+      {
+        "name": "Gandiva_Bow",
+        "centerZ": 6.626,
+        "deltaZ": -0.374,
+        "minZ": 6.572,
+        "maxZ": 6.68
+      },
+      {
+        "name": "Chakra_Spoke_L_6",
+        "centerZ": 6.728,
+        "deltaZ": -0.272,
+        "minZ": 6.513,
+        "maxZ": 6.943
+      },
+      {
+        "name": "Chakra_Spoke_R_6",
+        "centerZ": 6.753,
+        "deltaZ": -0.247,
+        "minZ": 6.538,
+        "maxZ": 6.969
+      },
+      {
+        "name": "Chakra_Spoke_L_7",
+        "centerZ": 6.779,
+        "deltaZ": -0.221,
+        "minZ": 6.598,
+        "maxZ": 6.96
+      },
+      {
+        "name": "Chakra_Spoke_R_7",
+        "centerZ": 6.804,
+        "deltaZ": -0.196,
+        "minZ": 6.623,
+        "maxZ": 6.985
+      },
+      {
+        "name": "Chakra_Spoke_L_5",
+        "centerZ": 6.807,
+        "deltaZ": -0.193,
+        "minZ": 6.626,
+        "maxZ": 6.988
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.823,
+        "deltaZ": -0.177,
+        "minZ": 6.634,
+        "maxZ": 7.012
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.828,
+        "deltaZ": -0.172,
+        "minZ": 6.824,
+        "maxZ": 6.832
+      },
+      {
+        "name": "Chakra_Spoke_R_5",
+        "centerZ": 6.832,
+        "deltaZ": -0.168,
+        "minZ": 6.651,
+        "maxZ": 7.013
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.857,
+        "deltaZ": -0.143,
+        "minZ": 6.817,
+        "maxZ": 6.896
+      },
+      {
+        "name": "Chariot_Hull",
+        "centerZ": 6.888,
+        "deltaZ": -0.112,
+        "minZ": 5.849,
+        "maxZ": 7.927
+      },
+      {
+        "name": "Chakra_Spoke_L_0",
+        "centerZ": 6.921,
+        "deltaZ": -0.079,
+        "minZ": 6.876,
+        "maxZ": 6.965
+      },
+      {
+        "name": "Sage_Head",
+        "centerZ": 6.925,
+        "deltaZ": -0.075,
+        "minZ": 6.79,
+        "maxZ": 7.06
+      },
+      {
+        "name": "Chakra_Hub_L",
+        "centerZ": 6.938,
+        "deltaZ": -0.062,
+        "minZ": 6.89,
+        "maxZ": 6.987
+      },
+      {
+        "name": "Chakra_Wheel_L",
+        "centerZ": 6.941,
+        "deltaZ": -0.059,
+        "minZ": 6.407,
+        "maxZ": 7.474
+      },
+      {
+        "name": "Chakra_Spoke_R_0",
+        "centerZ": 6.946,
+        "deltaZ": -0.054,
+        "minZ": 6.901,
+        "maxZ": 6.99
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.95,
+        "deltaZ": -0.05,
+        "minZ": 6.889,
+        "maxZ": 7.012
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.958,
+        "deltaZ": -0.042,
+        "minZ": 6.822,
+        "maxZ": 7.093
+      },
+      {
+        "name": "Sage_Dhoti",
+        "centerZ": 6.959,
+        "deltaZ": -0.041,
+        "minZ": 6.711,
+        "maxZ": 7.207
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.96,
+        "deltaZ": -0.04,
+        "minZ": 6.845,
+        "maxZ": 7.075
+      },
+      {
+        "name": "Chakra_Spoke_L_4",
+        "centerZ": 6.961,
+        "deltaZ": -0.039,
+        "minZ": 6.917,
+        "maxZ": 7.005
+      },
+      {
+        "name": "Chakra_Wheel_R",
+        "centerZ": 6.966,
+        "deltaZ": -0.034,
+        "minZ": 6.432,
+        "maxZ": 7.499
+      },
+      {
+        "name": "Chakra_Hub_R",
+        "centerZ": 6.968,
+        "deltaZ": -0.032,
+        "minZ": 6.92,
+        "maxZ": 7.017
+      },
+      {
+        "name": "Chakra_Spoke_R_4",
+        "centerZ": 6.986,
+        "deltaZ": -0.014,
+        "minZ": 6.942,
+        "maxZ": 7.03
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.989,
+        "deltaZ": -0.011,
+        "minZ": 6.792,
+        "maxZ": 7.187
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7,
+        "deltaZ": 0,
+        "minZ": 6.225,
+        "maxZ": 7.775
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7.023,
+        "deltaZ": 0.023,
+        "minZ": 6.753,
+        "maxZ": 7.293
+      },
+      {
+        "name": "Chakra_Spoke_L_1",
+        "centerZ": 7.075,
+        "deltaZ": 0.075,
+        "minZ": 6.894,
+        "maxZ": 7.256
+      },
+      {
+        "name": "Chakra_Spoke_R_1",
+        "centerZ": 7.1,
+        "deltaZ": 0.1,
+        "minZ": 6.919,
+        "maxZ": 7.281
+      },
+      {
+        "name": "Chakra_Spoke_L_3",
+        "centerZ": 7.103,
+        "deltaZ": 0.103,
+        "minZ": 6.922,
+        "maxZ": 7.284
+      },
+      {
+        "name": "Chakra_Spoke_R_3",
+        "centerZ": 7.128,
+        "deltaZ": 0.128,
+        "minZ": 6.947,
+        "maxZ": 7.309
+      },
+      {
+        "name": "Chakra_Spoke_L_2",
+        "centerZ": 7.154,
+        "deltaZ": 0.154,
+        "minZ": 6.938,
+        "maxZ": 7.369
+      },
+      {
+        "name": "Chakra_Spoke_R_2",
+        "centerZ": 7.179,
+        "deltaZ": 0.179,
+        "minZ": 6.963,
+        "maxZ": 7.394
+      },
+      {
+        "name": "Surya_Banner",
+        "centerZ": 7.372,
+        "deltaZ": 0.372,
+        "minZ": 7.025,
+        "maxZ": 7.718
+      },
+      {
+        "name": "Chariot_Flagstaff",
+        "centerZ": 7.578,
+        "deltaZ": 0.578,
+        "minZ": 7.535,
+        "maxZ": 7.62
+      }
+    ]
+  },
+  "blackBishop": {
+    "rootZ": -7,
+    "rootRotY": 0,
+    "enemyDirZ": 1,
+    "minDeltaZMesh": {
+      "name": "Chariot_Flagstaff",
+      "centerZ": -7.578,
+      "deltaZ": -0.578,
+      "minZ": -7.62,
+      "maxZ": -7.535
+    },
+    "maxDeltaZMesh": {
+      "name": "Chariot_Varutha",
+      "centerZ": -6.308,
+      "deltaZ": 0.692,
+      "minZ": -6.793,
+      "maxZ": -5.823
+    },
+    "allMeshes": [
+      {
+        "name": "Chariot_Flagstaff",
+        "centerZ": -7.578,
+        "deltaZ": -0.578,
+        "minZ": -7.62,
+        "maxZ": -7.535
+      },
+      {
+        "name": "Surya_Banner",
+        "centerZ": -7.371,
+        "deltaZ": -0.371,
+        "minZ": -7.718,
+        "maxZ": -7.025
+      },
+      {
+        "name": "Chakra_Spoke_R_2",
+        "centerZ": -7.178,
+        "deltaZ": -0.178,
+        "minZ": -7.393,
+        "maxZ": -6.963
+      },
+      {
+        "name": "Chakra_Spoke_L_2",
+        "centerZ": -7.154,
+        "deltaZ": -0.154,
+        "minZ": -7.37,
+        "maxZ": -6.939
+      },
+      {
+        "name": "Chakra_Spoke_R_3",
+        "centerZ": -7.127,
+        "deltaZ": -0.127,
+        "minZ": -7.308,
+        "maxZ": -6.946
+      },
+      {
+        "name": "Chakra_Spoke_L_3",
+        "centerZ": -7.104,
+        "deltaZ": -0.104,
+        "minZ": -7.285,
+        "maxZ": -6.923
+      },
+      {
+        "name": "Chakra_Spoke_R_1",
+        "centerZ": -7.099,
+        "deltaZ": -0.099,
+        "minZ": -7.28,
+        "maxZ": -6.918
+      },
+      {
+        "name": "Chakra_Spoke_L_1",
+        "centerZ": -7.075,
+        "deltaZ": -0.075,
+        "minZ": -7.256,
+        "maxZ": -6.895
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7.023,
+        "deltaZ": -0.023,
+        "minZ": -7.293,
+        "maxZ": -6.754
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7,
+        "deltaZ": 0,
+        "minZ": -7.775,
+        "maxZ": -6.225
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.989,
+        "deltaZ": 0.011,
+        "minZ": -7.186,
+        "maxZ": -6.792
+      },
+      {
+        "name": "Chakra_Spoke_R_4",
+        "centerZ": -6.985,
+        "deltaZ": 0.015,
+        "minZ": -7.03,
+        "maxZ": -6.941
+      },
+      {
+        "name": "Chakra_Hub_R",
+        "centerZ": -6.967,
+        "deltaZ": 0.033,
+        "minZ": -7.016,
+        "maxZ": -6.919
+      },
+      {
+        "name": "Chakra_Wheel_R",
+        "centerZ": -6.965,
+        "deltaZ": 0.035,
+        "minZ": -7.498,
+        "maxZ": -6.432
+      },
+      {
+        "name": "Chakra_Spoke_L_4",
+        "centerZ": -6.962,
+        "deltaZ": 0.038,
+        "minZ": -7.006,
+        "maxZ": -6.917
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.96,
+        "deltaZ": 0.04,
+        "minZ": -7.075,
+        "maxZ": -6.845
+      },
+      {
+        "name": "Sage_Dhoti",
+        "centerZ": -6.959,
+        "deltaZ": 0.041,
+        "minZ": -7.206,
+        "maxZ": -6.711
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.958,
+        "deltaZ": 0.042,
+        "minZ": -7.093,
+        "maxZ": -6.822
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.95,
+        "deltaZ": 0.05,
+        "minZ": -7.012,
+        "maxZ": -6.889
+      },
+      {
+        "name": "Chakra_Spoke_R_0",
+        "centerZ": -6.945,
+        "deltaZ": 0.055,
+        "minZ": -6.989,
+        "maxZ": -6.901
+      },
+      {
+        "name": "Chakra_Wheel_L",
+        "centerZ": -6.941,
+        "deltaZ": 0.059,
+        "minZ": -7.475,
+        "maxZ": -6.408
+      },
+      {
+        "name": "Chakra_Hub_L",
+        "centerZ": -6.939,
+        "deltaZ": 0.061,
+        "minZ": -6.987,
+        "maxZ": -6.891
+      },
+      {
+        "name": "Sage_Head",
+        "centerZ": -6.925,
+        "deltaZ": 0.075,
+        "minZ": -7.06,
+        "maxZ": -6.79
+      },
+      {
+        "name": "Chakra_Spoke_L_0",
+        "centerZ": -6.921,
+        "deltaZ": 0.079,
+        "minZ": -6.965,
+        "maxZ": -6.877
+      },
+      {
+        "name": "Chariot_Hull",
+        "centerZ": -6.888,
+        "deltaZ": 0.112,
+        "minZ": -7.926,
+        "maxZ": -5.85
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.857,
+        "deltaZ": 0.143,
+        "minZ": -6.896,
+        "maxZ": -6.817
+      },
+      {
+        "name": "Chakra_Spoke_R_5",
+        "centerZ": -6.831,
+        "deltaZ": 0.169,
+        "minZ": -7.012,
+        "maxZ": -6.65
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.828,
+        "deltaZ": 0.172,
+        "minZ": -6.832,
+        "maxZ": -6.824
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.823,
+        "deltaZ": 0.177,
+        "minZ": -7.012,
+        "maxZ": -6.634
+      },
+      {
+        "name": "Chakra_Spoke_L_5",
+        "centerZ": -6.807,
+        "deltaZ": 0.193,
+        "minZ": -6.988,
+        "maxZ": -6.627
+      },
+      {
+        "name": "Chakra_Spoke_R_7",
+        "centerZ": -6.803,
+        "deltaZ": 0.197,
+        "minZ": -6.984,
+        "maxZ": -6.622
+      },
+      {
+        "name": "Chakra_Spoke_L_7",
+        "centerZ": -6.779,
+        "deltaZ": 0.221,
+        "minZ": -6.96,
+        "maxZ": -6.598
+      },
+      {
+        "name": "Chakra_Spoke_R_6",
+        "centerZ": -6.752,
+        "deltaZ": 0.248,
+        "minZ": -6.968,
+        "maxZ": -6.537
+      },
+      {
+        "name": "Chakra_Spoke_L_6",
+        "centerZ": -6.729,
+        "deltaZ": 0.271,
+        "minZ": -6.944,
+        "maxZ": -6.513
+      },
+      {
+        "name": "Gandiva_Bow",
+        "centerZ": -6.625,
+        "deltaZ": 0.375,
+        "minZ": -6.679,
+        "maxZ": -6.572
+      },
+      {
+        "name": "Chariot_Varutha",
+        "centerZ": -6.308,
+        "deltaZ": 0.692,
+        "minZ": -6.793,
+        "maxZ": -5.823
+      }
+    ]
+  },
+  "whiteQueen": {
+    "rootZ": 7,
+    "rootRotY": 3.142,
+    "enemyDirZ": -1,
+    "minDeltaZMesh": {
+      "name": "unnamed",
+      "centerZ": 6.519,
+      "deltaZ": -0.481,
+      "minZ": 6.372,
+      "maxZ": 6.666
+    },
+    "maxDeltaZMesh": {
+      "name": "Maharani_Mantle",
+      "centerZ": 7.112,
+      "deltaZ": 0.112,
+      "minZ": 6.893,
+      "maxZ": 7.33
+    },
+    "allMeshes": [
+      {
+        "name": "unnamed",
+        "centerZ": 6.519,
+        "deltaZ": -0.481,
+        "minZ": 6.372,
+        "maxZ": 6.666
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.524,
+        "deltaZ": -0.476,
+        "minZ": 6.37,
+        "maxZ": 6.678
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.639,
+        "deltaZ": -0.361,
+        "minZ": 6.589,
+        "maxZ": 6.69
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.653,
+        "deltaZ": -0.347,
+        "minZ": 6.605,
+        "maxZ": 6.7
+      },
+      {
+        "name": "Khanda_Blade_L",
+        "centerZ": 6.708,
+        "deltaZ": -0.292,
+        "minZ": 6.619,
+        "maxZ": 6.798
+      },
+      {
+        "name": "Khanda_Blade_R",
+        "centerZ": 6.723,
+        "deltaZ": -0.277,
+        "minZ": 6.634,
+        "maxZ": 6.812
+      },
+      {
+        "name": "Khanda_Guard_L",
+        "centerZ": 6.772,
+        "deltaZ": -0.228,
+        "minZ": 6.737,
+        "maxZ": 6.807
+      },
+      {
+        "name": "Khanda_Guard_R",
+        "centerZ": 6.785,
+        "deltaZ": -0.215,
+        "minZ": 6.75,
+        "maxZ": 6.82
+      },
+      {
+        "name": "Khanda_Grip_L",
+        "centerZ": 6.786,
+        "deltaZ": -0.214,
+        "minZ": 6.751,
+        "maxZ": 6.82
+      },
+      {
+        "name": "Khanda_Grip_R",
+        "centerZ": 6.799,
+        "deltaZ": -0.201,
+        "minZ": 6.764,
+        "maxZ": 6.833
+      },
+      {
+        "name": "Khanda_Pommel_L",
+        "centerZ": 6.801,
+        "deltaZ": -0.199,
+        "minZ": 6.762,
+        "maxZ": 6.841
+      },
+      {
+        "name": "Khanda_Pommel_R",
+        "centerZ": 6.814,
+        "deltaZ": -0.186,
+        "minZ": 6.775,
+        "maxZ": 6.854
+      },
+      {
+        "name": "Maharani_Head",
+        "centerZ": 6.935,
+        "deltaZ": -0.065,
+        "minZ": 6.8,
+        "maxZ": 7.07
+      },
+      {
+        "name": "Maharani_Crown",
+        "centerZ": 6.942,
+        "deltaZ": -0.058,
+        "minZ": 6.774,
+        "maxZ": 7.111
+      },
+      {
+        "name": "Maharani_Pauldron_L",
+        "centerZ": 6.946,
+        "deltaZ": -0.054,
+        "minZ": 6.832,
+        "maxZ": 7.059
+      },
+      {
+        "name": "Maharani_Cuirass",
+        "centerZ": 6.947,
+        "deltaZ": -0.053,
+        "minZ": 6.739,
+        "maxZ": 7.155
+      },
+      {
+        "name": "Maharani_Pauldron_R",
+        "centerZ": 6.959,
+        "deltaZ": -0.041,
+        "minZ": 6.845,
+        "maxZ": 7.072
+      },
+      {
+        "name": "Maharani_Saree",
+        "centerZ": 6.966,
+        "deltaZ": -0.034,
+        "minZ": 6.715,
+        "maxZ": 7.217
+      },
+      {
+        "name": "Maharani_Foot_L",
+        "centerZ": 6.973,
+        "deltaZ": -0.027,
+        "minZ": 6.861,
+        "maxZ": 7.086
+      },
+      {
+        "name": "Maharani_Foot_R",
+        "centerZ": 6.977,
+        "deltaZ": -0.023,
+        "minZ": 6.865,
+        "maxZ": 7.09
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7,
+        "deltaZ": 0,
+        "minZ": 6.35,
+        "maxZ": 7.65
+      },
+      {
+        "name": "Maharani_Halo",
+        "centerZ": 7.028,
+        "deltaZ": 0.028,
+        "minZ": 6.989,
+        "maxZ": 7.068
+      },
+      {
+        "name": "Maharani_Mantle",
+        "centerZ": 7.112,
+        "deltaZ": 0.112,
+        "minZ": 6.893,
+        "maxZ": 7.33
+      }
+    ]
+  },
+  "blackQueen": {
+    "rootZ": -7,
+    "rootRotY": 0,
+    "enemyDirZ": 1,
+    "minDeltaZMesh": {
+      "name": "Maharani_Mantle",
+      "centerZ": -7.112,
+      "deltaZ": -0.112,
+      "minZ": -7.326,
+      "maxZ": -6.897
+    },
+    "maxDeltaZMesh": {
+      "name": "unnamed",
+      "centerZ": -6.52,
+      "deltaZ": 0.48,
+      "minZ": -6.669,
+      "maxZ": -6.371
+    },
+    "allMeshes": [
+      {
+        "name": "Maharani_Mantle",
+        "centerZ": -7.112,
+        "deltaZ": -0.112,
+        "minZ": -7.326,
+        "maxZ": -6.897
+      },
+      {
+        "name": "Maharani_Halo",
+        "centerZ": -7.028,
+        "deltaZ": -0.028,
+        "minZ": -7.064,
+        "maxZ": -6.992
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7,
+        "deltaZ": 0,
+        "minZ": -7.65,
+        "maxZ": -6.35
+      },
+      {
+        "name": "Maharani_Foot_L",
+        "centerZ": -6.976,
+        "deltaZ": 0.024,
+        "minZ": -7.088,
+        "maxZ": -6.864
+      },
+      {
+        "name": "Maharani_Foot_R",
+        "centerZ": -6.975,
+        "deltaZ": 0.025,
+        "minZ": -7.086,
+        "maxZ": -6.863
+      },
+      {
+        "name": "Maharani_Saree",
+        "centerZ": -6.966,
+        "deltaZ": 0.034,
+        "minZ": -7.213,
+        "maxZ": -6.719
+      },
+      {
+        "name": "Maharani_Pauldron_L",
+        "centerZ": -6.955,
+        "deltaZ": 0.045,
+        "minZ": -7.067,
+        "maxZ": -6.843
+      },
+      {
+        "name": "Maharani_Pauldron_R",
+        "centerZ": -6.95,
+        "deltaZ": 0.05,
+        "minZ": -7.062,
+        "maxZ": -6.838
+      },
+      {
+        "name": "Maharani_Cuirass",
+        "centerZ": -6.947,
+        "deltaZ": 0.053,
+        "minZ": -7.151,
+        "maxZ": -6.742
+      },
+      {
+        "name": "Maharani_Crown",
+        "centerZ": -6.942,
+        "deltaZ": 0.058,
+        "minZ": -7.109,
+        "maxZ": -6.776
+      },
+      {
+        "name": "Maharani_Head",
+        "centerZ": -6.935,
+        "deltaZ": 0.065,
+        "minZ": -7.068,
+        "maxZ": -6.802
+      },
+      {
+        "name": "Khanda_Pommel_L",
+        "centerZ": -6.81,
+        "deltaZ": 0.19,
+        "minZ": -6.849,
+        "maxZ": -6.771
+      },
+      {
+        "name": "Khanda_Pommel_R",
+        "centerZ": -6.805,
+        "deltaZ": 0.195,
+        "minZ": -6.844,
+        "maxZ": -6.766
+      },
+      {
+        "name": "Khanda_Grip_L",
+        "centerZ": -6.795,
+        "deltaZ": 0.205,
+        "minZ": -6.829,
+        "maxZ": -6.76
+      },
+      {
+        "name": "Khanda_Grip_R",
+        "centerZ": -6.79,
+        "deltaZ": 0.21,
+        "minZ": -6.824,
+        "maxZ": -6.756
+      },
+      {
+        "name": "Khanda_Guard_L",
+        "centerZ": -6.781,
+        "deltaZ": 0.219,
+        "minZ": -6.815,
+        "maxZ": -6.747
+      },
+      {
+        "name": "Khanda_Guard_R",
+        "centerZ": -6.776,
+        "deltaZ": 0.224,
+        "minZ": -6.81,
+        "maxZ": -6.743
+      },
+      {
+        "name": "Khanda_Blade_L",
+        "centerZ": -6.718,
+        "deltaZ": 0.282,
+        "minZ": -6.807,
+        "maxZ": -6.63
+      },
+      {
+        "name": "Khanda_Blade_R",
+        "centerZ": -6.713,
+        "deltaZ": 0.287,
+        "minZ": -6.801,
+        "maxZ": -6.624
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.648,
+        "deltaZ": 0.352,
+        "minZ": -6.697,
+        "maxZ": -6.6
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.643,
+        "deltaZ": 0.357,
+        "minZ": -6.693,
+        "maxZ": -6.594
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.522,
+        "deltaZ": 0.478,
+        "minZ": -6.674,
+        "maxZ": -6.37
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.52,
+        "deltaZ": 0.48,
+        "minZ": -6.669,
+        "maxZ": -6.371
+      }
+    ]
+  },
+  "whiteKing": {
+    "rootZ": 7,
+    "rootRotY": 3.142,
+    "enemyDirZ": -1,
+    "minDeltaZMesh": {
+      "name": "unnamed",
+      "centerZ": 6.246,
+      "deltaZ": -0.754,
+      "minZ": 6.201,
+      "maxZ": 6.291
+    },
+    "maxDeltaZMesh": {
+      "name": "Chhatra_Staff",
+      "centerZ": 7.167,
+      "deltaZ": 0.167,
+      "minZ": 7.105,
+      "maxZ": 7.23
+    },
+    "allMeshes": [
+      {
+        "name": "unnamed",
+        "centerZ": 6.246,
+        "deltaZ": -0.754,
+        "minZ": 6.201,
+        "maxZ": 6.291
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.25,
+        "deltaZ": -0.75,
+        "minZ": 6.206,
+        "maxZ": 6.294
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.452,
+        "deltaZ": -0.548,
+        "minZ": 6.404,
+        "maxZ": 6.499
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.46,
+        "deltaZ": -0.54,
+        "minZ": 6.412,
+        "maxZ": 6.507
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.472,
+        "deltaZ": -0.528,
+        "minZ": 6.201,
+        "maxZ": 6.742
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.529,
+        "deltaZ": -0.471,
+        "minZ": 6.469,
+        "maxZ": 6.589
+      },
+      {
+        "name": "Gada_Pommel",
+        "centerZ": 6.543,
+        "deltaZ": -0.457,
+        "minZ": 6.466,
+        "maxZ": 6.62
+      },
+      {
+        "name": "Gada_Shaft",
+        "centerZ": 6.561,
+        "deltaZ": -0.439,
+        "minZ": 6.504,
+        "maxZ": 6.618
+      },
+      {
+        "name": "Gada_Head",
+        "centerZ": 6.583,
+        "deltaZ": -0.417,
+        "minZ": 6.336,
+        "maxZ": 6.829
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.661,
+        "deltaZ": -0.339,
+        "minZ": 6.617,
+        "maxZ": 6.705
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 6.665,
+        "deltaZ": -0.335,
+        "minZ": 6.621,
+        "maxZ": 6.71
+      },
+      {
+        "name": "CrownRuby",
+        "centerZ": 6.726,
+        "deltaZ": -0.274,
+        "minZ": 6.655,
+        "maxZ": 6.797
+      },
+      {
+        "name": "Samrat_Lion_Pauldron_R",
+        "centerZ": 6.911,
+        "deltaZ": -0.089,
+        "minZ": 6.706,
+        "maxZ": 7.116
+      },
+      {
+        "name": "Samrat_Head",
+        "centerZ": 6.916,
+        "deltaZ": -0.084,
+        "minZ": 6.741,
+        "maxZ": 7.09
+      },
+      {
+        "name": "Samrat_Crown",
+        "centerZ": 6.918,
+        "deltaZ": -0.082,
+        "minZ": 6.713,
+        "maxZ": 7.124
+      },
+      {
+        "name": "Samrat_Lion_Pauldron_L",
+        "centerZ": 6.927,
+        "deltaZ": -0.073,
+        "minZ": 6.722,
+        "maxZ": 7.133
+      },
+      {
+        "name": "Samrat_Cuirass",
+        "centerZ": 6.932,
+        "deltaZ": -0.068,
+        "minZ": 6.609,
+        "maxZ": 7.255
+      },
+      {
+        "name": "Samrat_Boot_R",
+        "centerZ": 6.96,
+        "deltaZ": -0.04,
+        "minZ": 6.81,
+        "maxZ": 7.111
+      },
+      {
+        "name": "Samrat_Dhoti",
+        "centerZ": 6.963,
+        "deltaZ": -0.037,
+        "minZ": 6.628,
+        "maxZ": 7.299
+      },
+      {
+        "name": "Samrat_Boot_L",
+        "centerZ": 6.966,
+        "deltaZ": -0.034,
+        "minZ": 6.815,
+        "maxZ": 7.116
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7,
+        "deltaZ": 0,
+        "minZ": 6.35,
+        "maxZ": 7.65
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7.127,
+        "deltaZ": 0.127,
+        "minZ": 7.059,
+        "maxZ": 7.195
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7.13,
+        "deltaZ": 0.13,
+        "minZ": 6.844,
+        "maxZ": 7.416
+      },
+      {
+        "name": "Samrat_Mantle",
+        "centerZ": 7.134,
+        "deltaZ": 0.134,
+        "minZ": 6.857,
+        "maxZ": 7.412
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7.135,
+        "deltaZ": 0.135,
+        "minZ": 6.706,
+        "maxZ": 7.563
+      },
+      {
+        "name": "Chhatra_Finial",
+        "centerZ": 7.137,
+        "deltaZ": 0.137,
+        "minZ": 7.094,
+        "maxZ": 7.181
+      },
+      {
+        "name": "Chhatra_Tier_3",
+        "centerZ": 7.141,
+        "deltaZ": 0.141,
+        "minZ": 6.828,
+        "maxZ": 7.453
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7.141,
+        "deltaZ": 0.141,
+        "minZ": 6.58,
+        "maxZ": 7.702
+      },
+      {
+        "name": "Chhatra_Tier_2",
+        "centerZ": 7.146,
+        "deltaZ": 0.146,
+        "minZ": 6.7,
+        "maxZ": 7.593
+      },
+      {
+        "name": "unnamed",
+        "centerZ": 7.15,
+        "deltaZ": 0.15,
+        "minZ": 7.098,
+        "maxZ": 7.202
+      },
+      {
+        "name": "Chhatra_Tier_1",
+        "centerZ": 7.152,
+        "deltaZ": 0.152,
+        "minZ": 6.572,
+        "maxZ": 7.733
+      },
+      {
+        "name": "Chhatra_Staff",
+        "centerZ": 7.167,
+        "deltaZ": 0.167,
+        "minZ": 7.105,
+        "maxZ": 7.23
+      }
+    ]
+  },
+  "blackKing": {
+    "rootZ": -7,
+    "rootRotY": 0,
+    "enemyDirZ": 1,
+    "minDeltaZMesh": {
+      "name": "Chhatra_Staff",
+      "centerZ": -7.167,
+      "deltaZ": -0.167,
+      "minZ": -7.229,
+      "maxZ": -7.105
+    },
+    "maxDeltaZMesh": {
+      "name": "unnamed",
+      "centerZ": -6.246,
+      "deltaZ": 0.754,
+      "minZ": -6.291,
+      "maxZ": -6.202
+    },
+    "allMeshes": [
+      {
+        "name": "Chhatra_Staff",
+        "centerZ": -7.167,
+        "deltaZ": -0.167,
+        "minZ": -7.229,
+        "maxZ": -7.105
+      },
+      {
+        "name": "Chhatra_Tier_1",
+        "centerZ": -7.152,
+        "deltaZ": -0.152,
+        "minZ": -7.731,
+        "maxZ": -6.574
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7.15,
+        "deltaZ": -0.15,
+        "minZ": -7.202,
+        "maxZ": -7.098
+      },
+      {
+        "name": "Chhatra_Tier_2",
+        "centerZ": -7.146,
+        "deltaZ": -0.146,
+        "minZ": -7.592,
+        "maxZ": -6.701
+      },
+      {
+        "name": "Chhatra_Tier_3",
+        "centerZ": -7.141,
+        "deltaZ": -0.141,
+        "minZ": -7.453,
+        "maxZ": -6.829
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7.141,
+        "deltaZ": -0.141,
+        "minZ": -7.7,
+        "maxZ": -6.581
+      },
+      {
+        "name": "Chhatra_Finial",
+        "centerZ": -7.137,
+        "deltaZ": -0.137,
+        "minZ": -7.181,
+        "maxZ": -7.094
+      },
+      {
+        "name": "Samrat_Mantle",
+        "centerZ": -7.135,
+        "deltaZ": -0.135,
+        "minZ": -7.411,
+        "maxZ": -6.858
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7.135,
+        "deltaZ": -0.135,
+        "minZ": -7.562,
+        "maxZ": -6.707
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7.13,
+        "deltaZ": -0.13,
+        "minZ": -7.415,
+        "maxZ": -6.845
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7.127,
+        "deltaZ": -0.127,
+        "minZ": -7.195,
+        "maxZ": -7.059
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -7,
+        "deltaZ": 0,
+        "minZ": -7.65,
+        "maxZ": -6.35
+      },
+      {
+        "name": "Samrat_Boot_L",
+        "centerZ": -6.966,
+        "deltaZ": 0.034,
+        "minZ": -7.116,
+        "maxZ": -6.815
+      },
+      {
+        "name": "Samrat_Dhoti",
+        "centerZ": -6.963,
+        "deltaZ": 0.037,
+        "minZ": -7.298,
+        "maxZ": -6.629
+      },
+      {
+        "name": "Samrat_Boot_R",
+        "centerZ": -6.961,
+        "deltaZ": 0.039,
+        "minZ": -7.111,
+        "maxZ": -6.81
+      },
+      {
+        "name": "Samrat_Cuirass",
+        "centerZ": -6.932,
+        "deltaZ": 0.068,
+        "minZ": -7.254,
+        "maxZ": -6.61
+      },
+      {
+        "name": "Samrat_Lion_Pauldron_L",
+        "centerZ": -6.926,
+        "deltaZ": 0.074,
+        "minZ": -7.131,
+        "maxZ": -6.721
+      },
+      {
+        "name": "Samrat_Crown",
+        "centerZ": -6.918,
+        "deltaZ": 0.082,
+        "minZ": -7.124,
+        "maxZ": -6.713
+      },
+      {
+        "name": "Samrat_Head",
+        "centerZ": -6.916,
+        "deltaZ": 0.084,
+        "minZ": -7.09,
+        "maxZ": -6.741
+      },
+      {
+        "name": "Samrat_Lion_Pauldron_R",
+        "centerZ": -6.912,
+        "deltaZ": 0.088,
+        "minZ": -7.117,
+        "maxZ": -6.707
+      },
+      {
+        "name": "CrownRuby",
+        "centerZ": -6.726,
+        "deltaZ": 0.274,
+        "minZ": -6.797,
+        "maxZ": -6.655
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.665,
+        "deltaZ": 0.335,
+        "minZ": -6.71,
+        "maxZ": -6.62
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.662,
+        "deltaZ": 0.338,
+        "minZ": -6.706,
+        "maxZ": -6.618
+      },
+      {
+        "name": "Gada_Head",
+        "centerZ": -6.583,
+        "deltaZ": 0.417,
+        "minZ": -6.829,
+        "maxZ": -6.336
+      },
+      {
+        "name": "Gada_Shaft",
+        "centerZ": -6.561,
+        "deltaZ": 0.439,
+        "minZ": -6.618,
+        "maxZ": -6.504
+      },
+      {
+        "name": "Gada_Pommel",
+        "centerZ": -6.543,
+        "deltaZ": 0.457,
+        "minZ": -6.62,
+        "maxZ": -6.466
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.529,
+        "deltaZ": 0.471,
+        "minZ": -6.589,
+        "maxZ": -6.469
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.472,
+        "deltaZ": 0.528,
+        "minZ": -6.742,
+        "maxZ": -6.202
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.459,
+        "deltaZ": 0.541,
+        "minZ": -6.506,
+        "maxZ": -6.412
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.452,
+        "deltaZ": 0.548,
+        "minZ": -6.5,
+        "maxZ": -6.405
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.25,
+        "deltaZ": 0.75,
+        "minZ": -6.294,
+        "maxZ": -6.206
+      },
+      {
+        "name": "unnamed",
+        "centerZ": -6.246,
+        "deltaZ": 0.754,
+        "minZ": -6.291,
+        "maxZ": -6.202
+      }
+    ]
+  }
+}

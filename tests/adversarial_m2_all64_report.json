@@ -1,0 +1,446 @@
+{
+  "timestamp": "2026-10-22T10:35:29.137Z",
+  "suite1_64squares": {
+    "totalSquares": 64,
+    "totalValid": 64,
+    "yZeroValid": 64,
+    "boundsValid": 64,
+    "allPass": true,
+    "corners": [
+      {
+        "file": 0,
+        "rank": 0,
+        "notation": "a1",
+        "world": {
+          "x": -7,
+          "y": 0,
+          "z": 7
+        },
+        "expected": {
+          "x": -7,
+          "y": 0,
+          "z": 7
+        },
+        "pass": true
+      },
+      {
+        "file": 7,
+        "rank": 0,
+        "notation": "h1",
+        "world": {
+          "x": 7,
+          "y": 0,
+          "z": 7
+        },
+        "expected": {
+          "x": 7,
+          "y": 0,
+          "z": 7
+        },
+        "pass": true
+      },
+      {
+        "file": 0,
+        "rank": 7,
+        "notation": "a8",
+        "world": {
+          "x": -7,
+          "y": 0,
+          "z": -7
+        },
+        "expected": {
+          "x": -7,
+          "y": 0,
+          "z": -7
+        },
+        "pass": true
+      },
+      {
+        "file": 7,
+        "rank": 7,
+        "notation": "h8",
+        "world": {
+          "x": 7,
+          "y": 0,
+          "z": -7
+        },
+        "expected": {
+          "x": 7,
+          "y": 0,
+          "z": -7
+        },
+        "pass": true
+      }
+    ]
+  },
+  "suite2_32units_rest": {
+    "totalUnits": 32,
+    "whiteUnits": 16,
+    "blackUnits": 16,
+    "whiteFacingPass": 16,
+    "blackFacingPass": 16,
+    "pawnCount": 16,
+    "pawnsFacingEnemy": 16,
+    "spearsFound": 0,
+    "allPass": true,
+    "sampleUnits": [
+      {
+        "id": 0,
+        "team": "White",
+        "type": 4,
+        "rotY": 3.1416,
+        "expectedRotY": 3.1416,
+        "minZMesh": {
+          "name": "Elephant_Tusk_R",
+          "deltaZ": -0.8927
+        },
+        "maxZMesh": {
+          "name": "Elephant_Kada_0",
+          "deltaZ": 0.4638
+        },
+        "rotPass": true,
+        "meshPass": true,
+        "facesEnemy": true
+      },
+      {
+        "id": 1,
+        "team": "White",
+        "type": 1,
+        "rotY": 3.1416,
+        "expectedRotY": 3.1416,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.3044
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0693
+        },
+        "rotPass": true,
+        "meshPass": true,
+        "facesEnemy": true
+      },
+      {
+        "id": 2,
+        "team": "Black",
+        "type": 1,
+        "rotY": 0,
+        "expectedRotY": 0,
+        "minZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0693
+        },
+        "maxZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": 0.3164
+        },
+        "rotPass": true,
+        "meshPass": true,
+        "facesEnemy": true
+      },
+      {
+        "id": 3,
+        "team": "Black",
+        "type": 4,
+        "rotY": 0,
+        "expectedRotY": 0,
+        "minZMesh": {
+          "name": "Elephant_Kada_0",
+          "deltaZ": -0.4631
+        },
+        "maxZMesh": {
+          "name": "Elephant_Tusk_R",
+          "deltaZ": 0.8923
+        },
+        "rotPass": true,
+        "meshPass": true,
+        "facesEnemy": true
+      },
+      {
+        "id": 4,
+        "team": "White",
+        "type": 2,
+        "rotY": 3.1416,
+        "expectedRotY": 3.1416,
+        "minZMesh": {
+          "name": "Horse_LyreEar_R",
+          "deltaZ": -0.7033
+        },
+        "maxZMesh": {
+          "name": "Horse_Body",
+          "deltaZ": 0.1338
+        },
+        "rotPass": true,
+        "meshPass": true,
+        "facesEnemy": true
+      },
+      {
+        "id": 5,
+        "team": "White",
+        "type": 1,
+        "rotY": 3.1416,
+        "expectedRotY": 3.1416,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.3116
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0693
+        },
+        "rotPass": true,
+        "meshPass": true,
+        "facesEnemy": true
+      },
+      {
+        "id": 6,
+        "team": "Black",
+        "type": 1,
+        "rotY": 0,
+        "expectedRotY": 0,
+        "minZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": -0.0693
+        },
+        "maxZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": 0.3096
+        },
+        "rotPass": true,
+        "meshPass": true,
+        "facesEnemy": true
+      },
+      {
+        "id": 7,
+        "team": "Black",
+        "type": 2,
+        "rotY": 0,
+        "expectedRotY": 0,
+        "minZMesh": {
+          "name": "Horse_Body",
+          "deltaZ": -0.1341
+        },
+        "maxZMesh": {
+          "name": "Horse_LyreEar_L",
+          "deltaZ": 0.7028
+        },
+        "rotPass": true,
+        "meshPass": true,
+        "facesEnemy": true
+      },
+      {
+        "id": 8,
+        "team": "White",
+        "type": 3,
+        "rotY": 3.1416,
+        "expectedRotY": 3.1416,
+        "minZMesh": {
+          "name": "Chariot_Varutha",
+          "deltaZ": -0.6889
+        },
+        "maxZMesh": {
+          "name": "Chariot_Flagstaff",
+          "deltaZ": 0.5751
+        },
+        "rotPass": true,
+        "meshPass": true,
+        "facesEnemy": true
+      },
+      {
+        "id": 9,
+        "team": "White",
+        "type": 1,
+        "rotY": 3.1416,
+        "expectedRotY": 3.1416,
+        "minZMesh": {
+          "name": "Khanda_Tip",
+          "deltaZ": -0.304
+        },
+        "maxZMesh": {
+          "name": "Padati_Plume",
+          "deltaZ": 0.0693
+        },
+        "rotPass": true,
+        "meshPass": true,
+        "facesEnemy": true
+      }
+    ]
+  },
+  "suite3_pawn_forward_moves": {
+    "tests": [
+      {
+        "step": "White Pawn 2-Square (e2->e4)",
+        "dest": "e4",
+        "rotY": 3.1416,
+        "expectedRotY": 3.1416,
+        "dhalDeltaZ": -0.2468,
+        "plumeDeltaZ": 0.1326,
+        "rotPass": true,
+        "facesEnemy": true,
+        "spinsBackwards": false
+      },
+      {
+        "step": "Black Pawn 2-Square (d7->d5)",
+        "dest": "d5",
+        "rotY": 0,
+        "expectedRotY": 0,
+        "dhalDeltaZ": 0.2697,
+        "plumeDeltaZ": -0.0637,
+        "rotPass": true,
+        "facesEnemy": true,
+        "spinsBackwards": false
+      }
+    ],
+    "allPass": true
+  },
+  "suite4_pawn_diagonal_captures": {
+    "tests": [
+      {
+        "test": "White Pawn Diagonal Capture e4 x d5",
+        "attackerCombatRotY": -2.3562,
+        "expectedAttackerYaw": -2.3562,
+        "attackerCombatAngleDiff": 0,
+        "attackerCombatYawAligned": true,
+        "defenderCombatRotY": 0.7854,
+        "expectedDefenderYaw": 0.7854,
+        "defenderCombatAngleDiff": 0,
+        "defenderCombatYawAligned": true,
+        "postKillTile": "d5",
+        "postKillRotY": 3.1416,
+        "expectedPostKillRotY": 3.1416,
+        "postKillRotAlignedToWhiteArmy": true,
+        "postDhalDeltaZ": -0.2345,
+        "postDhalFacesOpponent": true,
+        "pass": true
+      }
+    ],
+    "allPass": true
+  },
+  "suite5_knight_l_leap": {
+    "tests": [
+      {
+        "test": "Black Knight L-Leap b8 -> c6",
+        "maxFlightY": 1.6479,
+        "flightHasClearance": true,
+        "landedRotY": 0,
+        "expectedLandedRotY": 0,
+        "landedFacingPass": true,
+        "landedYZero": true,
+        "earDeltaZ": 0.6198,
+        "earsFaceEnemy": true,
+        "pass": true
+      },
+      {
+        "test": "White Knight L-Leap g1 -> f3",
+        "maxFlightY": 1.6479,
+        "flightHasClearance": true,
+        "landedRotY": 3.1416,
+        "expectedLandedRotY": 3.1416,
+        "landedFacingPass": true,
+        "landedYZero": true,
+        "earDeltaZ": -0.6772,
+        "earsFaceEnemy": true,
+        "pass": true
+      }
+    ],
+    "allPass": true
+  },
+  "suite6_rapid_move_storm": {
+    "steps": [
+      {
+        "step": 1,
+        "move": "a7-a6",
+        "team": "Black",
+        "rotY": 0,
+        "expectedRot": 0,
+        "rotDiff": 0,
+        "posDiff": 0,
+        "yZero": true,
+        "pass": true
+      },
+      {
+        "step": 2,
+        "move": "a2-a3",
+        "team": "White",
+        "rotY": 3.1416,
+        "expectedRot": 3.1416,
+        "rotDiff": 0,
+        "posDiff": 0,
+        "yZero": true,
+        "pass": true
+      },
+      {
+        "step": 3,
+        "move": "a6-a5",
+        "team": "Black",
+        "rotY": 0,
+        "expectedRot": 0,
+        "rotDiff": 0,
+        "posDiff": 0,
+        "yZero": true,
+        "pass": true
+      },
+      {
+        "step": 4,
+        "move": "a3-a4",
+        "team": "White",
+        "rotY": 3.1416,
+        "expectedRot": 3.1416,
+        "rotDiff": 0,
+        "posDiff": 0,
+        "yZero": true,
+        "pass": true
+      },
+      {
+        "step": 5,
+        "move": "b7-b6",
+        "team": "Black",
+        "rotY": 0,
+        "expectedRot": 0,
+        "rotDiff": 0,
+        "posDiff": 0,
+        "yZero": true,
+        "pass": true
+      },
+      {
+        "step": 6,
+        "move": "b2-b3",
+        "team": "White",
+        "rotY": 3.1416,
+        "expectedRot": 3.1416,
+        "rotDiff": 0,
+        "posDiff": 0,
+        "yZero": true,
+        "pass": true
+      },
+      {
+        "step": 7,
+        "move": "b6-b5",
+        "team": "Black",
+        "rotY": 0,
+        "expectedRot": 0,
+        "rotDiff": 0,
+        "posDiff": 0,
+        "yZero": true,
+        "pass": true
+      },
+      {
+        "step": 8,
+        "move": "b3-b4",
+        "team": "White",
+        "rotY": 3.1416,
+        "expectedRot": 3.1416,
+        "rotDiff": 0,
+        "posDiff": 0,
+        "yZero": true,
+        "pass": true
+      }
+    ],
+    "allMovesValid": true,
+    "totalActiveRigs": 31,
+    "nonZeroYCount": 0,
+    "misalignedCount": 0,
+    "allPass": true
+  },
+  "consoleErrors": []
+}

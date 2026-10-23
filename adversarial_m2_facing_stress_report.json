@@ -1,0 +1,245 @@
+{
+  "suite1": {
+    "checkedSquares": 64,
+    "failureCount": 0,
+    "failures": []
+  },
+  "suite2": {
+    "totalRigs": 32,
+    "whiteFailures": 0,
+    "blackFailures": 0,
+    "pawnFailures": 16,
+    "spearDetectedCount": 0,
+    "whiteFacingFailures": [],
+    "blackFacingFailures": [],
+    "pawnFailuresList": [
+      {
+        "team": "White",
+        "f": 0,
+        "rootZ": 5,
+        "dhalCenterZ": 5.216823984657923,
+        "deltaZ": 0.21682398465792296,
+        "expectedDeltaSign": -1
+      },
+      {
+        "team": "Black",
+        "f": 0,
+        "rootZ": -5,
+        "dhalCenterZ": -5.223338278863068,
+        "deltaZ": -0.22333827886306779,
+        "expectedDeltaSign": 1
+      },
+      {
+        "team": "White",
+        "f": 1,
+        "rootZ": 5,
+        "dhalCenterZ": 5.216675234322219,
+        "deltaZ": 0.2166752343222189,
+        "expectedDeltaSign": -1
+      },
+      {
+        "team": "Black",
+        "f": 1,
+        "rootZ": -5,
+        "dhalCenterZ": -5.224956429544298,
+        "deltaZ": -0.22495642954429762,
+        "expectedDeltaSign": 1
+      },
+      {
+        "team": "White",
+        "f": 2,
+        "rootZ": 5,
+        "dhalCenterZ": 5.214933566815745,
+        "deltaZ": 0.21493356681574483,
+        "expectedDeltaSign": -1
+      },
+      {
+        "team": "Black",
+        "f": 2,
+        "rootZ": -5,
+        "dhalCenterZ": -5.213692344825095,
+        "deltaZ": -0.2136923448250947,
+        "expectedDeltaSign": 1
+      },
+      {
+        "team": "White",
+        "f": 3,
+        "rootZ": 5,
+        "dhalCenterZ": 5.215663905320175,
+        "deltaZ": 0.21566390532017543,
+        "expectedDeltaSign": -1
+      },
+      {
+        "team": "Black",
+        "f": 3,
+        "rootZ": -5,
+        "dhalCenterZ": -5.214639500240505,
+        "deltaZ": -0.21463950024050504,
+        "expectedDeltaSign": 1
+      },
+      {
+        "team": "White",
+        "f": 4,
+        "rootZ": 5,
+        "dhalCenterZ": 5.22252426463786,
+        "deltaZ": 0.22252426463786001,
+        "expectedDeltaSign": -1
+      },
+      {
+        "team": "Black",
+        "f": 4,
+        "rootZ": -5,
+        "dhalCenterZ": -5.224189334794479,
+        "deltaZ": -0.22418933479447922,
+        "expectedDeltaSign": 1
+      },
+      {
+        "team": "White",
+        "f": 5,
+        "rootZ": 5,
+        "dhalCenterZ": 5.212199314662275,
+        "deltaZ": 0.21219931466227493,
+        "expectedDeltaSign": -1
+      },
+      {
+        "team": "Black",
+        "f": 5,
+        "rootZ": -5,
+        "dhalCenterZ": -5.214261548160587,
+        "deltaZ": -0.21426154816058673,
+        "expectedDeltaSign": 1
+      },
+      {
+        "team": "White",
+        "f": 6,
+        "rootZ": 5,
+        "dhalCenterZ": 5.219610004475975,
+        "deltaZ": 0.21961000447597456,
+        "expectedDeltaSign": -1
+      },
+      {
+        "team": "Black",
+        "f": 6,
+        "rootZ": -5,
+        "dhalCenterZ": -5.2246440936639615,
+        "deltaZ": -0.22464409366396154,
+        "expectedDeltaSign": 1
+      },
+      {
+        "team": "White",
+        "f": 7,
+        "rootZ": 5,
+        "dhalCenterZ": 5.225091194327787,
+        "deltaZ": 0.22509119432778668,
+        "expectedDeltaSign": -1
+      },
+      {
+        "team": "Black",
+        "f": 7,
+        "rootZ": -5,
+        "dhalCenterZ": -5.211548134421392,
+        "deltaZ": -0.21154813442139186,
+        "expectedDeltaSign": 1
+      }
+    ]
+  },
+  "suite3": [
+    {
+      "name": "White Double Push e2-e4",
+      "posError": 0,
+      "rotY": 3.1416,
+      "rotDiff": 0,
+      "dhalDeltaZ": 0.2747,
+      "shieldFacingCorrect": false,
+      "passed": false
+    },
+    {
+      "name": "Black Double Push e7-e5",
+      "posError": 0,
+      "rotY": 0,
+      "rotDiff": 0,
+      "dhalDeltaZ": -0.251,
+      "shieldFacingCorrect": false,
+      "passed": false
+    },
+    {
+      "name": "White Single Push d2-d3",
+      "posError": 0,
+      "rotY": 3.1416,
+      "rotDiff": 0,
+      "dhalDeltaZ": 0.23,
+      "shieldFacingCorrect": false,
+      "passed": false
+    },
+    {
+      "name": "Black Single Push d7-d6",
+      "posError": 0,
+      "rotY": 0,
+      "rotDiff": 0,
+      "dhalDeltaZ": -0.2276,
+      "shieldFacingCorrect": false,
+      "passed": false
+    }
+  ],
+  "suite4": [
+    {
+      "name": "White Knight g1->f3",
+      "posError": 0,
+      "groundY": 0,
+      "rotY": 3.1416,
+      "rotDiff": 0,
+      "passed": true
+    },
+    {
+      "name": "Black Knight b8->c6",
+      "posError": 0,
+      "groundY": 0,
+      "rotY": 0,
+      "rotDiff": 0,
+      "passed": true
+    },
+    {
+      "name": "White Knight RETREAT f3->g1",
+      "posError": 0,
+      "groundY": 0,
+      "rotY": 3.1416,
+      "rotDiff": 0,
+      "passed": true
+    },
+    {
+      "name": "Black Knight RETREAT c6->b8",
+      "posError": 0,
+      "groundY": 0,
+      "rotY": 0,
+      "rotDiff": 0,
+      "passed": true
+    }
+  ],
+  "suite5": {
+    "captureSuccess": true,
+    "attackerRotY": 3.1416,
+    "rotDiff": 0,
+    "posError": 0,
+    "groundY": 0,
+    "passed": true
+  },
+  "suite6": {
+    "qAdvanceResult": {
+      "rotY": 0,
+      "rotDiff": 0
+    },
+    "qRetreatResult": {
+      "rotY": 0,
+      "rotDiff": 0,
+      "passed": true
+    }
+  },
+  "suite7": {
+    "totalActive": 31,
+    "misalignedPositions": 0,
+    "hoveringUnits": 0,
+    "invertedFacings": 0,
+    "passed": true
+  },
+  "browserErrors": []
+}

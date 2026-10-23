@@ -1,0 +1,125 @@
+{
+  "timestamp": "2026-10-22T07:58:14.926Z",
+  "verdict": "APPROVE",
+  "findings": [
+    {
+      "test": "animateWeightTransferTurn",
+      "passed": true,
+      "details": {
+        "elapsedMs": 356.60000002384186,
+        "sampleCount": 12,
+        "maxBankRad": 0.06941762829670549,
+        "maxBankDeg": 3.977337125209142,
+        "expectedBankDeg": 4,
+        "minDip": -0.039780875814730936,
+        "expectedDip": -0.04,
+        "finalTorsoZ": 0,
+        "finalBodyY": 0,
+        "finalYawMatches": true
+      }
+    },
+    {
+      "test": "Locomotion Scaling",
+      "passed": true,
+      "details": {
+        "results": [
+          {
+            "tiles": 1,
+            "adjustedDurationSec": 0.65,
+            "msPerTile": 650
+          },
+          {
+            "tiles": 2,
+            "adjustedDurationSec": 1.3,
+            "msPerTile": 650
+          },
+          {
+            "tiles": 3,
+            "adjustedDurationSec": 1.9500000000000002,
+            "msPerTile": 650
+          },
+          {
+            "tiles": 5,
+            "adjustedDurationSec": 3.25,
+            "msPerTile": 650
+          },
+          {
+            "tiles": 7,
+            "adjustedDurationSec": 4.55,
+            "msPerTile": 650
+          }
+        ],
+        "hasChariot": true
+      }
+    },
+    {
+      "test": "34 Octahedron Shards Physics",
+      "passed": true,
+      "details": {
+        "count": 34,
+        "expectedCount": 34,
+        "allOctahedrons": true,
+        "allRadius014": true,
+        "minSpeed": 1.972891822503595,
+        "maxSpeed": 5.899279979818719,
+        "speedBoundsValid": true,
+        "postBounceY": 0.08,
+        "postBounceVelY": 1.0323,
+        "restitutionVerified": true
+      }
+    },
+    {
+      "test": "Knight Stationary Strike & L-Leap",
+      "passed": true,
+      "details": {
+        "initialPos": {
+          "x": 1,
+          "z": 1
+        },
+        "midCombatDistMoved": 0,
+        "isStationaryDuringAttack": true,
+        "finalPos": {
+          "x": -1,
+          "y": 0,
+          "z": -3
+        },
+        "distFromTargetAtEnd": 0,
+        "finalFacingRad": 3.141592653589793,
+        "expectedFacingRad": 3.141592653589793,
+        "facingPassed": true,
+        "finalYContact": 0
+      }
+    },
+    {
+      "test": "Web Audio Synthesis Autonomy",
+      "passed": true,
+      "details": {
+        "totalOscillators": 9,
+        "totalFilters": 3,
+        "totalGains": 9,
+        "hasLayer1_SubBass": true,
+        "hasLayer2_DualHeartbeat": true,
+        "hasLayer3_MetallicChorus": true,
+        "hasLayer4_HarmonicChime": true,
+        "externalFetchTriggered": false,
+        "isFullyAutonomous": true
+      }
+    },
+    {
+      "test": "Grounding & Facing Integrity",
+      "passed": true,
+      "details": {
+        "totalRigs": 32,
+        "violationsCount": 0,
+        "violations": []
+      }
+    },
+    {
+      "test": "Runtime Stability & Exceptions",
+      "passed": true,
+      "details": {
+        "uncaughtErrorsCount": 0
+      }
+    }
+  ]
+}

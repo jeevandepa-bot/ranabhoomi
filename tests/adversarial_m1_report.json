@@ -1,0 +1,425 @@
+{
+  "overall_pass": true,
+  "models": {
+    "padati": {
+      "model": "padati",
+      "filepath": "C:\\Users\\Jeevan\\Downloads\\ranabhoomi\\assets\\padati.glb",
+      "exists": true,
+      "file_size_bytes": 995780,
+      "passes": true,
+      "failures": [],
+      "warnings": [],
+      "metrics": {
+        "total_objects": 26,
+        "mesh_objects_count": 26,
+        "mesh_names": [
+          "Padati_Dhoti",
+          "Padati_Leg_L",
+          "Padati_Kada_L",
+          "Padati_Leg_R",
+          "Padati_Kada_R",
+          "Padati_Kavacha",
+          "SuryaEmblem",
+          "Padati_ArmL",
+          "Padati_ArmR",
+          "Padati_Neck",
+          "Padati_Head",
+          "Padati_Helm",
+          "Padati_Plume",
+          "Padati_Dhal",
+          "Padati_Dhal_CenterBoss",
+          "Padati_Dhal_Boss_0",
+          "Padati_Dhal_Boss_1",
+          "Padati_Dhal_Boss_2",
+          "Padati_Dhal_Boss_3",
+          "Khanda_Grip",
+          "Khanda_Pommel",
+          "Khanda_PommelSpike",
+          "Khanda_Guard",
+          "Khanda_Blade",
+          "Khanda_Fuller",
+          "Khanda_Tip"
+        ],
+        "total_vertices": 4115,
+        "total_faces": 7336,
+        "smooth_faces": 6099,
+        "flat_faces": 1237,
+        "smooth_ratio": 0.8314,
+        "degenerate_faces": 48,
+        "bbox_min": [
+          -0.715911,
+          -0.3812,
+          0.0
+        ],
+        "bbox_max": [
+          0.523301,
+          0.255588,
+          2.100392
+        ],
+        "ground_touching_meshes": [
+          "Padati_Leg_L",
+          "Padati_Leg_R"
+        ],
+        "dhal_bounds": {
+          "min": [
+            -0.3934,
+            -0.2706,
+            0.79
+          ],
+          "max": [
+            -0.3266,
+            -0.1966,
+            0.79
+          ]
+        }
+      }
+    },
+    "gajadhvaja": {
+      "model": "gajadhvaja",
+      "filepath": "C:\\Users\\Jeevan\\Downloads\\ranabhoomi\\assets\\gajadhvaja.glb",
+      "exists": true,
+      "file_size_bytes": 716536,
+      "passes": true,
+      "failures": [],
+      "warnings": [],
+      "metrics": {
+        "total_objects": 20,
+        "mesh_objects_count": 20,
+        "mesh_names": [
+          "Elephant_Body",
+          "Elephant_Tusk_L",
+          "Elephant_Ferrule_L",
+          "Elephant_Tusk_R",
+          "Elephant_Ferrule_R",
+          "Elephant_Eye_L",
+          "Elephant_Eye_R",
+          "Elephant_Chamfron",
+          "Elephant_Jhul",
+          "Elephant_Kada_0",
+          "Elephant_Kada_1",
+          "Elephant_Kada_2",
+          "Elephant_Kada_3",
+          "Howdah_Base",
+          "Howdah_Pillar_0",
+          "Howdah_Pillar_1",
+          "Howdah_Pillar_2",
+          "Howdah_Pillar_3",
+          "Howdah_Dome",
+          "Howdah_Finial"
+        ],
+        "total_vertices": 4217,
+        "total_faces": 4668,
+        "smooth_faces": 4164,
+        "flat_faces": 504,
+        "smooth_ratio": 0.892,
+        "degenerate_faces": 0,
+        "bbox_min": [
+          -0.676831,
+          -1.35,
+          0.0
+        ],
+        "bbox_max": [
+          0.676831,
+          1.025591,
+          3.12
+        ],
+        "ground_touching_meshes": [
+          "Elephant_Body"
+        ],
+        "tusk_bounds": [
+          {
+            "name": "Elephant_Tusk_L",
+            "min": [
+              -0.2667,
+              -1.35,
+              0.879
+            ],
+            "max": [
+              -0.1686,
+              -0.7169,
+              1.1519
+            ]
+          },
+          {
+            "name": "Elephant_Tusk_R",
+            "min": [
+              0.1686,
+              -1.35,
+              0.879
+            ],
+            "max": [
+              0.2667,
+              -0.7169,
+              1.1519
+            ]
+          }
+        ]
+      }
+    },
+    "ashvarohi": {
+      "model": "ashvarohi",
+      "filepath": "C:\\Users\\Jeevan\\Downloads\\ranabhoomi\\assets\\ashvarohi.glb",
+      "exists": true,
+      "file_size_bytes": 963396,
+      "passes": true,
+      "failures": [],
+      "warnings": [],
+      "metrics": {
+        "total_objects": 16,
+        "mesh_objects_count": 16,
+        "mesh_names": [
+          "Horse_Body",
+          "Horse_LyreEar_L",
+          "Horse_LyreEar_R",
+          "Horse_Saddle",
+          "Dragoon_Leg_L",
+          "Dragoon_Leg_R",
+          "Dragoon_Torso",
+          "Dragoon_Head",
+          "Dragoon_Pagri",
+          "Dhanush_Bow",
+          "Dhanush_String",
+          "Tarkash_Quiver",
+          "Tarkash_Arrow_0",
+          "Tarkash_Arrow_1",
+          "Tarkash_Arrow_2",
+          "Tarkash_Arrow_3"
+        ],
+        "total_vertices": 2646,
+        "total_faces": 4384,
+        "smooth_faces": 4384,
+        "flat_faces": 0,
+        "smooth_ratio": 1.0,
+        "degenerate_faces": 0,
+        "bbox_min": [
+          -0.282642,
+          -0.9443,
+          0.0
+        ],
+        "bbox_max": [
+          0.282642,
+          1.3118,
+          2.1444
+        ],
+        "ground_touching_meshes": [
+          "Horse_Body"
+        ]
+      }
+    },
+    "ratha": {
+      "model": "ratha",
+      "filepath": "C:\\Users\\Jeevan\\Downloads\\ranabhoomi\\assets\\ratha.glb",
+      "exists": true,
+      "file_size_bytes": 1037336,
+      "passes": true,
+      "failures": [],
+      "warnings": [],
+      "metrics": {
+        "total_objects": 28,
+        "mesh_objects_count": 28,
+        "mesh_names": [
+          "Chariot_Hull",
+          "Chariot_Varutha",
+          "Chariot_Flagstaff",
+          "Surya_Banner",
+          "Chakra_Wheel_L",
+          "Chakra_Spoke_L_0",
+          "Chakra_Spoke_L_1",
+          "Chakra_Spoke_L_2",
+          "Chakra_Spoke_L_3",
+          "Chakra_Spoke_L_4",
+          "Chakra_Spoke_L_5",
+          "Chakra_Spoke_L_6",
+          "Chakra_Spoke_L_7",
+          "Chakra_Hub_L",
+          "Chakra_Wheel_R",
+          "Chakra_Spoke_R_0",
+          "Chakra_Spoke_R_1",
+          "Chakra_Spoke_R_2",
+          "Chakra_Spoke_R_3",
+          "Chakra_Spoke_R_4",
+          "Chakra_Spoke_R_5",
+          "Chakra_Spoke_R_6",
+          "Chakra_Spoke_R_7",
+          "Chakra_Hub_R",
+          "Sage_Dhoti",
+          "Sage_Head",
+          "Prabhamandala",
+          "Gandiva_Bow"
+        ],
+        "total_vertices": 5000,
+        "total_faces": 9488,
+        "smooth_faces": 9488,
+        "flat_faces": 0,
+        "smooth_ratio": 1.0,
+        "degenerate_faces": 0,
+        "bbox_min": [
+          -1.03,
+          -1.189343,
+          0.0
+        ],
+        "bbox_max": [
+          1.03,
+          0.972089,
+          2.384217
+        ],
+        "ground_touching_meshes": [
+          "Chakra_Wheel_L",
+          "Chakra_Wheel_R"
+        ],
+        "wheel_meshes": [
+          "Chakra_Wheel_L",
+          "Chakra_Spoke_L_0",
+          "Chakra_Spoke_L_1",
+          "Chakra_Spoke_L_2",
+          "Chakra_Spoke_L_3",
+          "Chakra_Spoke_L_4",
+          "Chakra_Spoke_L_5",
+          "Chakra_Spoke_L_6",
+          "Chakra_Spoke_L_7",
+          "Chakra_Hub_L",
+          "Chakra_Wheel_R",
+          "Chakra_Spoke_R_0",
+          "Chakra_Spoke_R_1",
+          "Chakra_Spoke_R_2",
+          "Chakra_Spoke_R_3",
+          "Chakra_Spoke_R_4",
+          "Chakra_Spoke_R_5",
+          "Chakra_Spoke_R_6",
+          "Chakra_Spoke_R_7",
+          "Chakra_Hub_R"
+        ]
+      }
+    },
+    "maharani": {
+      "model": "maharani",
+      "filepath": "C:\\Users\\Jeevan\\Downloads\\ranabhoomi\\assets\\maharani.glb",
+      "exists": true,
+      "file_size_bytes": 979160,
+      "passes": true,
+      "failures": [],
+      "warnings": [],
+      "metrics": {
+        "total_objects": 18,
+        "mesh_objects_count": 18,
+        "mesh_names": [
+          "Maharani_Saree",
+          "Maharani_Foot_L",
+          "Maharani_Foot_R",
+          "Maharani_Cuirass",
+          "Maharani_Pauldron_L",
+          "Maharani_Pauldron_R",
+          "Maharani_Mantle",
+          "Maharani_Head",
+          "Maharani_Crown",
+          "Maharani_Halo",
+          "Khanda_Grip_R",
+          "Khanda_Pommel_R",
+          "Khanda_Guard_R",
+          "Khanda_Blade_R",
+          "Khanda_Grip_L",
+          "Khanda_Pommel_L",
+          "Khanda_Guard_L",
+          "Khanda_Blade_L"
+        ],
+        "total_vertices": 3748,
+        "total_faces": 6784,
+        "smooth_faces": 6784,
+        "flat_faces": 0,
+        "smooth_ratio": 1.0,
+        "degenerate_faces": 0,
+        "bbox_min": [
+          -0.517852,
+          -0.304174,
+          0.0
+        ],
+        "bbox_max": [
+          0.517852,
+          0.328756,
+          2.070205
+        ],
+        "ground_touching_meshes": [
+          "Maharani_Foot_L",
+          "Maharani_Foot_R"
+        ],
+        "khanda_meshes": [
+          "Khanda_Grip_R",
+          "Khanda_Pommel_R",
+          "Khanda_Guard_R",
+          "Khanda_Blade_R",
+          "Khanda_Grip_L",
+          "Khanda_Pommel_L",
+          "Khanda_Guard_L",
+          "Khanda_Blade_L"
+        ]
+      }
+    },
+    "samrat": {
+      "model": "samrat",
+      "filepath": "C:\\Users\\Jeevan\\Downloads\\ranabhoomi\\assets\\samrat.glb",
+      "exists": true,
+      "file_size_bytes": 558344,
+      "passes": true,
+      "failures": [],
+      "warnings": [],
+      "metrics": {
+        "total_objects": 18,
+        "mesh_objects_count": 18,
+        "mesh_names": [
+          "Samrat_Dhoti",
+          "Samrat_Boot_L",
+          "Samrat_Boot_R",
+          "Samrat_Cuirass",
+          "Samrat_Lion_Pauldron_L",
+          "Samrat_Lion_Pauldron_R",
+          "Samrat_Mantle",
+          "Samrat_Head",
+          "Samrat_Crown",
+          "CrownRuby",
+          "Chhatra_Staff",
+          "Chhatra_Tier_1",
+          "Chhatra_Tier_2",
+          "Chhatra_Tier_3",
+          "Chhatra_Finial",
+          "Gada_Shaft",
+          "Gada_Pommel",
+          "Gada_Head"
+        ],
+        "total_vertices": 3713,
+        "total_faces": 6680,
+        "smooth_faces": 6456,
+        "flat_faces": 224,
+        "smooth_ratio": 0.9665,
+        "degenerate_faces": 0,
+        "bbox_min": [
+          -0.670368,
+          -0.598367,
+          0.0
+        ],
+        "bbox_max": [
+          0.670368,
+          0.747078,
+          3.180001
+        ],
+        "ground_touching_meshes": [
+          "Samrat_Boot_L",
+          "Samrat_Boot_R",
+          "Gada_Head"
+        ],
+        "chhatra_meshes": [
+          "Chhatra_Staff",
+          "Chhatra_Tier_1",
+          "Chhatra_Tier_2",
+          "Chhatra_Tier_3",
+          "Chhatra_Finial"
+        ],
+        "gada_meshes": [
+          "Gada_Shaft",
+          "Gada_Pommel",
+          "Gada_Head"
+        ],
+        "gada_head_zmin": 0.0
+      }
+    }
+  }
+}

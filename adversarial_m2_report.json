@@ -1,0 +1,153 @@
+{
+  "timestamp": "2026-10-21T18:37:14.148Z",
+  "milestone": "M2",
+  "verdict": "APPROVE",
+  "performanceAudit": {
+    "hardware": {
+      "gpuVendor": "Google Inc. (AMD)",
+      "gpuRenderer": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "frameStats": {
+      "count": 239,
+      "mean": 13.41,
+      "median": 12.7,
+      "min": 0.7,
+      "max": 36,
+      "p95": 21.2,
+      "p99": 34.4,
+      "stdDev": 4.93
+    },
+    "effectiveFps": 74.6,
+    "framesUnder16_7Pct": 93.3,
+    "framesUnder20_0Pct": 95,
+    "droppedFramesCount": 4,
+    "componentDurations": {
+      "updateBaahubaliWorldAvgMs": 0.023,
+      "baseSceneRenderMs": 10.9,
+      "mistOnlyRenderMs": 11.925,
+      "particlesOnlyRenderMs": 11.125,
+      "fullSceneRenderMs": 13.147,
+      "isolatedMistOverheadMs": 1.025,
+      "isolatedParticlesOverheadMs": 0.225,
+      "totalVisualOverheadMs": 2.247
+    },
+    "particles": {
+      "count": 600,
+      "bounds": {
+        "minX": -31.999847412109375,
+        "maxX": 31.999361038208008,
+        "minY": 0.20001450181007385,
+        "maxY": 8.99992561340332,
+        "minZ": -31.999778747558594,
+        "maxZ": 31.999069213867188
+      },
+      "strictlyWithinBounds": true,
+      "kinematicallyActive": true
+    },
+    "mistPlanes": [
+      {
+        "index": 0,
+        "elevationY": 0.18,
+        "width": 84,
+        "height": 84,
+        "opacity": 0.16,
+        "transparent": true,
+        "depthWrite": false,
+        "blending": "NormalBlending"
+      },
+      {
+        "index": 1,
+        "elevationY": 0.52,
+        "width": 84,
+        "height": 84,
+        "opacity": 0.11,
+        "transparent": true,
+        "depthWrite": false,
+        "blending": "NormalBlending"
+      }
+    ],
+    "mistStressStats": {
+      "count": 99,
+      "mean": 13.63,
+      "median": 13.2,
+      "min": 0.7,
+      "max": 34.2,
+      "p95": 17.9,
+      "p99": 34.2,
+      "stdDev": 4.27
+    },
+    "mistStressFps": 73.4
+  },
+  "raycastAudit": {
+    "tileMeshesValid": true,
+    "tileCount": 64,
+    "allTilesHaveUserData": true,
+    "runicMeshAudit": {
+      "found": true,
+      "inTileMeshes": false,
+      "elevationY": 0.0015,
+      "isElevatedAboveTiles": true,
+      "transparent": true,
+      "depthWrite": false,
+      "polygonOffset": true,
+      "runicWouldInterceptIfInArray": true
+    },
+    "screenClicks": {
+      "tested": 64,
+      "successful": 64,
+      "successRatePct": 100,
+      "failures": []
+    },
+    "multiAngleRaycast": {
+      "totalRaycasts": 384,
+      "totalHitsMatching": 384,
+      "overallSuccessRatePct": 100,
+      "maxElevationError": 0,
+      "angleResults": [
+        {
+          "angleName": "Default Battle Angle",
+          "squaresTested": 64,
+          "hitsMatching": 64,
+          "elevationErrorMax": 0,
+          "passed": true
+        },
+        {
+          "angleName": "90-deg Side Angle",
+          "squaresTested": 64,
+          "hitsMatching": 64,
+          "elevationErrorMax": 0,
+          "passed": true
+        },
+        {
+          "angleName": "180-deg Reverse Angle",
+          "squaresTested": 64,
+          "hitsMatching": 64,
+          "elevationErrorMax": 0,
+          "passed": true
+        },
+        {
+          "angleName": "270-deg Flank Angle",
+          "squaresTested": 64,
+          "hitsMatching": 64,
+          "elevationErrorMax": 0,
+          "passed": true
+        },
+        {
+          "angleName": "Low Grazing Pitch (Extreme Edge)",
+          "squaresTested": 64,
+          "hitsMatching": 64,
+          "elevationErrorMax": 0,
+          "passed": true
+        },
+        {
+          "angleName": "High Overhead Pitch",
+          "squaresTested": 64,
+          "hitsMatching": 64,
+          "elevationErrorMax": 0,
+          "passed": true
+        }
+      ],
+      "allAnglesPassed": true
+    }
+  }
+}

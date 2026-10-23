@@ -1,0 +1,95 @@
+{
+  "title": "Royal Ranbhoomi Animation Manifest",
+  "version": "1.0",
+  "fps": 30,
+  "units": {
+    "pawn": {
+      "name": "Paidal Sainik",
+      "weight": "Light",
+      "personality": "Disciplined, nervous, brave",
+      "strikeDistance": { "small": 1.6, "medium": 2.0, "large": 2.6 },
+      "clips": {
+        "idle": { "length": 90, "fps": 30, "route": "A+C" },
+        "idle_alt": { "length": 70, "fps": 30, "route": "A" },
+        "walk": { "length": 32, "fps": 30, "route": "A+C", "footstepFrames": [4, 16] },
+        "attack_a": { "length": 40, "impactFrame": 17, "impactTime": 0.567, "route": "B+C" },
+        "attack_b": { "length": 50, "impactFrame": 28, "impactTime": 0.933, "route": "B+C" },
+        "hit": { "length": 12, "route": "C" },
+        "death": { "length": 30, "route": "C" }
+      }
+    },
+    "rook": {
+      "name": "Gajraj War Elephant",
+      "weight": "Very heavy",
+      "personality": "Unstoppable, slow, terrifying",
+      "strikeDistance": { "small": 2.6, "medium": 2.8, "large": 3.2 },
+      "clips": {
+        "idle": { "length": 180, "fps": 30, "route": "B+C" },
+        "walk": { "length": 48, "fps": 30, "route": "B+C", "footstepFrames": [12, 24, 36, 48] },
+        "attack_a": { "length": 80, "impactFrame": 50, "impactTime": 1.667, "route": "B+C" },
+        "attack_b": { "length": 64, "impactFrame": 34, "impactTime": 1.133, "route": "B+C" },
+        "attack_b_vs_elephant": { "length": 100, "impactFrame": 70, "impactTime": 2.333, "route": "B+C" },
+        "hit": { "length": 16, "route": "C" },
+        "death": { "length": 45, "route": "C" }
+      }
+    },
+    "knight": {
+      "name": "Ashvarohi Dragoon",
+      "weight": "Medium, explosive",
+      "personality": "Flashy, acrobatic, proud",
+      "strikeDistance": { "small": 2.2, "medium": 1.6, "large": 2.4 },
+      "clips": {
+        "idle": { "length": 90, "fps": 30, "route": "A+C" },
+        "gallop": { "length": 24, "fps": 30, "route": "B+C" },
+        "leap": { "length": 36, "route": "C", "height": 2.8 },
+        "attack_a": { "length": 50, "impactFrame": 32, "impactTime": 1.067, "route": "B+C" },
+        "attack_b": { "length": 60, "impactFrame": 22, "impactTime": 0.733, "route": "B+C" },
+        "hit": { "length": 14, "route": "C" },
+        "death": { "length": 35, "route": "C" }
+      }
+    },
+    "bishop": {
+      "name": "Ratha Sage Chariot",
+      "weight": "Medium, rhythmic",
+      "personality": "Calm, mystical, precise",
+      "strikeDistance": { "small": 2.6, "medium": 2.6, "large": 2.6 },
+      "clips": {
+        "idle": { "length": 120, "fps": 30, "route": "B+C" },
+        "roll": { "length": 30, "fps": 30, "route": "C" },
+        "attack_a": { "length": 46, "impactFrame": 27, "impactTime": 0.900, "route": "B+C" },
+        "attack_b": { "length": 70, "impactFrame": null, "impactTime": 1.25, "route": "B+C" },
+        "hit": { "length": 14, "route": "C" },
+        "death": { "length": 35, "route": "C" }
+      }
+    },
+    "queen": {
+      "name": "Rani Senapati",
+      "weight": "Light, fastest",
+      "personality": "Lethal grace, dancer-like",
+      "strikeDistance": { "small": 1.1, "medium": 0.0, "large": 0.0 },
+      "clips": {
+        "idle": { "length": 75, "fps": 30, "route": "A+C" },
+        "sprint": { "length": 22, "fps": 30, "route": "A+C", "afterimages": true },
+        "whirlwind": { "length": 48, "impactFrame": 31, "impactTime": 1.033, "route": "B+C" },
+        "attack_a": { "length": 48, "impactFrame": 31, "impactTime": 1.033, "route": "B+C" },
+        "attack_b": { "length": 56, "impactFrame": 28, "impactTime": 0.933, "route": "B+C" },
+        "hit": { "length": 12, "route": "C" },
+        "death": { "length": 28, "route": "C" }
+      }
+    },
+    "king": {
+      "name": "Maharaja Chakravarti",
+      "weight": "Heavy, regal",
+      "personality": "Slow, dignified, overwhelming when he strikes",
+      "strikeDistance": { "small": 1.2, "medium": 1.8, "large": 2.4 },
+      "clips": {
+        "idle": { "length": 120, "fps": 30, "route": "A+C" },
+        "march": { "length": 36, "fps": 30, "route": "A+C" },
+        "attack_a": { "length": 54, "impactFrame": 22, "impactTime": 0.733, "route": "B+C" },
+        "attack_b": { "length": 70, "impactFrame": 46, "impactTime": 1.533, "route": "B+C" },
+        "hit": { "length": 16, "route": "C" },
+        "death": { "length": 45, "route": "C" }
+      }
+    }
+  }
+}

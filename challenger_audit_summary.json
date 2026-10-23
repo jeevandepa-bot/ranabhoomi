@@ -1,0 +1,3020 @@
+{
+  "boardPieces": [
+    {
+      "index": 0,
+      "team": "White",
+      "type": "Rook",
+      "posX": -7,
+      "posZ": 7,
+      "rootMinY": -0.003,
+      "rootMaxY": 4.5171,
+      "bodyMinY": -0.003,
+      "bodyMaxY": 4.5171,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 1,
+      "team": "White",
+      "type": "Pawn",
+      "posX": -7,
+      "posZ": 5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 2,
+      "team": "Black",
+      "type": "Pawn",
+      "posX": -7,
+      "posZ": -5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 3,
+      "team": "Black",
+      "type": "Rook",
+      "posX": -7,
+      "posZ": -7,
+      "rootMinY": -0.003,
+      "rootMaxY": 4.5171,
+      "bodyMinY": -0.003,
+      "bodyMaxY": 4.5171,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 4,
+      "team": "White",
+      "type": "Knight",
+      "posX": -5,
+      "posZ": 7,
+      "rootMinY": 0.0015,
+      "rootMaxY": 2.5615,
+      "bodyMinY": 0.0015,
+      "bodyMaxY": 2.5615,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 5,
+      "team": "White",
+      "type": "Pawn",
+      "posX": -5,
+      "posZ": 5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 6,
+      "team": "Black",
+      "type": "Pawn",
+      "posX": -5,
+      "posZ": -5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 7,
+      "team": "Black",
+      "type": "Knight",
+      "posX": -5,
+      "posZ": -7,
+      "rootMinY": 0.0015,
+      "rootMaxY": 2.5614,
+      "bodyMinY": 0.0015,
+      "bodyMaxY": 2.5614,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 8,
+      "team": "White",
+      "type": "Bishop",
+      "posX": -3,
+      "posZ": 7,
+      "rootMinY": -0.0145,
+      "rootMaxY": 1.8609,
+      "bodyMinY": -0.0145,
+      "bodyMaxY": 1.8609,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 9,
+      "team": "White",
+      "type": "Pawn",
+      "posX": -3,
+      "posZ": 5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 10,
+      "team": "Black",
+      "type": "Pawn",
+      "posX": -3,
+      "posZ": -5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 11,
+      "team": "Black",
+      "type": "Bishop",
+      "posX": -3,
+      "posZ": -7,
+      "rootMinY": -0.0145,
+      "rootMaxY": 1.8609,
+      "bodyMinY": -0.0145,
+      "bodyMaxY": 1.8609,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 12,
+      "team": "White",
+      "type": "Queen",
+      "posX": -1,
+      "posZ": 7,
+      "rootMinY": -0.0004,
+      "rootMaxY": 2.3005,
+      "bodyMinY": -0.0004,
+      "bodyMaxY": 2.3005,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 13,
+      "team": "White",
+      "type": "Pawn",
+      "posX": -1,
+      "posZ": 5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 14,
+      "team": "Black",
+      "type": "Pawn",
+      "posX": -1,
+      "posZ": -5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 15,
+      "team": "Black",
+      "type": "Queen",
+      "posX": -1,
+      "posZ": -7,
+      "rootMinY": -0.0004,
+      "rootMaxY": 2.3006,
+      "bodyMinY": -0.0004,
+      "bodyMaxY": 2.3006,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 16,
+      "team": "White",
+      "type": "King",
+      "posX": 1,
+      "posZ": 7,
+      "rootMinY": -0.0037,
+      "rootMaxY": 3.4109,
+      "bodyMinY": -0.0037,
+      "bodyMaxY": 3.4109,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 17,
+      "team": "White",
+      "type": "Pawn",
+      "posX": 1,
+      "posZ": 5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 18,
+      "team": "Black",
+      "type": "Pawn",
+      "posX": 1,
+      "posZ": -5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 19,
+      "team": "Black",
+      "type": "King",
+      "posX": 1,
+      "posZ": -7,
+      "rootMinY": -0.0037,
+      "rootMaxY": 3.4109,
+      "bodyMinY": -0.0037,
+      "bodyMaxY": 3.4109,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 20,
+      "team": "White",
+      "type": "Bishop",
+      "posX": 3,
+      "posZ": 7,
+      "rootMinY": -0.0145,
+      "rootMaxY": 1.8609,
+      "bodyMinY": -0.0145,
+      "bodyMaxY": 1.8609,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 21,
+      "team": "White",
+      "type": "Pawn",
+      "posX": 3,
+      "posZ": 5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 22,
+      "team": "Black",
+      "type": "Pawn",
+      "posX": 3,
+      "posZ": -5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 23,
+      "team": "Black",
+      "type": "Bishop",
+      "posX": 3,
+      "posZ": -7,
+      "rootMinY": -0.0145,
+      "rootMaxY": 1.8609,
+      "bodyMinY": -0.0145,
+      "bodyMaxY": 1.8609,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 24,
+      "team": "White",
+      "type": "Knight",
+      "posX": 5,
+      "posZ": 7,
+      "rootMinY": 0.0015,
+      "rootMaxY": 2.5614,
+      "bodyMinY": 0.0015,
+      "bodyMaxY": 2.5614,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 25,
+      "team": "White",
+      "type": "Pawn",
+      "posX": 5,
+      "posZ": 5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 26,
+      "team": "Black",
+      "type": "Pawn",
+      "posX": 5,
+      "posZ": -5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 27,
+      "team": "Black",
+      "type": "Knight",
+      "posX": 5,
+      "posZ": -7,
+      "rootMinY": 0.0015,
+      "rootMaxY": 2.5614,
+      "bodyMinY": 0.0015,
+      "bodyMaxY": 2.5614,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 28,
+      "team": "White",
+      "type": "Rook",
+      "posX": 7,
+      "posZ": 7,
+      "rootMinY": -0.003,
+      "rootMaxY": 4.5171,
+      "bodyMinY": -0.003,
+      "bodyMaxY": 4.5171,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 29,
+      "team": "White",
+      "type": "Pawn",
+      "posX": 7,
+      "posZ": 5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 30,
+      "team": "Black",
+      "type": "Pawn",
+      "posX": 7,
+      "posZ": -5,
+      "rootMinY": -0.0005,
+      "rootMaxY": 2.4457,
+      "bodyMinY": -0.0005,
+      "bodyMaxY": 2.4457,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    },
+    {
+      "index": 31,
+      "team": "Black",
+      "type": "Rook",
+      "posX": 7,
+      "posZ": -7,
+      "rootMinY": -0.003,
+      "rootMaxY": 4.5171,
+      "bodyMinY": -0.003,
+      "bodyMaxY": 4.5171,
+      "floatingPartsCount": 0,
+      "isRealistic": true
+    }
+  ],
+  "groundingViolations": 4,
+  "floatingPartsViolations": 0,
+  "proceduralResults": [
+    {
+      "archetype": "Pawn",
+      "type": 1,
+      "bodyMinY": 0,
+      "bodyMaxY": 1.989,
+      "floatingPartsCount": 0
+    },
+    {
+      "archetype": "Knight",
+      "type": 2,
+      "bodyMinY": 0,
+      "bodyMaxY": 1.92,
+      "floatingPartsCount": 0
+    },
+    {
+      "archetype": "Bishop",
+      "type": 3,
+      "bodyMinY": 0,
+      "bodyMaxY": 2.078,
+      "floatingPartsCount": 0
+    },
+    {
+      "archetype": "Rook",
+      "type": 4,
+      "bodyMinY": 0,
+      "bodyMaxY": 2.75,
+      "floatingPartsCount": 0
+    },
+    {
+      "archetype": "Queen",
+      "type": 5,
+      "bodyMinY": -0.1438,
+      "bodyMaxY": 2.7614,
+      "floatingPartsCount": 0
+    },
+    {
+      "archetype": "King",
+      "type": 6,
+      "bodyMinY": 0,
+      "bodyMaxY": 2.41,
+      "floatingPartsCount": 0
+    }
+  ],
+  "facingSpawn": [
+    {
+      "index": 0,
+      "team": "White",
+      "type": 4,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 1,
+      "team": "White",
+      "type": 1,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 2,
+      "team": "Black",
+      "type": 1,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 3,
+      "team": "Black",
+      "type": 4,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 4,
+      "team": "White",
+      "type": 2,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 5,
+      "team": "White",
+      "type": 1,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 6,
+      "team": "Black",
+      "type": 1,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 7,
+      "team": "Black",
+      "type": 2,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 8,
+      "team": "White",
+      "type": 3,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 9,
+      "team": "White",
+      "type": 1,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 10,
+      "team": "Black",
+      "type": 1,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 11,
+      "team": "Black",
+      "type": 3,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 12,
+      "team": "White",
+      "type": 5,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 13,
+      "team": "White",
+      "type": 1,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 14,
+      "team": "Black",
+      "type": 1,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 15,
+      "team": "Black",
+      "type": 5,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 16,
+      "team": "White",
+      "type": 6,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 17,
+      "team": "White",
+      "type": 1,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 18,
+      "team": "Black",
+      "type": 1,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 19,
+      "team": "Black",
+      "type": 6,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 20,
+      "team": "White",
+      "type": 3,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 21,
+      "team": "White",
+      "type": 1,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 22,
+      "team": "Black",
+      "type": 1,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 23,
+      "team": "Black",
+      "type": 3,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 24,
+      "team": "White",
+      "type": 2,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 25,
+      "team": "White",
+      "type": 1,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 26,
+      "team": "Black",
+      "type": 1,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 27,
+      "team": "Black",
+      "type": 2,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 28,
+      "team": "White",
+      "type": 4,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 29,
+      "team": "White",
+      "type": 1,
+      "rotY": 3.1416,
+      "forwardZ": -1,
+      "forwardX": 0
+    },
+    {
+      "index": 30,
+      "team": "Black",
+      "type": 1,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    },
+    {
+      "index": 31,
+      "team": "Black",
+      "type": 4,
+      "rotY": 0,
+      "forwardZ": 1,
+      "forwardX": 0
+    }
+  ],
+  "spawnFacingViolations": 0,
+  "moveRes": {
+    "error": "Moved rig not found at e4"
+  },
+  "blackMoveRes": {
+    "error": "Moved rig not found at e5"
+  },
+  "combatRes": {
+    "atkTeam": "White",
+    "atkRotY": 3.1416,
+    "atkForwardZ": -1,
+    "defHidden": true
+  },
+  "studioAuditResults": [
+    {
+      "piece": "padati",
+      "type": 1,
+      "isRealistic": true,
+      "totalMeshes": 27,
+      "meshes": [
+        {
+          "name": "Padati_Leg_-014",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0,
+          "boxMaxY": 0.504
+        },
+        {
+          "name": "Padati_Leg_014",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0,
+          "boxMaxY": 0.504
+        },
+        {
+          "name": "Padati_ArmL",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.966,
+          "boxMaxY": 1.344
+        },
+        {
+          "name": "Padati_ArmR",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.987,
+          "boxMaxY": 1.344
+        },
+        {
+          "name": "Padati_Neck",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.365,
+          "boxMaxY": 1.449
+        },
+        {
+          "name": "Padati_Head",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.449,
+          "boxMaxY": 1.659
+        },
+        {
+          "name": "Padati_Dhoti",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.263,
+          "boxMaxY": 0.924
+        },
+        {
+          "name": "Padati_Plume",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.911,
+          "boxMaxY": 2.002
+        },
+        {
+          "name": "Khanda_Grip",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.914,
+          "boxMaxY": 1.145
+        },
+        {
+          "name": "Khanda_Blade",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.166,
+          "boxMaxY": 2.237
+        },
+        {
+          "name": "Khanda_Tip",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 2.216,
+          "boxMaxY": 2.446
+        },
+        {
+          "name": "Padati_Kada_-014",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.063,
+          "boxMaxY": 0.126
+        },
+        {
+          "name": "Padati_Kada_014",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.063,
+          "boxMaxY": 0.126
+        },
+        {
+          "name": "Padati_Kavacha",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.903,
+          "boxMaxY": 1.365
+        },
+        {
+          "name": "SuryaEmblem",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.071,
+          "boxMaxY": 1.365
+        },
+        {
+          "name": "Padati_Helm",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.554,
+          "boxMaxY": 1.974
+        },
+        {
+          "name": "Padati_Dhal",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.599,
+          "boxMaxY": 1.397
+        },
+        {
+          "name": "Padati_Dhal_CenterBoss",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.94,
+          "boxMaxY": 1.055
+        },
+        {
+          "name": "Padati_Dhal_Boss_0",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.961,
+          "boxMaxY": 1.034
+        },
+        {
+          "name": "Padati_Dhal_Boss_1",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.15,
+          "boxMaxY": 1.223
+        },
+        {
+          "name": "Padati_Dhal_Boss_2",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.961,
+          "boxMaxY": 1.034
+        },
+        {
+          "name": "Padati_Dhal_Boss_3",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.772,
+          "boxMaxY": 0.845
+        },
+        {
+          "name": "Khanda_Pommel",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.901,
+          "boxMaxY": 0.926
+        },
+        {
+          "name": "Khanda_PommelSpike",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.824,
+          "boxMaxY": 0.898
+        },
+        {
+          "name": "Khanda_Guard",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.138,
+          "boxMaxY": 1.172
+        },
+        {
+          "name": "Khanda_Fuller",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.218,
+          "boxMaxY": 2.142
+        },
+        {
+          "name": "unnamed",
+          "geo": "PlaneGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.002,
+            "z": 0
+          },
+          "boxMinY": 0.002,
+          "boxMaxY": 0.002
+        }
+      ]
+    },
+    {
+      "piece": "gajadhvaja",
+      "type": 4,
+      "isRealistic": true,
+      "totalMeshes": 70,
+      "meshes": [
+        {
+          "name": "Gajraj_Tusk_-022",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.731,
+          "boxMaxY": 0.958
+        },
+        {
+          "name": "Gajraj_Tusk_022",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.731,
+          "boxMaxY": 0.958
+        },
+        {
+          "name": "Gajraj_Eye_-028",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.094,
+          "boxMaxY": 1.158
+        },
+        {
+          "name": "Gajraj_Eye_028",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.094,
+          "boxMaxY": 1.158
+        },
+        {
+          "name": "Gajraj_Forehead_Gem",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.13,
+          "boxMaxY": 1.222
+        },
+        {
+          "name": "Elephant_Body",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.151,
+          "boxMaxY": 1.37
+        },
+        {
+          "name": "Gajraj_Jhul_Blanket",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.109,
+          "boxMaxY": 1.344
+        },
+        {
+          "name": "Gajraj_Chamfron_Plate",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.991,
+          "boxMaxY": 1.294
+        },
+        {
+          "name": "Cylinder004",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder005",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere001",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder006",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere002",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder007",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere003",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder008",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere004",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder009",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere005",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder010",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere006",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder011",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere007",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder012",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere008",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder013",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere009",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder014",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere010",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder015",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere011",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder016",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere012",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder017",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere013",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder018",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere014",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder019",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere015",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder020",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere016",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder021",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere017",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder022",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere018",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder023",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere019",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder024",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere020",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder025",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere021",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder026",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere022",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder027",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere023",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder028",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere024",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder029",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere025",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder030",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere026",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder031",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.025,
+          "boxMaxY": 1.092
+        },
+        {
+          "name": "Icosphere027",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.994,
+          "boxMaxY": 1.047
+        },
+        {
+          "name": "Cylinder032",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.888,
+          "boxMaxY": 0.993
+        },
+        {
+          "name": "Castle_Saddle_Mount",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": -0.12,
+            "z": 0
+          },
+          "boxMinY": 4.138,
+          "boxMaxY": 4.516
+        },
+        {
+          "name": "Castle_Stone_Base",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": -0.12,
+            "z": 0
+          },
+          "boxMinY": 3.915,
+          "boxMaxY": 4.293
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 2.55,
+            "z": -0.38
+          },
+          "boxMinY": 1.9,
+          "boxMaxY": 3.2
+        },
+        {
+          "name": "unnamed",
+          "geo": "PlaneGeometry",
+          "pos": {
+            "x": 0,
+            "y": 3.02,
+            "z": -0.16
+          },
+          "boxMinY": 2.86,
+          "boxMaxY": 3.18
+        },
+        {
+          "name": "unnamed",
+          "geo": "PlaneGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.002,
+            "z": 0
+          },
+          "boxMinY": 0.002,
+          "boxMaxY": 0.002
+        }
+      ]
+    },
+    {
+      "piece": "ashvarohi",
+      "type": 2,
+      "isRealistic": true,
+      "totalMeshes": 32,
+      "meshes": [
+        {
+          "name": "Horse_Body",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": -0.005,
+            "z": 0
+          },
+          "boxMinY": 0.009,
+          "boxMaxY": 1.778
+        },
+        {
+          "name": "Horse_Saddle",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": -0.005,
+            "z": 0
+          },
+          "boxMinY": 1.233,
+          "boxMaxY": 1.37
+        },
+        {
+          "name": "unnamed",
+          "geo": "TubeGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.658,
+          "boxMaxY": 1.093
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": -0.168,
+            "y": 0.58,
+            "z": 0.08
+          },
+          "boxMinY": 0.47,
+          "boxMaxY": 0.69
+        },
+        {
+          "name": "unnamed",
+          "geo": "TorusGeometry",
+          "pos": {
+            "x": -0.168,
+            "y": 0.52,
+            "z": 0.08
+          },
+          "boxMinY": 0.508,
+          "boxMaxY": 0.532
+        },
+        {
+          "name": "unnamed",
+          "geo": "TubeGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.658,
+          "boxMaxY": 1.093
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0.168,
+            "y": 0.58,
+            "z": 0.08
+          },
+          "boxMinY": 0.47,
+          "boxMaxY": 0.69
+        },
+        {
+          "name": "unnamed",
+          "geo": "TorusGeometry",
+          "pos": {
+            "x": 0.168,
+            "y": 0.52,
+            "z": 0.08
+          },
+          "boxMinY": 0.508,
+          "boxMaxY": 0.532
+        },
+        {
+          "name": "unnamed",
+          "geo": "SphereGeometry",
+          "pos": {
+            "x": -0.26,
+            "y": 1.32,
+            "z": 0.04
+          },
+          "boxMinY": 1.283,
+          "boxMaxY": 1.44
+        },
+        {
+          "name": "unnamed",
+          "geo": "SphereGeometry",
+          "pos": {
+            "x": 0.26,
+            "y": 1.32,
+            "z": 0.04
+          },
+          "boxMinY": 1.283,
+          "boxMaxY": 1.44
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.15,
+            "z": 0.04
+          },
+          "boxMinY": 0.91,
+          "boxMaxY": 1.39
+        },
+        {
+          "name": "unnamed",
+          "geo": "CircleGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.2,
+            "z": 0.21
+          },
+          "boxMinY": 1.11,
+          "boxMaxY": 1.29
+        },
+        {
+          "name": "unnamed",
+          "geo": "SphereGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.48,
+            "z": 0.06
+          },
+          "boxMinY": 1.36,
+          "boxMaxY": 1.6
+        },
+        {
+          "name": "unnamed",
+          "geo": "ConeGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.62,
+            "z": 0.06
+          },
+          "boxMinY": 1.49,
+          "boxMaxY": 1.75
+        },
+        {
+          "name": "unnamed",
+          "geo": "OctahedronGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.6,
+            "z": 0.18
+          },
+          "boxMinY": 1.555,
+          "boxMaxY": 1.645
+        },
+        {
+          "name": "unnamed",
+          "geo": "ConeGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.76,
+            "z": 0.12
+          },
+          "boxMinY": 1.665,
+          "boxMaxY": 1.855
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": -0.2,
+            "y": 1.26,
+            "z": 0.22
+          },
+          "boxMinY": 1.105,
+          "boxMaxY": 1.415
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0.18,
+            "y": 1.22,
+            "z": 0.08
+          },
+          "boxMinY": 1.022,
+          "boxMaxY": 1.418
+        },
+        {
+          "name": "unnamed",
+          "geo": "TubeGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": -0.69,
+          "boxMaxY": 0.69
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": -0.09
+          },
+          "boxMinY": -0.67,
+          "boxMaxY": 0.67
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0.12
+          },
+          "boxMinY": -0.08,
+          "boxMaxY": 0.08
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": -0.39,
+          "boxMaxY": 0.39
+        },
+        {
+          "name": "unnamed",
+          "geo": "TorusGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.39,
+            "z": 0
+          },
+          "boxMinY": 0.374,
+          "boxMaxY": 0.406
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": -0.057,
+            "y": 0.44,
+            "z": 0.018
+          },
+          "boxMinY": 0,
+          "boxMaxY": 0.88
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": -0.057,
+            "y": 0.78,
+            "z": 0
+          },
+          "boxMinY": 0.71,
+          "boxMaxY": 0.85
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": -0.019,
+            "y": 0.44,
+            "z": -0.018
+          },
+          "boxMinY": 0,
+          "boxMaxY": 0.88
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": -0.019,
+            "y": 0.78,
+            "z": 0
+          },
+          "boxMinY": 0.71,
+          "boxMaxY": 0.85
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0.019,
+            "y": 0.44,
+            "z": 0.018
+          },
+          "boxMinY": 0,
+          "boxMaxY": 0.88
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": 0.019,
+            "y": 0.78,
+            "z": 0
+          },
+          "boxMinY": 0.71,
+          "boxMaxY": 0.85
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0.057,
+            "y": 0.44,
+            "z": -0.018
+          },
+          "boxMinY": 0,
+          "boxMaxY": 0.88
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": 0.057,
+            "y": 0.78,
+            "z": 0
+          },
+          "boxMinY": 0.71,
+          "boxMaxY": 0.85
+        },
+        {
+          "name": "unnamed",
+          "geo": "PlaneGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.002,
+            "z": 0
+          },
+          "boxMinY": 0.002,
+          "boxMaxY": 0.002
+        }
+      ]
+    },
+    {
+      "piece": "ratha",
+      "type": 3,
+      "isRealistic": true,
+      "totalMeshes": 32,
+      "meshes": [
+        {
+          "name": "Chariot_Hull",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.045,
+            "z": 0
+          },
+          "boxMinY": 0.295,
+          "boxMaxY": 0.895
+        },
+        {
+          "name": "Chariot_Varutha",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.045,
+            "z": 0
+          },
+          "boxMinY": 0.595,
+          "boxMaxY": 1.295
+        },
+        {
+          "name": "Cone",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": -0.91,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.315,
+          "boxMaxY": 0.735
+        },
+        {
+          "name": "Cone001",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.91,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.315,
+          "boxMaxY": 0.735
+        },
+        {
+          "name": "Torus",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": -0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0,
+          "boxMaxY": 1.05
+        },
+        {
+          "name": "Cylinder",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": -0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.045,
+          "boxMaxY": 1.005
+        },
+        {
+          "name": "Cylinder001",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": -0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.074,
+          "boxMaxY": 0.976
+        },
+        {
+          "name": "Cylinder002",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": -0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.171,
+          "boxMaxY": 0.879
+        },
+        {
+          "name": "Cylinder003",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": -0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.323,
+          "boxMaxY": 0.727
+        },
+        {
+          "name": "Cylinder004",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": -0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.505,
+          "boxMaxY": 0.545
+        },
+        {
+          "name": "Cylinder005",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": -0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.323,
+          "boxMaxY": 0.727
+        },
+        {
+          "name": "Cylinder006",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": -0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.171,
+          "boxMaxY": 0.879
+        },
+        {
+          "name": "Cylinder007",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": -0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.074,
+          "boxMaxY": 0.976
+        },
+        {
+          "name": "Torus001",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0,
+          "boxMaxY": 1.05
+        },
+        {
+          "name": "Cylinder008",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.045,
+          "boxMaxY": 1.005
+        },
+        {
+          "name": "Cylinder009",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.074,
+          "boxMaxY": 0.976
+        },
+        {
+          "name": "Cylinder010",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.171,
+          "boxMaxY": 0.879
+        },
+        {
+          "name": "Cylinder011",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.323,
+          "boxMaxY": 0.727
+        },
+        {
+          "name": "Cylinder012",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.505,
+          "boxMaxY": 0.545
+        },
+        {
+          "name": "Cylinder013",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.323,
+          "boxMaxY": 0.727
+        },
+        {
+          "name": "Cylinder014",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.171,
+          "boxMaxY": 0.879
+        },
+        {
+          "name": "Cylinder015",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.75,
+            "y": 0.525,
+            "z": 0
+          },
+          "boxMinY": 0.074,
+          "boxMaxY": 0.976
+        },
+        {
+          "name": "Gandiva_Bow",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.32,
+            "y": 1.395,
+            "z": -0.35
+          },
+          "boxMinY": 1.365,
+          "boxMaxY": 1.425
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.55,
+            "z": 0
+          },
+          "boxMinY": 0.225,
+          "boxMaxY": 0.875
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.02,
+            "z": 0.02
+          },
+          "boxMinY": 0.81,
+          "boxMaxY": 1.23
+        },
+        {
+          "name": "unnamed",
+          "geo": "CircleGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.06,
+            "z": 0.18
+          },
+          "boxMinY": 0.98,
+          "boxMaxY": 1.14
+        },
+        {
+          "name": "unnamed",
+          "geo": "SphereGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.32,
+            "z": 0.04
+          },
+          "boxMinY": 1.21,
+          "boxMaxY": 1.43
+        },
+        {
+          "name": "unnamed",
+          "geo": "SphereGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.4,
+            "z": 0.04
+          },
+          "boxMinY": 1.29,
+          "boxMaxY": 1.51
+        },
+        {
+          "name": "unnamed",
+          "geo": "OctahedronGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.44,
+            "z": 0.14
+          },
+          "boxMinY": 1.402,
+          "boxMaxY": 1.478
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": -0.18,
+            "y": 1.12,
+            "z": 0.18
+          },
+          "boxMinY": 0.981,
+          "boxMaxY": 1.259
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0.16,
+            "y": 1.08,
+            "z": 0.06
+          },
+          "boxMinY": 0.898,
+          "boxMaxY": 1.262
+        },
+        {
+          "name": "unnamed",
+          "geo": "PlaneGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.002,
+            "z": 0
+          },
+          "boxMinY": 0.002,
+          "boxMaxY": 0.002
+        }
+      ]
+    },
+    {
+      "piece": "maharani",
+      "type": 5,
+      "isRealistic": true,
+      "totalMeshes": 17,
+      "meshes": [
+        {
+          "name": "Maharani_Foot_-012",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0,
+          "boxMaxY": 0.286
+        },
+        {
+          "name": "Maharani_Foot_012",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0,
+          "boxMaxY": 0.286
+        },
+        {
+          "name": "Maharani_Head",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.387,
+          "boxMaxY": 1.612
+        },
+        {
+          "name": "Cylinder",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.32,
+            "y": 1.25,
+            "z": -0.22
+          },
+          "boxMinY": 0.251,
+          "boxMaxY": 2.299
+        },
+        {
+          "name": "Maharani_Cuirass",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.918,
+          "boxMaxY": 1.377
+        },
+        {
+          "name": "Maharani_Crown",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.591,
+          "boxMaxY": 2.091
+        },
+        {
+          "name": "Maharani_Pauldron_-034",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.173,
+          "boxMaxY": 1.448
+        },
+        {
+          "name": "Maharani_Pauldron_034",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.173,
+          "boxMaxY": 1.448
+        },
+        {
+          "name": "Torus",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.32,
+            "y": 1.768,
+            "z": -0.738
+          },
+          "boxMinY": 1.767,
+          "boxMaxY": 1.839
+        },
+        {
+          "name": "Torus001",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0.32,
+            "y": 0.733,
+            "z": 0.298
+          },
+          "boxMinY": 0.711,
+          "boxMaxY": 0.783
+        },
+        {
+          "name": "Maharani_Saree",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.204,
+          "boxMaxY": 0.938
+        },
+        {
+          "name": "Maharani_Mantle",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.388,
+          "boxMaxY": 1.346
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": -0.026,
+          "boxMaxY": 0.026
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.48,
+            "z": 0
+          },
+          "boxMinY": 0.055,
+          "boxMaxY": 0.905
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": -0.026,
+          "boxMaxY": 0.026
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.48,
+            "z": 0
+          },
+          "boxMinY": 0.055,
+          "boxMaxY": 0.905
+        },
+        {
+          "name": "unnamed",
+          "geo": "PlaneGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.002,
+            "z": 0
+          },
+          "boxMinY": 0.002,
+          "boxMaxY": 0.002
+        }
+      ]
+    },
+    {
+      "piece": "samrat",
+      "type": 6,
+      "isRealistic": true,
+      "totalMeshes": 25,
+      "meshes": [
+        {
+          "name": "Samrat_Head",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.62,
+          "boxMaxY": 1.879
+        },
+        {
+          "name": "CrownRuby",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 2.122,
+          "boxMaxY": 2.306
+        },
+        {
+          "name": "Samrat_Dhoti",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.238,
+          "boxMaxY": 1.037
+        },
+        {
+          "name": "Cube001",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.059,
+          "boxMaxY": 1.193
+        },
+        {
+          "name": "Samrat_Mantle",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0.486,
+          "boxMaxY": 1.598
+        },
+        {
+          "name": "Samrat_Boot_-016",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0,
+          "boxMaxY": 0.302
+        },
+        {
+          "name": "Samrat_Boot_016",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 0,
+          "boxMaxY": 0.302
+        },
+        {
+          "name": "Samrat_Cuirass",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.026,
+          "boxMaxY": 1.62
+        },
+        {
+          "name": "Samrat_Crown",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.858,
+          "boxMaxY": 2.462
+        },
+        {
+          "name": "Cylinder",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.215,
+          "boxMaxY": 1.701
+        },
+        {
+          "name": "Cube",
+          "geo": "BufferGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "boxMinY": 1.177,
+          "boxMaxY": 1.242
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 2.35,
+            "z": -0.22
+          },
+          "boxMinY": 1.55,
+          "boxMaxY": 3.15
+        },
+        {
+          "name": "unnamed",
+          "geo": "ConeGeometry",
+          "pos": {
+            "x": 0,
+            "y": 2.65,
+            "z": -0.22
+          },
+          "boxMinY": 2.58,
+          "boxMaxY": 2.72
+        },
+        {
+          "name": "unnamed",
+          "geo": "ConeGeometry",
+          "pos": {
+            "x": 0,
+            "y": 2.85,
+            "z": -0.22
+          },
+          "boxMinY": 2.79,
+          "boxMaxY": 2.91
+        },
+        {
+          "name": "unnamed",
+          "geo": "ConeGeometry",
+          "pos": {
+            "x": 0,
+            "y": 3.02,
+            "z": -0.22
+          },
+          "boxMinY": 2.97,
+          "boxMaxY": 3.07
+        },
+        {
+          "name": "unnamed",
+          "geo": "SphereGeometry",
+          "pos": {
+            "x": 0,
+            "y": 3.12,
+            "z": -0.22
+          },
+          "boxMinY": 3.055,
+          "boxMaxY": 3.185
+        },
+        {
+          "name": "unnamed",
+          "geo": "CylinderGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.72,
+            "z": 0
+          },
+          "boxMinY": -0.005,
+          "boxMaxY": 1.445
+        },
+        {
+          "name": "unnamed",
+          "geo": "SphereGeometry",
+          "pos": {
+            "x": 0,
+            "y": 1.35,
+            "z": 0
+          },
+          "boxMinY": 1.053,
+          "boxMaxY": 3.409
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": 0.24,
+            "y": 1.35,
+            "z": 0
+          },
+          "boxMinY": 2.936,
+          "boxMaxY": 3.409
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": 0.12,
+            "y": 1.35,
+            "z": 0.208
+          },
+          "boxMinY": 2.936,
+          "boxMaxY": 3.409
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": -0.12,
+            "y": 1.35,
+            "z": 0.208
+          },
+          "boxMinY": 2.936,
+          "boxMaxY": 3.409
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": -0.24,
+            "y": 1.35,
+            "z": 0
+          },
+          "boxMinY": 2.936,
+          "boxMaxY": 3.409
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": -0.12,
+            "y": 1.35,
+            "z": -0.208
+          },
+          "boxMinY": 2.936,
+          "boxMaxY": 3.409
+        },
+        {
+          "name": "unnamed",
+          "geo": "BoxGeometry",
+          "pos": {
+            "x": 0.12,
+            "y": 1.35,
+            "z": -0.208
+          },
+          "boxMinY": 2.936,
+          "boxMaxY": 3.409
+        },
+        {
+          "name": "unnamed",
+          "geo": "PlaneGeometry",
+          "pos": {
+            "x": 0,
+            "y": 0.002,
+            "z": 0
+          },
+          "boxMinY": 0.002,
+          "boxMaxY": 0.002
+        }
+      ]
+    }
+  ]
+}

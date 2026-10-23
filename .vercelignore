@@ -1,0 +1,38 @@
+# Development artifacts and test runs
+.agents/
+.temp_chrome_profile_*
+tests/
+orbit_frames/
+pure_board_frames/
+stress_frames/
+temp_frames/
+__pycache__/
+
+# Python, C#, test & diagnostic scripts
+*.py
+*.cs
+*.bat
+*.lnk
+*.md
+report*.json
+adversarial*.json
+audit*.json
+challenger*.json
+
+# Top-level test scripts (assets/ scripts are preserved)
+audit_*.js
+check_*.js
+test_*.js
+capture_*.js
+inspect_*.js
+measure_*.js
+verify_*.js
+
+# Audit & benchmark PNG images
+*.png
+
+# Exclude unnecessary models in assets/ if duplicates exist
+assets/soldier.glb
+assets/horse.glb
+assets/queen.glb
+assets/elephant.glb

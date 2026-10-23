@@ -1,0 +1,345 @@
+{
+  "summary": {},
+  "padati": {
+    "object_names": [
+      "Padati_Dhoti",
+      "Padati_Leg_L",
+      "Padati_Kada_L",
+      "Padati_Leg_R",
+      "Padati_Kada_R",
+      "Padati_Kavacha",
+      "SuryaEmblem",
+      "Padati_ArmL",
+      "Padati_ArmR",
+      "Padati_Neck",
+      "Padati_Head",
+      "Padati_Helm",
+      "Padati_Plume",
+      "Padati_Dhal",
+      "Padati_Dhal_CenterBoss",
+      "Padati_Dhal_Boss_0",
+      "Padati_Dhal_Boss_1",
+      "Padati_Dhal_Boss_2",
+      "Padati_Dhal_Boss_3",
+      "Khanda_Grip",
+      "Khanda_Pommel",
+      "Khanda_PommelSpike",
+      "Khanda_Guard",
+      "Khanda_Blade",
+      "Khanda_Fuller",
+      "Khanda_Tip"
+    ],
+    "mesh_count": 26,
+    "forbidden_weapons_found": [],
+    "dhal_bounds": {
+      "min": [
+        -0.7159,
+        -0.22,
+        0.5941
+      ],
+      "max": [
+        -0.0041,
+        -0.18,
+        1.3059
+      ],
+      "span": [
+        0.7118,
+        0.04,
+        0.7118
+      ]
+    },
+    "dhal_center_y": -0.22,
+    "dhal_rim_y": -0.18,
+    "dhal_radial_sample": {
+      "0.0": -0.22,
+      "0.04": -0.2191,
+      "0.07": -0.2179,
+      "0.11": -0.2159,
+      "0.14": -0.2131
+    },
+    "dhal_radius": 0.36,
+    "dhal_curvature_facing_minus_Y": "CONVEX",
+    "boss_count": 4,
+    "center_boss_count": 1,
+    "khanda_blade_bounds": {
+      "min": [
+        0.3319,
+        -0.2648,
+        1.13
+      ],
+      "max": [
+        0.4281,
+        -0.1443,
+        2.08
+      ],
+      "span": [
+        0.0963,
+        0.1205,
+        0.95
+      ]
+    },
+    "khanda_blade_length_z": 0.95,
+    "khanda_tip_span_x": 0.0869,
+    "khanda_base_span_x": 0.0819,
+    "khanda_fuller_found": true
+  },
+  "gajadhvaja": {
+    "object_names": [
+      "Elephant_Body",
+      "Elephant_Tusk_L",
+      "Elephant_Ferrule_L",
+      "Elephant_Tusk_R",
+      "Elephant_Ferrule_R",
+      "Elephant_Eye_L",
+      "Elephant_Eye_R",
+      "Elephant_Chamfron",
+      "Elephant_Jhul",
+      "Elephant_Kada_0",
+      "Elephant_Kada_1",
+      "Elephant_Kada_2",
+      "Elephant_Kada_3",
+      "Howdah_Base",
+      "Howdah_Pillar_0",
+      "Howdah_Pillar_1",
+      "Howdah_Pillar_2",
+      "Howdah_Pillar_3",
+      "Howdah_Dome",
+      "Howdah_Finial"
+    ],
+    "mesh_count": 20,
+    "tusk_L_bounds": {
+      "min": [
+        -0.2667,
+        -1.35,
+        0.879
+      ],
+      "max": [
+        -0.1686,
+        -0.7169,
+        1.1519
+      ],
+      "span": [
+        0.0981,
+        0.6331,
+        0.2729
+      ]
+    },
+    "tusk_L_base_y": -0.7169,
+    "tusk_L_tip_y": -1.35,
+    "tusk_L_base_point": [
+      -0.2201,
+      -0.7169,
+      0.9186
+    ],
+    "tusk_L_tip_point": [
+      -0.2024,
+      -1.35,
+      1.15
+    ],
+    "tusk_R_bounds": {
+      "min": [
+        0.1686,
+        -1.35,
+        0.879
+      ],
+      "max": [
+        0.2667,
+        -0.7169,
+        1.1519
+      ],
+      "span": [
+        0.0981,
+        0.6331,
+        0.2729
+      ]
+    },
+    "tusk_R_base_y": -0.7169,
+    "tusk_R_tip_y": -1.35,
+    "tusk_R_base_point": [
+      0.2201,
+      -0.7169,
+      0.9186
+    ],
+    "tusk_R_tip_point": [
+      0.2024,
+      -1.35,
+      1.15
+    ],
+    "howdah_bounds": {
+      "min": [
+        -0.4777,
+        -0.5732,
+        1.5
+      ],
+      "max": [
+        0.4777,
+        0.5732,
+        1.88
+      ],
+      "span": [
+        0.9553,
+        1.1464,
+        0.38
+      ]
+    }
+  },
+  "samrat": {
+    "object_names": [
+      "Samrat_Dhoti",
+      "Samrat_Boot_L",
+      "Samrat_Boot_R",
+      "Samrat_Cuirass",
+      "Samrat_Lion_Pauldron_L",
+      "Samrat_Lion_Pauldron_R",
+      "Samrat_Mantle",
+      "Samrat_Head",
+      "Samrat_Crown",
+      "CrownRuby",
+      "Chhatra_Staff",
+      "Chhatra_Tier_1",
+      "Chhatra_Tier_2",
+      "Chhatra_Tier_3",
+      "Chhatra_Finial",
+      "Gada_Shaft",
+      "Gada_Pommel",
+      "Gada_Head"
+    ],
+    "mesh_count": 18,
+    "gada_head_bounds": {
+      "min": [
+        -0.2184,
+        -0.5984,
+        0.0
+      ],
+      "max": [
+        0.2184,
+        -0.1616,
+        0.45
+      ],
+      "span": [
+        0.4367,
+        0.4367,
+        0.45
+      ]
+    },
+    "gada_head_min_z": 0.0,
+    "chhatra_tier_count": 3
+  },
+  "ashvarohi": {
+    "object_names": [
+      "Horse_Body",
+      "Horse_LyreEar_L",
+      "Horse_LyreEar_R",
+      "Horse_Saddle",
+      "Dragoon_Leg_L",
+      "Dragoon_Leg_R",
+      "Dragoon_Torso",
+      "Dragoon_Head",
+      "Dragoon_Pagri",
+      "Dhanush_Bow",
+      "Dhanush_String",
+      "Tarkash_Quiver",
+      "Tarkash_Arrow_0",
+      "Tarkash_Arrow_1",
+      "Tarkash_Arrow_2",
+      "Tarkash_Arrow_3"
+    ],
+    "mesh_count": 16,
+    "bow_found": true,
+    "quiver_found": true,
+    "arrow_count": 4
+  },
+  "ratha": {
+    "object_names": [
+      "Chariot_Hull",
+      "Chariot_Varutha",
+      "Chariot_Flagstaff",
+      "Surya_Banner",
+      "Chakra_Wheel_L",
+      "Chakra_Spoke_L_0",
+      "Chakra_Spoke_L_1",
+      "Chakra_Spoke_L_2",
+      "Chakra_Spoke_L_3",
+      "Chakra_Spoke_L_4",
+      "Chakra_Spoke_L_5",
+      "Chakra_Spoke_L_6",
+      "Chakra_Spoke_L_7",
+      "Chakra_Hub_L",
+      "Chakra_Wheel_R",
+      "Chakra_Spoke_R_0",
+      "Chakra_Spoke_R_1",
+      "Chakra_Spoke_R_2",
+      "Chakra_Spoke_R_3",
+      "Chakra_Spoke_R_4",
+      "Chakra_Spoke_R_5",
+      "Chakra_Spoke_R_6",
+      "Chakra_Spoke_R_7",
+      "Chakra_Hub_R",
+      "Sage_Dhoti",
+      "Sage_Head",
+      "Prabhamandala",
+      "Gandiva_Bow"
+    ],
+    "mesh_count": 28,
+    "wheel_l": true,
+    "wheel_r": true,
+    "spoke_count": 16,
+    "hub_scythe_count": 2,
+    "prabhamandala": true,
+    "gandiva_bow": true
+  },
+  "maharani": {
+    "object_names": [
+      "Maharani_Saree",
+      "Maharani_Foot_L",
+      "Maharani_Foot_R",
+      "Maharani_Cuirass",
+      "Maharani_Pauldron_L",
+      "Maharani_Pauldron_R",
+      "Maharani_Mantle",
+      "Maharani_Head",
+      "Maharani_Crown",
+      "Maharani_Halo",
+      "Khanda_Grip_R",
+      "Khanda_Pommel_R",
+      "Khanda_Guard_R",
+      "Khanda_Blade_R",
+      "Khanda_Grip_L",
+      "Khanda_Pommel_L",
+      "Khanda_Guard_L",
+      "Khanda_Blade_L"
+    ],
+    "mesh_count": 18,
+    "khanda_blade_r": true,
+    "khanda_blade_l": true,
+    "mantle": true,
+    "saree": true
+  },
+  "grounding": {
+    "padati": {
+      "min_z": 0.0,
+      "grounding_mesh": "Padati_Leg_L"
+    },
+    "gajadhvaja": {
+      "min_z": 0.0,
+      "grounding_mesh": "Elephant_Body"
+    },
+    "ashvarohi": {
+      "min_z": 0.0,
+      "grounding_mesh": "Horse_Body"
+    },
+    "ratha": {
+      "min_z": 0.0,
+      "grounding_mesh": "Chakra_Wheel_L"
+    },
+    "maharani": {
+      "min_z": 0.0,
+      "grounding_mesh": "Maharani_Foot_L"
+    },
+    "samrat": {
+      "min_z": 0.0,
+      "grounding_mesh": "Samrat_Boot_L"
+    }
+  },
+  "failures": []
+}
