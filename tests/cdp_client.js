@@ -65,7 +65,8 @@ class CDPClient {
       throw new Error(`Failed to connect to Chrome debugging port ${this.port} after 10s.`);
     }
 
-    const targetTab = tabs.find(t => t.type === 'page' && t.url.includes('localhost:8080')) || tabs[0];
+    let targetTab = tabs.find(t => t.type === 'page' && !t.url.startsWith('chrome-extension://'));
+    if (!targetTab) targetTab = tabs[0];
     if (!targetTab || !targetTab.webSocketDebuggerUrl) {
       throw new Error(`No valid page target found on port ${this.port}`);
     }

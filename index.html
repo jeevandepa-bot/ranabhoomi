@@ -144,8 +144,8 @@
       transform-origin: center center;
     }
 
-    /* Mobile Touch Targets & Header Responsiveness (360px-430px & Landscape) */
-    @media screen and (max-width: 768px), screen and (max-height: 520px) {
+    /* Mobile Touch Targets & Responsiveness: Portrait (width <= 768px and height > 520px) */
+    @media screen and (max-width: 768px) and (min-height: 521px) {
       .mobile-touch-btn {
         width: 48px !important;
         height: 48px !important;
@@ -156,17 +156,110 @@
         font-size: 0.78rem !important;
       }
     }
-    @media screen and (max-height: 500px) and (orientation: landscape) {
-      /* In mobile landscape, shrink top header and telemetry so battlefield has maximum viewable height */
+
+    /* Mobile Landscape & Short Viewports (height <= 520px): Streamlined single-row non-overlapping UI */
+    @media screen and (max-height: 520px) {
+      #mainAppHeader {
+        padding-top: 4px !important;
+        padding-bottom: 2px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+      }
+      #mainAppHeader > div {
+        flex-wrap: nowrap !important;
+        gap: 6px !important;
+        overflow-x: auto;
+      }
+      #headerBrandPanel {
+        padding: 3px 8px !important;
+        gap: 6px !important;
+        flex-shrink: 0 !important;
+      }
+      #headerBrandPanel span.font-sanskrit {
+        display: none !important;
+      }
+      #headerBrandIcon {
+        width: 24px !important;
+        height: 24px !important;
+      }
+      #headerBrandIcon span {
+        font-size: 13px !important;
+      }
+      #headerBrandTitle {
+        font-size: 11px !important;
+      }
+      #headerSubtitle {
+        display: none !important;
+      }
+      #headerTabsPanel {
+        padding: 2px !important;
+        gap: 3px !important;
+        flex-shrink: 0 !important;
+      }
+      #headerTabsPanel button {
+        padding: 3px 6px !important;
+        font-size: 10px !important;
+      }
+      #headerUtilityPanel {
+        padding: 3px 6px !important;
+        gap: 4px !important;
+        flex-shrink: 0 !important;
+      }
+      #headerUtilityPanel button {
+        padding: 2px 6px !important;
+        font-size: 10px !important;
+      }
+      #headerUtilityPanel span#audioLabel,
+      #headerUtilityPanel span#killCamLabel {
+        display: none !important;
+      }
       #battlefieldHud {
-        padding: 0.35rem 0.75rem !important;
+        height: calc(100% - 38px) !important;
+        padding: 3px 8px !important;
+      }
+      #battlefieldTopBar {
+        gap: 4px !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+      }
+      #turnStatusPanel {
+        padding: 3px 8px !important;
+        gap: 6px !important;
+        flex-shrink: 0 !important;
+      }
+      #turnCommandSub {
+        display: none !important;
+      }
+      #turnStatusText {
+        font-size: 11px !important;
+        line-height: 1.15 !important;
+      }
+      #matchControlsPanel {
+        padding: 2px 6px !important;
+        gap: 4px !important;
+        flex-shrink: 0 !important;
+      }
+      #matchControlsPanel button {
+        padding: 2px 6px !important;
+        font-size: 10px !important;
       }
       #unitTelemetryCard {
-        max-width: 22rem !important;
-        padding: 0.4rem 0.75rem !important;
+        max-width: 18rem !important;
+        padding: 3px 8px !important;
       }
       #unitTelemetryDesc {
-        display: none !important; /* Hide long description in tight landscape to preserve chessboard clearance */
+        display: none !important;
+      }
+      .mobile-touch-btn {
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        min-height: 30px !important;
+        font-size: 11px !important;
+      }
+      #studioHud {
+        height: calc(100% - 38px) !important;
+        padding: 3px 8px !important;
       }
     }
   </style>
@@ -272,24 +365,24 @@
   </div>
 
   <!-- Top Navigation Bar -->
-  <header class="relative z-20 w-full px-3 sm:px-6 pt-3 pointer-events-none">
+  <header id="mainAppHeader" class="relative z-20 w-full px-3 sm:px-6 pt-3 pointer-events-none">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2.5">
       <!-- Title & Royal Ranbhoomi Crest -->
-      <div class="mg-panel regal-corner px-4 py-2.5 rounded-xl pointer-events-auto flex items-center gap-3">
-        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-400 via-amber-600 to-rose-700 flex items-center justify-center shadow-lg shadow-amber-500/25 border border-amber-300/40">
+      <div id="headerBrandPanel" class="mg-panel regal-corner px-4 py-2.5 rounded-xl pointer-events-auto flex items-center gap-3">
+        <div id="headerBrandIcon" class="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-400 via-amber-600 to-rose-700 flex items-center justify-center shadow-lg shadow-amber-500/25 border border-amber-300/40">
           <span class="text-lg">👑</span>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="font-regal font-extrabold text-sm sm:text-base tracking-wider text-white">ROYAL RANBHOOMI</h1>
+            <h1 id="headerBrandTitle" class="font-regal font-extrabold text-sm sm:text-base tracking-wider text-white">ROYAL RANBHOOMI</h1>
             <span class="text-[10px] font-sanskrit text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-400/40">रणभूमि ३D</span>
           </div>
-          <p class="text-[11px] text-slate-300 font-kinetic tracking-wide">Sculpted 3D Units • Bullet-Time 0.16x • FIDE Chess &amp; AI</p>
+          <p id="headerSubtitle" class="text-[11px] text-slate-300 font-kinetic tracking-wide">Sculpted 3D Units • Bullet-Time 0.16x • FIDE Chess &amp; AI</p>
         </div>
       </div>
 
       <!-- Center Mode Switcher Tabs -->
-      <div class="mg-panel p-1 rounded-xl pointer-events-auto flex items-center gap-1">
+      <div id="headerTabsPanel" class="mg-panel p-1 rounded-xl pointer-events-auto flex items-center gap-1">
         <button id="tabBattlefieldBtn" class="mg-btn mg-btn-active px-3.5 sm:px-4 py-1.5 rounded-lg text-xs font-kinetic font-semibold tracking-wider uppercase flex items-center gap-1.5 border border-transparent">
           <span>⚔️ Ranbhoomi Match</span>
         </button>
@@ -302,7 +395,7 @@
       </div>
 
       <!-- Right Utility Controls -->
-      <div class="mg-panel px-3 py-1.5 rounded-xl pointer-events-auto flex items-center gap-2">
+      <div id="headerUtilityPanel" class="mg-panel px-3 py-1.5 rounded-xl pointer-events-auto flex items-center gap-2">
         <button id="toggleAudioBtn" class="mg-btn px-2.5 py-1 rounded-lg text-xs font-kinetic text-emerald-300 border border-emerald-500/30 bg-emerald-500/10 flex items-center gap-1" title="Toggle Synthesized Audio Suite">
           <span id="audioIcon">🔊</span>
           <span id="audioLabel" class="hidden sm:inline">SFX ON</span>
@@ -324,13 +417,13 @@
   <div id="battlefieldHud" class="relative z-10 w-full h-[calc(100%-72px)] pointer-events-none flex flex-col justify-between p-3 sm:p-6">
     
     <!-- Top Tactical Bar: Turn Telemetry & Game Mode -->
-    <div class="max-w-7xl w-full mx-auto flex flex-wrap items-start justify-between gap-2.5">
+    <div id="battlefieldTopBar" class="max-w-7xl w-full mx-auto flex flex-wrap items-start justify-between gap-2.5">
       <!-- Turn Status & Check Alert -->
-      <div class="mg-panel regal-corner px-4 py-2.5 rounded-xl pointer-events-auto flex items-center gap-3">
-        <div id="turnBadgeDot" class="w-3.5 h-3.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50"></div>
+      <div id="turnStatusPanel" class="mg-panel regal-corner px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-xl pointer-events-auto flex items-center gap-2 sm:gap-3">
+        <div id="turnBadgeDot" class="w-3 sm:w-3.5 h-3 sm:h-3.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50 flex-shrink-0"></div>
         <div>
-          <div class="text-[10px] font-kinetic uppercase tracking-[0.22em] text-slate-400">ACTIVE COMMAND // वर्तमान चाल</div>
-          <div id="turnStatusText" class="text-xs sm:text-sm font-regal font-bold tracking-wider text-white">SURYAVANSHI VANGUARD (WHITE) TO MOVE</div>
+          <div id="turnCommandSub" class="text-[9px] sm:text-[10px] font-kinetic uppercase tracking-[0.2em] text-slate-400 hidden sm:block">COMMAND // चाल</div>
+          <div id="turnStatusText" class="text-xs sm:text-sm font-regal font-bold tracking-wider text-white">WHITE TO MOVE</div>
         </div>
         <div id="checkAlertBadge" class="hidden px-2.5 py-0.5 rounded bg-rose-500/25 border border-rose-500 text-[10px] font-kinetic font-bold text-rose-300 tracking-widest uppercase animate-pulse">
           CHECK! राजा संकट में!
@@ -338,7 +431,7 @@
       </div>
 
       <!-- Match Controls & AI Difficulty -->
-      <div class="mg-panel px-3 py-2 rounded-xl pointer-events-auto flex flex-wrap items-center gap-2">
+      <div id="matchControlsPanel" class="mg-panel px-3 py-2 rounded-xl pointer-events-auto flex flex-wrap items-center gap-2">
         <div class="flex items-center gap-1 bg-slate-900/80 p-1 rounded-lg border border-white/10">
           <button id="modeVsAiBtn" class="mg-btn mg-btn-active px-2.5 py-1 rounded text-[11px] font-kinetic uppercase border border-transparent">Vs AI</button>
           <button id="modeLocal2PBtn" class="mg-btn px-2.5 py-1 rounded text-[11px] font-kinetic uppercase text-slate-300 border border-transparent">Local 2P</button>
@@ -1430,7 +1523,7 @@
       model.position.set(0, 0, 0); // Exact ground contact y=0.000
       applyPuranicTheme(model, team);
 
-      // Hide pedestal plinth, rune disc, floating torus rings, towering castle smokestacks, oversized blocks, and floating cones
+      // Hide unrigged static elephant body & plinths so fully articulated 4 legs and trunk animate smoothly
       model.traverse(child => {
         if (child.isMesh) {
           const n = child.name || '';
@@ -1441,11 +1534,60 @@
               (cylNum >= 0 && (cylNum <= 3 || cylNum >= 32)) ||
               n.includes('Cube') || n.includes('Bastion') || n.includes('Upper_Deck') ||
               n.includes('Castle_Saddle') || n.includes('Castle_Stone_Base') ||
-              n.includes('Cone')) {
+              n.includes('Cone') || n.includes('Elephant_Body') || n.includes('Elephant_Kada')) {
             child.visible = false;
           }
         }
       });
+
+      // 1. Four Articulated Lathe Pillar Quadruped Legs with 24K Gold Kadas (grounded at y = 0.000m)
+      const legCoords = [
+        [-0.34, 0.65, 0.38],  // FL (Front Left)
+        [0.34, 0.65, 0.38],   // FR (Front Right)
+        [-0.34, 0.65, -0.38], // BL (Back Left)
+        [0.34, 0.65, -0.38]   // BR (Back Right)
+      ];
+      legCoords.forEach(([lx, ly, lz]) => {
+        const qLeg = new THREE.Group();
+        qLeg.position.set(lx, ly, lz);
+        const legCol = createLatheMesh([
+          [0.0, -0.65], [0.17, -0.65], [0.15, -0.45], [0.19, -0.15], [0.18, 0.0]
+        ], mats.armor, 32);
+        const cuff = new THREE.Mesh(new THREE.TorusGeometry(0.165, 0.028, 12, 28), mats.trim);
+        cuff.rotation.x = Math.PI / 2;
+        cuff.position.y = -0.52;
+        qLeg.add(legCol, cuff);
+        rig.quadLegs.push(qLeg);
+        rig.bodyRoot.add(qLeg);
+      });
+
+      // 2. Sculpted Muscular Ellipsoid Barrel Body & Caparison Saddle
+      const bodyBarrel = new THREE.Mesh(new THREE.SphereGeometry(0.58, 32, 24), mats.armor);
+      bodyBarrel.scale.set(0.92, 0.82, 1.28);
+      bodyBarrel.position.set(0, 0.95, 0);
+      const saddleTrim = new THREE.Mesh(new THREE.CylinderGeometry(0.52, 0.56, 0.55, 32, 1, true), mats.trim);
+      saddleTrim.scale.set(1.0, 1.0, 1.15);
+      saddleTrim.position.set(0, 1.00, 0);
+      rig.torso.add(bodyBarrel, saddleTrim);
+
+      // 3. 4-Segment Articulated Trunk with Raised Gold Ring Collars
+      rig.head.position.set(0, 1.13, 0.68);
+      let parentTrunk = rig.head;
+      for (let s = 0; s < 4; s++) {
+        const segPivot = new THREE.Group();
+        segPivot.position.set(0, s === 0 ? -0.06 : -0.18, s === 0 ? 0.32 : 0.04);
+        const rTop = 0.13 - s * 0.022;
+        const rBot = 0.11 - s * 0.022;
+        const segMesh = new THREE.Mesh(new THREE.CylinderGeometry(rTop, rBot, 0.20, 20), mats.armor);
+        segMesh.position.y = -0.09;
+        const ringBand = new THREE.Mesh(new THREE.TorusGeometry(rTop, 0.016, 10, 24), mats.trim);
+        ringBand.rotation.x = Math.PI / 2;
+        segPivot.add(segMesh, ringBand);
+        parentTrunk.add(segPivot);
+        rig.trunkSegs.push(segPivot);
+        parentTrunk = segPivot;
+      }
+      rig.torso.add(rig.head);
 
       rig.torso.position.set(0, 0, 0);
       rig.torso.add(model);
@@ -5183,9 +5325,13 @@
         const bankSign = Math.sign(diffYaw);
         const bankAngle = 0.0698; // 4° inward banking roll (4 * Math.PI / 180)
         let elapsed = 0;
+        let lastTurnFrameTime = performance.now();
 
-        function turnStep() {
-          const dt = 0.016 * timeScale;
+        function turnStep(nowTimestamp) {
+          const currentNow = typeof nowTimestamp === 'number' ? nowTimestamp : performance.now();
+          const rawDt = Math.min(0.05, Math.max(0.001, (currentNow - lastTurnFrameTime) / 1000));
+          lastTurnFrameTime = currentNow;
+          const dt = rawDt * timeScale;
           elapsed += dt;
           const t = Math.min(1, elapsed / duration);
           const ease = t * t * (3 - 2 * t); // SmoothStep cubic-bezier
@@ -5404,6 +5550,7 @@
             }
             rig.bodyRoot.position.set(0, 0, 0);
             rig.quadLegs.forEach(ql => ql.rotation.set(0, 0, 0));
+            if (rig.trunkSegs) rig.trunkSegs.forEach(ts => ts.rotation.set(0, 0, 0));
             rig.walkWeight = 0;
 
             // All units always face opponent upon finishing movement (White faces -Z = Math.PI, Black faces +Z = 0)
@@ -5637,8 +5784,13 @@
 
         let p = 0;
         let slowMoActive = false;
+        let lastArrowFrame = performance.now();
 
-        function arrowTick() {
+        function arrowTick(nowTimestamp) {
+          const currentNow = typeof nowTimestamp === 'number' ? nowTimestamp : performance.now();
+          const rawDt = Math.min(0.05, Math.max(0.001, (currentNow - lastArrowFrame) / 1000));
+          lastArrowFrame = currentNow;
+
           // Dramatic bullet-time slow-down pocket right before piercing the victim (p in [0.60, 0.94])
           if (p >= 0.60 && p < 0.94) {
             if (!slowMoActive) {
@@ -5651,9 +5803,9 @@
               camera.updateProjectionMatrix();
               ambientLight.intensity = 0.25;
             }
-            p += 0.034;
+            p += Math.max(0.045, rawDt * 2.8);
           } else {
-            p += 0.11;
+            p += Math.max(0.14, rawDt * 9.5);
           }
 
           if (p < 1.0) {
@@ -5717,20 +5869,116 @@
       attackDir.normalize();
 
       // 1. Move to staging point using Animation Bible Section 11 Strike Distances
+      // Elephant closes distance near to victim (1.35m) for intense visceral melee
       const stopDistMap = {
         [PIECE_PAWN]: 1.6,
         [PIECE_KING]: 1.4,
         [PIECE_QUEEN]: 1.1,
         [PIECE_KNIGHT]: 2.2,
         [PIECE_BISHOP]: 2.6,
-        [PIECE_ROOK]: 2.6
+        [PIECE_ROOK]: 1.35
       };
       const stagingStopDist = stopDistMap[attackerRig.type] || 1.6;
       const stagingPos = targetWorldPos.clone().addScaledVector(attackDir, -stagingStopDist);
       const defTargetYaw = Math.atan2(-attackDir.x, -attackDir.z);
-      await animateWeightTransferTurn(defenderRig, defTargetYaw, 0.18);
 
-      if (attackerRig.type !== PIECE_KNIGHT) {
+      // Non-blocking defender turn for Knight & Elephant so attack begins immediately (eliminates initial stall)
+      const defTurnPromise = animateWeightTransferTurn(defenderRig, defTargetYaw, 0.20);
+      if (attackerRig.type !== PIECE_KNIGHT && attackerRig.type !== PIECE_ROOK) {
+        await defTurnPromise;
+      }
+
+      if (attackerRig.type === PIECE_ROOK) {
+        // Dynamic step calculation & scale speed based on number of steps
+        const originPos = attackerRig.root.position.clone();
+        const totalDist = originPos.distanceTo(targetWorldPos);
+        const stepCount = Math.max(1, Math.round(totalDist / TILE_SIZE));
+        const chargeDuration = Math.min(1.20, Math.max(0.32, 0.22 + stepCount * 0.11));
+        const runDist = Math.max(0.1, originPos.distanceTo(stagingPos));
+        const speed = runDist / chargeDuration;
+        const gaitFreq = Math.max(12.0, Math.min(24.0, 9.0 + speed * 1.1));
+
+        // Turn to face target before running
+        attackerRig.root.rotation.y = Math.atan2(attackDir.x, attackDir.z);
+
+        // Run fast towards victim with 4 legs movement, trunk swinging backwards, and cinematic camera tracking
+        await new Promise(resolveCharge => {
+          let cElapsed = 0;
+          let lastStepSound = 0;
+          let lastChargeFrameTime = performance.now();
+          attackerRig.walkWeight = 1.0;
+
+          function chargeTick(nowTimestamp) {
+            const currentNow = typeof nowTimestamp === 'number' ? nowTimestamp : performance.now();
+            const rawDt = Math.min(0.05, Math.max(0.001, (currentNow - lastChargeFrameTime) / 1000));
+            lastChargeFrameTime = currentNow;
+            const dt = rawDt * timeScale;
+            cElapsed += dt;
+            const tC = Math.min(1, cElapsed / chargeDuration);
+            // Accelerating forward charge ease
+            const chargeEase = tC * tC * (3 - 2 * tC);
+            attackerRig.root.position.lerpVectors(originPos, stagingPos, chargeEase);
+            attackerRig.root.position.y = 0;
+
+            // 1. Mandatory 4-Legs Dynamic Running Gait (Cadence proportional to speed)
+            const legCycle = Math.sin(cElapsed * gaitFreq);
+            if (attackerRig.quadLegs && attackerRig.quadLegs.length === 4) {
+              attackerRig.quadLegs[0].rotation.x = legCycle * 0.75;
+              attackerRig.quadLegs[1].rotation.x = -legCycle * 0.75;
+              attackerRig.quadLegs[2].rotation.x = -legCycle * 0.75;
+              attackerRig.quadLegs[3].rotation.x = legCycle * 0.75;
+            }
+            attackerRig.bodyRoot.position.y = Math.abs(legCycle) * 0.14; // Heavy gallop bounce
+            attackerRig.torso.rotation.x = Math.cos(cElapsed * gaitFreq) * 0.08;
+
+            // 2. Trunk Swings Backwards During Run (Enraged War Trumpet Windup)
+            if (attackerRig.trunkSegs && attackerRig.trunkSegs.length > 0) {
+              attackerRig.trunkSegs.forEach((seg, idx) => {
+                seg.rotation.x = -0.58 - (idx * 0.22) * Math.sin(tC * Math.PI * 0.5);
+                seg.rotation.z = Math.sin(cElapsed * 12 + idx) * 0.12;
+                seg.rotation.y = Math.cos(cElapsed * 8 + idx) * 0.08;
+              });
+            }
+
+            // 3. Cinematic Camera Motion: smooth dynamic tracking as elephant runs from origin to between both characters
+            if (camState.killCamEnabled && !keepCameraInStudio) {
+              const lookStart = originPos.clone().add(new THREE.Vector3(0, 1.2, 0));
+              const midCombatPoint = stagingPos.clone().lerp(targetWorldPos, 0.5);
+              midCombatPoint.y = 1.0;
+              const camEase = tC * tC * (3 - 2 * tC);
+              camState.targetLookPivot.lerpVectors(lookStart, midCombatPoint, camEase);
+
+              const distStart = Math.min(8.0, 4.8 + totalDist * 0.24);
+              camState.targetDistance = THREE.MathUtils.lerp(distStart, 5.8, camEase);
+              camState.targetPitch = THREE.MathUtils.lerp(0.38, 0.28, camEase);
+
+              const combatYaw = Math.atan2(attackDir.z, -attackDir.x);
+              const startYaw = combatYaw + 0.55;
+              camState.targetYaw = THREE.MathUtils.lerp(startYaw, combatYaw, camEase);
+            }
+
+            // Ground tremors & dust on footfalls
+            if (cElapsed - lastStepSound > 0.18) {
+              lastStepSound = cElapsed;
+              sfx.playStep(PIECE_ROOK);
+              spawnHeavyTremorShockwave(attackerRig.root.position, 1.8, 0.45);
+              spawnFootstepDustPuff(attackerRig.root.position, legCycle > 0 ? 0.3 : -0.3, 0.9);
+              triggerCameraShake(0.18, 0.10);
+            }
+
+            if (tC < 1) {
+              requestAnimationFrame(chargeTick);
+            } else {
+              attackerRig.root.position.copy(stagingPos);
+              attackerRig.root.position.y = 0;
+              attackerRig.root.rotation.y = Math.atan2(attackDir.x, attackDir.z);
+              attackerRig.walkWeight = 0;
+              resolveCharge();
+            }
+          }
+          requestAnimationFrame(chargeTick);
+        });
+      } else if (attackerRig.type !== PIECE_KNIGHT) {
         await animateUnitWalkTo(
           attackerRig,
           stagingPos,
@@ -5763,8 +6011,8 @@
         } else {
           const mid = stagingPos.clone().lerp(targetWorldPos, 0.55);
           camState.targetLookPivot.set(mid.x, 0.95, mid.z);
-          camState.targetDistance = 6.2;
-          camState.targetPitch = 0.32;
+          camState.targetDistance = 5.8;
+          camState.targetPitch = 0.28;
           camState.targetYaw = Math.atan2(attackDir.z, -attackDir.x);
         }
       }
@@ -5785,7 +6033,7 @@
         [PIECE_KING]: 'king.attack_a.fallback'
       }[attackerRig.type];
       const clipDef = ANIMATION_BIBLE_DEFS[bibleClipKey];
-      const duration = attackerRig.type === PIECE_KNIGHT ? 2.15 : (clipDef ? (clipDef.length / 30) : 1.35);
+      const duration = attackerRig.type === PIECE_KNIGHT ? 0.80 : (clipDef ? (clipDef.length / 30) : 1.35);
       const impactTime = clipDef ? clipDef.impactTime : (duration * 0.55);
 
       await new Promise(resolve => {
@@ -5846,8 +6094,12 @@
           }
         }
 
-        function combatTick() {
-          const dt = 0.016 * (timeScale < 0.5 ? 0.40 : timeScale);
+        let lastCombatFrameTime = performance.now();
+        function combatTick(nowTimestamp) {
+          const currentNow = typeof nowTimestamp === 'number' ? nowTimestamp : performance.now();
+          const rawDt = Math.min(0.05, Math.max(0.001, (currentNow - lastCombatFrameTime) / 1000));
+          lastCombatFrameTime = currentNow;
+          const dt = rawDt * (timeScale < 0.5 ? 0.40 : timeScale);
           elapsed += dt;
           const t = Math.min(1, elapsed / duration);
 
@@ -6005,53 +6257,72 @@
             }
           }
           else if (attackerRig.type === PIECE_ROOK) {
-            // INNOVATIVE FATAL STRIKE: GAJRAJ TRUNK COIL, VERTICAL SKY-LIFT & VIOLENT GROUND THRASH
-            if (t < 0.30) {
-              // Phase 1: Heavy windup, trunk coils forward around victim
-              const p1 = t / 0.30;
-              attackerRig.bodyRoot.rotation.x = -0.42 * Math.sin(p1 * (Math.PI / 2));
-              attackerRig.bodyRoot.position.y = 0.45 * Math.sin(p1 * (Math.PI / 2));
-              attackerRig.head.rotation.x = -0.35 * p1;
-              attackerRig.trunkSegs.forEach((ts, idx) => {
-                ts.rotation.x = -0.65 * p1;
-                ts.rotation.z = Math.sin(idx * 0.8) * 0.35 * p1;
-              });
-              defenderRig.root.position.y = 0.15 * p1;
-            } else if (t < 0.62) {
-              // Phase 2: Rears high on hind legs, lifts victim +2.6m in the air, flailing helplessly!
-              const p2 = (t - 0.30) / 0.32;
-              attackerRig.bodyRoot.rotation.x = -0.42 - 0.35 * Math.sin(p2 * (Math.PI / 2));
-              attackerRig.bodyRoot.position.y = 0.45 + 0.55 * Math.sin(p2 * (Math.PI / 2));
-              attackerRig.head.rotation.x = -0.35 + 0.55 * p2;
-              defenderRig.root.position.y = 0.15 + 2.45 * Math.sin(p2 * (Math.PI / 2));
-              defenderRig.root.position.z = Math.sin(p2 * Math.PI) * 0.45;
-              defenderRig.torso.rotation.x = -0.65 * p2;
-              defenderRig.torso.rotation.z = Math.sin(p2 * Math.PI * 3) * 0.35;
-              defenderRig.head.rotation.x = 0.45 * p2;
-            } else if (t < 0.80) {
-              // Phase 3: VIOLENT DOWNWARD ARC & HARSH GROUND THRASH
-              const p3 = (t - 0.62) / 0.18;
-              const whip = p3 * p3;
-              attackerRig.bodyRoot.rotation.x = -0.77 + 0.85 * whip;
-              attackerRig.bodyRoot.position.y = 1.00 * (1 - whip);
-              attackerRig.head.rotation.x = 0.20 - 0.75 * whip;
-              // Defender is slammed down with enormous velocity onto the stone floor!
-              defenderRig.root.position.y = Math.max(0, 2.60 * (1 - whip));
-              defenderRig.torso.rotation.x = -0.65 + 2.00 * whip;
-            } else {
-              // Phase 4: Ground recovery & triumphant trunk trumpet
-              const p4 = (t - 0.80) / 0.20;
-              attackerRig.bodyRoot.rotation.x = 0.08 * (1 - p4);
-              attackerRig.bodyRoot.position.y = 0;
-              attackerRig.head.rotation.x = -0.55 * (1 - p4);
+            // MONUMENTAL GAJRAJ FATAL STRIKE: VIOLENT TRUNK THRASH & CRUSHING IMPACT
+            if (t < 0.20) {
+              // Phase 1: High rear with massive kinetic tension; trunk coiled backwards in rage
+              const p1 = t / 0.20;
+              const rearEase = Math.sin(p1 * (Math.PI / 2));
+              attackerRig.bodyRoot.rotation.x = -0.52 * rearEase;
+              attackerRig.bodyRoot.position.y = 0.62 * rearEase;
+              attackerRig.head.rotation.x = -0.38 * rearEase;
+              if (attackerRig.quadLegs && attackerRig.quadLegs.length === 4) {
+                attackerRig.quadLegs[0].rotation.x = -0.65 * rearEase;
+                attackerRig.quadLegs[1].rotation.x = -0.65 * rearEase;
+                attackerRig.quadLegs[2].rotation.x = 0.35 * rearEase;
+                attackerRig.quadLegs[3].rotation.x = 0.35 * rearEase;
+              }
+              if (attackerRig.trunkSegs && attackerRig.trunkSegs.length > 0) {
+                attackerRig.trunkSegs.forEach((ts, idx) => {
+                  ts.rotation.x = -0.75 - 0.35 * rearEase - (idx * 0.15);
+                  ts.rotation.z = Math.sin(idx * 0.8) * 0.25 * rearEase;
+                });
+              }
+              defenderRig.torso.rotation.x = -0.28 * rearEase;
+            } else if (t < 0.52) {
+              // Phase 2: VIOLENT DOWNWARD TRUNK SMASH & CRUSHING IMPACT DIRECTLY INTO VICTIM
+              const p2 = (t - 0.20) / 0.32;
+              const slamEase = Math.pow(p2, 2.5);
+              attackerRig.bodyRoot.rotation.x = -0.52 + 0.95 * slamEase;
+              attackerRig.bodyRoot.position.y = 0.62 * (1 - slamEase);
+              attackerRig.head.rotation.x = -0.38 + 0.72 * slamEase;
+              if (attackerRig.quadLegs && attackerRig.quadLegs.length === 4) {
+                attackerRig.quadLegs[0].rotation.x = -0.65 * (1 - slamEase);
+                attackerRig.quadLegs[1].rotation.x = -0.65 * (1 - slamEase);
+                attackerRig.quadLegs[2].rotation.x = 0.35 * (1 - slamEase);
+                attackerRig.quadLegs[3].rotation.x = 0.35 * (1 - slamEase);
+              }
+              if (attackerRig.trunkSegs && attackerRig.trunkSegs.length > 0) {
+                attackerRig.trunkSegs.forEach((ts, idx) => {
+                  ts.rotation.x = -1.15 + 3.10 * slamEase;
+                });
+              }
+              // Defender takes direct trauma
               defenderRig.root.position.y = 0;
+              defenderRig.torso.rotation.x = 0.85 * slamEase;
+
+              if (p2 >= 0.40 && !impactTriggered) {
+                triggerFatalImpact();
+              }
+            } else {
+              // Phase 3: Monumental stance recovery & triumphant trumpeting posture
+              const p3 = (t - 0.52) / 0.48;
+              const recEase = p3 * (2 - p3);
+              attackerRig.bodyRoot.rotation.x = 0.43 * (1 - recEase);
+              attackerRig.bodyRoot.position.y = 0;
+              attackerRig.head.rotation.x = 0.34 * (1 - recEase);
+              if (attackerRig.trunkSegs && attackerRig.trunkSegs.length > 0) {
+                attackerRig.trunkSegs.forEach((ts, idx) => {
+                  ts.rotation.x = (1.95 - 0.15 * idx) * (1 - recEase) + 0.15 * Math.sin(recEase * Math.PI);
+                });
+              }
             }
           }
           else if (attackerRig.type === PIECE_KNIGHT) {
             // INNOVATIVE FATAL STRIKE: ASHVAROHI REARING STEED & SOLAR LONGBOW HEART STRIKE
-            if (t < 0.35) {
-              // Phase 1: Marwari warhorse rears up on hind legs, front hooves paw the air
-              const p1 = t / 0.35;
+            // Rapid zero-lag release: instant rearing (~100ms), swift draw (~80ms), hypersonic arrow release at ~180ms
+            if (t < 0.12) {
+              // Phase 1: Rapid dynamic equestrian rear (0 - 0.10s)
+              const p1 = t / 0.12;
               const rearEase = Math.sin(p1 * (Math.PI / 2));
               attackerRig.bodyRoot.rotation.x = -0.82 * rearEase;
               attackerRig.bodyRoot.position.y = 0.95 * rearEase;
@@ -6064,19 +6335,19 @@
                 attackerRig.bowWeapon.position.set(-0.20, 1.65 + 0.25 * rearEase, 0.45);
               }
               attackerRig.armR.position.set(0.15, 0.65, -0.45 * rearEase);
-            } else if (t < 0.50) {
-              // Phase 2: Full draw, blazing arrowhead, horse held poised
-              const p2 = (t - 0.35) / 0.15;
-              attackerRig.bodyRoot.rotation.x = -0.82 + Math.sin(p2 * Math.PI) * 0.06;
-              attackerRig.bodyRoot.position.y = 0.95 + Math.sin(p2 * Math.PI) * 0.04;
+            } else if (t < 0.22) {
+              // Phase 2: Instant solar draw & target lock (0.10s - 0.18s)
+              const p2 = (t - 0.12) / 0.10;
+              attackerRig.bodyRoot.rotation.x = -0.82 + Math.sin(p2 * Math.PI) * 0.05;
+              attackerRig.bodyRoot.position.y = 0.95 + Math.sin(p2 * Math.PI) * 0.03;
               if (Math.floor(elapsed * 40) % 2 === 0) {
                 spawnRunicGlintTrail(attackerRig.root.position.clone().add(new THREE.Vector3(0, 1.8, 0)), attackerRig.team);
               }
               defenderRig.torso.rotation.x = -0.25 * p2;
               defenderRig.head.rotation.x = 0.20 * p2;
-            } else if (t < 0.65) {
-              // Phase 3: ARROW RELEASE & HYPERSONIC HEART STRIKE ACROSS THE CHESSBOARD
-              const p3 = (t - 0.50) / 0.15;
+            } else if (t < 0.45) {
+              // Phase 3: ARROW RELEASE & HYPERSONIC HEART STRIKE (Triggers immediately at ~180ms)
+              const p3 = (t - 0.22) / 0.23;
               if (attackerRig.bowWeapon) {
                 attackerRig.bowWeapon.rotation.x = -0.15;
               }
@@ -6090,7 +6361,7 @@
               }
             } else {
               // Phase 4: Warhorse lands powerfully back on 4 hooves, dust puff on landing
-              const p4 = (t - 0.65) / 0.35;
+              const p4 = (t - 0.45) / 0.55;
               const landEase = p4 * p4;
               attackerRig.bodyRoot.rotation.x = -0.82 * (1 - landEase);
               attackerRig.bodyRoot.position.y = 0.95 * (1 - landEase);
@@ -6098,7 +6369,7 @@
                 attackerRig.quadLegs[0].rotation.x = -0.95 * (1 - landEase);
                 attackerRig.quadLegs[1].rotation.x = -0.75 * (1 - landEase);
               }
-              if (p4 > 0.65 && !attackerRig.horseLanded) {
+              if (p4 > 0.45 && !attackerRig.horseLanded) {
                 attackerRig.horseLanded = true;
                 sfx.playHorseLanding();
                 spawnFootstepDustPuff(attackerRig.root.position, 0, 1.25);
@@ -6182,6 +6453,8 @@
               attackerRig.armL.rotation.set(0, 0, 0);
             }
             if (attackerRig.type === PIECE_KING) attackerRig.armR.position.set(0, 0.68, 0.38);
+            if (attackerRig.trunkSegs) attackerRig.trunkSegs.forEach(ts => ts.rotation.set(0, 0, 0));
+            if (attackerRig.quadLegs) attackerRig.quadLegs.forEach(ql => ql.rotation.set(0, 0, 0));
             attackerRig.inKillSequence = false;
             defenderRig.inKillSequence = false;
             attackerRig.currentKillStyle = undefined;
@@ -6306,11 +6579,11 @@
 
       moveBadge.textContent = `TURN #${chess.moveNumber}`;
       if (chess.turn === TEAM_WHITE) {
-        turnText.textContent = "SURYAVANSHI VANGUARD (WHITE) TO MOVE";
-        turnDot.className = "w-3.5 h-3.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50";
+        turnText.textContent = "WHITE TO MOVE";
+        turnDot.className = "w-3 sm:w-3.5 h-3 sm:h-3.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50 flex-shrink-0";
       } else {
-        turnText.textContent = gameMode === 'vsai' ? "CHANDRAVANSHI DOMINION (AI) DELIBERATING..." : "CHANDRAVANSHI DOMINION (BLACK) TO MOVE";
-        turnDot.className = "w-3.5 h-3.5 rounded-full bg-rose-500 shadow-lg shadow-rose-500/50";
+        turnText.textContent = gameMode === 'vsai' ? "BLACK (AI) THINKING..." : "BLACK TO MOVE";
+        turnDot.className = "w-3 sm:w-3.5 h-3 sm:h-3.5 rounded-full bg-rose-500 shadow-lg shadow-rose-500/50 flex-shrink-0";
       }
 
       const inCheck = chess.isInCheck(chess.turn);
