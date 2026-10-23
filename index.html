@@ -1468,7 +1468,7 @@
           }
         }
         if (child.name === 'Khanda_Tip' || child.name === 'Bhala_Tip') {
-          rig.weaponTip.position.set(0.42 * 1.05, 2.25 * 1.05, 0.26 * 1.05);
+          rig.weaponTip.position.set(-0.38 * 1.05, 2.25 * 1.05, 0.26 * 1.05);
         }
       });
 
@@ -1479,9 +1479,9 @@
       legRPivot.position.set(0.14, 0.48, 0);
 
       const armLPivot = rig.armL;
-      armLPivot.position.set(-0.34, 1.25, 0);
+      armLPivot.position.set(0.34, 1.25, 0); // Anatomical Left (Holds Shield)
       const armRPivot = rig.armR;
-      armRPivot.position.set(0.34, 1.25, 0);
+      armRPivot.position.set(-0.34, 1.25, 0); // Anatomical Right (Holds Sword)
 
       const headPivot = rig.head;
       headPivot.position.set(0, 1.30, 0);
@@ -1497,10 +1497,10 @@
           child.position.set(-0.14, -0.48, 0);
           legRPivot.add(child);
         } else if (n.startsWith('Padati_ArmL') || n.startsWith('Padati_Dhal')) {
-          child.position.set(0.34, -1.25, 0);
+          child.position.set(-0.34, -1.25, 0);
           armLPivot.add(child);
         } else if (n.startsWith('Padati_ArmR') || n.startsWith('Khanda')) {
-          child.position.set(-0.34, -1.25, 0);
+          child.position.set(0.34, -1.25, 0);
           armRPivot.add(child);
         } else if (n.startsWith('Padati_Neck') || n.startsWith('Padati_Head') || n.startsWith('Padati_Helm') || n.startsWith('Padati_Plume')) {
           child.position.set(0, -1.30, 0);
@@ -1588,6 +1588,22 @@
         parentTrunk = segPivot;
       }
       rig.torso.add(rig.head);
+
+      // Slender Imperial Flagstaff & War Banner atop Elephant Howdah
+      const mastGeo = new THREE.CylinderGeometry(0.018, 0.018, 1.1, 8);
+      const mast = new THREE.Mesh(mastGeo, mats.trim);
+      mast.position.set(0, 3.45, -0.35);
+      const bannerGeo = new THREE.PlaneGeometry(0.55, 0.32, 8, 8);
+      bannerGeo.translate(0.275, 0, 0);
+      bannerGeo.rotateY(Math.PI / 2);
+      const bannerMesh = new THREE.Mesh(bannerGeo, new THREE.MeshStandardMaterial({
+        color: mats.accentHex,
+        side: THREE.DoubleSide,
+        roughness: 0.45
+      }));
+      bannerMesh.position.set(0, 3.85, -0.35);
+      model.add(mast, bannerMesh);
+      animatedBanners.push({ mesh: bannerMesh, offset: Math.random() * 3.0 });
 
       rig.torso.position.set(0, 0, 0);
       rig.torso.add(model);
@@ -1680,16 +1696,50 @@
       model.position.set(0, 0.0145, 0); // Exact ground contact y=0.000 (wheels touch stone floor at y=0.000m)
       applyPuranicTheme(model, team);
 
-      // Register chariot wheels for rolling locomotion & hide crude cylinder mannequin
+      // Register chariot wheels for rolling locomotion on their exact axle axis
+      rig.wheels = [];
+      const wheelL = model.getObjectByName('Chakra_Wheel_L');
+      const wheelR = model.getObjectByName('Chakra_Wheel_R');
+
+      if (wheelL && wheelR) {
+        // Dedicated axle pivot groups centered at the wheel hubs (X = +-0.75, Y = 0.517, Z = 0.0)
+        const pivotL = new THREE.Group();
+        pivotL.name = 'Chakra_Wheel_Pivot_L';
+        pivotL.position.set(-0.75, 0.517, 0.0);
+
+        const pivotR = new THREE.Group();
+        pivotR.name = 'Chakra_Wheel_Pivot_R';
+        pivotR.position.set(0.75, 0.517, 0.0);
+
+        // Position wheel inside pivot so wheel hub aligns exactly at (0, 0, 0) of the pivot
+        // Note: Do NOT mutate shared wheel geometry!
+        wheelL.position.set(0.75, -0.517, 0.0);
+        pivotL.add(wheelL);
+
+        wheelR.position.set(-0.75, -0.517, 0.0);
+        pivotR.add(wheelR);
+
+        model.add(pivotL, pivotR);
+        rig.wheels.push(pivotL, pivotR);
+      } else {
+        model.traverse(child => {
+          if (child.isMesh && child.material && (child.name.includes('Wheel') || child.name.includes('Chakra'))) {
+            rig.wheels.push(child);
+          }
+        });
+      }
+
+      const suryaBanner = model.getObjectByName('Surya_Banner');
+      if (suryaBanner) {
+        animatedBanners.push({ mesh: suryaBanner, offset: Math.random() * 3.0 });
+      }
+
       model.traverse(child => {
         if (child.isMesh) {
           const n = child.name || '';
           if (n.includes('Archer_Robe') || n.includes('Archer_Head') || n.includes('Prabhamandala') ||
               n.includes('Cone') || n.includes('Pedestal') || n.includes('Rune')) {
             child.visible = false;
-          }
-          if (child.material && (n.includes('Torus') || n.includes('Cylinder') || n.includes('Wheel') || n.includes('Chakra'))) {
-            rig.wheels.push(child);
           }
         }
       });
@@ -2211,15 +2261,15 @@
         rig.torso.add(rig.head);
 
         // Ornate Rajput Dhal Shield on Left Arm (r = 0.44) with Central Lotus Boss, 4 Brass Bosses & Runic Inlay
-        rig.armL.position.set(-0.32, 0.54, 0);
+        rig.armL.position.set(0.32, 0.54, 0);
         const pauldronL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 20, 16, 0, Math.PI * 2, 0, Math.PI * 0.6), mats.trim);
         const forearmL = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.065, 0.42, 16), mats.armor);
-        forearmL.position.set(-0.04, -0.20, 0.10);
+        forearmL.position.set(0.04, -0.20, 0.10);
         forearmL.rotation.x = -Math.PI / 4;
 
         const shieldGroup = new THREE.Group();
-        shieldGroup.position.set(-0.12, -0.22, 0.28);
-        shieldGroup.rotation.y = -0.35;
+        shieldGroup.position.set(0.12, -0.22, 0.28);
+        shieldGroup.rotation.y = 0.35;
         const shieldDisc = createLatheMesh([
           [0.0, 0.09], [0.12, 0.075], [0.38, 0.02], [0.44, 0.0], [0.40, -0.025], [0.0, 0.045]
         ], mats.armor, 36);
@@ -2244,16 +2294,16 @@
         rig.torso.add(rig.armL);
 
         // Kshatriya Khanda / Talwar Sword on Right Arm (Hilt, Spiked Saucer Pommel, Knuckle-Bow, Broad Blade & Fuller)
-        rig.armR.position.set(0.32, 0.54, 0);
+        rig.armR.position.set(-0.32, 0.54, 0);
         const pauldronR = pauldronL.clone();
         const forearmR = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.065, 0.44, 16), mats.armor);
-        forearmR.position.set(0.04, -0.22, 0.08);
+        forearmR.position.set(-0.04, -0.22, 0.08);
         forearmR.rotation.x = -Math.PI / 5;
 
         const swordGroup = new THREE.Group();
-        swordGroup.position.set(0.06, -0.28, 0.20);
+        swordGroup.position.set(-0.06, -0.28, 0.20);
         swordGroup.rotation.x = Math.PI / 3.2; // Alert ready angle angled upward & forward
-        swordGroup.rotation.z = -0.12;
+        swordGroup.rotation.z = 0.12;
 
         const grip = new THREE.Mesh(new THREE.CylinderGeometry(0.024, 0.022, 0.22, 12), mats.dark);
         grip.position.y = 0.08;
@@ -3058,37 +3108,15 @@
         rig.bodyRoot.position.set(0, 0, 0);
 
         if (w <= 0.01 && !rig.inKillSequence) {
-          // Master Respiration Breathing Loop (ω = 2.6 rad/s)
-          const breath = Math.sin(elapsed * 2.6);
-          rig.torso.rotation.set(breath * 0.035, Math.sin(elapsed * 0.9 + rig.animPhase) * 0.018, 0);
-
-          // Archetype Idle Flourishes
-          if (rig.type === PIECE_PAWN && rig.head) {
-            rig.head.rotation.y = Math.sin(elapsed * 1.3) * 0.22;
-          }
-          if (rig.type === PIECE_ROOK && rig.trunkSegs) {
-            rig.trunkSegs.forEach((ts, idx) => {
-              ts.rotation.x = 0.15 + Math.sin(elapsed * 2.6 - idx * 0.75) * 0.22;
-              ts.rotation.z = Math.cos(elapsed * 1.8 - idx * 0.55) * 0.14;
-            });
-          }
-          if (rig.type === PIECE_KNIGHT && rig.quadLegs && rig.quadLegs.length === 4) {
-            const pawCycle = Math.sin(elapsed * 3.2);
-            if (pawCycle > 0.4) {
-              rig.quadLegs[0].rotation.x = (pawCycle - 0.4) * 0.75;
-            }
-          }
-          if (rig.type === PIECE_BISHOP && rig.wheels) {
-            rig.wheels.forEach(wh => { wh.rotation.x += dt * 0.65; });
-          }
-          if (rig.type === PIECE_QUEEN && rig.armR) {
-            rig.armR.rotation.x = Math.sin(elapsed * 2.6) * 0.16;
-            rig.armR.rotation.y = Math.sin(elapsed * 5.2) * 0.14;
-          }
-          if (rig.type === PIECE_KING) {
-            if (rig.crownMount) rig.crownMount.rotation.y += dt * 1.2;
-            if (rig.floatingParts) rig.floatingParts.forEach(fp => { fp.rotation.y += dt * 1.2; });
-          }
+          // All characters stand firm, grounded, and dignified — zero body swinging, bobbing or swaying
+          rig.torso.rotation.set(0, 0, 0);
+          if (rig.head) rig.head.rotation.set(0, 0, 0);
+          if (rig.armL) rig.armL.rotation.set(0, 0, 0);
+          if (rig.armR) rig.armR.rotation.set(0, 0, 0);
+          rig.legL.rotation.set(0, 0, 0);
+          rig.legR.rotation.set(0, 0, 0);
+          if (rig.quadLegs) rig.quadLegs.forEach(ql => ql.rotation.set(0, 0, 0));
+          if (rig.trunkSegs) rig.trunkSegs.forEach(ts => ts.rotation.set(0, 0, 0));
           return;
         }
 
@@ -3100,7 +3128,7 @@
           rig.torso.rotation.z = Math.sin(p * 0.5) * 0.032 * w;
           rig.torso.rotation.y = Math.cos(p * 0.5) * 0.022 * w;
         } else if (rig.type === PIECE_BISHOP) {
-          // Chariot wheel rotation
+          // Chariot wheel rotation strictly proportional to locomotion speed
           rig.wheels.forEach(wh => { wh.rotation.x += dt * 14.0 * w; });
         } else if (rig.type === PIECE_KNIGHT) {
           // Dragoon mount gallop sway
@@ -3115,43 +3143,16 @@
       }
 
       if (w <= 0.01 && !rig.inKillSequence && !rig.inTurn) {
-        // Procedural Idle Breathing Loop (ω = 2.6 rad/s)
-        const breath = Math.sin(elapsed * 2.6);
-        rig.torso.position.y = (rig.type === PIECE_ROOK ? 0.95 : rig.type === PIECE_KNIGHT ? 0.86 : rig.type === PIECE_BISHOP ? 0.418 : rig.type === PIECE_KING ? 0.82 : 0.68) + breath * 0.02;
-        rig.torso.rotation.set(0, Math.sin(elapsed * 1.1) * 0.04, 0);
+        // Procedural Idle: Grounded, steady posture with zero body swinging/swaying
+        rig.torso.position.y = (rig.type === PIECE_ROOK ? 0.95 : rig.type === PIECE_KNIGHT ? 0.86 : rig.type === PIECE_BISHOP ? 0.418 : rig.type === PIECE_KING ? 0.82 : 0.68);
+        rig.torso.rotation.set(0, 0, 0);
+        if (rig.head) rig.head.rotation.set(0, 0, 0);
         rig.legL.rotation.set(0, 0, 0);
         rig.legR.rotation.set(0, 0, 0);
         rig.armL.rotation.set(0, 0, 0);
         if (!rig.inKillSequence) rig.armR.rotation.set(0, 0, 0);
         rig.quadLegs.forEach(ql => ql.rotation.set(0, 0, 0));
-
-        // Procedural Archetype Idle Flourishes
-        if (rig.type === PIECE_PAWN && rig.head) {
-          rig.head.rotation.y = Math.sin(elapsed * 1.3) * 0.22;
-        }
-        if (rig.type === PIECE_ROOK && rig.trunkSegs) {
-          rig.trunkSegs.forEach((ts, idx) => {
-            ts.rotation.x = 0.15 + Math.sin(elapsed * 2.6 - idx * 0.75) * 0.22;
-            ts.rotation.z = Math.cos(elapsed * 1.8 - idx * 0.55) * 0.14;
-          });
-        }
-        if (rig.type === PIECE_KNIGHT && rig.quadLegs && rig.quadLegs.length === 4) {
-          const pawCycle = Math.sin(elapsed * 3.2);
-          if (pawCycle > 0.4) {
-            rig.quadLegs[0].rotation.x = (pawCycle - 0.4) * 0.75;
-          }
-        }
-        if (rig.type === PIECE_BISHOP && rig.wheels) {
-          rig.wheels.forEach(wh => { wh.rotation.x += dt * 0.65; });
-        }
-        if (rig.type === PIECE_QUEEN && rig.armR) {
-          rig.armR.rotation.x = Math.sin(elapsed * 2.6) * 0.16;
-          rig.armR.rotation.y = Math.sin(elapsed * 5.2) * 0.14;
-        }
-        if (rig.type === PIECE_KING) {
-          if (rig.crownMount) rig.crownMount.rotation.y += dt * 1.2;
-          if (rig.floatingParts) rig.floatingParts.forEach(fp => { fp.rotation.y += dt * 1.2; });
-        }
+        if (rig.trunkSegs) rig.trunkSegs.forEach(ts => ts.rotation.set(0, 0, 0));
         return;
       }
 
@@ -3562,24 +3563,24 @@
     // =========================================================================
     const container = document.getElementById('canvasContainer');
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x9a6b46, 35, 160);
+    scene.fog = new THREE.Fog(0xdfbe9f, 95, 340);
     queenAfterimagePool = new QueenAfterimagePool(scene);
 
     const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.8, 350);
     const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance', logarithmicDepthBuffer: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x9a6b46);
+    renderer.setClearColor(0xdfbe9f);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.08;
+    renderer.toneMappingExposure = 1.26;
     container.appendChild(renderer.domElement);
 
     // 4-Point Cinematic Stormy Lighting Rig + Atmospheric Sky Fill
-    const sunLight = new THREE.DirectionalLight(0xffedd8, 1.30);
-    sunLight.position.set(34, 52, 40);
+    const sunLight = new THREE.DirectionalLight(0xfffaea, 2.20);
+    sunLight.position.set(38, 56, 42);
     sunLight.castShadow = true;
     sunLight.shadow.mapSize.width = 2048;
     sunLight.shadow.mapSize.height = 2048;
@@ -3595,22 +3596,32 @@
     scene.add(sunLight);
 
     // 2. Dramatic Cool Silver-Blue Silhouette Rim Backlight
-    const rimLightSilver = new THREE.DirectionalLight(0x93c5fd, 0.85);
-    rimLightSilver.position.set(-36, 24, -36);
+    const rimLightSilver = new THREE.DirectionalLight(0xb2d4fd, 1.05);
+    rimLightSilver.position.set(-36, 26, -36);
     scene.add(rimLightSilver);
 
     // 3. Cinematic Atmospheric Hemisphere Light (Warm sunset sky dome fill + terracotta canyon ground bounce)
-    const hemiLight = new THREE.HemisphereLight(0xffdfb8, 0x6e4a30, 0.70);
+    const hemiLight = new THREE.HemisphereLight(0xffecd6, 0xc49b78, 1.55);
     scene.add(hemiLight);
 
-    // 4. Muted Stormy Slate Ambient Fill
-    const ambientLight = new THREE.AmbientLight(0x3e322a, 0.35);
+    // 4. Vibrant Vedic Ambient Fill
+    const ambientLight = new THREE.AmbientLight(0xad9480, 0.95);
     scene.add(ambientLight);
 
     // 5. Warm Ground Battle Fire / Brazier Fill Light
-    const fireFillLight = new THREE.DirectionalLight(0xf97316, 0.32);
-    fireFillLight.position.set(0, 6, 26);
+    const fireFillLight = new THREE.DirectionalLight(0xf97316, 0.55);
+    fireFillLight.position.set(0, 8, 28);
     scene.add(fireFillLight);
+
+    // 6. Direct North Ruins & Gopuram Uplight (Vivid visibility of Dravidian Gopuram & Colonnades)
+    const ruinsFillLight = new THREE.DirectionalLight(0xffecd2, 1.50);
+    ruinsFillLight.position.set(-22, 36, -32);
+    scene.add(ruinsFillLight);
+
+    // 7. Direct South Sanctuary & Colonnades Uplight
+    const ruinsFillLightSouth = new THREE.DirectionalLight(0xffe4cc, 1.25);
+    ruinsFillLightSouth.position.set(22, 32, 30);
+    scene.add(ruinsFillLightSouth);
 
 
     // Master Groups
@@ -3647,16 +3658,16 @@
 
       // Atmospheric vertical gradient: V = 0 is zenith, V = 0.50 is the horizon!
       const grad = ctx.createLinearGradient(0, 0, 0, 512);
-      grad.addColorStop(0.00, '#121824'); // Deep twilight indigo zenith
-      grad.addColorStop(0.22, '#282430'); // Dusky twilight purple cloud deck
-      grad.addColorStop(0.34, '#5c3628'); // Copper storm cloud underbelly
-      grad.addColorStop(0.42, '#9a4f26'); // Burnt orange sunset glow
-      grad.addColorStop(0.47, '#db752a'); // Fiery amber cloud edge
-      grad.addColorStop(0.50, '#f9aa42'); // Brilliant golden horizon break at the equator!
-      grad.addColorStop(0.53, '#e88934'); // Warm sunset glow just beneath horizon
-      grad.addColorStop(0.58, '#94532e'); // Terracotta canyon dust haze
-      grad.addColorStop(0.68, '#4e2f1e'); // Canyon shadow
-      grad.addColorStop(1.00, '#221610'); // Deep gorge floor shadow
+      grad.addColorStop(0.00, '#362a42'); // Warm dusk twilight amethyst zenith (never pitch black!)
+      grad.addColorStop(0.18, '#583648'); // Dusky twilight purple cloud deck
+      grad.addColorStop(0.30, '#864836'); // Rich copper storm cloud underbelly
+      grad.addColorStop(0.40, '#b85c2c'); // Burnt orange sunset glow
+      grad.addColorStop(0.46, '#e28032'); // Fiery amber cloud edge
+      grad.addColorStop(0.50, '#fdbd4a'); // Brilliant golden horizon break at the equator!
+      grad.addColorStop(0.53, '#eb943c'); // Warm sunset glow just beneath horizon
+      grad.addColorStop(0.58, '#a25e36'); // Terracotta canyon dust haze
+      grad.addColorStop(0.68, '#5c3624'); // Canyon shadow
+      grad.addColorStop(1.00, '#2e1c16'); // Deep gorge floor shadow
 
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, 1024, 512);
@@ -3726,44 +3737,42 @@
 // -------------------------------------------------------------------------
     // 6B. VAST DECCAN CANYON BASIN & GEOLOGICAL ESCARPMENT TERRACES
     // -------------------------------------------------------------------------
-    // Stone & Ground PBR Texture Instances with specific wrapping & repeats
     // -------------------------------------------------------------------------
     // 6B. VAST DECCAN CANYON BASIN & GEOLOGICAL ESCARPMENT TERRACES
     // -------------------------------------------------------------------------
     // Stone & Ground PBR Texture Instances with specific wrapping & repeats
-    // -------------------------------------------------------------------------
-    // 6B. VAST DECCAN CANYON BASIN & GEOLOGICAL ESCARPMENT TERRACES
-    // -------------------------------------------------------------------------
-    // Stone & Ground PBR Texture Instances with specific wrapping & repeats
-    const canyonDiff = StoneTextureManager.stoneLightDiff.clone();
+    const canyonDiff = envTextureLoader.load('assets/textures/stone_light_diffuse.png');
     canyonDiff.wrapS = THREE.RepeatWrapping;
     canyonDiff.wrapT = THREE.RepeatWrapping;
     canyonDiff.repeat.set(16, 16);
+    canyonDiff.encoding = THREE.sRGBEncoding;
 
-    const canyonNorm = groundNorm.clone();
+    const canyonNorm = envTextureLoader.load('assets/textures/ground_normal.png');
     canyonNorm.wrapS = THREE.RepeatWrapping;
     canyonNorm.wrapT = THREE.RepeatWrapping;
     canyonNorm.repeat.set(16, 16);
 
-    const mesaDiff = StoneTextureManager.stoneLightDiff.clone();
+    const mesaDiff = envTextureLoader.load('assets/textures/stone_light_diffuse.png');
     mesaDiff.wrapS = THREE.RepeatWrapping;
     mesaDiff.wrapT = THREE.RepeatWrapping;
     mesaDiff.repeat.set(4, 3);
+    mesaDiff.encoding = THREE.sRGBEncoding;
 
-    const basaltDiff = StoneTextureManager.stoneDarkDiff.clone();
+    const basaltDiff = envTextureLoader.load('assets/textures/stone_dark_diffuse.png');
     basaltDiff.wrapS = THREE.RepeatWrapping;
     basaltDiff.wrapT = THREE.RepeatWrapping;
     basaltDiff.repeat.set(4, 3);
+    basaltDiff.encoding = THREE.sRGBEncoding;
 
     // A. Vast Deep Canyon Bedrock Basin (Floor of the rift gorge)
     const canyonFloor = new THREE.Mesh(
       new THREE.PlaneGeometry(420, 420, 32, 32),
       new THREE.MeshStandardMaterial({
-        color: 0x8a684c, // Warm Deccan sandstone floor
+        color: 0xdfc2a8, // Warm radiant Deccan sandstone floor
         map: canyonDiff,
         normalMap: canyonNorm,
         normalScale: new THREE.Vector2(1.8, 1.8),
-        roughness: 0.92,
+        roughness: 0.84,
         metalness: 0.04
       })
     );
@@ -3774,11 +3783,11 @@
 
     // B. Intermediate Canyon Bedrock Terraces (Ravine Shelf & Stepped Rock Escarpments)
     const midCanyonMat = new THREE.MeshStandardMaterial({
-      color: 0x72543e,
+      color: 0xcca88f,
       map: canyonDiff,
       normalMap: canyonNorm,
       normalScale: new THREE.Vector2(2.2, 2.2),
-      roughness: 0.88,
+      roughness: 0.80,
       metalness: 0.06,
       flatShading: true
     });
@@ -3809,23 +3818,23 @@
     // C. Towering Deccan Traps / Hampi Mesas and Canyon Crags (Replacing all generic cones)
     const mountainGroup = new THREE.Group();
     const basaltDarkMat = new THREE.MeshStandardMaterial({
-      color: 0x4a3a2e,
+      color: 0xab9180,
       map: basaltDiff,
-      roughness: 0.90,
+      roughness: 0.82,
       metalness: 0.06,
       flatShading: true
     });
     const sandstoneWarmMat = new THREE.MeshStandardMaterial({
-      color: 0x9a6c4a,
+      color: 0xebc5a4,
       map: mesaDiff,
-      roughness: 0.86,
+      roughness: 0.78,
       metalness: 0.08,
       flatShading: true
     });
     const ochreCliffMat = new THREE.MeshStandardMaterial({
-      color: 0xb88960,
+      color: 0xf5d3b0,
       map: mesaDiff,
-      roughness: 0.82,
+      roughness: 0.74,
       metalness: 0.08,
       flatShading: true
     });
@@ -3929,24 +3938,24 @@
     // 6C. GRAND MAHISHMATI CITADEL COURTYARD & STEPPED TERRACE
     // -------------------------------------------------------------------------
     const courtyardMat = new THREE.MeshStandardMaterial({
-      color: 0x5c4a3b,
+      color: 0xd6bca4,
       map: canyonDiff,
       normalMap: groundNorm,
       normalScale: new THREE.Vector2(1.8, 1.8),
-      roughness: 0.86,
+      roughness: 0.80,
       metalness: 0.08
     });
     const daisMat = new THREE.MeshStandardMaterial({
-      color: 0x362a22,
+      color: 0xb59a82,
       map: basaltDiff,
-      roughness: 0.88,
-      metalness: 0.12
+      roughness: 0.82,
+      metalness: 0.08
     });
     const stoneTrimMat = new THREE.MeshStandardMaterial({
-      color: 0x765e48,
+      color: 0xddc0a2,
       map: mesaDiff,
-      roughness: 0.70,
-      metalness: 0.30
+      roughness: 0.65,
+      metalness: 0.22
     });
 
     // Outer Fortress Courtyard Platform with carved ashlar frieze edges
@@ -4189,24 +4198,24 @@
     
     // Rich weathered stone materials with authentic diffuse & normal maps
     const ruinedStoneMat = new THREE.MeshStandardMaterial({
-      color: 0x6e5645,
+      color: 0xd6bba2,
       map: mesaDiff,
-      roughness: 0.86,
+      roughness: 0.78,
       metalness: 0.08,
       normalMap: groundNorm,
       normalScale: new THREE.Vector2(2.0, 2.0)
     });
     const carvedReliefMat = new THREE.MeshStandardMaterial({
-      color: 0x8a6e56,
+      color: 0xf0d8be,
       map: mesaDiff,
-      roughness: 0.82,
+      roughness: 0.74,
       metalness: 0.10,
       normalMap: groundNorm,
       normalScale: new THREE.Vector2(1.8, 1.8)
     });
     const ancientBronzeMat = new THREE.MeshStandardMaterial({
-      color: 0x684c2e,
-      roughness: 0.45,
+      color: 0xd6a86c,
+      roughness: 0.38,
       metalness: 0.78
     });
 
@@ -4671,7 +4680,7 @@
     mistTex1.wrapT = THREE.RepeatWrapping;
     mistTex1.repeat.set(3, 3);
 
-    const mistTex2 = mistTex1.clone();
+    const mistTex2 = StoneTextureManager.loader.load('assets/textures/mist_noise.png');
     mistTex2.wrapS = THREE.RepeatWrapping;
     mistTex2.wrapT = THREE.RepeatWrapping;
     mistTex2.repeat.set(4, 4);
@@ -4679,19 +4688,19 @@
     const mistMat1 = new THREE.MeshBasicMaterial({
       map: mistTex1,
       transparent: true,
-      opacity: 0.16,
-      color: 0x4a5868,
+      opacity: 0.04,
+      color: 0xf59e0b,
       depthWrite: false,
-      blending: THREE.NormalBlending
+      blending: THREE.AdditiveBlending
     });
 
     const mistMat2 = new THREE.MeshBasicMaterial({
       map: mistTex2,
       transparent: true,
-      opacity: 0.11,
-      color: 0x58697c,
+      opacity: 0.03,
+      color: 0xfbbf24,
       depthWrite: false,
-      blending: THREE.NormalBlending
+      blending: THREE.AdditiveBlending
     });
 
     const mistPlane1 = new THREE.Mesh(new THREE.PlaneGeometry(84, 84), mistMat1);
@@ -4763,12 +4772,13 @@
 
       // 2. Animated Fluttering Dynastic War Banners
       animatedBanners.forEach(({ mesh, offset }) => {
+        if (!mesh || !mesh.geometry || !mesh.geometry.attributes || !mesh.geometry.attributes.position) return;
         const pos = mesh.geometry.attributes.position;
         const time = elapsed * 4.2 + offset;
         for (let i = 0; i < pos.count; i++) {
           const x = pos.getX(i);
           if (x > 0.05) {
-            const wave = Math.sin(time + x * 2.8) * 0.18 * (x / 2.2);
+            const wave = Math.sin(time + x * 2.8) * 0.18 * Math.min(1.0, x / 1.5);
             pos.setZ(i, wave);
           }
         }
@@ -5801,7 +5811,7 @@
               if (killCoords) killCoords.textContent = 'BULLET-TIME 0.16X // ARROW PIERCING TRAJECTORY';
               camera.fov = 28;
               camera.updateProjectionMatrix();
-              ambientLight.intensity = 0.25;
+              ambientLight.intensity = 0.45;
             }
             p += Math.max(0.045, rawDt * 2.8);
           } else {
@@ -5821,7 +5831,7 @@
             timeScale = 1.0;
             camera.fov = 42;
             camera.updateProjectionMatrix();
-            ambientLight.intensity = 0.68;
+            ambientLight.intensity = 0.72;
             document.body.classList.remove('slowmo-impact-active');
             const killCoords = document.getElementById('killCamCoords');
             if (killCoords) killCoords.textContent = 'FOV 42° // REAL-TIME 1.00X';
@@ -5857,6 +5867,8 @@
 
     async function executeSynchronizedKillSequence(attackerRig, defenderRig, targetWorldPos, keepCameraInStudio = false) {
       if (!attackerRig || !attackerRig.root || !defenderRig || !defenderRig.root) return;
+      attackerRig.inKillSequence = true;
+      defenderRig.inKillSequence = true;
       const savedYaw = camState.targetYaw;
       const savedPitch = camState.targetPitch;
       const savedDist = camState.targetDistance;
@@ -5882,11 +5894,8 @@
       const stagingPos = targetWorldPos.clone().addScaledVector(attackDir, -stagingStopDist);
       const defTargetYaw = Math.atan2(-attackDir.x, -attackDir.z);
 
-      // Non-blocking defender turn for Knight & Elephant so attack begins immediately (eliminates initial stall)
+      // Non-blocking defender turn so attack advance begins immediately without initial stall
       const defTurnPromise = animateWeightTransferTurn(defenderRig, defTargetYaw, 0.20);
-      if (attackerRig.type !== PIECE_KNIGHT && attackerRig.type !== PIECE_ROOK) {
-        await defTurnPromise;
-      }
 
       if (attackerRig.type === PIECE_ROOK) {
         // Dynamic step calculation & scale speed based on number of steps
@@ -6074,7 +6083,7 @@
             if (kc) kc.textContent = 'BULLET-TIME 0.16X // IMPACT LOCKED';
             camera.fov = 31;
             camera.updateProjectionMatrix();
-            ambientLight.intensity = 0.25;
+            ambientLight.intensity = 0.45;
 
             setTimeout(() => {
               timeScale = 0.55;
@@ -6086,7 +6095,7 @@
               timeScale = 1.0;
               camera.fov = 42;
               camera.updateProjectionMatrix();
-              ambientLight.intensity = 0.68;
+              ambientLight.intensity = 0.72;
               document.body.classList.remove('slowmo-impact-active');
               const kc3 = document.getElementById('killCamCoords');
               if (kc3) kc3.textContent = 'FOV 42° // REAL-TIME 1.00X';
@@ -6113,51 +6122,61 @@
           // ARCHETYPE-SPECIFIC COMBAT CHOREOGRAPHY
           // -------------------------------------------------------------------
           if (attackerRig.type === PIECE_PAWN) {
-            // SIGNATURE TWO-STAGE COMBAT: 1. BEAT FIRST WITH SHIELD -> 2. DESTROY WITH SWORD
+            // AUTHENTIC PURANIC KSHATRIYA COMBAT (MATCHING REFERENCE CHOREOGRAPHY):
+            // 1. Advance into battle guard with Left Dhal shield braced & Right Khanda sword raised
+            // 2. Khanda sword ignites with blazing runic fire energy & sparks
+            // 3. Sweeping rotational horizontal cleave with incandescent flame ribbon arc
+            // 4. Fatal kinetic impact, 0.16x bullet-time slow-mo, camera shake, polyhedral shatter & debris
+            // 5. Heroic wide execution follow-through stance
             const style = attackerRig.currentKillStyle || 0;
             if (style === 0) {
-              // Style 0: Direct Rajput Dhal Shield Ram & High Khanda Overhead Execution Cleave
-              if (t < 0.44) {
-                // Phase 1: Heavy Concussive Shield Beat
-                const p1 = t / 0.44;
-                attackerRig.torso.rotation.y = -0.45 * Math.sin(p1 * Math.PI);
-                attackerRig.armL.position.set(-0.12, 0.52, Math.sin(p1 * Math.PI) * 0.92);
-                attackerRig.armL.rotation.y = -0.40 * Math.sin(p1 * Math.PI);
-                attackerRig.armR.position.set(0.36, 0.54 + 0.38 * p1, -0.32 * p1);
-                attackerRig.armR.rotation.x = -1.25 * p1;
-                attackerRig.armR.rotation.z = -0.22 * p1;
+              // Style 0: Video Reference Signature — Runic Sword Flare & Full-Body Rotational Cleave
+              if (t < 0.42) {
+                // Phase 1: Combat Guard, Stance Lock & Fiery Sword Runic Flare
+                const p1 = t / 0.42;
+                attackerRig.torso.rotation.y = -0.38 * Math.sin(p1 * Math.PI);
+                attackerRig.torso.rotation.x = -0.15 * p1;
+                // Left Arm holds Dhal shield firmly braced forward in phalanx guard
+                attackerRig.armL.position.set(0.26, 0.54, 0.32 + 0.12 * Math.sin(p1 * Math.PI));
+                attackerRig.armL.rotation.y = 0.35 * Math.sin(p1 * Math.PI);
+                // Right Arm raises and cocks Khanda sword overhead preparing strike
+                attackerRig.armR.position.set(-0.38, 0.54 + 0.48 * p1, -0.35 * p1);
+                attackerRig.armR.rotation.x = -1.55 * p1;
+                attackerRig.armR.rotation.z = 0.28 * p1;
 
-                if (p1 > 0.45 && !attackerRig.shieldBeatTriggered) {
+                if (p1 > 0.40 && !attackerRig.shieldBeatTriggered) {
                   attackerRig.shieldBeatTriggered = true;
-                  sfx.playHit();
-                  spawnShockwaveRing(defenderRig.root.position, attackerRig.mats.accentHex, 1.9, 0.45);
-                  spawnCollisionSparkShower(defenderRig.root.position, attackerRig.team);
-                  triggerCameraShake(0.38, 0.22);
+                  sfx.playAttackWindup(PIECE_PAWN);
+                  spawnRunicGlintTrail(attackerRig.root.position, attackerRig.team);
+                  spawnCollisionSparkShower(attackerRig.root.position, attackerRig.team);
+                  triggerCameraShake(0.22, 0.15);
                 }
 
                 if (p1 > 0.30) {
                   const stag = Math.sin((p1 - 0.30) / 0.70 * Math.PI);
-                  defenderRig.torso.rotation.x = -0.55 * stag;
-                  defenderRig.head.rotation.x = -0.42 * stag;
-                  defenderRig.root.position.z = -0.26 * stag;
+                  defenderRig.torso.rotation.x = -0.35 * stag;
+                  defenderRig.head.rotation.x = -0.28 * stag;
                 }
               } else {
-                // Phase 2: Lethal Khanda Sword Cleave & Polyhedral Destruction
-                const p2 = (t - 0.44) / 0.56;
-                attackerRig.armL.position.lerp(new THREE.Vector3(-0.32, 0.54, 0), p2 * 0.85);
-                attackerRig.armL.rotation.y = 0;
+                // Phase 2: Explosive Rotational Cleave with Blazing Ribbon Arc & Bullet-Time Destruction
+                const p2 = (t - 0.42) / 0.58;
+                // Braced left shield maintains forward defensive stability
+                attackerRig.armL.position.lerp(new THREE.Vector3(0.32, 0.54, 0.10), p2 * 0.85);
+                attackerRig.armL.rotation.y = 0.12 * (1 - p2);
 
-                attackerRig.torso.rotation.y = 0.52 * Math.sin(p2 * Math.PI);
-                attackerRig.torso.rotation.x = 0.24 * Math.sin(p2 * Math.PI);
+                // Torso drives full rotational kinetic force across opponent
+                attackerRig.torso.rotation.y = -0.38 + 0.95 * Math.sin(p2 * Math.PI * 0.9);
+                attackerRig.torso.rotation.x = 0.22 * Math.sin(p2 * Math.PI);
 
-                attackerRig.armR.position.set(0.16, 0.54 + 0.38 * (1 - p2), 0.80 * Math.sin(p2 * Math.PI));
-                attackerRig.armR.rotation.x = -1.25 + 2.55 * Math.pow(p2, 1.8);
-                attackerRig.armR.rotation.y = -0.42 * Math.sin(p2 * Math.PI);
-                attackerRig.armR.rotation.z = -0.52 * p2;
+                // Right Arm sweeps Khanda blade in a lethal 180° horizontal cleave
+                attackerRig.armR.position.set(-0.38 + 0.65 * p2, 0.54 + 0.32 * (1 - p2), 0.85 * Math.sin(p2 * Math.PI));
+                attackerRig.armR.rotation.x = -1.55 + 2.85 * Math.pow(p2, 1.6);
+                attackerRig.armR.rotation.y = -0.55 + 1.25 * p2;
+                attackerRig.armR.rotation.z = 0.45 * p2;
 
-                if (p2 > 0.22 && !attackerRig.swordTrailTriggered) {
+                if (p2 > 0.18 && !attackerRig.swordTrailTriggered) {
                   attackerRig.swordTrailTriggered = true;
-                  spawnBladeRibbonArc(targetWorldPos, attackerRig.mats.accentHex, 2.6, 0.55);
+                  spawnBladeRibbonArc(targetWorldPos, attackerRig.mats.accentHex, 3.2, 0.65);
                 }
 
                 if (p2 >= 0.48 && !impactTriggered) {
@@ -6165,15 +6184,15 @@
                 }
               }
             } else if (style === 1) {
-              // Style 1: Lateral Shield Hook Stagger & Horizontal Khanda Slash
+              // Style 1: Lateral Shield Parry Stagger & Decapitating Horizontal Khanda Slash
               if (t < 0.42) {
-                // Phase 1: Lateral Shield Hook
+                // Phase 1: Lateral Shield Hook with Left Arm
                 const p1 = t / 0.42;
-                attackerRig.torso.rotation.y = 0.55 * Math.sin(p1 * Math.PI);
-                attackerRig.armL.position.set(0.15 * Math.sin(p1 * Math.PI) - 0.32, 0.54, Math.sin(p1 * Math.PI) * 0.85);
-                attackerRig.armL.rotation.y = 0.75 * Math.sin(p1 * Math.PI);
-                attackerRig.armR.position.set(0.40, 0.54, -0.45 * p1);
-                attackerRig.armR.rotation.y = -1.25 * p1;
+                attackerRig.torso.rotation.y = -0.55 * Math.sin(p1 * Math.PI);
+                attackerRig.armL.position.set(-0.15 * Math.sin(p1 * Math.PI) + 0.34, 0.54, Math.sin(p1 * Math.PI) * 0.85);
+                attackerRig.armL.rotation.y = -0.75 * Math.sin(p1 * Math.PI);
+                attackerRig.armR.position.set(-0.40, 0.54, -0.45 * p1);
+                attackerRig.armR.rotation.y = 1.25 * p1;
 
                 if (p1 > 0.45 && !attackerRig.shieldBeatTriggered) {
                   attackerRig.shieldBeatTriggered = true;
@@ -6185,24 +6204,24 @@
 
                 if (p1 > 0.30) {
                   const stag = Math.sin((p1 - 0.30) / 0.70 * Math.PI);
-                  defenderRig.torso.rotation.y = -0.45 * stag;
-                  defenderRig.torso.rotation.z = 0.35 * stag;
-                  defenderRig.root.position.x = 0.22 * stag;
+                  defenderRig.torso.rotation.y = 0.45 * stag;
+                  defenderRig.torso.rotation.z = -0.35 * stag;
+                  defenderRig.root.position.x = -0.22 * stag;
                 }
               } else {
-                // Phase 2: Decapitating Horizontal Khanda Slash
+                // Phase 2: Decapitating Horizontal Khanda Slash with Right Arm
                 const p2 = (t - 0.42) / 0.58;
-                attackerRig.armL.position.lerp(new THREE.Vector3(-0.32, 0.54, 0), p2 * 0.8);
+                attackerRig.armL.position.lerp(new THREE.Vector3(0.34, 0.54, 0), p2 * 0.8);
                 attackerRig.armL.rotation.y = 0;
 
-                attackerRig.torso.rotation.y = -0.65 * Math.sin(p2 * Math.PI);
-                attackerRig.armR.position.set(0.25 - 0.35 * p2, 0.54 + 0.15 * Math.sin(p2 * Math.PI), 0.75 * Math.sin(p2 * Math.PI));
-                attackerRig.armR.rotation.y = -1.25 + 2.50 * p2;
+                attackerRig.torso.rotation.y = 0.65 * Math.sin(p2 * Math.PI);
+                attackerRig.armR.position.set(-0.25 + 0.35 * p2, 0.54 + 0.15 * Math.sin(p2 * Math.PI), 0.75 * Math.sin(p2 * Math.PI));
+                attackerRig.armR.rotation.y = 1.25 - 2.50 * p2;
                 attackerRig.armR.rotation.x = 0.25 * Math.sin(p2 * Math.PI);
 
                 if (p2 > 0.22 && !attackerRig.swordTrailTriggered) {
                   attackerRig.swordTrailTriggered = true;
-                  spawnBladeRibbonArc(targetWorldPos, attackerRig.mats.accentHex, 2.5, 0.52);
+                  spawnBladeRibbonArc(targetWorldPos, attackerRig.mats.accentHex, 2.8, 0.55);
                 }
 
                 if (p2 >= 0.48 && !impactTriggered) {
@@ -6210,14 +6229,14 @@
                 }
               }
             } else {
-              // Style 2: Low Knee Shield Up-Crush & High Overhead Sword Plunge
+              // Style 2: Low Stance Windup & Overhead Execution Plunge
               if (t < 0.42) {
-                // Phase 1: Knee Drop & Upward Shield Crush
+                // Phase 1: Knee Drop & Shield Defense with Left Arm
                 const p1 = t / 0.42;
                 attackerRig.bodyRoot.position.y = -0.22 * Math.sin(p1 * Math.PI);
                 attackerRig.torso.rotation.x = -0.35 * Math.sin(p1 * Math.PI);
-                attackerRig.armL.position.set(-0.15, 0.54 + 0.35 * Math.sin(p1 * Math.PI), Math.sin(p1 * Math.PI) * 0.88);
-                attackerRig.armR.position.set(0.38, 0.75 * p1 + 0.45, -0.25 * p1);
+                attackerRig.armL.position.set(0.18, 0.54 + 0.30 * Math.sin(p1 * Math.PI), Math.sin(p1 * Math.PI) * 0.88);
+                attackerRig.armR.position.set(-0.38, 0.75 * p1 + 0.45, -0.25 * p1);
                 attackerRig.armR.rotation.x = -1.40 * p1;
 
                 if (p1 > 0.45 && !attackerRig.shieldBeatTriggered) {
@@ -6235,19 +6254,19 @@
                   defenderRig.root.position.y = 0.18 * stag;
                 }
               } else {
-                // Phase 2: Rises and Drives Sword Downward Through Victim
+                // Phase 2: Rises and Drives Sword Downward Through Victim with Right Arm
                 const p2 = (t - 0.42) / 0.58;
                 attackerRig.bodyRoot.position.y = 0;
                 attackerRig.torso.rotation.x = 0.25 * Math.sin(p2 * Math.PI);
-                attackerRig.armL.position.lerp(new THREE.Vector3(-0.32, 0.54, 0), p2 * 0.85);
+                attackerRig.armL.position.lerp(new THREE.Vector3(0.34, 0.54, 0), p2 * 0.85);
 
-                attackerRig.armR.position.set(0.20, 0.54 + 0.45 * (1 - p2), 0.75 * Math.sin(p2 * Math.PI));
+                attackerRig.armR.position.set(-0.20, 0.54 + 0.45 * (1 - p2), 0.75 * Math.sin(p2 * Math.PI));
                 attackerRig.armR.rotation.x = -1.40 + 2.70 * Math.pow(p2, 1.8);
-                attackerRig.armR.rotation.z = -0.35 * p2;
+                attackerRig.armR.rotation.z = 0.35 * p2;
 
                 if (p2 > 0.22 && !attackerRig.swordTrailTriggered) {
                   attackerRig.swordTrailTriggered = true;
-                  spawnBladeRibbonArc(targetWorldPos, attackerRig.mats.accentHex, 2.6, 0.55);
+                  spawnBladeRibbonArc(targetWorldPos, attackerRig.mats.accentHex, 2.8, 0.55);
                 }
 
                 if (p2 >= 0.48 && !impactTriggered) {
@@ -6459,8 +6478,6 @@
             defenderRig.inKillSequence = false;
             attackerRig.currentKillStyle = undefined;
             attackerRig.styleEffectTriggered = false;
-            attackerRig.shieldBeatTriggered = false;
-            attackerRig.swordTrailTriggered = false;
             attackerRig.arrowShot = false;
             attackerRig.horseLanded = false;
 

@@ -392,21 +392,21 @@ def build_organic_padati():
     create_organic_lofted_mesh("SuryaEmblem", sun_rings, num_segments=16, material=gold_mat, subsurf_levels=0, cap_top=True)
 
     # 4. Muscular Arms
-    # Left Arm (Holding Dhal Shield at forearm)
+    # Left Arm (Holding Dhal Shield at forearm) - Anatomical Left is +X
     arm_l_spine = [
-        Vector((-0.34, 0.00, 1.28)),
-        Vector((-0.36, -0.08, 1.12)),
-        Vector((-0.34, -0.16, 0.98)),
-        Vector((-0.32, -0.20, 0.94))
+        Vector((0.34, 0.00, 1.28)),
+        Vector((0.36, -0.08, 1.12)),
+        Vector((0.34, -0.16, 0.98)),
+        Vector((0.32, -0.20, 0.94))
     ]
     create_swept_tube("Padati_ArmL", arm_l_spine, [0.08, 0.07, 0.065, 0.055], num_segments=12, material=skin_mat, subsurf_levels=1)
 
-    # Right Arm (Gripping Khanda Sword)
+    # Right Arm (Gripping Khanda Sword) - Anatomical Right is -X
     arm_r_spine = [
-        Vector((0.34, 0.00, 1.28)),
-        Vector((0.36, -0.08, 1.12)),
-        Vector((0.36, -0.16, 0.98)),
-        Vector((0.38, -0.18, 0.95))
+        Vector((-0.34, 0.00, 1.28)),
+        Vector((-0.36, -0.08, 1.12)),
+        Vector((-0.34, -0.16, 0.98)),
+        Vector((-0.38, -0.18, 0.95))
     ]
     create_swept_tube("Padati_ArmR", arm_r_spine, [0.08, 0.07, 0.065, 0.055], num_segments=12, material=skin_mat, subsurf_levels=1)
 
@@ -437,21 +437,21 @@ def build_organic_padati():
     ]
     create_swept_tube("Padati_Plume", plume_spine, [0.035, 0.055, 0.02], num_segments=10, material=dhoti_mat, subsurf_levels=1)
 
-    # 6. Rajput Dhal Shield on Left Arm (Radius 0.36m, depth 0.04m, facing -Y)
-    create_concave_dhal_mesh("Padati_Dhal", center=(-0.36, -0.22, 0.95), radius=0.36, depth=0.04, material=gold_mat)
+    # 6. Rajput Dhal Shield on Left Arm (Radius 0.36m, depth 0.04m, facing -Y, center at +0.36)
+    create_concave_dhal_mesh("Padati_Dhal", center=(0.36, -0.22, 0.95), radius=0.36, depth=0.04, material=gold_mat)
 
     # Central 8-Petal Lotus Boss on Shield
     lotus_rings = [
-        (0.95, 0.065, 0.065, -0.36, -0.24, 8, 0.22),
-        (0.95, 0.040, 0.040, -0.36, -0.26),
-        (0.95, 0.010, 0.010, -0.36, -0.27)
+        (0.95, 0.065, 0.065, 0.36, -0.24, 8, 0.22),
+        (0.95, 0.040, 0.040, 0.36, -0.26),
+        (0.95, 0.010, 0.010, 0.36, -0.27)
     ]
     create_organic_lofted_mesh("Padati_Dhal_CenterBoss", lotus_rings, num_segments=16, material=gold_mat, subsurf_levels=1, cap_top=True)
 
     # 4 Brass Boss Hemispheres at radius 0.16m
     for i in range(4):
         ang = i * (math.pi / 2.0)
-        bx = -0.36 + 0.16 * math.cos(ang)
+        bx = 0.36 + 0.16 * math.cos(ang)
         bz = 0.95 + 0.16 * math.sin(ang)
         boss_rings = [
             (bz, 0.035, 0.035, bx, -0.23),
@@ -460,48 +460,48 @@ def build_organic_padati():
         ]
         create_organic_lofted_mesh(f"Padati_Dhal_Boss_{i}", boss_rings, num_segments=12, material=gold_mat, subsurf_levels=1, cap_top=True)
 
-    # 7. Authentic Curved Khanda Broadsword in Right Hand (Zero Spears!)
+    # 7. Authentic Curved Khanda Broadsword in Right Hand (Zero Spears!) - Center at -0.38
     # Grip / Hilt
-    grip_spine = [Vector((0.38, -0.18, 0.88)), Vector((0.38, -0.18, 1.08))]
+    grip_spine = [Vector((-0.38, -0.18, 0.88)), Vector((-0.38, -0.18, 1.08))]
     create_swept_tube("Khanda_Grip", grip_spine, [0.024, 0.024], num_segments=12, material=steel_mat, subsurf_levels=0)
 
     # Saucer Disc Pommel
     pommel_rings = [
-        (0.88, 0.065, 0.065, 0.38, -0.18),
-        (0.86, 0.065, 0.065, 0.38, -0.18),
-        (0.85, 0.020, 0.020, 0.38, -0.18)
+        (0.88, 0.065, 0.065, -0.38, -0.18),
+        (0.86, 0.065, 0.065, -0.38, -0.18),
+        (0.85, 0.020, 0.020, -0.38, -0.18)
     ]
     create_organic_lofted_mesh("Khanda_Pommel", pommel_rings, num_segments=16, material=gold_mat, subsurf_levels=1, cap_bottom=True)
 
     # Pommel Spike
-    spike_spine = [Vector((0.38, -0.18, 0.85)), Vector((0.38, -0.18, 0.78))]
+    spike_spine = [Vector((-0.38, -0.18, 0.85)), Vector((-0.38, -0.18, 0.78))]
     create_swept_tube("Khanda_PommelSpike", spike_spine, [0.018, 0.002], num_segments=8, material=gold_mat, subsurf_levels=0)
 
     # Reinforced Crossguard
     guard_rings = [
-        (1.08, 0.14, 0.035, 0.38, -0.18),
-        (1.11, 0.16, 0.040, 0.38, -0.18),
-        (1.13, 0.12, 0.032, 0.38, -0.18)
+        (1.08, 0.14, 0.035, -0.38, -0.18),
+        (1.11, 0.16, 0.040, -0.38, -0.18),
+        (1.13, 0.12, 0.032, -0.38, -0.18)
     ]
     create_organic_lofted_mesh("Khanda_Guard", guard_rings, num_segments=12, material=gold_mat, subsurf_levels=1)
 
     # 0.85m Broad Steel Khanda Blade with curved flare tip
     blade_spine = [
-        Vector((0.38, -0.18, 1.13)),
-        Vector((0.38, -0.19, 1.40)),
-        Vector((0.38, -0.20, 1.70)),
-        Vector((0.38, -0.22, 1.95)),
-        Vector((0.38, -0.25, 2.08))  # flared tip
+        Vector((-0.38, -0.18, 1.13)),
+        Vector((-0.38, -0.19, 1.40)),
+        Vector((-0.38, -0.20, 1.70)),
+        Vector((-0.38, -0.22, 1.95)),
+        Vector((-0.38, -0.25, 2.08))  # flared tip
     ]
     blade_radii = [0.042, 0.045, 0.048, 0.055, 0.005]
     create_swept_tube("Khanda_Blade", blade_spine, blade_radii, num_segments=12, material=steel_mat, subsurf_levels=1)
 
     # Blade Fuller Groove (Gold Inlay)
-    fuller_spine = [Vector((0.38, -0.185, 1.15)), Vector((0.38, -0.205, 1.85))]
+    fuller_spine = [Vector((-0.38, -0.185, 1.15)), Vector((-0.38, -0.205, 1.85))]
     create_swept_tube("Khanda_Fuller", fuller_spine, [0.010, 0.010], num_segments=8, material=gold_mat, subsurf_levels=0)
 
     # Named tip for combat weapon registration
-    tip_spine = [Vector((0.38, -0.24, 2.05)), Vector((0.38, -0.25, 2.10))]
+    tip_spine = [Vector((-0.38, -0.24, 2.05)), Vector((-0.38, -0.25, 2.10))]
     create_swept_tube("Khanda_Tip", tip_spine, [0.020, 0.002], num_segments=8, material=steel_mat, subsurf_levels=0)
 
     export_glb("assets/padati.glb")
@@ -777,6 +777,26 @@ def build_organic_ratha():
         out_x = wx + (0.28 if wx > 0 else -0.28)
         scythe_spine = [Vector((wx, 0.0, 0.48)), Vector((out_x, 0.0, 0.48))]
         create_swept_tube(f"Chakra_Hub_{side_label}", scythe_spine, [0.065, 0.005], num_segments=12, material=steel_mat, subsurf_levels=1)
+
+        # Consolidate wheel meshes and set origin to axle center (wx, 0.0, 0.48) for pure rolling rotation on axis
+        wheel_parts = [bpy.data.objects.get(f"Chakra_Wheel_{side_label}"), bpy.data.objects.get(f"Chakra_Hub_{side_label}")]
+        for s in range(8):
+            sp = bpy.data.objects.get(f"Chakra_Spoke_{side_label}_{s}")
+            if sp: wheel_parts.append(sp)
+        wheel_parts = [p for p in wheel_parts if p]
+        bpy.ops.object.select_all(action='DESELECT')
+        for p in wheel_parts:
+            p.select_set(True)
+        bpy.context.view_layer.objects.active = wheel_parts[0]
+        bpy.ops.object.join()
+        wheel_combined = bpy.context.active_object
+        wheel_combined.name = f"Chakra_Wheel_{side_label}"
+        bpy.context.scene.cursor.location = Vector((wx, 0.0, 0.48))
+        bpy.ops.object.origin_set(type='ORIGIN_CURSOR')
+
+    # 2b. Solid Transverse Axle Rod connecting left and right wheel hubs
+    axle_spine = [Vector((-0.75, 0.0, 0.48)), Vector((0.75, 0.0, 0.48))]
+    create_swept_tube("Chakra_Axle", axle_spine, [0.038, 0.038], num_segments=16, material=gold_mat, subsurf_levels=0)
 
     # 3. Standing Celestial Sage Archer facing -Y
     robe_rings = [
