@@ -3715,27 +3715,27 @@
       battlefieldGroup.add(bGroup);
     });
 
-    // Fire & Ember Particles Emitter for Braziers
-    const fireParticleCount = 96;
+    // Fire & Ember Particles Emitter for Braziers (Subtle, contained embers)
+    const fireParticleCount = 40;
     const fpGeo = new THREE.BufferGeometry();
     const fpPos = new Float32Array(fireParticleCount * 3);
     for (let i = 0; i < fireParticleCount; i++) {
       const bPos = brazierPositions[i % brazierPositions.length];
-      fpPos[i * 3] = bPos[0] + (Math.random() - 0.5) * 0.6;
-      fpPos[i * 3 + 1] = 0.35 + Math.random() * 2.2;
-      fpPos[i * 3 + 2] = bPos[1] + (Math.random() - 0.5) * 0.6;
+      fpPos[i * 3] = bPos[0] + (Math.random() - 0.5) * 0.4;
+      fpPos[i * 3 + 1] = 0.35 + Math.random() * 1.6;
+      fpPos[i * 3 + 2] = bPos[1] + (Math.random() - 0.5) * 0.4;
       flameParticles.push({
         baseX: bPos[0],
         baseZ: bPos[1],
         y: fpPos[i * 3 + 1],
-        vy: 1.2 + Math.random() * 1.8,
+        vy: 0.8 + Math.random() * 1.2,
         sway: Math.random() * 6.28
       });
     }
     fpGeo.setAttribute('position', new THREE.BufferAttribute(fpPos, 3));
     const flameField = new THREE.Points(
       fpGeo,
-      new THREE.PointsMaterial({ color: 0xff7700, size: 0.18, transparent: true, opacity: 0.78 })
+      new THREE.PointsMaterial({ color: 0xff7700, size: 0.07, transparent: true, opacity: 0.45 })
     );
     battlefieldGroup.add(flameField);
 
@@ -4129,9 +4129,9 @@
     battlefieldGroup.add(mistPlane2);
 
     // -------------------------------------------------------------------------
-    // 6I. 600-PARTICLE WIND-BLOWN TEMPEST DUST & SPARK SYSTEM
+    // 6I. SUBTLE AMBIENT TEMPEST DUST & GENTLE EMBER SYSTEM (REDUCED SPARKS)
     // -------------------------------------------------------------------------
-    const stormParticleCount = 600;
+    const stormParticleCount = 48; // Significantly reduced from 600 for clear, distraction-free board visibility
     const spGeo = new THREE.BufferGeometry();
     const spPos = new Float32Array(stormParticleCount * 3);
     const spCol = new Float32Array(stormParticleCount * 3);
@@ -4139,27 +4139,27 @@
 
     for (let i = 0; i < stormParticleCount; i++) {
       spPos[i * 3] = (Math.random() - 0.5) * 60;
-      spPos[i * 3 + 1] = 0.2 + Math.random() * 8.5;
+      spPos[i * 3 + 1] = 0.5 + Math.random() * 6.5;
       spPos[i * 3 + 2] = (Math.random() - 0.5) * 60;
 
-      const isSpark = i >= 450;
+      const isSpark = i >= 40; // Only 8 very faint, tiny embers
       if (isSpark) {
-        // Glowing battle ember / spark (fiery orange/gold)
-        spCol[i * 3] = 1.0;
-        spCol[i * 3 + 1] = 0.45 + Math.random() * 0.35;
-        spCol[i * 3 + 2] = 0.05 + Math.random() * 0.15;
-        spVel[i * 3] = 5.0 + Math.random() * 7.0; // Fast horizontal wind drift
-        spVel[i * 3 + 1] = 0.8 + Math.random() * 1.5; // Thermal buoyancy
-        spVel[i * 3 + 2] = (Math.random() - 0.5) * 2.0;
+        // Subtle, gentle ember (soft warm gold)
+        spCol[i * 3] = 0.95;
+        spCol[i * 3 + 1] = 0.60;
+        spCol[i * 3 + 2] = 0.15;
+        spVel[i * 3] = 2.0 + Math.random() * 2.5; // Gentle horizontal drift
+        spVel[i * 3 + 1] = 0.4 + Math.random() * 0.6; // Gentle thermal rise
+        spVel[i * 3 + 2] = (Math.random() - 0.5) * 1.0;
       } else {
-        // Wind-blown dust / sand grit (cool slate-stone gray)
-        const gray = 0.50 + Math.random() * 0.22;
+        // Faint atmospheric dust grit
+        const gray = 0.42 + Math.random() * 0.15;
         spCol[i * 3] = gray * 0.90;
         spCol[i * 3 + 1] = gray * 0.95;
         spCol[i * 3 + 2] = gray * 1.05;
-        spVel[i * 3] = 6.0 + Math.random() * 8.0;
-        spVel[i * 3 + 1] = (Math.random() - 0.5) * 0.4;
-        spVel[i * 3 + 2] = (Math.random() - 0.5) * 2.5;
+        spVel[i * 3] = 2.5 + Math.random() * 3.0;
+        spVel[i * 3 + 1] = (Math.random() - 0.5) * 0.2;
+        spVel[i * 3 + 2] = (Math.random() - 0.5) * 1.2;
       }
     }
 
@@ -4168,10 +4168,10 @@
     const stormParticleField = new THREE.Points(
       spGeo,
       new THREE.PointsMaterial({
-        size: 0.14,
+        size: 0.045, // Over 3x smaller (delicate motes, no chunky blocks)
         vertexColors: true,
         transparent: true,
-        opacity: 0.72,
+        opacity: 0.22, // Over 3x softer opacity for crystal-clear piece visibility
         depthWrite: false
       })
     );
