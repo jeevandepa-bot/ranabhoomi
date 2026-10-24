@@ -157,75 +157,38 @@
       }
     }
 
-    /* Mobile Landscape & Short Viewports (height <= 520px): Streamlined single-row non-overlapping UI */
-    @media screen and (max-height: 520px) {
+    /* Mobile & Compact Screen Responsive Rule: Pure unobstructed view, corner options & fullscreen */
+    @media screen and (max-width: 1024px), screen and (max-height: 650px) {
       #mainAppHeader {
-        padding-top: 4px !important;
-        padding-bottom: 2px !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-      }
-      #mainAppHeader > div {
-        flex-wrap: nowrap !important;
-        gap: 6px !important;
-        overflow-x: auto;
-      }
-      #headerBrandPanel {
-        padding: 3px 8px !important;
-        gap: 6px !important;
-        flex-shrink: 0 !important;
-      }
-      #headerBrandPanel span.font-sanskrit {
         display: none !important;
       }
-      #headerBrandIcon {
-        width: 24px !important;
-        height: 24px !important;
-      }
-      #headerBrandIcon span {
-        font-size: 13px !important;
-      }
-      #headerBrandTitle {
-        font-size: 11px !important;
-      }
-      #headerSubtitle {
+      #matchControlsPanel {
         display: none !important;
       }
-      #headerTabsPanel {
-        padding: 2px !important;
-        gap: 3px !important;
-        flex-shrink: 0 !important;
-      }
-      #headerTabsPanel button {
-        padding: 3px 6px !important;
-        font-size: 10px !important;
-      }
-      #headerUtilityPanel {
-        padding: 3px 6px !important;
-        gap: 4px !important;
-        flex-shrink: 0 !important;
-      }
-      #headerUtilityPanel button {
-        padding: 2px 6px !important;
-        font-size: 10px !important;
-      }
-      #headerUtilityPanel span#audioLabel,
-      #headerUtilityPanel span#killCamLabel {
+      #unitTelemetryCard {
         display: none !important;
       }
       #battlefieldHud {
-        height: calc(100% - 38px) !important;
-        padding: 3px 8px !important;
+        height: 100% !important;
+        padding: 8px 12px !important;
       }
       #battlefieldTopBar {
-        gap: 4px !important;
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
         flex-wrap: nowrap !important;
-        overflow-x: auto;
+        gap: 8px !important;
       }
       #turnStatusPanel {
-        padding: 3px 8px !important;
+        padding: 5px 12px !important;
         gap: 6px !important;
         flex-shrink: 0 !important;
+        background: rgba(10, 13, 22, 0.78) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(245, 158, 11, 0.4) !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
       }
       #turnCommandSub {
         display: none !important;
@@ -233,33 +196,35 @@
       #turnStatusText {
         font-size: 11px !important;
         line-height: 1.15 !important;
+        letter-spacing: 0.08em !important;
       }
-      #matchControlsPanel {
-        padding: 2px 6px !important;
-        gap: 4px !important;
-        flex-shrink: 0 !important;
+      #cornerControlsPanel {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
       }
-      #matchControlsPanel button {
-        padding: 2px 6px !important;
-        font-size: 10px !important;
+      #cornerFullscreenBtn, #cornerOptionsBtn {
+        padding: 5px 10px !important;
+        font-size: 11px !important;
+        border-radius: 9999px !important;
       }
-      #unitTelemetryCard {
-        max-width: 18rem !important;
-        padding: 3px 8px !important;
-      }
-      #unitTelemetryDesc {
-        display: none !important;
+      #battlefieldCamControls {
+        padding: 4px 8px !important;
+        gap: 3px !important;
+        background: rgba(10, 13, 22, 0.70) !important;
+        backdrop-filter: blur(8px) !important;
+        border-radius: 12px !important;
       }
       .mobile-touch-btn {
-        width: 30px !important;
-        height: 30px !important;
-        min-width: 30px !important;
-        min-height: 30px !important;
-        font-size: 11px !important;
+        width: 28px !important;
+        height: 28px !important;
+        min-width: 28px !important;
+        min-height: 28px !important;
+        font-size: 10px !important;
       }
       #studioHud {
-        height: calc(100% - 38px) !important;
-        padding: 3px 8px !important;
+        height: 100% !important;
+        padding: 6px 10px !important;
       }
     }
   </style>
@@ -417,7 +382,7 @@
   <div id="battlefieldHud" class="relative z-10 w-full h-[calc(100%-72px)] pointer-events-none flex flex-col justify-between p-3 sm:p-6">
     
     <!-- Top Tactical Bar: Turn Telemetry & Game Mode -->
-    <div id="battlefieldTopBar" class="max-w-7xl w-full mx-auto flex flex-wrap items-start justify-between gap-2.5">
+    <div id="battlefieldTopBar" class="max-w-7xl w-full mx-auto flex flex-wrap items-center justify-between gap-2.5">
       <!-- Turn Status & Check Alert -->
       <div id="turnStatusPanel" class="mg-panel regal-corner px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-xl pointer-events-auto flex items-center gap-2 sm:gap-3">
         <div id="turnBadgeDot" class="w-3 sm:w-3.5 h-3 sm:h-3.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50 flex-shrink-0"></div>
@@ -430,7 +395,7 @@
         </div>
       </div>
 
-      <!-- Match Controls & AI Difficulty -->
+      <!-- Match Controls & AI Difficulty (Desktop view) -->
       <div id="matchControlsPanel" class="mg-panel px-3 py-2 rounded-xl pointer-events-auto flex flex-wrap items-center gap-2">
         <div class="flex items-center gap-1 bg-slate-900/80 p-1 rounded-lg border border-white/10">
           <button id="modeVsAiBtn" class="mg-btn mg-btn-active px-2.5 py-1 rounded text-[11px] font-kinetic uppercase border border-transparent">Vs AI</button>
@@ -452,6 +417,18 @@
           🔄 New Game
         </button>
       </div>
+
+      <!-- Corner Options & Fullscreen Bar -->
+      <div id="cornerControlsPanel" class="pointer-events-auto flex items-center gap-2">
+        <button id="cornerFullscreenBtn" onclick="toggleFullscreen()" class="mg-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-kinetic font-bold text-amber-300 border border-amber-500/40 bg-black/70 backdrop-blur-md flex items-center gap-1.5 shadow-lg active:scale-95" title="Toggle Fullscreen">
+          <span id="cornerFullscreenIcon" class="text-sm">⛶</span>
+          <span id="cornerFullscreenLabel" class="hidden sm:inline">FULLSCREEN</span>
+        </button>
+        <button id="cornerOptionsBtn" onclick="openOptionsDrawer()" class="mg-btn px-3 py-1.5 rounded-xl text-xs font-kinetic font-bold text-white border border-white/20 bg-black/70 backdrop-blur-md flex items-center gap-1.5 shadow-lg active:scale-95" title="Game Options & Settings">
+          <span>⚙️</span>
+          <span>OPTIONS</span>
+        </button>
+      </div>
     </div>
 
     <!-- Bottom Tactical Bar: Selected Piece Info + Touch Orbit Pad -->
@@ -469,7 +446,7 @@
       </div>
 
       <!-- On-Screen Camera Orbit Pad -->
-      <div class="mg-panel px-3 py-2 rounded-xl pointer-events-auto flex items-center gap-1.5">
+      <div id="battlefieldCamControls" class="mg-panel px-3 py-2 rounded-xl pointer-events-auto flex items-center gap-1.5">
         <span class="text-[10px] font-kinetic uppercase tracking-widest text-amber-400 mr-1 hidden sm:inline">3D Cam:</span>
         <button id="orbitLeftBtn" class="mg-btn mobile-touch-btn w-12 h-12 md:w-9 md:h-9 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center active:scale-95" title="Orbit Left">⟲</button>
         <button id="orbitRightBtn" class="mg-btn mobile-touch-btn w-12 h-12 md:w-9 md:h-9 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center active:scale-95" title="Orbit Right">⟳</button>
@@ -612,6 +589,122 @@
           <p class="mt-1">Procedural audio synthesized entirely in code with no external sound file downloads: (A) Sub-Bass Time-Warp Drop (145Hz &rarr; 24Hz with lowpass filter sweep), (B) Dual Heartbeat Thud at +0.08s and +0.26s, (C) Detuned Metallic Resonance (580Hz & 588Hz &rarr; 175Hz), and (D) Crystalline 34-Shard Pentatonic Arpeggio Chime.</p>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================= -->
+  <!-- MODAL: MOBILE OPTIONS & SETTINGS DRAWER                                 -->
+  <!-- ======================================================================= -->
+  <div id="mobileOptionsDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex justify-end">
+    <!-- Backdrop click to close -->
+    <div id="optionsDrawerBackdrop" class="absolute inset-0 bg-black/75 backdrop-blur-sm pointer-events-auto" onclick="closeOptionsDrawer()"></div>
+
+    <!-- Slide-out Menu Panel -->
+    <div id="optionsDrawerContent" class="relative z-10 w-full max-w-xs sm:max-w-sm h-full bg-[#0d101a]/95 border-l border-amber-500/30 shadow-2xl p-5 flex flex-col justify-between overflow-y-auto pointer-events-auto transform translate-x-full transition-transform duration-300">
+      
+      <div>
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 via-amber-600 to-rose-700 flex items-center justify-center shadow-lg shadow-amber-500/25 border border-amber-300/40">
+              <span class="text-sm">👑</span>
+            </div>
+            <div>
+              <h3 class="font-regal font-bold text-sm tracking-wider text-white">ROYAL RANBHOOMI</h3>
+              <p class="text-[10px] font-kinetic text-amber-400 tracking-wider uppercase">रणभूमि विकल्प // OPTIONS</p>
+            </div>
+          </div>
+          <button onclick="closeOptionsDrawer()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-slate-300 hover:text-white transition-colors text-sm font-bold">
+            ✕
+          </button>
+        </div>
+
+        <!-- Section: Fullscreen Mode -->
+        <div class="mb-4">
+          <label class="block text-[10px] font-kinetic uppercase tracking-widest text-slate-400 mb-1.5">DISPLAY</label>
+          <button onclick="toggleFullscreen(); closeOptionsDrawer();" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-amber-600/30 border border-amber-400/40 text-amber-200 font-regal font-bold text-xs flex items-center justify-center gap-2 hover:from-amber-500/30 hover:to-amber-600/40 transition-all shadow-md active:scale-95">
+            <span class="text-base">⛶</span>
+            <span id="drawerFullscreenLabel">TOGGLE FULLSCREEN</span>
+          </button>
+        </div>
+
+        <!-- Section: Game Mode & AI Difficulty -->
+        <div class="mb-4">
+          <label class="block text-[10px] font-kinetic uppercase tracking-widest text-slate-400 mb-1.5">OPPONENT &amp; MODE</label>
+          <div class="grid grid-cols-2 gap-2 mb-2">
+            <button id="drawerVsAiBtn" onclick="setGameModeFromDrawer(true)" class="py-2 px-3 rounded-lg text-xs font-kinetic font-semibold uppercase border border-amber-500/50 bg-amber-500/20 text-amber-300 transition-all">
+              ⚔️ VS AI
+            </button>
+            <button id="drawerLocal2PBtn" onclick="setGameModeFromDrawer(false)" class="py-2 px-3 rounded-lg text-xs font-kinetic font-semibold uppercase border border-white/10 bg-white/5 text-slate-300 transition-all">
+              👥 LOCAL 2P
+            </button>
+          </div>
+          
+          <!-- AI Difficulty -->
+          <div id="drawerAiDiffRow" class="flex items-center gap-1.5 bg-slate-900/80 p-1.5 rounded-lg border border-white/10">
+            <span class="text-[10px] font-kinetic uppercase tracking-wider text-slate-400 px-1">AI:</span>
+            <button id="drawerAiEasyBtn" onclick="setAiDiffFromDrawer('easy')" class="flex-1 py-1 rounded text-[11px] font-kinetic text-slate-300 border border-transparent">Easy</button>
+            <button id="drawerAiMedBtn" onclick="setAiDiffFromDrawer('med')" class="flex-1 py-1 rounded text-[11px] font-kinetic border border-amber-400/50 bg-amber-500/20 text-amber-200">Med</button>
+            <button id="drawerAiHardBtn" onclick="setAiDiffFromDrawer('hard')" class="flex-1 py-1 rounded text-[11px] font-kinetic text-slate-300 border border-transparent">Hard</button>
+          </div>
+        </div>
+
+        <!-- Section: Match Actions -->
+        <div class="mb-4">
+          <label class="block text-[10px] font-kinetic uppercase tracking-widest text-slate-400 mb-1.5">MATCH ACTIONS</label>
+          <div class="flex flex-col gap-2">
+            <button onclick="triggerNewGameFromDrawer()" class="w-full py-2 px-3 rounded-lg text-xs font-kinetic font-semibold uppercase bg-white/10 hover:bg-white/15 text-white border border-white/15 flex items-center justify-center gap-2 active:scale-95">
+              🔄 New Game
+            </button>
+            <button onclick="triggerDemoKillFromDrawer()" class="w-full py-2 px-3 rounded-lg text-xs font-kinetic font-semibold uppercase bg-gradient-to-r from-rose-500/25 to-amber-500/25 text-amber-200 border border-amber-400/40 flex items-center justify-center gap-2 active:scale-95">
+              ⚡ Demo Kill Cam
+            </button>
+            <button onclick="triggerResetCamFromDrawer()" class="w-full py-2 px-3 rounded-lg text-xs font-kinetic text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center gap-2 active:scale-95">
+              🧭 Reset 3D Camera
+            </button>
+          </div>
+        </div>
+
+        <!-- Section: Audio & Cinematic Controls -->
+        <div class="mb-4">
+          <label class="block text-[10px] font-kinetic uppercase tracking-widest text-slate-400 mb-1.5">AUDIO &amp; CINEMATICS</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="drawerToggleAudioBtn" onclick="toggleAudioFromDrawer()" class="py-2 px-2.5 rounded-lg text-xs font-kinetic text-emerald-300 border border-emerald-500/30 bg-emerald-500/10 flex items-center justify-center gap-1.5 active:scale-95">
+              <span id="drawerAudioIcon">🔊</span>
+              <span id="drawerAudioLabel">SFX: ON</span>
+            </button>
+            <button id="drawerToggleKillCamBtn" onclick="toggleKillCamFromDrawer()" class="py-2 px-2.5 rounded-lg text-xs font-kinetic text-amber-300 border border-amber-500/30 bg-amber-500/10 flex items-center justify-center gap-1.5 active:scale-95">
+              <span>🎥</span>
+              <span id="drawerKillCamLabel">Kill-Cam: ON</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Section: Navigation & Studios -->
+        <div class="mb-4">
+          <label class="block text-[10px] font-kinetic uppercase tracking-widest text-slate-400 mb-1.5">VIEWS &amp; SPEC</label>
+          <div class="flex flex-col gap-1.5">
+            <button onclick="switchTabFromDrawer('battlefield')" class="py-2 px-3 rounded-lg text-xs font-kinetic text-left text-white bg-amber-500/15 border border-amber-400/30 flex items-center gap-2">
+              <span>⚔️</span>
+              <span>Ranbhoomi Match</span>
+            </button>
+            <button onclick="switchTabFromDrawer('studio')" class="py-2 px-3 rounded-lg text-xs font-kinetic text-left text-slate-300 hover:text-white bg-white/5 border border-white/10 flex items-center gap-2">
+              <span>✨</span>
+              <span>Sculpt &amp; Kill Studio</span>
+            </button>
+            <button onclick="openSpecsFromDrawer()" class="py-2 px-3 rounded-lg text-xs font-kinetic text-left text-amber-300 bg-amber-500/10 border border-amber-500/20 flex items-center gap-2">
+              <span>📜</span>
+              <span>Gemini Specification</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer Footer -->
+      <div class="pt-3 border-t border-white/10 text-center">
+        <span class="text-[10px] font-kinetic text-slate-500 uppercase tracking-widest">Royal Ranbhoomi 3D • Ancient Indian Chess</span>
+      </div>
+
     </div>
   </div>
 
@@ -922,6 +1015,7 @@
       }
     }
     const sfx = new SoundDirector();
+    window.sfx = sfx;
 
     // =========================================================================
     // 3. ASYNCHRONOUS 3D GLTF ASSET MANAGER & REALISTIC CHARACTERS
@@ -6544,6 +6638,8 @@
     window.activeRigs = activeRigs;
     window.coordToWorld = coordToWorld;
     window.buildSculptedUnit = buildSculptedUnit;
+    window.gameMode = gameMode;
+    window.aiDifficulty = aiDifficulty;
     window.executeSynchronizedKillSequence = executeSynchronizedKillSequence;
     window.performChessMove = performChessMove;
     window.animateUnitLJump = animateUnitLJump;
@@ -7049,6 +7145,7 @@
 
     document.getElementById('modeVsAiBtn').addEventListener('click', () => {
       gameMode = 'vsai';
+      window.gameMode = gameMode;
       document.getElementById('modeVsAiBtn').classList.add('mg-btn-active');
       document.getElementById('modeLocal2PBtn').classList.remove('mg-btn-active');
       document.getElementById('aiDiffGroup').classList.remove('hidden');
@@ -7057,6 +7154,7 @@
 
     document.getElementById('modeLocal2PBtn').addEventListener('click', () => {
       gameMode = 'local2p';
+      window.gameMode = gameMode;
       document.getElementById('modeLocal2PBtn').classList.add('mg-btn-active');
       document.getElementById('modeVsAiBtn').classList.remove('mg-btn-active');
       document.getElementById('aiDiffGroup').classList.add('hidden');
@@ -7071,6 +7169,7 @@
     aiBtns.forEach(({ id, level }) => {
       document.getElementById(id).addEventListener('click', () => {
         aiDifficulty = level;
+        window.aiDifficulty = aiDifficulty;
         aiBtns.forEach(b => document.getElementById(b.id).classList.remove('mg-btn-active'));
         document.getElementById(id).classList.add('mg-btn-active');
       });
@@ -7110,15 +7209,180 @@
       document.getElementById('specsModal').classList.add('hidden');
     });
 
+    // =========================================================================
+    // MOBILE OPTIONS DRAWER & FULLSCREEN CONTROLLERS
+    // =========================================================================
+    function openOptionsDrawer() {
+      const drawer = document.getElementById('mobileOptionsDrawer');
+      const content = document.getElementById('optionsDrawerContent');
+      if (drawer && content) {
+        syncDrawerState();
+        drawer.style.opacity = '1';
+        drawer.style.pointerEvents = 'auto';
+        drawer.classList.remove('pointer-events-none', 'opacity-0');
+        drawer.classList.add('pointer-events-auto', 'opacity-100');
+        content.style.transform = 'translateX(0)';
+        content.classList.remove('translate-x-full');
+        content.classList.add('translate-x-0');
+      }
+    }
+    window.openOptionsDrawer = openOptionsDrawer;
+
+    function closeOptionsDrawer() {
+      const drawer = document.getElementById('mobileOptionsDrawer');
+      const content = document.getElementById('optionsDrawerContent');
+      if (drawer && content) {
+        drawer.style.opacity = '0';
+        drawer.style.pointerEvents = 'none';
+        drawer.classList.add('pointer-events-none', 'opacity-0');
+        drawer.classList.remove('pointer-events-auto', 'opacity-100');
+        content.style.transform = 'translateX(100%)';
+        content.classList.add('translate-x-full');
+        content.classList.remove('translate-x-0');
+      }
+    }
+    window.closeOptionsDrawer = closeOptionsDrawer;
+
+    function toggleFullscreen() {
+      const isFull = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+      if (!isFull) {
+        const el = document.documentElement;
+        const rfs = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+        if (rfs) {
+          rfs.call(el).catch(err => console.log('Fullscreen failed:', err));
+        }
+      } else {
+        const efs = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+        if (efs) {
+          efs.call(document).catch(err => console.log('Exit fullscreen failed:', err));
+        }
+      }
+    }
+    window.toggleFullscreen = toggleFullscreen;
+
+    function updateFullscreenUI() {
+      const isFull = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+      const icon = document.getElementById('cornerFullscreenIcon');
+      const text = document.getElementById('cornerFullscreenLabel');
+      const drawerLabel = document.getElementById('drawerFullscreenLabel');
+      if (icon) icon.textContent = isFull ? '🗗' : '⛶';
+      if (text) text.textContent = isFull ? 'EXIT FULL' : 'FULLSCREEN';
+      if (drawerLabel) drawerLabel.textContent = isFull ? 'EXIT FULLSCREEN' : 'TOGGLE FULLSCREEN';
+    }
+
+    ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(ev => {
+      document.addEventListener(ev, updateFullscreenUI);
+    });
+
+    function syncDrawerState() {
+      updateFullscreenUI();
+      // Sync Game Mode
+      const vsAiBtn = document.getElementById('drawerVsAiBtn');
+      const local2pBtn = document.getElementById('drawerLocal2PBtn');
+      const aiDiffRow = document.getElementById('drawerAiDiffRow');
+      if (vsAiBtn && local2pBtn) {
+        if (gameMode === 'vsai') {
+          vsAiBtn.className = "py-2 px-3 rounded-lg text-xs font-kinetic font-semibold uppercase border border-amber-500/50 bg-amber-500/20 text-amber-300 transition-all";
+          local2pBtn.className = "py-2 px-3 rounded-lg text-xs font-kinetic font-semibold uppercase border border-white/10 bg-white/5 text-slate-300 transition-all";
+          if (aiDiffRow) aiDiffRow.style.display = 'flex';
+        } else {
+          vsAiBtn.className = "py-2 px-3 rounded-lg text-xs font-kinetic font-semibold uppercase border border-white/10 bg-white/5 text-slate-300 transition-all";
+          local2pBtn.className = "py-2 px-3 rounded-lg text-xs font-kinetic font-semibold uppercase border border-amber-500/50 bg-amber-500/20 text-amber-300 transition-all";
+          if (aiDiffRow) aiDiffRow.style.display = 'none';
+        }
+      }
+      // Sync AI Difficulty
+      const diffLevels = { easy: 1, med: 2, hard: 3 };
+      ['easy', 'med', 'hard'].forEach(diff => {
+        const btn = document.getElementById(`drawerAi${diff.charAt(0).toUpperCase() + diff.slice(1)}Btn`);
+        if (btn) {
+          if (aiDifficulty === diffLevels[diff]) {
+            btn.className = "flex-1 py-1 rounded text-[11px] font-kinetic border border-amber-400/50 bg-amber-500/20 text-amber-200";
+          } else {
+            btn.className = "flex-1 py-1 rounded text-[11px] font-kinetic text-slate-300 border border-transparent";
+          }
+        }
+      });
+      // Sync Audio & Kill-Cam
+      const audioIcon = document.getElementById('drawerAudioIcon');
+      const audioLabel = document.getElementById('drawerAudioLabel');
+      if (audioIcon) audioIcon.textContent = sfx && sfx.enabled ? '🔊' : '🔇';
+      if (audioLabel) audioLabel.textContent = sfx && sfx.enabled ? 'SFX: ON' : 'SFX: MUTED';
+
+      const killCamLabel = document.getElementById('drawerKillCamLabel');
+      if (killCamLabel) killCamLabel.textContent = `Kill-Cam: ${camState.killCamEnabled ? 'ON' : 'OFF'}`;
+    }
+
+    function setGameModeFromDrawer(isAi) {
+      const targetBtn = document.getElementById(isAi ? 'modeVsAiBtn' : 'modeLocal2PBtn');
+      if (targetBtn) targetBtn.click();
+      syncDrawerState();
+    }
+    window.setGameModeFromDrawer = setGameModeFromDrawer;
+
+    function setAiDiffFromDrawer(diff) {
+      const targetBtn = document.getElementById(diff === 'easy' ? 'aiEasyBtn' : diff === 'med' ? 'aiMedBtn' : 'aiHardBtn');
+      if (targetBtn) targetBtn.click();
+      syncDrawerState();
+    }
+    window.setAiDiffFromDrawer = setAiDiffFromDrawer;
+
+    function triggerNewGameFromDrawer() {
+      closeOptionsDrawer();
+      const btn = document.getElementById('newBattleBtn');
+      if (btn) btn.click();
+    }
+    window.triggerNewGameFromDrawer = triggerNewGameFromDrawer;
+
+    function triggerDemoKillFromDrawer() {
+      closeOptionsDrawer();
+      const btn = document.getElementById('demoEpicDuelBtn');
+      if (btn) btn.click();
+    }
+    window.triggerDemoKillFromDrawer = triggerDemoKillFromDrawer;
+
+    function triggerResetCamFromDrawer() {
+      closeOptionsDrawer();
+      const btn = document.getElementById('resetCamBtn');
+      if (btn) btn.click();
+    }
+    window.triggerResetCamFromDrawer = triggerResetCamFromDrawer;
+
+    function toggleAudioFromDrawer() {
+      const btn = document.getElementById('toggleAudioBtn');
+      if (btn) btn.click();
+      syncDrawerState();
+    }
+    window.toggleAudioFromDrawer = toggleAudioFromDrawer;
+
+    function toggleKillCamFromDrawer() {
+      const btn = document.getElementById('toggleKillCamBtn');
+      if (btn) btn.click();
+      syncDrawerState();
+    }
+    window.toggleKillCamFromDrawer = toggleKillCamFromDrawer;
+
+    function switchTabFromDrawer(view) {
+      closeOptionsDrawer();
+      const btn = document.getElementById(view === 'battlefield' ? 'tabBattlefieldBtn' : 'tabStudioBtn');
+      if (btn) btn.click();
+    }
+    window.switchTabFromDrawer = switchTabFromDrawer;
+
+    function openSpecsFromDrawer() {
+      closeOptionsDrawer();
+      const btn = document.getElementById('openSpecsModalBtn');
+      if (btn) btn.click();
+    }
+    window.openSpecsFromDrawer = openSpecsFromDrawer;
+
     // Window Resize & Mobile Orientation Management
     function tryRequestLandscape() {
       try {
         if (screen.orientation && screen.orientation.lock) {
           screen.orientation.lock('landscape').catch(() => {});
         }
-        if (document.documentElement.requestFullscreen) {
-          document.documentElement.requestFullscreen().catch(() => {});
-        }
+        toggleFullscreen();
       } catch (e) {}
     }
     window.tryRequestLandscape = tryRequestLandscape;
