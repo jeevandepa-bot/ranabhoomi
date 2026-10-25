@@ -280,6 +280,7 @@
         <div id="loadingProgressBar" class="h-full bg-gradient-to-r from-amber-500 via-amber-400 to-rose-500 rounded-full transition-all duration-300" style="width: 10%;"></div>
       </div>
       <div id="loadingStatusText" class="text-xs font-kinetic text-slate-300 tracking-wider uppercase">Loading 3D Kshatriya Warriors &amp; Recorded Audio Suite...</div>
+      <button onclick="startGameNow()" class="mt-4 px-4 py-1.5 rounded-full text-xs font-kinetic font-semibold text-amber-300 border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 active:scale-95 transition-all">⚡ ENTER BATTLEFIELD NOW</button>
     </div>
   </div>
 
@@ -833,7 +834,7 @@
       async preloadAll(onProgress) {
         const entries = Object.entries(this.soundUrls);
         let loaded = 0;
-        for (const [key, url] of entries) {
+        await Promise.all(entries.map(async ([key, url]) => {
           try {
             const audio = new Audio(url);
             audio.preload = 'auto';
@@ -851,7 +852,7 @@
           }
           loaded++;
           if (onProgress) onProgress(loaded / entries.length);
-        }
+        }));
         this.isLoaded = true;
       }
 
@@ -1032,16 +1033,16 @@
         }
         const loader = new THREE.GLTFLoader();
         const assets = [
-          { key: 'padati', url: 'assets/padati.glb?v=' + Date.now() },
-          { key: 'gajadhvaja', url: 'assets/gajadhvaja.glb?v=' + Date.now() },
-          { key: 'ashvarohi', url: 'assets/ashvarohi.glb?v=' + Date.now() },
-          { key: 'ratha', url: 'assets/ratha.glb?v=' + Date.now() },
-          { key: 'maharani', url: 'assets/maharani.glb?v=' + Date.now() },
-          { key: 'samrat', url: 'assets/samrat.glb?v=' + Date.now() }
+          { key: 'padati', url: 'assets/padati.glb?v=3.2' },
+          { key: 'gajadhvaja', url: 'assets/gajadhvaja.glb?v=3.2' },
+          { key: 'ashvarohi', url: 'assets/ashvarohi.glb?v=3.2' },
+          { key: 'ratha', url: 'assets/ratha.glb?v=3.2' },
+          { key: 'maharani', url: 'assets/maharani.glb?v=3.2' },
+          { key: 'samrat', url: 'assets/samrat.glb?v=3.2' }
         ];
 
         let loaded = 0;
-        for (const item of assets) {
+        await Promise.all(assets.map(async (item) => {
           try {
             const gltf = await new Promise((resolve, reject) => {
               loader.load(item.url, resolve, undefined, reject);
@@ -1052,7 +1053,7 @@
           }
           loaded++;
           if (onProgress) onProgress(loaded / assets.length);
-        }
+        }));
         if (Object.keys(ModelManager.models).length > 0) {
           ModelManager.isLoaded = true;
         }
@@ -7695,20 +7696,41 @@
       renderer.render(scene, camera);
     }
 
+    let hasGameStarted = false;
+    function startGameNow() {
+      if (hasGameStarted) return;
+      hasGameStarted = true;
+      const loader = document.getElementById('loadingScreen');
+      if (loader) {
+        loader.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => { try { loader.remove(); } catch (e) {} }, 500);
+      }
+      spawnBattlefieldArmies();
+      try { sfx.playShankhaConch(); } catch (e) {}
+      requestAnimationFrame(animateLoop);
+    }
+    window.startGameNow = startGameNow;
+
     window.onload = async () => {
       const pBar = document.getElementById('loadingProgressBar');
       const statusText = document.getElementById('loadingStatusText');
       let mProgress = 0, aProgress = 0;
       function updProgress() {
-        const pct = Math.max(12, Math.min(100, Math.round((mProgress * 0.7 + aProgress * 0.3) * 100)));
+        const pct = Math.max(15, Math.min(100, Math.round((mProgress * 0.7 + aProgress * 0.3) * 100)));
         if (pBar) pBar.style.width = pct + '%';
       }
 
+      // 3.8s safety ceiling so game NEVER gets stuck on loadingScreen even on slow network
+      const maxWaitTimeout = new Promise(resolve => setTimeout(resolve, 3800));
+
       try {
         if (statusText) statusText.textContent = 'TRANSMITTING 3D KSHATRIYA WARRIORS & AUDIO SUITE...';
-        await Promise.all([
-          ModelManager.loadAll(p => { mProgress = p; updProgress(); }),
-          sfx.preloadAll(p => { aProgress = p; updProgress(); })
+        await Promise.race([
+          Promise.all([
+            ModelManager.loadAll(p => { mProgress = p; updProgress(); }),
+            sfx.preloadAll(p => { aProgress = p; updProgress(); })
+          ]),
+          maxWaitTimeout
         ]);
       } catch (err) {
         console.warn('Preload notice:', err);
@@ -7717,16 +7739,7 @@
       if (pBar) pBar.style.width = '100%';
       if (statusText) statusText.textContent = ModelManager.isLoaded ? 'ROYAL RANBHOOMI READY' : 'OFFLINE MODE ACTIVE';
 
-      setTimeout(() => {
-        const loader = document.getElementById('loadingScreen');
-        if (loader) {
-          loader.classList.add('opacity-0', 'pointer-events-none');
-          setTimeout(() => loader.remove(), 700);
-        }
-        spawnBattlefieldArmies();
-        try { sfx.playShankhaConch(); } catch (e) {}
-        requestAnimationFrame(animateLoop);
-      }, 400);
+      setTimeout(startGameNow, 300);
     };
   </script>
 </body>
