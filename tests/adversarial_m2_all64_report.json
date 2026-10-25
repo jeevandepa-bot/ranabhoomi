@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-25T05:57:18.678Z",
+  "timestamp": "2026-10-25T10:21:55.964Z",
   "suite1_64squares": {
     "totalSquares": 64,
     "totalValid": 64,
@@ -91,12 +91,12 @@
         "rotY": 3.1416,
         "expectedRotY": 3.1416,
         "minZMesh": {
-          "name": "",
-          "deltaZ": -1.12
+          "name": "Elephant_Ferrule_Tip_L",
+          "deltaZ": -1.2624
         },
         "maxZMesh": {
-          "name": "",
-          "deltaZ": 0.525
+          "name": "Elephant_Leg_BR",
+          "deltaZ": 0.4576
         },
         "rotPass": true,
         "meshPass": true,
@@ -145,12 +145,12 @@
         "rotY": 0,
         "expectedRotY": 0,
         "minZMesh": {
-          "name": "",
-          "deltaZ": -0.525
+          "name": "Elephant_Leg_BL",
+          "deltaZ": -0.4576
         },
         "maxZMesh": {
-          "name": "",
-          "deltaZ": 1.12
+          "name": "Elephant_Ferrule_Tip_R",
+          "deltaZ": 1.2624
         },
         "rotPass": true,
         "meshPass": true,
@@ -332,7 +332,7 @@
       },
       {
         "test": "White Knight L-Leap g1 -> f3",
-        "maxFlightY": 1.65,
+        "maxFlightY": 1.6499,
         "flightHasClearance": true,
         "landedRotY": 3.1416,
         "expectedLandedRotY": 3.1416,

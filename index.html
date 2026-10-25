@@ -16,6 +16,37 @@
   </script>
   <script src="assets/GLTFLoader.js"></script>
   <script src="assets/SkeletonUtils.js"></script>
+  <!-- Three.js Post-Processing Pipeline (Local Offline with CDN Fallback) -->
+  <script src="assets/Pass.js"></script>
+  <script src="assets/CopyShader.js"></script>
+  <script src="assets/ShaderPass.js"></script>
+  <script src="assets/LuminosityHighPassShader.js"></script>
+  <script src="assets/RenderPass.js"></script>
+  <script src="assets/EffectComposer.js"></script>
+  <script src="assets/UnrealBloomPass.js"></script>
+  <script>
+    (function checkPostProcessingFallback() {
+      if (typeof THREE === 'undefined') return;
+      var cdnBase = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/';
+      var scripts = [
+        { test: function() { return THREE.Pass; }, url: cdnBase + 'postprocessing/Pass.js' },
+        { test: function() { return THREE.CopyShader; }, url: cdnBase + 'shaders/CopyShader.js' },
+        { test: function() { return THREE.ShaderPass; }, url: cdnBase + 'postprocessing/ShaderPass.js' },
+        { test: function() { return THREE.LuminosityHighPassShader; }, url: cdnBase + 'shaders/LuminosityHighPassShader.js' },
+        { test: function() { return THREE.RenderPass; }, url: cdnBase + 'postprocessing/RenderPass.js' },
+        { test: function() { return THREE.EffectComposer; }, url: cdnBase + 'postprocessing/EffectComposer.js' },
+        { test: function() { return THREE.UnrealBloomPass; }, url: cdnBase + 'postprocessing/UnrealBloomPass.js' }
+      ];
+      scripts.forEach(function(s) {
+        if (!s.test()) {
+          var el = document.createElement('script');
+          el.src = s.url;
+          el.async = false;
+          document.head.appendChild(el);
+        }
+      });
+    })();
+  </script>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1162,281 +1193,356 @@
     ProceduralRunicTextureManager.init();
 
     // -------------------------------------------------------------------------
-    // 3B. SHARED ANCIENT TEMPLE STONE PBR TEXTURE LIBRARY
+    // 3B. ADVANCED PURANIC PBR TEXTURE & CENTRALIZED MATERIAL LIBRARY
     // -------------------------------------------------------------------------
-    const StoneTextureManager = {
+    const PuranicTextureManager = {
       loader: new THREE.TextureLoader(),
-      stoneLightDiff: null,
-      stoneLightNorm: null,
-      stoneLightRough: null,
-      stoneLightEmis: null,
-      stoneDarkDiff: null,
-      stoneDarkNorm: null,
-      stoneDarkRough: null,
-      stoneDarkEmis: null,
+      // Stone Fissure & Dais Maps
+      stoneLightDiff: null, stoneLightNorm: null, stoneLightRough: null, stoneLightEmis: null,
+      stoneDarkDiff: null,  stoneDarkNorm: null,  stoneDarkRough: null,  stoneDarkEmis: null,
+      // Bespoke Surface Detail Maps
+      damascusSteel: null,
+      kavachaGold: null,
+      elephantSkin: null,
+      elephantJhul: null,
+      dhotiSilk: null,
+      sandalwood: null,
       initialized: false,
+
       init() {
         if (this.initialized) return;
         this.initialized = true;
-        this.stoneLightDiff = this.loader.load('assets/textures/stone_light_diffuse.png');
-        this.stoneLightDiff.encoding = THREE.sRGBEncoding;
-        this.stoneLightNorm = this.loader.load('assets/textures/stone_light_normal.png');
-        this.stoneLightRough = this.loader.load('assets/textures/stone_light_roughness.png');
-        this.stoneLightEmis = this.loader.load('assets/textures/stone_light_emissive.png');
-        this.stoneLightEmis.encoding = THREE.sRGBEncoding;
 
-        this.stoneDarkDiff = this.loader.load('assets/textures/stone_dark_diffuse.png');
-        this.stoneDarkDiff.encoding = THREE.sRGBEncoding;
-        this.stoneDarkNorm = this.loader.load('assets/textures/stone_dark_normal.png');
-        this.stoneDarkRough = this.loader.load('assets/textures/stone_dark_roughness.png');
-        this.stoneDarkEmis = this.loader.load('assets/textures/stone_dark_emissive.png');
-        this.stoneDarkEmis.encoding = THREE.sRGBEncoding;
+        const loadTex = (path, isSRGB = false, repeatX = 1, repeatY = 1) => {
+          const tex = this.loader.load(path);
+          tex.encoding = isSRGB ? THREE.sRGBEncoding : THREE.LinearEncoding;
+          tex.wrapS = THREE.RepeatWrapping;
+          tex.wrapT = THREE.RepeatWrapping;
+          tex.repeat.set(repeatX, repeatY);
+          tex.anisotropy = 16;
+          return tex;
+        };
 
-        const allTextures = [
-          this.stoneLightDiff, this.stoneLightNorm, this.stoneLightRough, this.stoneLightEmis,
-          this.stoneDarkDiff, this.stoneDarkNorm, this.stoneDarkRough, this.stoneDarkEmis
-        ];
-        allTextures.forEach(tex => {
-          if (tex) {
-            tex.wrapS = THREE.RepeatWrapping;
-            tex.wrapT = THREE.RepeatWrapping;
-            tex.anisotropy = 16;
-          }
-        });
+        // 1. Ancient Stone Monolith Textures
+        this.stoneLightDiff  = loadTex('assets/textures/stone_light_diffuse.png', true);
+        this.stoneLightNorm  = loadTex('assets/textures/stone_light_normal.png', false);
+        this.stoneLightRough = loadTex('assets/textures/stone_light_roughness.png', false);
+        this.stoneLightEmis  = loadTex('assets/textures/stone_light_emissive.png', true);
+
+        this.stoneDarkDiff   = loadTex('assets/textures/stone_dark_diffuse.png', true);
+        this.stoneDarkNorm   = loadTex('assets/textures/stone_dark_normal.png', false);
+        this.stoneDarkRough  = loadTex('assets/textures/stone_dark_roughness.png', false);
+        this.stoneDarkEmis   = loadTex('assets/textures/stone_dark_emissive.png', true);
+
+        // 2. Bespoke PBR Equipment & Surface Textures
+        this.damascusSteel   = loadTex('assets/textures/damascus_steel.png', true, 2, 2);
+        this.kavachaGold     = loadTex('assets/textures/kavacha_gold.png', true, 2, 2);
+        this.elephantSkin    = loadTex('assets/textures/elephant_skin.png', true, 1.5, 1.5);
+        this.elephantJhul    = loadTex('assets/textures/elephant_jhul.png', true, 2, 2);
+        this.dhotiSilk       = loadTex('assets/textures/dhoti_silk.png', true, 3, 3);
+        this.sandalwood      = loadTex('assets/textures/sandalwood_chariot.png', true, 1.5, 1.5);
       }
     };
-    StoneTextureManager.init();
+    PuranicTextureManager.init();
+    const StoneTextureManager = PuranicTextureManager; // Backward compatibility alias
 
-    // Authentic Puranic Living Temple Monolith Theming:
-    // White Team: Suryavanshi (Solar Deva Empire) — Colossal living carved Ellora sandstone monoliths, 24K Surya gold relief inlays, saffron-pigmented stone drapery, tempered Wootz steel, and pulsing radiant golden fissure channels.
-    // Black Team: Chandravanshi / Asura (Midnight Shadow Empire) — Colossal living carved volcanic basalt/obsidian monoliths, quenched obsidian bronze relief, blood-ruby dyed stone folds, midnight quenched steel, and smoldering magma ember fissures.
+    const PuranicPBRMaterialLibrary = {
+      white: null,
+      black: null,
+      initialized: false,
+
+      init() {
+        if (this.initialized) return;
+        this.initialized = true;
+
+        const TM = PuranicTextureManager;
+
+        // ---------------------------------------------------------------------
+        // SURYAVANSHI VANGUARD (WHITE ARMY: SOLAR DEVA EMPIRE)
+        // ---------------------------------------------------------------------
+        this.white = {
+          // 1. Weathered Ellora Sandstone Monolith Body
+          stone: new THREE.MeshStandardMaterial({
+            color: 0xf4f1ea,
+            map: TM.stoneLightDiff,
+            normalMap: TM.stoneLightNorm,
+            normalScale: new THREE.Vector2(1.5, 1.5),
+            roughnessMap: TM.stoneLightRough,
+            roughness: 0.86,
+            metalness: 0.10,
+            emissiveMap: TM.stoneLightEmis,
+            emissive: new THREE.Color(0xf59e0b),
+            emissiveIntensity: 0.52
+          }),
+
+          // 2. Beaten 24K Gold Foil (Kavacha Armor, Mukutas, Howdah Crests, Ferrules)
+          gold: new THREE.MeshStandardMaterial({
+            color: 0xf59e0b,
+            map: TM.kavachaGold,
+            normalMap: TM.stoneLightNorm,
+            normalScale: new THREE.Vector2(0.40, 0.40),
+            roughness: 0.28,
+            metalness: 0.92,
+            emissive: new THREE.Color(0x92400e),
+            emissiveIntensity: 0.18
+          }),
+
+          // 3. Wootz Damascus Folded Steel (Khanda Blades, Spearheads, Lance Tips)
+          steel: new THREE.MeshStandardMaterial({
+            color: 0x334155,
+            map: TM.damascusSteel,
+            normalMap: TM.stoneLightNorm,
+            normalScale: new THREE.Vector2(0.20, 0.20),
+            roughness: 0.24,
+            metalness: 0.92,
+            emissive: new THREE.Color(0x38bdf8),
+            emissiveIntensity: 0.20
+          }),
+
+          // 4. Gajraj Wrinkled Pachyderm Hide (Sacred Airavata Alabaster)
+          elephantSkin: new THREE.MeshStandardMaterial({
+            color: 0xf4f1ea,
+            map: TM.elephantSkin,
+            normalMap: TM.stoneLightNorm,
+            normalScale: new THREE.Vector2(1.2, 1.2),
+            roughness: 0.82,
+            metalness: 0.08,
+            emissiveMap: TM.stoneLightEmis,
+            emissive: new THREE.Color(0xf59e0b),
+            emissiveIntensity: 0.40
+          }),
+
+          // 5. Pleated Saffron Silk Textiles (Dhoti, Elephant Jhul, Royal Mantle)
+          silk: new THREE.MeshStandardMaterial({
+            color: 0xc27429,
+            map: TM.dhotiSilk,
+            normalMap: TM.stoneLightNorm,
+            normalScale: new THREE.Vector2(0.35, 0.35),
+            roughness: 0.58,
+            metalness: 0.15,
+            emissive: new THREE.Color(0x78350f),
+            emissiveIntensity: 0.18
+          }),
+
+          // 6. Polished Royal Ivory (Forward Cheek Tusks)
+          ivory: new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            normalMap: TM.stoneLightNorm,
+            normalScale: new THREE.Vector2(0.30, 0.30),
+            roughness: 0.20,
+            metalness: 0.06
+          }),
+
+          // 7. Carved Sandalwood Timber (Ratha Chariot Hull & Howdah Frame)
+          sandalwood: new THREE.MeshStandardMaterial({
+            color: 0xd4a373,
+            map: TM.sandalwood,
+            normalMap: TM.stoneLightNorm,
+            normalScale: new THREE.Vector2(0.8, 0.8),
+            roughness: 0.70,
+            metalness: 0.08,
+            emissive: new THREE.Color(0x78350f),
+            emissiveIntensity: 0.16
+          }),
+
+          // 8. Celestial Solar-Cyan Plasma Cores & Prabhamandala Halos
+          plasmaCore: new THREE.MeshStandardMaterial({
+            color: 0x38bdf8,
+            emissive: new THREE.Color(0x38bdf8),
+            emissiveIntensity: 2.4,
+            toneMapped: false
+          }),
+
+          // 9. Living Temple Amber Gaze (Eyes)
+          amberGaze: new THREE.MeshStandardMaterial({
+            color: 0xffb703,
+            emissive: new THREE.Color(0xfb8500),
+            emissiveIntensity: 3.8,
+            toneMapped: false
+          })
+        };
+
+        // ---------------------------------------------------------------------
+        // CHANDRAVANSHI DOMINION (BLACK ARMY: MIDNIGHT LUNAR / ASURA EMPIRE)
+        // ---------------------------------------------------------------------
+        this.black = {
+          // 1. Carved Volcanic Basalt / Midnight Obsidian Monolith Body
+          stone: new THREE.MeshStandardMaterial({
+            color: 0x161923,
+            map: TM.stoneDarkDiff,
+            normalMap: TM.stoneDarkNorm,
+            normalScale: new THREE.Vector2(1.6, 1.6),
+            roughnessMap: TM.stoneDarkRough,
+            roughness: 0.88,
+            metalness: 0.16,
+            emissiveMap: TM.stoneDarkEmis,
+            emissive: new THREE.Color(0x06b6d4),
+            emissiveIntensity: 0.58
+          }),
+
+          // 2. Burnished Crimson-Bronze Foil (Kavacha Armor, Mukutas, Ferrules)
+          gold: new THREE.MeshStandardMaterial({
+            color: 0xe11d48,
+            map: TM.kavachaGold,
+            normalMap: TM.stoneDarkNorm,
+            normalScale: new THREE.Vector2(0.40, 0.40),
+            roughness: 0.28,
+            metalness: 0.92,
+            emissive: new THREE.Color(0x450a0a),
+            emissiveIntensity: 0.20
+          }),
+
+          // 3. Abyssal Folded Iron Damascus Steel (Khanda Blades, Spearheads)
+          steel: new THREE.MeshStandardMaterial({
+            color: 0x090b10,
+            map: TM.damascusSteel,
+            normalMap: TM.stoneDarkNorm,
+            normalScale: new THREE.Vector2(0.20, 0.20),
+            roughness: 0.24,
+            metalness: 0.94,
+            emissive: new THREE.Color(0x06b6d4),
+            emissiveIntensity: 0.22
+          }),
+
+          // 4. Volcanic Obsidian Elephant Hide (Asura War Beast)
+          elephantSkin: new THREE.MeshStandardMaterial({
+            color: 0x161923,
+            map: TM.elephantSkin,
+            normalMap: TM.stoneDarkNorm,
+            normalScale: new THREE.Vector2(1.3, 1.3),
+            roughness: 0.84,
+            metalness: 0.14,
+            emissiveMap: TM.stoneDarkEmis,
+            emissive: new THREE.Color(0x06b6d4),
+            emissiveIntensity: 0.45
+          }),
+
+          // 5. Imperial Blood-Ruby / Crimson Silk Textiles (Dhoti, Elephant Jhul)
+          silk: new THREE.MeshStandardMaterial({
+            color: 0x5e1824,
+            map: TM.elephantJhul,
+            normalMap: TM.stoneDarkNorm,
+            normalScale: new THREE.Vector2(0.35, 0.35),
+            roughness: 0.60,
+            metalness: 0.18,
+            emissive: new THREE.Color(0x3f0713),
+            emissiveIntensity: 0.18
+          }),
+
+          // 6. Smoked Battle-Hardened Ash Ivory (Forward Cheek Tusks)
+          ivory: new THREE.MeshStandardMaterial({
+            color: 0x64748b,
+            normalMap: TM.stoneDarkNorm,
+            normalScale: new THREE.Vector2(0.30, 0.30),
+            roughness: 0.32,
+            metalness: 0.10
+          }),
+
+          // 7. Midnight Quenched Timber (Ratha Chariot Hull)
+          sandalwood: new THREE.MeshStandardMaterial({
+            color: 0x1e1e24,
+            map: TM.sandalwood,
+            normalMap: TM.stoneDarkNorm,
+            normalScale: new THREE.Vector2(0.8, 0.8),
+            roughness: 0.72,
+            metalness: 0.12,
+            emissive: new THREE.Color(0x06b6d4),
+            emissiveIntensity: 0.16
+          }),
+
+          // 8. Celestial Chandra Sapphire / Magma Plasma Cores
+          plasmaCore: new THREE.MeshStandardMaterial({
+            color: 0x06b6d4,
+            emissive: new THREE.Color(0x06b6d4),
+            emissiveIntensity: 2.4,
+            toneMapped: false
+          }),
+
+          // 9. Asura Fiery Crimson Gaze (Eyes)
+          amberGaze: new THREE.MeshStandardMaterial({
+            color: 0xff3300,
+            emissive: new THREE.Color(0xd90429),
+            emissiveIntensity: 4.2,
+            toneMapped: false
+          })
+        };
+      },
+
+      updateEmissiveBreathing(breathFactor) {
+        if (!this.initialized) return;
+
+        // White Army (Surya Saffron / Solar Gold)
+        this.white.stone.emissiveIntensity = 0.52 * breathFactor;
+        this.white.gold.emissiveIntensity  = 0.18 * breathFactor;
+        this.white.steel.emissiveIntensity = 0.20 * breathFactor;
+        this.white.elephantSkin.emissiveIntensity = 0.40 * breathFactor;
+        this.white.plasmaCore.emissiveIntensity = 2.40 * breathFactor;
+
+        // Black Army (Chandra Sapphire / Lunar Cyan)
+        this.black.stone.emissiveIntensity = 0.58 * breathFactor;
+        this.black.gold.emissiveIntensity  = 0.20 * breathFactor;
+        this.black.steel.emissiveIntensity = 0.22 * breathFactor;
+        this.black.elephantSkin.emissiveIntensity = 0.45 * breathFactor;
+        this.black.plasmaCore.emissiveIntensity = 2.40 * breathFactor;
+      }
+    };
+    PuranicPBRMaterialLibrary.init();
+
     function applyPuranicTheme(object, team) {
-      const isWhite = team === TEAM_WHITE;
-      const stoneNorm = isWhite ? StoneTextureManager.stoneLightNorm : StoneTextureManager.stoneDarkNorm;
-      const stoneRough = isWhite ? StoneTextureManager.stoneLightRough : StoneTextureManager.stoneDarkRough;
-      const stoneEmis = isWhite ? StoneTextureManager.stoneLightEmis : StoneTextureManager.stoneDarkEmis;
+      const isWhite = (team === TEAM_WHITE);
+      const lib = isWhite ? PuranicPBRMaterialLibrary.white : PuranicPBRMaterialLibrary.black;
 
       object.traverse(child => {
         if (child.isMesh && child.material) {
           child.castShadow = true;
           child.receiveShadow = true;
-          if (Array.isArray(child.material)) {
-            child.material = child.material.map(m => m.clone());
-          } else {
-            child.material = child.material.clone();
-          }
-          const materials = Array.isArray(child.material) ? child.material : [child.material];
-          materials.forEach(mat => {
-            const name = (mat.name || '').toLowerCase();
 
-            // 1. 24K SURYA GOLD / ASURA OBSIDIAN BRONZE KAVACHA ARMOR / CROWNS / ORNAMENTS
-            if (name.includes('gold') || name.includes('kavacha') || name.includes('saddle') || name.includes('chakra')) {
-              mat.normalMap = stoneNorm;
-              mat.normalScale = new THREE.Vector2(1.1, 1.1);
-              mat.roughnessMap = stoneRough;
-              if (isWhite) {
-                mat.color.setHex(0xe5b84b); // 24K Champagne Gold filigree
-                mat.roughness = 0.16;
-                mat.metalness = 0.88;
-                mat.emissive.setHex(0x996515);
-                mat.emissiveIntensity = 0.25;
-              } else {
-                mat.color.setHex(0xe11d48); // Burnished Crimson-Bronze filigree
-                mat.roughness = 0.16;
-                mat.metalness = 0.88;
-                mat.emissive.setHex(0x450a0a);
-                mat.emissiveIntensity = 0.25;
-              }
+          const assignMaterial = (mat) => {
+            const name = (mat.name || child.name || '').toLowerCase();
+
+            // 1. 24K Surya Gold / Asura Crimson-Bronze Regalia
+            if (name.includes('gold') || name.includes('kavacha') || name.includes('saddle') || name.includes('chakra') || name.includes('ferrule') || name.includes('crown') || name.includes('boss') || name.includes('trim')) {
+              return lib.gold;
             }
-            // 2. CHISELED STONE DRAPERY / SILK / DHOTI / SAREE / ELEPHANT JHUL / ROYAL MANTLE
-            else if (name.includes('silk') || name.includes('dhoti') || name.includes('jhul') || name.includes('saree') || name.includes('mantle') || name.includes('robe')) {
-              mat.normalMap = stoneNorm;
-              mat.normalScale = new THREE.Vector2(1.0, 1.0);
-              mat.roughnessMap = stoneRough;
-              if (isWhite) {
-                mat.color.setHex(0xc27429); // Carved pleated sandstone drapery with saffron pigment
-                mat.roughness = 0.70;
-                mat.metalness = 0.14;
-                mat.emissive.setHex(0x78350f);
-                mat.emissiveIntensity = 0.18;
-              } else {
-                mat.color.setHex(0x5e1824); // Imperial blood-ruby carved stone drapery
-                mat.roughness = 0.72;
-                mat.metalness = 0.18;
-                mat.emissive.setHex(0x3f0713);
-                mat.emissiveIntensity = 0.18;
-              }
+            // 2. Chiseled Silk Textiles & Dhoti Drapery
+            else if (name.includes('silk') || name.includes('dhoti') || name.includes('jhul') || name.includes('saree') || name.includes('mantle') || name.includes('robe') || name.includes('plume')) {
+              return lib.silk;
             }
-            // 3. WOOTZ DAMASCUS STEEL / BHALA SPEAR / LANCE / SCYTHE / KHANDA SWORD
-            else if (name.includes('steel') || name.includes('damascus') || name.includes('lance') || name.includes('scythe') || name.includes('glaive') || name.includes('khanda')) {
-              mat.normalMap = stoneNorm;
-              mat.normalScale = new THREE.Vector2(0.8, 0.8);
-              if (isWhite) {
-                mat.color.setHex(0x334155); // Tempered Slate Steel
-                mat.roughness = 0.38;
-                mat.metalness = 0.65;
-              } else {
-                mat.color.setHex(0x090b10); // Abyssal Forged Iron
-                mat.roughness = 0.35;
-                mat.metalness = 0.85;
-                mat.emissive.setHex(0xe11d48);
-                mat.emissiveIntensity = 0.20;
-              }
+            // 3. Wootz Damascus Folded Steel Blades & Spearheads
+            else if (name.includes('steel') || name.includes('damascus') || name.includes('lance') || name.includes('scythe') || name.includes('glaive') || name.includes('khanda') || name.includes('blade') || name.includes('tip')) {
+              return lib.steel;
             }
-            // 4. ELEPHANT CARVED STONE BODY (PURE SACRED MAKRANA MARBLE & VOLCANIC BASALT)
+            // 4. Pachyderm Wrinkled Hide
             else if (name.includes('elephantskin') || name.includes('elephantmarbleskin')) {
-              mat.map = null; // Clear dark gray texture map so pure white marble radiates bright!
-              mat.normalMap = stoneNorm;
-              mat.normalScale = new THREE.Vector2(1.3, 1.3);
-              mat.roughnessMap = stoneRough;
-              mat.emissiveMap = stoneEmis;
-              if (isWhite) {
-                mat.color.setHex(0xf4f1ea); // Pearl Alabaster Airavata Elephant
-                mat.roughness = 0.24;
-                mat.metalness = 0.32;
-                mat.emissive.setHex(0xfacc15);
-                mat.emissiveIntensity = 0.18;
-              } else {
-                mat.color.setHex(0x161923); // Anodized Volcanic Obsidian elephant
-                mat.roughness = 0.24;
-                mat.metalness = 0.68;
-                mat.emissive.setHex(0xf43f5e);
-                mat.emissiveIntensity = 0.35;
-              }
-              mat.needsUpdate = true;
+              return lib.elephantSkin;
             }
-            // 5. MARWARI HORSE COAT (CARVED WAR STEED)
-            else if (name.includes('marwari') || name.includes('coat')) {
-              mat.map = null;
-              mat.normalMap = stoneNorm;
-              mat.normalScale = new THREE.Vector2(1.2, 1.2);
-              mat.roughnessMap = stoneRough;
-              mat.emissiveMap = stoneEmis;
-              if (isWhite) {
-                mat.color.setHex(0xf4f1ea); // Pearl Alabaster Marwari war steed
-                mat.roughness = 0.24;
-                mat.metalness = 0.32;
-                mat.emissive.setHex(0xfacc15);
-                mat.emissiveIntensity = 0.18;
-              } else {
-                mat.color.setHex(0x161923); // Anodized Volcanic Obsidian war steed
-                mat.roughness = 0.24;
-                mat.metalness = 0.68;
-                mat.emissive.setHex(0xf43f5e);
-                mat.emissiveIntensity = 0.35;
-              }
-              mat.needsUpdate = true;
+            // 5. Sacred Royal Ivory Tusks
+            else if (name.includes('ivory') || name.includes('tusk')) {
+              return lib.ivory;
             }
-            // 6. LIVING TEMPLE MONOLITH WARRIOR SKIN / BODY
-            else if (name.includes('skin')) {
-              mat.normalMap = stoneNorm;
-              mat.normalScale = new THREE.Vector2(1.25, 1.25);
-              mat.roughnessMap = stoneRough;
-              mat.emissiveMap = stoneEmis;
-              if (isWhite) {
-                mat.color.setHex(0xf4f1ea); // Living Pearl Alabaster statue
-                mat.roughness = 0.24;
-                mat.metalness = 0.32;
-                mat.emissive.setHex(0xfacc15);
-                mat.emissiveIntensity = 0.18;
-              } else {
-                mat.color.setHex(0x161923); // Living Volcanic Obsidian statue
-                mat.roughness = 0.24;
-                mat.metalness = 0.68;
-                mat.emissive.setHex(0xf43f5e);
-                mat.emissiveIntensity = 0.35;
-              }
-              mat.needsUpdate = true;
+            // 6. Carved Sandalwood & Howdah Stone
+            else if (name.includes('wood') || name.includes('sandalwood') || name.includes('howdah') || name.includes('hull')) {
+              return lib.sandalwood;
             }
-            // 7. SACRED IVORY TUSKS
-            else if (name.includes('ivory')) {
-              mat.map = null;
-              mat.normalMap = stoneNorm;
-              mat.normalScale = new THREE.Vector2(0.6, 0.6);
-              if (isWhite) {
-                mat.color.setHex(0xffffff); // Pure radiant royal ivory
-                mat.roughness = 0.22;
-                mat.metalness = 0.08;
-              } else {
-                mat.color.setHex(0x6b7280); // Smoked battle-hardened ash ivory
-                mat.roughness = 0.36;
-                mat.metalness = 0.12;
-              }
-              mat.needsUpdate = true;
+            // 7. Celestial Plasma Cores & Prabhamandala Halos
+            else if (name.includes('crystal') || name.includes('halo') || name.includes('wing') || name.includes('ruby') || name.includes('rune')) {
+              return lib.plasmaCore;
             }
-            // 8. SANDALWOOD & CASTLE STONE & HOWDAH STONE
-            else if (name.includes('wood') || name.includes('stone') || name.includes('sandalwood') || name.includes('howdahstone') || name.includes('castlesandstone')) {
-              mat.map = null;
-              mat.normalMap = stoneNorm;
-              mat.normalScale = new THREE.Vector2(1.2, 1.2);
-              mat.roughnessMap = stoneRough;
-              mat.emissiveMap = stoneEmis;
-              if (isWhite) {
-                mat.color.setHex(0xf4f1ea); // Pearl Alabaster citadel
-                mat.roughness = 0.24;
-                mat.metalness = 0.32;
-                mat.emissive.setHex(0xfacc15);
-                mat.emissiveIntensity = 0.18;
-              } else {
-                mat.color.setHex(0x161923); // Volcanic Obsidian citadel
-                mat.roughness = 0.24;
-                mat.metalness = 0.68;
-                mat.emissive.setHex(0xf43f5e);
-                mat.emissiveIntensity = 0.35;
-              }
-              mat.needsUpdate = true;
-            }
-            // 9. CELESTIAL EMISSIVES & PLASMA CORES (PRABHAMANDALA HALO, HOWDAH CRYSTAL, ENERGY WINGS, CROWN RUBY)
-            else if (name.includes('crystal') || name.includes('halo') || name.includes('wing') || name.includes('ruby')) {
-              if (isWhite) {
-                mat.color.setHex(0x38bdf8);
-                if (mat.emissive) {
-                  mat.emissive.setHex(0x38bdf8);
-                  mat.emissiveIntensity = 2.2;
-                  mat.toneMapped = false;
-                }
-              } else {
-                mat.color.setHex(0xf43f5e);
-                if (mat.emissive) {
-                  mat.emissive.setHex(0xf43f5e);
-                  mat.emissiveIntensity = 2.2;
-                  mat.toneMapped = false;
-                }
-              }
-            }
-            // 10. GLOWING AMBER EYES & FOREHEAD CABOCHON GEM (LIVING STATUE GAZE)
+            // 8. Living Amber & Crimson Gaze (Eyes)
             else if (name.includes('amber') || name.includes('eye') || name.includes('gem')) {
-              if (isWhite) {
-                mat.color.setHex(0xffb703);
-                if (mat.emissive) {
-                  mat.emissive.setHex(0xfb8500);
-                  mat.emissiveIntensity = 3.6;
-                }
-              } else {
-                mat.color.setHex(0xff3300);
-                if (mat.emissive) {
-                  mat.emissive.setHex(0xd90429);
-                  mat.emissiveIntensity = 4.0;
-                }
-              }
+              return lib.amberGaze;
             }
-            // 11. GLOWING SANSKRIT RUNE DISC
-            else if (name.includes('rune')) {
-              if (isWhite) {
-                mat.color.setHex(0xffd700);
-                if (mat.emissive) {
-                  mat.emissive.setHex(0xffaa00);
-                  mat.emissiveIntensity = 2.8;
-                }
-              } else {
-                mat.color.setHex(0xa855f7);
-                if (mat.emissive) {
-                  mat.emissive.setHex(0x9333ea);
-                  mat.emissiveIntensity = 3.0;
-                }
-              }
+            // 9. Default Living Temple Monolith Stone Body / Armor
+            else {
+              return lib.stone;
             }
-          });
+          };
+
+          if (Array.isArray(child.material)) {
+            child.material = child.material.map(assignMaterial);
+          } else {
+            child.material = assignMaterial(child.material);
+          }
         }
       });
     }
@@ -1613,92 +1719,101 @@
 
     function buildPuranicRook(rig, mats, team) {
       const model = cloneModelWithSkeleton(ModelManager.models.gajadhvaja.scene);
-      model.scale.setScalar(0.84); // Monumental war elephant stature
+      model.scale.setScalar(0.88); // Monumental war elephant stature
       model.rotation.y = 0; // Model naturally faces +Z in glTF space; tusks curve forward into opposing army
       model.position.set(0, 0, 0); // Exact ground contact y=0.000
       applyPuranicTheme(model, team);
 
-      // Hide unrigged static elephant body & plinths so fully articulated 4 legs and trunk animate smoothly
+      // Hide legacy plinths if any
       model.traverse(child => {
         if (child.isMesh) {
           const n = child.name || '';
-          const match = n.match(/Cylinder\.?(\d+)/);
-          const cylNum = match ? parseInt(match[1]) : (n === 'Cylinder' ? 0 : -1);
-          if (n.includes('Pedestal') || n.includes('Rune') ||
-              n.includes('Torus') ||
-              (cylNum >= 0 && (cylNum <= 3 || cylNum >= 32)) ||
-              n.includes('Cube') || n.includes('Bastion') || n.includes('Upper_Deck') ||
-              n.includes('Castle_Saddle') || n.includes('Castle_Stone_Base') ||
-              n.includes('Cone') || n.includes('Elephant_Body') || n.includes('Elephant_Kada')) {
+          if (n.includes('Pedestal') || n.includes('Rune') || n.includes('Disc')) {
             child.visible = false;
           }
         }
       });
 
-      // 1. Four Articulated Lathe Pillar Quadruped Legs with 24K Gold Kadas (grounded at y = 0.000m)
-      const legCoords = [
-        [-0.34, 0.65, 0.38],  // FL (Front Left)
-        [0.34, 0.65, 0.38],   // FR (Front Right)
-        [-0.34, 0.65, -0.38], // BL (Back Left)
-        [0.34, 0.65, -0.38]   // BR (Back Right)
+      // Anatomical limb pivots for articulated 4-legged pachyderm locomotion:
+      // Foreleg shoulder pivots at y = 1.45m, z = 0.48m
+      // Hindleg hip pivots at y = 1.45m, z = -0.52m
+      const legPivots = [
+        { name: 'Elephant_Leg_FL', px: -0.44, py: 1.45, pz:  0.48, kadaName: 'Elephant_Kada_FL' },
+        { name: 'Elephant_Leg_FR', px:  0.44, py: 1.45, pz:  0.48, kadaName: 'Elephant_Kada_FR' },
+        { name: 'Elephant_Leg_BL', px: -0.42, py: 1.45, pz: -0.52, kadaName: 'Elephant_Kada_BL' },
+        { name: 'Elephant_Leg_BR', px:  0.42, py: 1.45, pz: -0.52, kadaName: 'Elephant_Kada_BR' }
       ];
-      legCoords.forEach(([lx, ly, lz]) => {
-        const qLeg = new THREE.Group();
-        qLeg.position.set(lx, ly, lz);
-        const legCol = createLatheMesh([
-          [0.0, -0.65], [0.17, -0.65], [0.15, -0.45], [0.19, -0.15], [0.18, 0.0]
-        ], mats.armor, 32);
-        const cuff = new THREE.Mesh(new THREE.TorusGeometry(0.165, 0.028, 12, 28), mats.trim);
-        cuff.rotation.x = Math.PI / 2;
-        cuff.position.y = -0.52;
-        qLeg.add(legCol, cuff);
-        rig.quadLegs.push(qLeg);
-        rig.bodyRoot.add(qLeg);
+
+      rig.quadLegs = [];
+      legPivots.forEach(lp => {
+        const pivot = new THREE.Group();
+        pivot.name = lp.name + '_Pivot';
+        pivot.position.set(lp.px, lp.py, lp.pz);
+
+        const legMesh = model.getObjectByName(lp.name);
+        const kadaMesh = model.getObjectByName(lp.kadaName);
+
+        if (legMesh) {
+          legMesh.position.set(-lp.px, -lp.py, -lp.pz);
+          pivot.add(legMesh);
+        }
+        if (kadaMesh) {
+          kadaMesh.position.set(-lp.px, -lp.py, -lp.pz);
+          pivot.add(kadaMesh);
+        }
+
+        model.add(pivot);
+        rig.quadLegs.push(pivot);
       });
 
-      // 2. Sculpted Muscular Ellipsoid Barrel Body & Caparison Saddle
-      const bodyBarrel = new THREE.Mesh(new THREE.SphereGeometry(0.58, 32, 24), mats.armor);
-      bodyBarrel.scale.set(0.92, 0.82, 1.28);
-      bodyBarrel.position.set(0, 0.95, 0);
-      const saddleTrim = new THREE.Mesh(new THREE.CylinderGeometry(0.52, 0.56, 0.55, 32, 1, true), mats.trim);
-      saddleTrim.scale.set(1.0, 1.0, 1.15);
-      saddleTrim.position.set(0, 1.00, 0);
-      rig.torso.add(bodyBarrel, saddleTrim);
+      // Bind 4-segment articulated tapered trunk to rig.trunkSegs
+      const trunkPivots = [
+        { name: 'Elephant_Trunk_0', px: 0.0, py: 1.35, pz: 1.00 },
+        { name: 'Elephant_Trunk_1', px: 0.0, py: 1.15, pz: 1.08 },
+        { name: 'Elephant_Trunk_2', px: 0.0, py: 0.88, pz: 1.14 },
+        { name: 'Elephant_Trunk_3', px: 0.0, py: 0.58, pz: 1.18 }
+      ];
 
-      // 3. 4-Segment Articulated Trunk with Raised Gold Ring Collars
-      rig.head.position.set(0, 1.13, 0.68);
-      let parentTrunk = rig.head;
-      for (let s = 0; s < 4; s++) {
-        const segPivot = new THREE.Group();
-        segPivot.position.set(0, s === 0 ? -0.06 : -0.18, s === 0 ? 0.32 : 0.04);
-        const rTop = 0.13 - s * 0.022;
-        const rBot = 0.11 - s * 0.022;
-        const segMesh = new THREE.Mesh(new THREE.CylinderGeometry(rTop, rBot, 0.20, 20), mats.armor);
-        segMesh.position.y = -0.09;
-        const ringBand = new THREE.Mesh(new THREE.TorusGeometry(rTop, 0.016, 10, 24), mats.trim);
-        ringBand.rotation.x = Math.PI / 2;
-        segPivot.add(segMesh, ringBand);
-        parentTrunk.add(segPivot);
-        rig.trunkSegs.push(segPivot);
-        parentTrunk = segPivot;
+      rig.trunkSegs = [];
+      trunkPivots.forEach(tp => {
+        const pivot = new THREE.Group();
+        pivot.name = tp.name + '_Pivot';
+        pivot.position.set(tp.px, tp.py, tp.pz);
+
+        const trunkMesh = model.getObjectByName(tp.name);
+        if (trunkMesh) {
+          trunkMesh.position.set(-tp.px, -tp.py, -tp.pz);
+          pivot.add(trunkMesh);
+        }
+
+        model.add(pivot);
+        rig.trunkSegs.push(pivot);
+      });
+
+      // Bind ear pivots for temple ear flutters
+      const earLPivot = new THREE.Group();
+      earLPivot.name = 'Elephant_Ear_L_Pivot';
+      earLPivot.position.set(-0.38, 1.62, 0.88);
+      const earLMesh = model.getObjectByName('Elephant_Ear_L');
+      if (earLMesh) {
+        earLMesh.position.set(0.38, -1.62, -0.88);
+        earLPivot.add(earLMesh);
       }
-      rig.torso.add(rig.head);
+      model.add(earLPivot);
+      rig.earL = earLPivot;
 
-      // Slender Imperial Flagstaff & War Banner atop Elephant Howdah
-      const mastGeo = new THREE.CylinderGeometry(0.018, 0.018, 1.1, 8);
-      const mast = new THREE.Mesh(mastGeo, mats.trim);
-      mast.position.set(0, 3.45, -0.35);
-      const bannerGeo = new THREE.PlaneGeometry(0.55, 0.32, 8, 8);
-      bannerGeo.translate(0.275, 0, 0);
-      bannerGeo.rotateY(Math.PI / 2);
-      const bannerMesh = new THREE.Mesh(bannerGeo, new THREE.MeshStandardMaterial({
-        color: mats.accentHex,
-        side: THREE.DoubleSide,
-        roughness: 0.45
-      }));
-      bannerMesh.position.set(0, 3.85, -0.35);
-      model.add(mast, bannerMesh);
-      animatedBanners.push({ mesh: bannerMesh, offset: Math.random() * 3.0 });
+      const earRPivot = new THREE.Group();
+      earRPivot.name = 'Elephant_Ear_R_Pivot';
+      earRPivot.position.set(0.38, 1.62, 0.88);
+      const earRMesh = model.getObjectByName('Elephant_Ear_R');
+      if (earRMesh) {
+        earRMesh.position.set(-0.38, -1.62, -0.88);
+        earRPivot.add(earRMesh);
+      }
+      model.add(earRPivot);
+      rig.earR = earRPivot;
+
+      rig.head = model.getObjectByName('Elephant_Head') || rig.head;
 
       rig.torso.position.set(0, 0, 0);
       rig.torso.add(model);
@@ -2053,7 +2168,7 @@
         dhalGroup.add(dhalMesh);
         rig.torso.add(dhalGroup);
       }
-      else if (type === PIECE_ROOK) {
+      else if (type === PIECE_ROOK && !ModelManager.isLoaded) {
         // =====================================================================
         // 2. ROOK (Gajadhvaja War Elephant):
         //    - Proportional Snug Howdah Pavilion (Organic & Streamlined)
@@ -3220,6 +3335,8 @@
           if (rig.trunkSegs) rig.trunkSegs.forEach(ts => ts.rotation.set(0, 0, 0));
           if (rig.tail) rig.tail.rotation.set(0, 0, 0);
           if (rig.neck) rig.neck.rotation.set(0, 0, 0);
+          if (rig.earL) rig.earL.rotation.set(0, 0, 0);
+          if (rig.earR) rig.earR.rotation.set(0, 0, 0);
           return;
         }
 
@@ -3227,9 +3344,63 @@
 
         // Walking locomotion for realistic models (Animation Bible Section 12)
         if (rig.type === PIECE_ROOK) {
-          // War Elephant 4-beat tectonic sway
-          rig.torso.rotation.z = Math.sin(p * 0.5) * 0.032 * w;
-          rig.torso.rotation.y = Math.cos(p * 0.5) * 0.022 * w;
+          // -----------------------------------------------------------------------------
+          // GAJRAJ: BIOMECHANICAL 4-BEAT TECTONIC PACING GAIT & LIVING PACHYDERM KINEMATICS
+          // -----------------------------------------------------------------------------
+          const phi = p;
+          const s = Math.sin(phi);
+          const c = Math.cos(phi);
+
+          // 1. 4-Beat Diagonal Pacing Limb Cadence across quadLegs:
+          // FL (Index 0): Phase offset delta = PI * 0.5
+          // FR (Index 1): Phase offset delta = PI * 1.5
+          // BL (Index 2): Phase offset delta = 0
+          // BR (Index 3): Phase offset delta = PI
+          const legAmp = 0.44 * w;
+          if (rig.quadLegs && rig.quadLegs.length === 4) {
+            rig.quadLegs[0].rotation.x = Math.sin(phi + Math.PI * 0.5) * legAmp; // FL
+            rig.quadLegs[1].rotation.x = Math.sin(phi + Math.PI * 1.5) * legAmp; // FR
+            rig.quadLegs[2].rotation.x = Math.sin(phi) * legAmp;                 // BL
+            rig.quadLegs[3].rotation.x = Math.sin(phi + Math.PI) * legAmp;       // BR
+          }
+
+          // 2. Colossal Torso Lumber & Weight Shift:
+          const pitch = Math.cos(phi) * 0.028 * w;            // Front/back pitch
+          const roll  = Math.sin(phi * 0.5) * 0.045 * w;      // Heavy lumbering lateral roll
+          rig.torso.rotation.x = pitch;
+          rig.torso.rotation.z = roll;
+          rig.torso.rotation.y = Math.cos(phi * 0.5) * 0.024 * w; // Spinal yaw counter-twist
+
+          // 3. Dynamic Multi-Segment S-Curve Trunk Curl:
+          if (rig.trunkSegs && rig.trunkSegs.length > 0) {
+            rig.trunkSegs.forEach((ts, idx) => {
+              ts.rotation.x = 0.18 + Math.sin(phi * 0.8 - idx * 0.65) * 0.22 * w;
+              ts.rotation.z = Math.cos(phi * 0.6 - idx * 0.50) * 0.12 * w;
+              ts.rotation.y = Math.sin(phi * 0.4 - idx * 0.35) * 0.08 * w;
+            });
+          }
+
+          // 4. Temple Ear Gentle Flutter:
+          if (rig.earL && rig.earR) {
+            const earFlutter = (Math.sin(elapsed * 2.2) + 0.3 * Math.sin(elapsed * 4.4 + 0.4)) * 0.14 * w;
+            rig.earL.rotation.y = 0.08 + earFlutter;
+            rig.earR.rotation.y = -0.08 - earFlutter;
+          }
+
+          // 5. Dynamic Elevation Compensation Formula (Strict Tangential Ground Contact Y_min >= 0.000m)
+          const zFront = 0.48;
+          const zRear  = 0.52;
+          const xHalf  = 0.44;
+          const pitchDropFront = Math.max(0,  zFront * Math.sin(pitch));
+          const pitchDropRear  = Math.max(0, -zRear  * Math.sin(pitch));
+          const pitchComp      = Math.max(pitchDropFront, pitchDropRear);
+          const rollComp       = xHalf * Math.abs(Math.sin(roll));
+          const stompBounce    = Math.abs(s) * 0.052;
+          const legSwingComp   = Math.max(0, Math.sin(legAmp) * 0.058);
+          const groundComp     = (pitchComp + rollComp + stompBounce + legSwingComp) * w;
+
+          rig.torso.position.y = 0;
+          rig.bodyRoot.position.y = groundComp;
         } else if (rig.type === PIECE_BISHOP) {
           // Chariot wheel rotation strictly proportional to locomotion speed
           rig.wheels.forEach(wh => { wh.rotation.x += dt * 14.0 * w; });
@@ -3702,7 +3873,7 @@
     // =========================================================================
     const container = document.getElementById('canvasContainer');
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0xdfbe9f, 95, 340);
+    scene.fog = new THREE.Fog(0x101520, 90, 320);
     queenAfterimagePool = new QueenAfterimagePool(scene);
 
     const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.8, 350);
@@ -3710,7 +3881,7 @@
     const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance', logarithmicDepthBuffer: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(isMobileDevice ? Math.min(window.devicePixelRatio, 1.35) : Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0xdfbe9f);
+    renderer.setClearColor(0x101520);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.shadowMap.autoUpdate = false;
@@ -3720,50 +3891,139 @@
     renderer.toneMappingExposure = 1.26;
     container.appendChild(renderer.domElement);
 
-    // 4-Point Cinematic Stormy Lighting Rig + Atmospheric Sky Fill
-    const sunLight = new THREE.DirectionalLight(0xfffaea, 2.20);
-    sunLight.position.set(38, 56, 42);
+    // 1. Dominant Celestial Sharp Key Light (Warm starlight/moonlight break through storm clouds)
+    const sunLight = new THREE.DirectionalLight(0xfff2d4, 2.25);
+    sunLight.position.set(36, 52, 38);
     sunLight.castShadow = true;
     sunLight.shadow.mapSize.width = 2048;
     sunLight.shadow.mapSize.height = 2048;
     sunLight.shadow.camera.near = 4;
-    sunLight.shadow.camera.far = 140;
+    sunLight.shadow.camera.far = 135;
     const d = 20;
     sunLight.shadow.camera.left = -d;
     sunLight.shadow.camera.right = d;
     sunLight.shadow.camera.top = d;
     sunLight.shadow.camera.bottom = -d;
-    sunLight.shadow.bias = -0.0004;
-    sunLight.shadow.normalBias = 0.025;
+    sunLight.shadow.bias = -0.0001;
+    sunLight.shadow.normalBias = 0.022;
     scene.add(sunLight);
 
-    // 2. Dramatic Cool Silver-Blue Silhouette Rim Backlight
-    const rimLightSilver = new THREE.DirectionalLight(0xb2d4fd, 1.05);
-    rimLightSilver.position.set(-36, 26, -36);
+    // 2. High-Contrast Cool Cyan Silhouette Rim Backlight (Opposing Tempest Sky Separation)
+    const rimLightSilver = new THREE.DirectionalLight(0x06b6d4, 1.15);
+    rimLightSilver.position.set(-28, 26, -34);
     scene.add(rimLightSilver);
 
-    // 3. Cinematic Atmospheric Hemisphere Light (Warm sunset sky dome fill + terracotta canyon ground bounce)
-    const hemiLight = new THREE.HemisphereLight(0xffecd6, 0xc49b78, 1.55);
+    // 3. Cinematic Atmospheric Hemisphere Light (Deep Storm Slate Sky + Dark Basalt Ground Bounce)
+    const hemiLight = new THREE.HemisphereLight(0x243044, 0x12161f, 0.40);
     scene.add(hemiLight);
 
-    // 4. Vibrant Vedic Ambient Fill
-    const ambientLight = new THREE.AmbientLight(0xad9480, 0.95);
+    // 4. Deep Cool Slate Ambient Baseline (Preserves Rich Shadow Depth & Eliminates Washout)
+    const ambientLight = new THREE.AmbientLight(0x1a2230, 0.65);
     scene.add(ambientLight);
 
-    // 5. Warm Ground Battle Fire / Brazier Fill Light
-    const fireFillLight = new THREE.DirectionalLight(0xf97316, 0.55);
-    fireFillLight.position.set(0, 8, 28);
+    // 5. Warm Molten Amber Side Rim Light (Grazing Agni Kunda Temple Altar Firelight)
+    const fireFillLight = new THREE.DirectionalLight(0xd97706, 1.35);
+    fireFillLight.position.set(-32, 14, 28);
     scene.add(fireFillLight);
 
-    // 6. Direct North Ruins & Gopuram Uplight (Vivid visibility of Dravidian Gopuram & Colonnades)
-    const ruinsFillLight = new THREE.DirectionalLight(0xffecd2, 1.50);
+    // 6. Atmospheric Desaturated North Ruins Uplight (Moody Background Depth)
+    const ruinsFillLight = new THREE.DirectionalLight(0x334155, 0.55);
     ruinsFillLight.position.set(-22, 36, -32);
     scene.add(ruinsFillLight);
 
-    // 7. Direct South Sanctuary & Colonnades Uplight
-    const ruinsFillLightSouth = new THREE.DirectionalLight(0xffe4cc, 1.25);
+    // 7. Atmospheric Desaturated South Sanctuary Uplight
+    const ruinsFillLightSouth = new THREE.DirectionalLight(0x3b4252, 0.45);
     ruinsFillLightSouth.position.set(22, 32, 30);
     scene.add(ruinsFillLightSouth);
+
+    // Filmic Vignette Shader (Smoothstep radial falloff framing the battlefield dais)
+    const FilmicVignetteShader = {
+      uniforms: {
+        tDiffuse: { value: null },
+        offset: { value: 1.08 },
+        darkness: { value: 1.25 }
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform sampler2D tDiffuse;
+        uniform float offset;
+        uniform float darkness;
+        varying vec2 vUv;
+        void main() {
+          vec4 texel = texture2D(tDiffuse, vUv);
+          vec2 coord = (vUv - 0.5) * 2.0;
+          float dist = length(coord);
+          float vig = smoothstep(offset, offset - 0.52, dist);
+          vec3 vignetteColor = mix(texel.rgb * (1.0 - clamp(darkness * 0.72, 0.0, 1.0)), texel.rgb, vig);
+          gl_FragColor = vec4(vignetteColor, texel.a);
+        }
+      `
+    };
+
+    let composer = null;
+    let renderPass = null;
+    let bloomPass = null;
+    let vignettePass = null;
+    let postProcessingActive = true;
+
+    function initPostProcessing() {
+      if (typeof THREE.Pass === 'undefined' ||
+          typeof THREE.EffectComposer === 'undefined' ||
+          typeof THREE.RenderPass === 'undefined' ||
+          typeof THREE.UnrealBloomPass === 'undefined') {
+        console.warn('Post-processing addons not loaded; using direct WebGLRenderer.');
+        return;
+      }
+
+      try {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const pixelRatio = renderer.getPixelRatio();
+
+        // High quality render target with sRGB encoding
+        const renderTarget = new THREE.WebGLRenderTarget(Math.floor(width * pixelRatio), Math.floor(height * pixelRatio), {
+          minFilter: THREE.LinearFilter,
+          magFilter: THREE.LinearFilter,
+          format: THREE.RGBAFormat,
+          encoding: THREE.sRGBEncoding
+        });
+        renderTarget.texture.name = 'Ranabhoomi.MainRT';
+
+        composer = new THREE.EffectComposer(renderer, renderTarget);
+        composer.setPixelRatio(pixelRatio);
+        composer.setSize(width, height);
+
+        // 1. Base Scene RenderPass
+        renderPass = new THREE.RenderPass(scene, camera);
+        composer.addPass(renderPass);
+
+        // 2. Selective UnrealBloomPass (threshold 0.85, strength 0.65, radius 0.40)
+        const bloomResolution = new THREE.Vector2(Math.floor(width * pixelRatio / 2), Math.floor(height * pixelRatio / 2));
+        bloomPass = new THREE.UnrealBloomPass(bloomResolution, 0.65, 0.40, 0.85);
+        composer.addPass(bloomPass);
+
+        // 3. Filmic Vignette ShaderPass
+        vignettePass = new THREE.ShaderPass(FilmicVignetteShader);
+        vignettePass.renderToScreen = true;
+        composer.addPass(vignettePass);
+
+        window.__postProcessingActive = true;
+        window.__ranabhoomiComposer = composer;
+        window.__ranabhoomiBloomPass = bloomPass;
+        window.__ranabhoomiVignettePass = vignettePass;
+        console.log('AAA Dark Mythic Post-Processing Pipeline Initialized Successfully.');
+      } catch (err) {
+        console.warn('Post-processing initialization failed:', err);
+        composer = null;
+      }
+    }
+    initPostProcessing();
 
 
     // Master Groups
@@ -4360,27 +4620,57 @@
       battlefieldGroup.add(fireLight);
     });
 
-    // Fire & Ember Particles Emitter for Braziers
-    const fireParticleCount = 40;
+    // High-Fidelity Convective Brazier Embers with Thermodynamic Vertex Color Spectrum
+    const fireParticleCount = 120;
     const fpGeo = new THREE.BufferGeometry();
     const fpPos = new Float32Array(fireParticleCount * 3);
+    const fpCol = new Float32Array(fireParticleCount * 3);
+
     for (let i = 0; i < fireParticleCount; i++) {
-      const bPos = brazierPositions[i % brazierPositions.length];
-      fpPos[i * 3] = bPos[0] + (Math.random() - 0.5) * 0.35;
-      fpPos[i * 3 + 1] = 0.45 + Math.random() * 1.5;
-      fpPos[i * 3 + 2] = bPos[1] + (Math.random() - 0.5) * 0.35;
+      const bIdx = i % brazierPositions.length;
+      const bPos = brazierPositions[bIdx];
+      const startX = bPos[0] + (Math.random() - 0.5) * 0.38;
+      const startY = 0.40 + Math.random() * 2.2;
+      const startZ = bPos[1] + (Math.random() - 0.5) * 0.38;
+
+      fpPos[i * 3] = startX;
+      fpPos[i * 3 + 1] = startY;
+      fpPos[i * 3 + 2] = startZ;
+
+      // Initial color: warm glowing amber
+      fpCol[i * 3] = 1.0;
+      fpCol[i * 3 + 1] = 0.65;
+      fpCol[i * 3 + 2] = 0.15;
+
       flameParticles.push({
+        brazierIdx: bIdx,
         baseX: bPos[0],
         baseZ: bPos[1],
-        y: fpPos[i * 3 + 1],
-        vy: 0.85 + Math.random() * 1.3,
-        sway: Math.random() * 6.28
+        x: startX,
+        y: startY,
+        z: startZ,
+        vx: (Math.random() - 0.5) * 0.14,
+        vy: 0.95 + Math.random() * 1.15,
+        vz: (Math.random() - 0.5) * 0.14,
+        life: Math.random(), // Staggered initial life phase
+        maxLife: 2.2 + Math.random() * 1.4,
+        seed1: Math.random() * 10,
+        seed2: Math.random() * 10
       });
     }
     fpGeo.setAttribute('position', new THREE.BufferAttribute(fpPos, 3));
+    fpGeo.setAttribute('color', new THREE.BufferAttribute(fpCol, 3));
+
     const flameField = new THREE.Points(
       fpGeo,
-      new THREE.PointsMaterial({ color: 0xff8811, size: 0.065, transparent: true, opacity: 0.60 })
+      new THREE.PointsMaterial({
+        size: 0.075,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.88,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
+      })
     );
     battlefieldGroup.add(flameField);
 
@@ -4916,45 +5206,65 @@
     }
 
     // -------------------------------------------------------------------------
-    // 6H. DUAL-LAYER VOLUMETRIC SCROLLING GROUND MIST
+    // 6H. DUAL-LAYER VOLUMETRIC SCROLLING GROUND MIST (COOL SLATE / RADIAL FALLOFF)
     // -------------------------------------------------------------------------
+    function createMistRadialAlphaTexture() {
+      const c = document.createElement('canvas');
+      c.width = 256;
+      c.height = 256;
+      const ctx = c.getContext('2d');
+      const grad = ctx.createRadialGradient(128, 128, 16, 128, 128, 126);
+      grad.addColorStop(0.0, 'rgba(255, 255, 255, 1.0)');
+      grad.addColorStop(0.50, 'rgba(255, 255, 255, 0.80)');
+      grad.addColorStop(0.80, 'rgba(255, 255, 255, 0.30)');
+      grad.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 256, 256);
+      return new THREE.CanvasTexture(c);
+    }
+    const mistRadialMask = createMistRadialAlphaTexture();
+
     const mistTex1 = StoneTextureManager.loader.load('assets/textures/mist_noise.png');
     mistTex1.wrapS = THREE.RepeatWrapping;
     mistTex1.wrapT = THREE.RepeatWrapping;
-    mistTex1.repeat.set(3, 3);
+    mistTex1.repeat.set(2.8, 2.8);
 
     const mistTex2 = StoneTextureManager.loader.load('assets/textures/mist_noise.png');
     mistTex2.wrapS = THREE.RepeatWrapping;
     mistTex2.wrapT = THREE.RepeatWrapping;
-    mistTex2.repeat.set(4, 4);
+    mistTex2.repeat.set(3.6, 3.6);
 
+    // Layer 1: Creeping Ground Mist hugging cracked stone dais (y = 0.08)
     const mistMat1 = new THREE.MeshBasicMaterial({
       map: mistTex1,
+      alphaMap: mistRadialMask,
       transparent: true,
-      opacity: 0.04,
-      color: 0xf59e0b,
+      opacity: 0.042,
+      color: 0x64748b, // Moody stormy slate
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
 
+    // Layer 2: Ethereal Cyan Mid-Height Vapor Drift (y = 0.38)
     const mistMat2 = new THREE.MeshBasicMaterial({
       map: mistTex2,
+      alphaMap: mistRadialMask,
       transparent: true,
-      opacity: 0.03,
-      color: 0xfbbf24,
+      opacity: 0.028,
+      color: 0x38bdf8, // Cold celestial azure mist
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
 
-    const mistPlane1 = new THREE.Mesh(new THREE.PlaneGeometry(84, 84), mistMat1);
+    const mistPlane1 = new THREE.Mesh(new THREE.PlaneGeometry(86, 86), mistMat1);
     mistPlane1.rotation.x = -Math.PI / 2;
-    mistPlane1.position.y = 0.18;
+    mistPlane1.position.y = 0.08; // Skims just above stone floor (y=0) and coordinates (y=0.002)
     lockStaticMesh(mistPlane1);
     battlefieldGroup.add(mistPlane1);
 
-    const mistPlane2 = new THREE.Mesh(new THREE.PlaneGeometry(84, 84), mistMat2);
+    const mistPlane2 = new THREE.Mesh(new THREE.PlaneGeometry(86, 86), mistMat2);
     mistPlane2.rotation.x = -Math.PI / 2;
-    mistPlane2.position.y = 0.52;
+    mistPlane2.position.y = 0.38; // Volumetric vapor rolling around unit knees/pedestals
     lockStaticMesh(mistPlane2);
     battlefieldGroup.add(mistPlane2);
 
@@ -5035,22 +5345,70 @@
         light.intensity = 0.95 + Math.sin(elapsed * 2.6 + seed) * 0.04 + Math.sin(elapsed * 5.4 + seed * 1.8) * 0.02;
       });
 
-      // 4. Rising Flame & Ember Particles
-      const fAttr = fpGeo.attributes.position;
+      // 4. Rising Flame & Convective Ember Particles with Multi-Sine Turbulence
+      const fPosAttr = fpGeo.attributes.position;
+      const fColAttr = fpGeo.attributes.color;
+      const pArrEmbers = fPosAttr.array;
+      const cArrEmbers = fColAttr.array;
+      const tTime = elapsed * 3.2;
+
       for (let i = 0; i < flameParticles.length; i++) {
         const fp = flameParticles[i];
-        fp.y += fp.vy * dt;
-        if (fp.y > 3.2) {
-          fp.y = 0.35 + Math.random() * 0.2;
+        fp.life += dt / fp.maxLife;
+
+        if (fp.life >= 1.0) {
+          fp.life = 0.0;
+          fp.maxLife = 2.0 + Math.random() * 1.5;
+          const bPos = brazierPositions[fp.brazierIdx];
+          fp.x = bPos[0] + (Math.random() - 0.5) * 0.38;
+          fp.y = 0.40 + Math.random() * 0.12;
+          fp.z = bPos[1] + (Math.random() - 0.5) * 0.38;
+          fp.vy = 1.0 + Math.random() * 1.1;
         }
-        fAttr.setXYZ(
-          i,
-          fp.baseX + Math.sin(elapsed * 4.0 + fp.sway) * 0.22,
-          fp.y,
-          fp.baseZ + Math.cos(elapsed * 4.0 + fp.sway) * 0.22
-        );
+
+        // Multi-frequency convective draft
+        const turbX = Math.sin(tTime + fp.seed1) * 0.18 + Math.sin(tTime * 2.1 + fp.seed2) * 0.06;
+        const turbZ = Math.cos(tTime * 0.95 + fp.seed1) * 0.18 + Math.cos(tTime * 1.9 + fp.seed2) * 0.06;
+        const driftX = 0.28 * dt; // Prevailing storm draft
+
+        fp.x += fp.vx * dt + driftX;
+        fp.y += fp.vy * dt;
+        fp.z += fp.vz * dt;
+
+        pArrEmbers[i * 3]     = fp.x + turbX;
+        pArrEmbers[i * 3 + 1] = fp.y;
+        pArrEmbers[i * 3 + 2] = fp.z + turbZ;
+
+        // Thermodynamic blackbody lifecycle color & alpha fade
+        const age = fp.life;
+        let r = 1.0, g = 0.9, b = 0.3;
+        if (age < 0.25) {
+          // Intense radiant white-gold core (triggers UnrealBloomPass)
+          const factor = age / 0.25;
+          r = 1.0;
+          g = 0.95 - factor * 0.25;
+          b = 0.55 - factor * 0.40;
+        } else if (age < 0.65) {
+          // Fiery molten amber-orange flame
+          const factor = (age - 0.25) / 0.40;
+          r = 1.0 - factor * 0.15;
+          g = 0.70 - factor * 0.45;
+          b = 0.15 - factor * 0.10;
+        } else {
+          // Cooling smoldering ruby cinder fading into ash
+          const factor = (age - 0.65) / 0.35;
+          const fade = Math.max(0.0, 1.0 - factor);
+          r = (0.85 - factor * 0.60) * fade;
+          g = (0.25 - factor * 0.22) * fade;
+          b = 0.05 * fade;
+        }
+
+        cArrEmbers[i * 3]     = r;
+        cArrEmbers[i * 3 + 1] = g;
+        cArrEmbers[i * 3 + 2] = b;
       }
-      fAttr.needsUpdate = true;
+      fPosAttr.needsUpdate = true;
+      fColAttr.needsUpdate = true;
 
       // 4B. Option A Atmospheric Ruins Creeping Smoke Drift
       if (typeof smokeMisty !== 'undefined' && smokeMisty.length > 0) {
@@ -5068,11 +5426,11 @@
         sAttr.needsUpdate = true;
       }
 
-      // 5. Dual-Layer Volumetric Ground Mist UV Scrolling
-      mistTex1.offset.x += dt * 0.012;
-      mistTex1.offset.y += dt * 0.006;
-      mistTex2.offset.x += dt * 0.016;
-      mistTex2.offset.y -= dt * 0.005;
+      // 5. Dual-Layer Volumetric Ground Mist Counter-Scrolling
+      mistTex1.offset.x += dt * 0.009;
+      mistTex1.offset.y += dt * 0.005;
+      mistTex2.offset.x -= dt * 0.013;
+      mistTex2.offset.y += dt * 0.007;
 
       // 6. 600 Wind-Blown Tempest Dust & Spark Particle Integration
       const pAttr = spGeo.attributes.position;
@@ -5748,9 +6106,19 @@
               // 1. GAJRAJ: Monumental Quadruped 4-Legged Gait & Alternating Weight Shift
               const gStride = Math.sin(elapsed * 6.0);
               const gPitch = Math.cos(elapsed * 6.0);
-              rig.torso.rotation.z = gStride * 0.055; // Left/right heavy lumbering weight roll
-              rig.torso.rotation.x = gPitch * 0.038; // Front/back mass pitch
-              rig.bodyRoot.position.y = Math.abs(gStride) * 0.065; // Heavy vertical stomp bounce
+              const pitch = gPitch * 0.038;
+              const roll = gStride * 0.055;
+              rig.torso.rotation.z = roll; // Left/right heavy lumbering weight roll
+              rig.torso.rotation.x = pitch; // Front/back mass pitch
+
+              const pitchDropFront = Math.max(0,  0.52 * Math.sin(pitch));
+              const pitchDropRear  = Math.max(0, -0.56 * Math.sin(pitch));
+              const pitchComp      = Math.max(pitchDropFront, pitchDropRear);
+              const rollComp       = 0.44 * Math.abs(Math.sin(roll));
+              const stompBounce    = Math.abs(gStride) * 0.065;
+              const legSwingComp   = Math.max(0, Math.sin(0.44) * 0.068);
+              rig.bodyRoot.position.y = pitchComp + rollComp + stompBounce + legSwingComp;
+
               if (rig.quadLegs && rig.quadLegs.length === 4) {
                 rig.quadLegs[0].rotation.x = gStride * 0.44;
                 rig.quadLegs[3].rotation.x = gStride * 0.44;
@@ -6265,8 +6633,12 @@
               attackerRig.quadLegs[2].rotation.x = -legCycle * 0.75;
               attackerRig.quadLegs[3].rotation.x = legCycle * 0.75;
             }
-            attackerRig.bodyRoot.position.y = Math.abs(legCycle) * 0.14; // Heavy gallop bounce
             attackerRig.torso.rotation.x = Math.cos(cElapsed * gaitFreq) * 0.08;
+            const sprintPitch = attackerRig.torso.rotation.x;
+            const sprintPitchDropFront = Math.max(0,  0.48 * Math.sin(sprintPitch));
+            const sprintPitchDropRear  = Math.max(0, -0.52 * Math.sin(sprintPitch));
+            const sprintPitchDrop = Math.max(sprintPitchDropFront, sprintPitchDropRear) + 1.45 * (1 - Math.cos(sprintPitch));
+            attackerRig.bodyRoot.position.y = Math.abs(legCycle) * 0.14 + sprintPitchDrop + 0.035; // Heavy gallop bounce + pitch compensation
 
             // 2. Trunk Swings Backwards During Run (Enraged War Trumpet Windup)
             if (attackerRig.trunkSegs && attackerRig.trunkSegs.length > 0) {
@@ -6604,63 +6976,93 @@
             }
           }
           else if (attackerRig.type === PIECE_ROOK) {
-            // MONUMENTAL GAJRAJ FATAL STRIKE: VIOLENT TRUNK THRASH & CRUSHING IMPACT
-            if (t < 0.20) {
-              // Phase 1: High rear with massive kinetic tension; trunk coiled backwards in rage
-              const p1 = t / 0.20;
+            // MONUMENTAL GAJRAJ FATAL STRIKE: 4-STAGE SEISMIC COMBAT MATRIX
+            if (t < 0.25) {
+              // Stage 2: Colossal Rear-up (-0.72 rad) & skyward trumpet conch audio
+              attackerRig.torso.rotation.x = 0;
+              const p1 = t / 0.25;
               const rearEase = Math.sin(p1 * (Math.PI / 2));
-              attackerRig.bodyRoot.rotation.x = -0.52 * rearEase;
-              attackerRig.bodyRoot.position.y = 0.62 * rearEase;
-              attackerRig.head.rotation.x = -0.38 * rearEase;
+              attackerRig.bodyRoot.rotation.x = -0.72 * rearEase;
+              attackerRig.bodyRoot.position.y = 0.78 * rearEase;
+              attackerRig.head.rotation.x = -0.45 * rearEase;
               if (attackerRig.quadLegs && attackerRig.quadLegs.length === 4) {
-                attackerRig.quadLegs[0].rotation.x = -0.65 * rearEase;
-                attackerRig.quadLegs[1].rotation.x = -0.65 * rearEase;
-                attackerRig.quadLegs[2].rotation.x = 0.35 * rearEase;
-                attackerRig.quadLegs[3].rotation.x = 0.35 * rearEase;
+                attackerRig.quadLegs[0].rotation.x = -0.85 * rearEase;
+                attackerRig.quadLegs[1].rotation.x = -0.85 * rearEase;
+                attackerRig.quadLegs[2].rotation.x =  0.38 * rearEase;
+                attackerRig.quadLegs[3].rotation.x =  0.38 * rearEase;
               }
               if (attackerRig.trunkSegs && attackerRig.trunkSegs.length > 0) {
                 attackerRig.trunkSegs.forEach((ts, idx) => {
-                  ts.rotation.x = -0.75 - 0.35 * rearEase - (idx * 0.15);
+                  ts.rotation.x = -0.85 - 0.45 * rearEase - (idx * 0.18);
                   ts.rotation.z = Math.sin(idx * 0.8) * 0.25 * rearEase;
                 });
               }
-              defenderRig.torso.rotation.x = -0.28 * rearEase;
-            } else if (t < 0.52) {
-              // Phase 2: VIOLENT DOWNWARD TRUNK SMASH & CRUSHING IMPACT DIRECTLY INTO VICTIM
-              const p2 = (t - 0.20) / 0.32;
-              const slamEase = Math.pow(p2, 2.5);
-              attackerRig.bodyRoot.rotation.x = -0.52 + 0.95 * slamEase;
-              attackerRig.bodyRoot.position.y = 0.62 * (1 - slamEase);
-              attackerRig.head.rotation.x = -0.38 + 0.72 * slamEase;
+              if (attackerRig.earL) attackerRig.earL.rotation.y = 0.42 * rearEase;
+              if (attackerRig.earR) attackerRig.earR.rotation.y = -0.42 * rearEase;
+
+              // Skyward trumpet conch audio
+              if (!attackerRig.conchAudioPlayed) {
+                attackerRig.conchAudioPlayed = true;
+                if (typeof sfx !== 'undefined' && sfx.playShankhaConch) sfx.playShankhaConch();
+                if (typeof sfx !== 'undefined' && sfx.playAttackWindup) sfx.playAttackWindup(PIECE_ROOK);
+              }
+
+              defenderRig.torso.rotation.x = -0.35 * rearEase;
+            } else if (t < 0.60) {
+              // Stage 3: VIOLENT DOWNWARD TRUNK SLAM & FORWARD TUSK GORE (0.16x bullet time & 34-shard explosion)
+              attackerRig.torso.rotation.x = 0;
+              const p2 = (t - 0.25) / 0.35;
+              const slamEase = Math.pow(p2, 2.8);
+              attackerRig.bodyRoot.rotation.x = -0.72 + 1.15 * slamEase;
+              const forwardPitch = Math.max(0, attackerRig.bodyRoot.rotation.x);
+              const slamPitchDrop = (0.68 * Math.sin(forwardPitch) + 1.45 * (1 - Math.cos(forwardPitch)));
+              attackerRig.bodyRoot.position.y = 0.78 * (1 - slamEase) + slamPitchDrop;
+              attackerRig.head.rotation.x = -0.45 + 0.85 * slamEase;
               if (attackerRig.quadLegs && attackerRig.quadLegs.length === 4) {
-                attackerRig.quadLegs[0].rotation.x = -0.65 * (1 - slamEase);
-                attackerRig.quadLegs[1].rotation.x = -0.65 * (1 - slamEase);
-                attackerRig.quadLegs[2].rotation.x = 0.35 * (1 - slamEase);
-                attackerRig.quadLegs[3].rotation.x = 0.35 * (1 - slamEase);
+                attackerRig.quadLegs[0].rotation.x = -0.85 * (1 - slamEase);
+                attackerRig.quadLegs[1].rotation.x = -0.85 * (1 - slamEase);
+                attackerRig.quadLegs[2].rotation.x = 0.38 * (1 - slamEase);
+                attackerRig.quadLegs[3].rotation.x = 0.38 * (1 - slamEase);
               }
               if (attackerRig.trunkSegs && attackerRig.trunkSegs.length > 0) {
                 attackerRig.trunkSegs.forEach((ts, idx) => {
-                  ts.rotation.x = -1.15 + 3.10 * slamEase;
+                  ts.rotation.x = -1.30 + 3.45 * slamEase;
                 });
               }
+              if (attackerRig.earL) attackerRig.earL.rotation.y = 0.42 * (1 - slamEase);
+              if (attackerRig.earR) attackerRig.earR.rotation.y = -0.42 * (1 - slamEase);
+
               // Defender takes direct trauma
               defenderRig.root.position.y = 0;
               defenderRig.torso.rotation.x = 0.85 * slamEase;
 
-              if (p2 >= 0.40 && !impactTriggered) {
+              if (p2 >= 0.42 && !impactTriggered) {
                 triggerFatalImpact();
               }
             } else {
-              // Phase 3: Monumental stance recovery & triumphant trumpeting posture
-              const p3 = (t - 0.52) / 0.48;
+              // Stage 4: 4-FOOTPAD TECTONIC TRAMPLE RECOVERY & RADIAL GROUND TREMOR SHOCKWAVE
+              attackerRig.torso.rotation.x = 0;
+              const p3 = (t - 0.60) / 0.40;
               const recEase = p3 * (2 - p3);
               attackerRig.bodyRoot.rotation.x = 0.43 * (1 - recEase);
-              attackerRig.bodyRoot.position.y = 0;
-              attackerRig.head.rotation.x = 0.34 * (1 - recEase);
+              const recPitch = Math.max(0, attackerRig.bodyRoot.rotation.x);
+              const recPitchDrop = (0.68 * Math.sin(recPitch) + 1.45 * (1 - Math.cos(recPitch)));
+              attackerRig.bodyRoot.position.y = recPitchDrop;
+              attackerRig.head.rotation.x = 0.40 * (1 - recEase);
+              if (attackerRig.quadLegs) attackerRig.quadLegs.forEach(ql => ql.rotation.x = 0);
               if (attackerRig.trunkSegs && attackerRig.trunkSegs.length > 0) {
                 attackerRig.trunkSegs.forEach((ts, idx) => {
                   ts.rotation.x = (1.95 - 0.15 * idx) * (1 - recEase) + 0.15 * Math.sin(recEase * Math.PI);
                 });
+              }
+              if (attackerRig.earL) attackerRig.earL.rotation.y = 0.42 * (1 - recEase);
+              if (attackerRig.earR) attackerRig.earR.rotation.y = -0.42 * (1 - recEase);
+
+              if (!attackerRig.trampleShockwavePlayed) {
+                attackerRig.trampleShockwavePlayed = true;
+                if (typeof spawnHeavyTremorShockwave === 'function') spawnHeavyTremorShockwave(attackerRig.root.position, 2.8, 0.75);
+                if (typeof spawnFootstepDustPuff === 'function') spawnFootstepDustPuff(attackerRig.root.position, 0.0, 1.4);
+                if (typeof sfx !== 'undefined' && sfx.playStep) sfx.playStep(PIECE_ROOK);
               }
             }
           }
@@ -6810,6 +7212,10 @@
             if (attackerRig.type === PIECE_KING && attackerRig.armR) attackerRig.armR.position.set(0, 0.68, 0.38);
             if (attackerRig.trunkSegs) attackerRig.trunkSegs.forEach(ts => ts.rotation.set(0, 0, 0));
             if (attackerRig.quadLegs) attackerRig.quadLegs.forEach(ql => ql.rotation.set(0, 0, 0));
+            if (attackerRig.earL) attackerRig.earL.rotation.set(0, 0, 0);
+            if (attackerRig.earR) attackerRig.earR.rotation.set(0, 0, 0);
+            attackerRig.conchAudioPlayed = false;
+            attackerRig.trampleShockwavePlayed = false;
             attackerRig.inKillSequence = false;
             defenderRig.inKillSequence = false;
             attackerRig.currentKillStyle = undefined;
@@ -6892,6 +7298,7 @@
     window.gameMode = gameMode;
     window.aiDifficulty = aiDifficulty;
     window.executeSynchronizedKillSequence = executeSynchronizedKillSequence;
+    window.updateUnitRigAnimation = updateUnitRigAnimation;
     window.performChessMove = performChessMove;
     window.animateUnitLJump = animateUnitLJump;
     window.spawnFlamingArrowProjectile = spawnFlamingArrowProjectile;
@@ -7687,30 +8094,34 @@
     }
     window.dismissLandscapeAdvisory = dismissLandscapeAdvisory;
 
-    window.addEventListener('orientationchange', () => {
-      if (window.innerWidth > window.innerHeight) {
+    function onWindowResizeHandler() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      if (width > height) {
         document.body.classList.remove('portrait-override');
       }
-      setTimeout(() => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 840;
-        renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio || 1, 1.35) : Math.min(window.devicePixelRatio || 1, 2.0));
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        requestShadowUpdate(3);
-      }, 200);
-    });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > window.innerHeight) {
-        document.body.classList.remove('portrait-override');
-      }
-      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 840;
-      renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio || 1, 1.35) : Math.min(window.devicePixelRatio || 1, 2.0));
-      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || width <= 840;
+      const pixelRatio = isMobile ? Math.min(window.devicePixelRatio || 1, 1.35) : Math.min(window.devicePixelRatio || 1, 2.0);
+
+      renderer.setPixelRatio(pixelRatio);
+      renderer.setSize(width, height);
+
+      if (composer) {
+        composer.setPixelRatio(pixelRatio);
+        composer.setSize(width, height);
+        if (bloomPass) {
+          bloomPass.resolution.set(Math.floor(width * pixelRatio / 2), Math.floor(height * pixelRatio / 2));
+        }
+      }
       requestShadowUpdate(3);
+    }
+
+    window.addEventListener('resize', onWindowResizeHandler);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(onWindowResizeHandler, 200);
     });
 
     // =========================================================================
@@ -7754,6 +8165,18 @@
       }
       emberField.rotation.y += dt * 0.04;
 
+      // Dynamic Emissive Breathing for ancient living temple monoliths & fissure veins
+      const breathFactor = 0.80 + 0.35 * Math.sin(1.20 * elapsed) + 0.10 * Math.sin(2.40 * elapsed + 0.4);
+      if (typeof PuranicPBRMaterialLibrary !== 'undefined' && PuranicPBRMaterialLibrary.updateEmissiveBreathing) {
+        PuranicPBRMaterialLibrary.updateEmissiveBreathing(breathFactor);
+      }
+      if (typeof lightTileMat !== 'undefined' && lightTileMat) {
+        lightTileMat.emissiveIntensity = 0.25 * breathFactor;
+      }
+      if (typeof darkTileMat !== 'undefined' && darkTileMat) {
+        darkTileMat.emissiveIntensity = 0.22 * breathFactor;
+      }
+
       updateActiveVFX(dt);
       updateCamera(rawDt);
 
@@ -7784,7 +8207,11 @@
         frameCount: frameCount || 0
       };
 
-      renderer.render(scene, camera);
+      if (composer && postProcessingActive) {
+        composer.render(dt);
+      } else {
+        renderer.render(scene, camera);
+      }
     }
 
     let hasGameStarted = false;

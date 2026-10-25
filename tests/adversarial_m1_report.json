@@ -78,27 +78,47 @@
       "model": "gajadhvaja",
       "filepath": "C:\\Users\\Jeevan\\Downloads\\ranabhoomi\\assets\\gajadhvaja.glb",
       "exists": true,
-      "file_size_bytes": 716536,
+      "file_size_bytes": 833744,
       "passes": true,
       "failures": [],
       "warnings": [],
       "metrics": {
-        "total_objects": 20,
-        "mesh_objects_count": 20,
+        "total_objects": 40,
+        "mesh_objects_count": 40,
         "mesh_names": [
+          "Elephant_Torso",
           "Elephant_Body",
-          "Elephant_Tusk_L",
-          "Elephant_Ferrule_L",
-          "Elephant_Tusk_R",
-          "Elephant_Ferrule_R",
-          "Elephant_Eye_L",
-          "Elephant_Eye_R",
-          "Elephant_Chamfron",
-          "Elephant_Jhul",
+          "Elephant_Leg_FL",
+          "Elephant_Kada_FL",
+          "Elephant_Leg_FR",
+          "Elephant_Kada_FR",
+          "Elephant_Leg_BL",
+          "Elephant_Kada_BL",
+          "Elephant_Leg_BR",
+          "Elephant_Kada_BR",
           "Elephant_Kada_0",
           "Elephant_Kada_1",
           "Elephant_Kada_2",
           "Elephant_Kada_3",
+          "Elephant_Head",
+          "Elephant_Eye_L",
+          "Elephant_Eye_R",
+          "Elephant_Chamfron",
+          "Elephant_Ear_L",
+          "Elephant_Ear_R",
+          "Elephant_Tusk_L",
+          "Elephant_Ferrule_L",
+          "Elephant_Ferrule_Mid_L",
+          "Elephant_Ferrule_Tip_L",
+          "Elephant_Tusk_R",
+          "Elephant_Ferrule_R",
+          "Elephant_Ferrule_Mid_R",
+          "Elephant_Ferrule_Tip_R",
+          "Elephant_Trunk_0",
+          "Elephant_Trunk_1",
+          "Elephant_Trunk_2",
+          "Elephant_Trunk_3",
+          "Elephant_Jhul",
           "Howdah_Base",
           "Howdah_Pillar_0",
           "Howdah_Pillar_1",
@@ -107,50 +127,53 @@
           "Howdah_Dome",
           "Howdah_Finial"
         ],
-        "total_vertices": 4217,
-        "total_faces": 4668,
-        "smooth_faces": 4164,
-        "flat_faces": 504,
-        "smooth_ratio": 0.892,
+        "total_vertices": 8558,
+        "total_faces": 16632,
+        "smooth_faces": 16192,
+        "flat_faces": 440,
+        "smooth_ratio": 0.9735,
         "degenerate_faces": 0,
         "bbox_min": [
-          -0.676831,
-          -1.35,
+          -0.794502,
+          -1.649999,
           0.0
         ],
         "bbox_max": [
-          0.676831,
-          1.025591,
-          3.12
+          0.794502,
+          0.949999,
+          3.25
         ],
         "ground_touching_meshes": [
-          "Elephant_Body"
+          "Elephant_Leg_FL",
+          "Elephant_Leg_FR",
+          "Elephant_Leg_BL",
+          "Elephant_Leg_BR"
         ],
         "tusk_bounds": [
           {
             "name": "Elephant_Tusk_L",
             "min": [
-              -0.2667,
-              -1.35,
-              0.879
+              -0.2846,
+              -1.65,
+              1.0355
             ],
             "max": [
-              -0.1686,
-              -0.7169,
-              1.1519
+              -0.1684,
+              -0.95,
+              1.3514
             ]
           },
           {
             "name": "Elephant_Tusk_R",
             "min": [
-              0.1686,
-              -1.35,
-              0.879
+              0.1684,
+              -1.65,
+              1.0355
             ],
             "max": [
-              0.2667,
-              -0.7169,
-              1.1519
+              0.2846,
+              -0.95,
+              1.3514
             ]
           }
         ]

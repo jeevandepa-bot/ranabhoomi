@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-22T12:03:51.600Z",
+  "timestamp": "2026-10-25T08:51:02.943Z",
   "audit32": {
     "totalUnits": 32,
     "allFacingPass": true,
@@ -15,17 +15,17 @@
         "rootRotY": 3.1416,
         "expectedEnemyDirZ": -1,
         "frontFeature": {
-          "name": "Elephant_Tusk_R",
-          "deltaZ": -0.8556
+          "name": "Elephant_Tusk_L",
+          "deltaZ": -1.144
         },
         "rearFeature": null,
         "minZMesh": {
-          "name": "Elephant_Tusk_R",
-          "deltaZ": -0.8556
+          "name": "Elephant_Ferrule_Tip_L",
+          "deltaZ": -1.2624
         },
         "maxZMesh": {
-          "name": "Elephant_Kada_0",
-          "deltaZ": 0.4705
+          "name": "Elephant_Kada_BR",
+          "deltaZ": 0.4576
         },
         "frontCorrect": true
       },
@@ -39,19 +39,19 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2273
+          "deltaZ": -0.252
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1574
+          "deltaZ": 0.1217
         },
         "minZMesh": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2273
+          "deltaZ": -0.252
         },
         "maxZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1574
+          "deltaZ": 0.1217
         },
         "frontCorrect": true
       },
@@ -65,19 +65,19 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Padati_Dhal",
-          "deltaZ": 0.1963
+          "deltaZ": 0.21
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1572
+          "deltaZ": -0.1217
         },
         "minZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1572
+          "deltaZ": -0.1217
         },
         "maxZMesh": {
-          "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": 0.2383
+          "name": "Khanda_Tip",
+          "deltaZ": 0.252
         },
         "frontCorrect": true
       },
@@ -91,16 +91,16 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Elephant_Tusk_L",
-          "deltaZ": 0.8513
+          "deltaZ": 1.144
         },
         "rearFeature": null,
         "minZMesh": {
-          "name": "Elephant_Kada_0",
-          "deltaZ": -0.4665
+          "name": "Elephant_Kada_2",
+          "deltaZ": -0.4576
         },
         "maxZMesh": {
-          "name": "Elephant_Tusk_R",
-          "deltaZ": 0.8537
+          "name": "Elephant_Ferrule_Tip_R",
+          "deltaZ": 1.2624
         },
         "frontCorrect": true
       },
@@ -114,16 +114,16 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Horse_LyreEar_L",
-          "deltaZ": -0.6363
+          "deltaZ": -0.8653
         },
         "rearFeature": null,
         "minZMesh": {
-          "name": "Horse_LyreEar_L",
-          "deltaZ": -0.6363
+          "name": "Lance_Tip",
+          "deltaZ": -2.2347
         },
         "maxZMesh": {
-          "name": "Horse_Body",
-          "deltaZ": 0.1745
+          "name": "Horse_Tail",
+          "deltaZ": 0.854
         },
         "frontCorrect": true
       },
@@ -137,19 +137,19 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2365
+          "deltaZ": -0.252
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1573
+          "deltaZ": 0.1217
         },
         "minZMesh": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2365
+          "deltaZ": -0.252
         },
         "maxZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1573
+          "deltaZ": 0.1217
         },
         "frontCorrect": true
       },
@@ -163,19 +163,19 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Padati_Dhal",
-          "deltaZ": 0.1856
+          "deltaZ": 0.21
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1574
+          "deltaZ": -0.1217
         },
         "minZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1574
+          "deltaZ": -0.1217
         },
         "maxZMesh": {
-          "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": 0.2276
+          "name": "Khanda_Tip",
+          "deltaZ": 0.252
         },
         "frontCorrect": true
       },
@@ -189,16 +189,16 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Horse_LyreEar_R",
-          "deltaZ": 0.636
+          "deltaZ": 0.8653
         },
         "rearFeature": null,
         "minZMesh": {
-          "name": "Horse_Body",
-          "deltaZ": -0.1744
+          "name": "Horse_Tail",
+          "deltaZ": -0.854
         },
         "maxZMesh": {
-          "name": "Horse_LyreEar_R",
-          "deltaZ": 0.636
+          "name": "Lance_Tip",
+          "deltaZ": 2.2347
         },
         "frontCorrect": true
       },
@@ -212,16 +212,16 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Chariot_Varutha",
-          "deltaZ": -0.6489
+          "deltaZ": -0.6654
         },
         "rearFeature": null,
         "minZMesh": {
           "name": "Chariot_Varutha",
-          "deltaZ": -0.6489
+          "deltaZ": -0.6654
         },
         "maxZMesh": {
           "name": "Chariot_Flagstaff",
-          "deltaZ": 0.6419
+          "deltaZ": 0.6175
         },
         "frontCorrect": true
       },
@@ -235,19 +235,19 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2272
+          "deltaZ": -0.252
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1574
+          "deltaZ": 0.1217
         },
         "minZMesh": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2272
+          "deltaZ": -0.252
         },
         "maxZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1574
+          "deltaZ": 0.1217
         },
         "frontCorrect": true
       },
@@ -261,19 +261,19 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Padati_Dhal",
-          "deltaZ": 0.1947
+          "deltaZ": 0.21
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1573
+          "deltaZ": -0.1217
         },
         "minZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1573
+          "deltaZ": -0.1217
         },
         "maxZMesh": {
-          "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": 0.2367
+          "name": "Khanda_Tip",
+          "deltaZ": 0.252
         },
         "frontCorrect": true
       },
@@ -287,16 +287,16 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Chariot_Varutha",
-          "deltaZ": 0.6488
+          "deltaZ": 0.6654
         },
         "rearFeature": null,
         "minZMesh": {
           "name": "Chariot_Flagstaff",
-          "deltaZ": -0.6382
+          "deltaZ": -0.6175
         },
         "maxZMesh": {
           "name": "Chariot_Varutha",
-          "deltaZ": 0.6488
+          "deltaZ": 0.6654
         },
         "frontCorrect": true
       },
@@ -310,16 +310,16 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Khanda_Blade_R",
-          "deltaZ": -0.2105
+          "deltaZ": -0.2341
         },
         "rearFeature": null,
         "minZMesh": {
           "name": "unnamed",
-          "deltaZ": -0.4075
+          "deltaZ": -0.4331
         },
         "maxZMesh": {
           "name": "Maharani_Mantle",
-          "deltaZ": 0.1532
+          "deltaZ": 0.1375
         },
         "frontCorrect": true
       },
@@ -333,19 +333,19 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2407
+          "deltaZ": -0.252
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1572
+          "deltaZ": 0.1217
         },
         "minZMesh": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2407
+          "deltaZ": -0.252
         },
         "maxZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1572
+          "deltaZ": 0.1217
         },
         "frontCorrect": true
       },
@@ -359,19 +359,19 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Padati_Dhal",
-          "deltaZ": 0.1971
+          "deltaZ": 0.21
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1572
+          "deltaZ": -0.1217
         },
         "minZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1572
+          "deltaZ": -0.1217
         },
         "maxZMesh": {
-          "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": 0.2391
+          "name": "Khanda_Tip",
+          "deltaZ": 0.252
         },
         "frontCorrect": true
       },
@@ -384,17 +384,17 @@
         "rootRotY": 0,
         "expectedEnemyDirZ": 1,
         "frontFeature": {
-          "name": "Khanda_Pommel_L",
-          "deltaZ": 0.1366
+          "name": "Khanda_Pommel_R",
+          "deltaZ": 0.1615
         },
         "rearFeature": null,
         "minZMesh": {
           "name": "Maharani_Mantle",
-          "deltaZ": -0.1532
+          "deltaZ": -0.1375
         },
         "maxZMesh": {
           "name": "unnamed",
-          "deltaZ": 0.4074
+          "deltaZ": 0.4331
         },
         "frontCorrect": true
       },
@@ -407,17 +407,17 @@
         "rootRotY": 3.1416,
         "expectedEnemyDirZ": -1,
         "frontFeature": {
-          "name": "Gada_Head",
-          "deltaZ": -0.4059
+          "name": "Gada_Shaft",
+          "deltaZ": -0.4104
         },
         "rearFeature": null,
         "minZMesh": {
           "name": "unnamed",
-          "deltaZ": -0.6018
+          "deltaZ": -0.6578
         },
         "maxZMesh": {
-          "name": "Chhatra_Finial",
-          "deltaZ": 0.2983
+          "name": "Chhatra_Tier_3",
+          "deltaZ": 0.2376
         },
         "frontCorrect": true
       },
@@ -431,19 +431,19 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2356
+          "deltaZ": -0.252
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1573
+          "deltaZ": 0.1217
         },
         "minZMesh": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2356
+          "deltaZ": -0.252
         },
         "maxZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1573
+          "deltaZ": 0.1217
         },
         "frontCorrect": true
       },
@@ -457,19 +457,19 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Padati_Dhal",
-          "deltaZ": 0.1974
+          "deltaZ": 0.21
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1572
+          "deltaZ": -0.1217
         },
         "minZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1572
+          "deltaZ": -0.1217
         },
         "maxZMesh": {
-          "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": 0.2394
+          "name": "Khanda_Tip",
+          "deltaZ": 0.252
         },
         "frontCorrect": true
       },
@@ -482,17 +482,17 @@
         "rootRotY": 0,
         "expectedEnemyDirZ": 1,
         "frontFeature": {
-          "name": "Gada_Pommel",
-          "deltaZ": 0.382
+          "name": "Gada_Shaft",
+          "deltaZ": 0.4104
         },
         "rearFeature": null,
         "minZMesh": {
           "name": "Chhatra_Finial",
-          "deltaZ": -0.2983
+          "deltaZ": -0.2376
         },
         "maxZMesh": {
           "name": "unnamed",
-          "deltaZ": 0.6022
+          "deltaZ": 0.6578
         },
         "frontCorrect": true
       },
@@ -506,16 +506,16 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Chariot_Varutha",
-          "deltaZ": -0.6489
+          "deltaZ": -0.6654
         },
         "rearFeature": null,
         "minZMesh": {
           "name": "Chariot_Varutha",
-          "deltaZ": -0.6489
+          "deltaZ": -0.6654
         },
         "maxZMesh": {
           "name": "Chariot_Flagstaff",
-          "deltaZ": 0.6479
+          "deltaZ": 0.6175
         },
         "frontCorrect": true
       },
@@ -529,19 +529,19 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2389
+          "deltaZ": -0.252
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1572
+          "deltaZ": 0.1217
         },
         "minZMesh": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2389
+          "deltaZ": -0.252
         },
         "maxZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1572
+          "deltaZ": 0.1217
         },
         "frontCorrect": true
       },
@@ -555,19 +555,19 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Padati_Dhal",
-          "deltaZ": 0.198
+          "deltaZ": 0.21
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1572
+          "deltaZ": -0.1217
         },
         "minZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1572
+          "deltaZ": -0.1217
         },
         "maxZMesh": {
-          "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": 0.2399
+          "name": "Khanda_Tip",
+          "deltaZ": 0.252
         },
         "frontCorrect": true
       },
@@ -581,16 +581,16 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Chariot_Varutha",
-          "deltaZ": 0.6489
+          "deltaZ": 0.6654
         },
         "rearFeature": null,
         "minZMesh": {
           "name": "Chariot_Flagstaff",
-          "deltaZ": -0.642
+          "deltaZ": -0.6175
         },
         "maxZMesh": {
           "name": "Chariot_Varutha",
-          "deltaZ": 0.6489
+          "deltaZ": 0.6654
         },
         "frontCorrect": true
       },
@@ -603,17 +603,17 @@
         "rootRotY": 3.1416,
         "expectedEnemyDirZ": -1,
         "frontFeature": {
-          "name": "Horse_LyreEar_R",
-          "deltaZ": -0.6365
+          "name": "Horse_LyreEar_L",
+          "deltaZ": -0.8653
         },
         "rearFeature": null,
         "minZMesh": {
-          "name": "Horse_LyreEar_R",
-          "deltaZ": -0.6365
+          "name": "Lance_Tip",
+          "deltaZ": -2.2347
         },
         "maxZMesh": {
-          "name": "Horse_Body",
-          "deltaZ": 0.1742
+          "name": "Horse_Tail",
+          "deltaZ": 0.854
         },
         "frontCorrect": true
       },
@@ -627,19 +627,19 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2377
+          "deltaZ": -0.252
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1572
+          "deltaZ": 0.1217
         },
         "minZMesh": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2377
+          "deltaZ": -0.252
         },
         "maxZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1572
+          "deltaZ": 0.1217
         },
         "frontCorrect": true
       },
@@ -653,19 +653,19 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Padati_Dhal",
-          "deltaZ": 0.1852
+          "deltaZ": 0.21
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1574
+          "deltaZ": -0.1217
         },
         "minZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1574
+          "deltaZ": -0.1217
         },
         "maxZMesh": {
-          "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": 0.2272
+          "name": "Khanda_Tip",
+          "deltaZ": 0.252
         },
         "frontCorrect": true
       },
@@ -678,17 +678,17 @@
         "rootRotY": 0,
         "expectedEnemyDirZ": 1,
         "frontFeature": {
-          "name": "Horse_LyreEar_L",
-          "deltaZ": 0.6362
+          "name": "Horse_LyreEar_R",
+          "deltaZ": 0.8653
         },
         "rearFeature": null,
         "minZMesh": {
-          "name": "Horse_Body",
-          "deltaZ": -0.1745
+          "name": "Horse_Tail",
+          "deltaZ": -0.854
         },
         "maxZMesh": {
-          "name": "Horse_LyreEar_L",
-          "deltaZ": 0.6362
+          "name": "Lance_Tip",
+          "deltaZ": 2.2347
         },
         "frontCorrect": true
       },
@@ -701,17 +701,17 @@
         "rootRotY": 3.1416,
         "expectedEnemyDirZ": -1,
         "frontFeature": {
-          "name": "Elephant_Tusk_R",
-          "deltaZ": -0.8549
+          "name": "Elephant_Tusk_L",
+          "deltaZ": -1.144
         },
         "rearFeature": null,
         "minZMesh": {
-          "name": "Elephant_Tusk_R",
-          "deltaZ": -0.8549
+          "name": "Elephant_Ferrule_Tip_L",
+          "deltaZ": -1.2624
         },
         "maxZMesh": {
-          "name": "Elephant_Kada_0",
-          "deltaZ": 0.469
+          "name": "Elephant_Kada_BR",
+          "deltaZ": 0.4576
         },
         "frontCorrect": true
       },
@@ -725,19 +725,19 @@
         "expectedEnemyDirZ": -1,
         "frontFeature": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2389
+          "deltaZ": -0.252
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1572
+          "deltaZ": 0.1217
         },
         "minZMesh": {
           "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": -0.2389
+          "deltaZ": -0.252
         },
         "maxZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": 0.1572
+          "deltaZ": 0.1217
         },
         "frontCorrect": true
       },
@@ -751,19 +751,19 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Padati_Dhal",
-          "deltaZ": 0.1949
+          "deltaZ": 0.21
         },
         "rearFeature": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1573
+          "deltaZ": -0.1217
         },
         "minZMesh": {
           "name": "Padati_Plume",
-          "deltaZ": -0.1573
+          "deltaZ": -0.1217
         },
         "maxZMesh": {
-          "name": "Padati_Dhal_CenterBoss",
-          "deltaZ": 0.2369
+          "name": "Khanda_Tip",
+          "deltaZ": 0.252
         },
         "frontCorrect": true
       },
@@ -777,16 +777,16 @@
         "expectedEnemyDirZ": 1,
         "frontFeature": {
           "name": "Elephant_Tusk_L",
-          "deltaZ": 0.8499
+          "deltaZ": 1.144
         },
         "rearFeature": null,
         "minZMesh": {
-          "name": "Elephant_Kada_0",
-          "deltaZ": -0.4692
+          "name": "Elephant_Kada_2",
+          "deltaZ": -0.4576
         },
         "maxZMesh": {
-          "name": "Elephant_Tusk_R",
-          "deltaZ": 0.855
+          "name": "Elephant_Ferrule_Tip_R",
+          "deltaZ": 1.2624
         },
         "frontCorrect": true
       }
@@ -811,7 +811,7 @@
       "postKillRotY": 3.1416,
       "expectedPostKillRotY": 3.1416,
       "postKillRotYMatchesWhiteArmy": true,
-      "postDhalDeltaZ": -0.2512,
+      "postDhalDeltaZ": -0.2453,
       "postDhalFacesOpponent": true
     }
   ]

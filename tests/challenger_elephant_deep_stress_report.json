@@ -1,0 +1,256 @@
+{
+  "timestamp": "2026-10-25T10:21:34.840Z",
+  "tests": [
+    {
+      "name": "Elephant Rest Grounding & Footpads",
+      "pass": true,
+      "data": {
+        "count": 4,
+        "rooks": [
+          {
+            "file": 0,
+            "rank": 0,
+            "team": "White",
+            "rootY": 0,
+            "bboxMinY": 0,
+            "rotY": 3.141593,
+            "legBoxes": [
+              {
+                "idx": 0,
+                "name": "Elephant_Leg_FL_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 1,
+                "name": "Elephant_Leg_FR_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 2,
+                "name": "Elephant_Leg_BL_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 3,
+                "name": "Elephant_Leg_BR_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              }
+            ]
+          },
+          {
+            "file": 0,
+            "rank": 7,
+            "team": "Black",
+            "rootY": 0,
+            "bboxMinY": 0,
+            "rotY": 0,
+            "legBoxes": [
+              {
+                "idx": 0,
+                "name": "Elephant_Leg_FL_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 1,
+                "name": "Elephant_Leg_FR_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 2,
+                "name": "Elephant_Leg_BL_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 3,
+                "name": "Elephant_Leg_BR_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              }
+            ]
+          },
+          {
+            "file": 7,
+            "rank": 0,
+            "team": "White",
+            "rootY": 0,
+            "bboxMinY": 0,
+            "rotY": 3.141593,
+            "legBoxes": [
+              {
+                "idx": 0,
+                "name": "Elephant_Leg_FL_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 1,
+                "name": "Elephant_Leg_FR_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 2,
+                "name": "Elephant_Leg_BL_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 3,
+                "name": "Elephant_Leg_BR_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              }
+            ]
+          },
+          {
+            "file": 7,
+            "rank": 7,
+            "team": "Black",
+            "rootY": 0,
+            "bboxMinY": 0,
+            "rotY": 0,
+            "legBoxes": [
+              {
+                "idx": 0,
+                "name": "Elephant_Leg_FL_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 1,
+                "name": "Elephant_Leg_FR_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 2,
+                "name": "Elephant_Leg_BL_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              },
+              {
+                "idx": 3,
+                "name": "Elephant_Leg_BR_Pivot",
+                "minY": 0,
+                "maxY": 1.276
+              }
+            ]
+          }
+        ],
+        "minBoardY": 0,
+        "allRootYZero": true,
+        "allLegsGrounded": true,
+        "allBboxMinYNonNegative": true
+      }
+    },
+    {
+      "name": "Elephant 4-Beat Pacing Locomotion Elevation Stress",
+      "pass": true,
+      "data": {
+        "totalSteps": 120,
+        "minSampleMinY": 0.002,
+        "minSampleFootpadY": 0.002882,
+        "anyFloorDipping": false,
+        "samples": [
+          {
+            "step": 0,
+            "phi": 0,
+            "groundComp": 0.038143,
+            "bboxMinY": 0.002,
+            "minFootpadY": 0.022305
+          },
+          {
+            "step": 20,
+            "phi": 2.094,
+            "groundComp": 0.094161,
+            "bboxMinY": 0.002,
+            "minFootpadY": 0.044498
+          },
+          {
+            "step": 40,
+            "phi": 4.189,
+            "groundComp": 0.094161,
+            "bboxMinY": 0.002,
+            "minFootpadY": 0.045889
+          },
+          {
+            "step": 60,
+            "phi": 6.283,
+            "groundComp": 0.038143,
+            "bboxMinY": 0.002,
+            "minFootpadY": 0.021785
+          },
+          {
+            "step": 80,
+            "phi": 8.378,
+            "groundComp": 0.094161,
+            "bboxMinY": 0.002,
+            "minFootpadY": 0.045838
+          },
+          {
+            "step": 100,
+            "phi": 10.472,
+            "groundComp": 0.094161,
+            "bboxMinY": 0.002,
+            "minFootpadY": 0.044285
+          },
+          {
+            "step": 120,
+            "phi": 12.566,
+            "groundComp": 0.038143,
+            "bboxMinY": 0.002,
+            "minFootpadY": 0.022305
+          }
+        ]
+      }
+    },
+    {
+      "name": "Elephant 4-Stage Combat Execution Elevation & Facing Stress",
+      "pass": true,
+      "data": {
+        "minObservedFootpadY": -0.000106,
+        "minObservedRootY": 0,
+        "anyCombatDipping": false,
+        "maxRearUpRotX": 0.72,
+        "rearUpFrontLegLiftY": 1.7412,
+        "postCombatPos": {
+          "x": -1,
+          "y": 0,
+          "z": 1
+        },
+        "postCombatRotY": 3.1416,
+        "expectedPostCombatRotY": 3.1416,
+        "facingAligned": true
+      }
+    },
+    {
+      "name": "Camera Shake Dynamics & Finite Coordinates",
+      "pass": true,
+      "data": {
+        "hasNaN": false,
+        "maxDisplacement": 20.2795,
+        "finalTimer": -0.0034,
+        "timerExpired": true,
+        "finalFinite": true
+      }
+    },
+    {
+      "name": "34-Octahedron Shard Explosion Physics & No-NaN Velocity",
+      "pass": true,
+      "data": {
+        "shardsCount": 38,
+        "hasExpectedCount": true,
+        "anyNaN": false,
+        "minShardY": 0.08,
+        "floorRestitutionPass": true
+      }
+    }
+  ]
+}

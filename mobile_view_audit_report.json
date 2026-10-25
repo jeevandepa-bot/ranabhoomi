@@ -1,0 +1,57 @@
+[
+  {
+    "viewport": "iPhone 14 Portrait (390x844)",
+    "docW": 390,
+    "scrollW": 390,
+    "hasOverflow": false,
+    "overlayVisible": true,
+    "btnWidth": 28,
+    "btnHeight": 28,
+    "touchTargetSufficient": false,
+    "screenshot": "audit_mobile_portrait_390x844.png"
+  },
+  {
+    "viewport": "iPhone 14 Landscape (844x390)",
+    "docW": 844,
+    "scrollW": 844,
+    "hasOverflow": false,
+    "overlayVisible": false,
+    "btnWidth": 28,
+    "btnHeight": 28,
+    "touchTargetSufficient": false,
+    "screenshot": "audit_mobile_landscape_844x390.png"
+  },
+  {
+    "viewport": "Android Galaxy Portrait (360x780)",
+    "docW": 360,
+    "scrollW": 360,
+    "hasOverflow": false,
+    "overlayVisible": true,
+    "btnWidth": 28,
+    "btnHeight": 28,
+    "touchTargetSufficient": false,
+    "screenshot": "audit_mobile_portrait_360x780.png"
+  },
+  {
+    "viewport": "Android Galaxy Landscape (780x360)",
+    "docW": 780,
+    "scrollW": 780,
+    "hasOverflow": false,
+    "overlayVisible": false,
+    "btnWidth": 28,
+    "btnHeight": 28,
+    "touchTargetSufficient": false,
+    "screenshot": "audit_mobile_landscape_780x360.png"
+  },
+  {
+    "viewport": "Pixel 7 Landscape (915x412)",
+    "docW": 915,
+    "scrollW": 915,
+    "hasOverflow": false,
+    "overlayVisible": false,
+    "btnWidth": 28,
+    "btnHeight": 28,
+    "touchTargetSufficient": false,
+    "screenshot": "audit_mobile_landscape_915x412.png"
+  }
+]

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-24T05:58:20.385Z",
+  "timestamp": "2026-10-25T10:22:16.603Z",
   "tests": [
     {
       "description": "renderer.shadowMap.autoUpdate is strictly false in idle state",
@@ -9,7 +9,7 @@
       }
     },
     {
-      "description": "shadowUpdateCountdown remains exactly 0 across 9 consecutive idle render calls",
+      "description": "shadowUpdateCountdown remains exactly 0 across 345 consecutive idle render calls",
       "status": "PASS",
       "details": {
         "allCountdownZero": true,
@@ -17,7 +17,7 @@
       }
     },
     {
-      "description": "renderer.shadowMap.needsUpdate is strictly false during 100% of 9 idle render calls",
+      "description": "renderer.shadowMap.needsUpdate is strictly false during 100% of 345 idle render calls",
       "status": "PASS",
       "details": {
         "allNeedsUpdateFalse": true,
@@ -51,7 +51,7 @@
       "description": "renderer.shadowMap.needsUpdate was true on 47 render passes during locomotion",
       "status": "PASS",
       "details": {
-        "totalRenders": 47,
+        "totalRenders": 705,
         "rendersWithShadowNeedsUpdateTrue": 47
       }
     },
@@ -59,7 +59,7 @@
       "description": "isBusyAnimating resets to false after piece locomotion completes",
       "status": "PASS",
       "details": {
-        "frameCount": 5,
+        "frameCount": 210,
         "isBusy": false,
         "allCountdownZero": true,
         "allNeedsUpdateFalse": true
@@ -104,11 +104,11 @@
       }
     },
     {
-      "description": "renderer.shadowMap.needsUpdate was true on 76 render passes during combat choreography",
+      "description": "renderer.shadowMap.needsUpdate was true on 121 render passes during combat choreography",
       "status": "PASS",
       "details": {
-        "totalRenders": 76,
-        "rendersWithShadowNeedsUpdateTrue": 76
+        "totalRenders": 1815,
+        "rendersWithShadowNeedsUpdateTrue": 121
       }
     },
     {
@@ -222,7 +222,7 @@
       "description": "Shared OctahedronGeometry was disposed on expiration",
       "status": "PASS",
       "details": {
-        "geoDisposeCalls": 34
+        "geoDisposeCalls": 1
       }
     },
     {
@@ -294,7 +294,7 @@
         "studioNeedsUpdate": true,
         "bfieldCountdown": 8,
         "bfieldNeedsUpdate": true,
-        "resetCamCountdown": 7,
+        "resetCamCountdown": 5,
         "resetCamNeedsUpdate": true,
         "settledCountdown": 0,
         "settledNeedsUpdate": false
@@ -308,7 +308,7 @@
         "studioNeedsUpdate": true,
         "bfieldCountdown": 8,
         "bfieldNeedsUpdate": true,
-        "resetCamCountdown": 7,
+        "resetCamCountdown": 5,
         "resetCamNeedsUpdate": true,
         "settledCountdown": 0,
         "settledNeedsUpdate": false
@@ -322,7 +322,7 @@
         "studioNeedsUpdate": true,
         "bfieldCountdown": 8,
         "bfieldNeedsUpdate": true,
-        "resetCamCountdown": 7,
+        "resetCamCountdown": 5,
         "resetCamNeedsUpdate": true,
         "settledCountdown": 0,
         "settledNeedsUpdate": false
@@ -336,7 +336,7 @@
         "studioNeedsUpdate": true,
         "bfieldCountdown": 8,
         "bfieldNeedsUpdate": true,
-        "resetCamCountdown": 7,
+        "resetCamCountdown": 5,
         "resetCamNeedsUpdate": true,
         "settledCountdown": 0,
         "settledNeedsUpdate": false

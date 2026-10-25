@@ -1,0 +1,361 @@
+{
+  "totalUnits": 32,
+  "elephantPhysicalWidthPass": true,
+  "elephantGroundingPass": true,
+  "elephantPerimeterPass": true,
+  "elephantFacingPass": true,
+  "facingFailuresCount": 0,
+  "physicalWidthFailuresCount": 0,
+  "bishopWidthFailuresCount": 4,
+  "physicalGroundingFailuresCount": 6,
+  "cornerElephantDetails": [
+    {
+      "square": "A1",
+      "team": "White",
+      "rootPos": {
+        "x": -7,
+        "y": 0,
+        "z": 7
+      },
+      "physicalBodySize": {
+        "width_X": 1.3983,
+        "height_Y": 2.86,
+        "length_Z": 2.288
+      },
+      "tacticalWidthCheck": {
+        "width_X": 1.3983,
+        "limit_1_72m": 1.72,
+        "fits_limit": true,
+        "lateralSafetyMarginOnTile_m": 0.3008
+      },
+      "grounding": {
+        "minY": 0,
+        "isGroundedExact": true
+      },
+      "perimeterClearance": {
+        "strictlyInsideBoard": true,
+        "marginToRimMinX": 0.3008,
+        "marginToRimMaxX": 14.3008,
+        "marginToRimMinZ": 13.548,
+        "marginToRimMaxZ": 0.164
+      },
+      "tacticalClearance": {
+        "lateralMarginInsideTile": 0.3008,
+        "lateralOverhang": 0,
+        "clearanceToAdjacentKnight_m": 0.7608,
+        "clearanceToAdjacentPawn_m": 0.2796
+      },
+      "tusks": {
+        "count": 8,
+        "pointingTowardEnemy": true,
+        "tipSamples": [
+          {
+            "name": "Elephant_Tusk_L",
+            "worldCenter": {
+              "x": -6.8007,
+              "y": 1.0502,
+              "z": 5.856
+            },
+            "deltaZ": -1.144
+          },
+          {
+            "name": "Elephant_Tusk_R",
+            "worldCenter": {
+              "x": -7.1993,
+              "y": 1.0502,
+              "z": 5.856
+            },
+            "deltaZ": -1.144
+          },
+          {
+            "name": "Elephant_Ferrule_Tip_L",
+            "worldCenter": {
+              "x": -6.784,
+              "y": 1.0332,
+              "z": 5.7376
+            },
+            "deltaZ": -1.2624
+          },
+          {
+            "name": "Elephant_Ferrule_Tip_R",
+            "worldCenter": {
+              "x": -7.216,
+              "y": 1.0332,
+              "z": 5.7376
+            },
+            "deltaZ": -1.2624
+          }
+        ]
+      }
+    },
+    {
+      "square": "H1",
+      "team": "White",
+      "rootPos": {
+        "x": 7,
+        "y": 0,
+        "z": 7
+      },
+      "physicalBodySize": {
+        "width_X": 1.3983,
+        "height_Y": 2.86,
+        "length_Z": 2.288
+      },
+      "tacticalWidthCheck": {
+        "width_X": 1.3983,
+        "limit_1_72m": 1.72,
+        "fits_limit": true,
+        "lateralSafetyMarginOnTile_m": 0.3008
+      },
+      "grounding": {
+        "minY": 0,
+        "isGroundedExact": true
+      },
+      "perimeterClearance": {
+        "strictlyInsideBoard": true,
+        "marginToRimMinX": 14.3008,
+        "marginToRimMaxX": 0.3008,
+        "marginToRimMinZ": 13.548,
+        "marginToRimMaxZ": 0.164
+      },
+      "tacticalClearance": {
+        "lateralMarginInsideTile": 0.3008,
+        "lateralOverhang": 0,
+        "clearanceToAdjacentKnight_m": 0.8702,
+        "clearanceToAdjacentPawn_m": 0.2796
+      },
+      "tusks": {
+        "count": 8,
+        "pointingTowardEnemy": true,
+        "tipSamples": [
+          {
+            "name": "Elephant_Tusk_L",
+            "worldCenter": {
+              "x": 7.1993,
+              "y": 1.0502,
+              "z": 5.856
+            },
+            "deltaZ": -1.144
+          },
+          {
+            "name": "Elephant_Tusk_R",
+            "worldCenter": {
+              "x": 6.8007,
+              "y": 1.0502,
+              "z": 5.856
+            },
+            "deltaZ": -1.144
+          },
+          {
+            "name": "Elephant_Ferrule_Tip_L",
+            "worldCenter": {
+              "x": 7.216,
+              "y": 1.0332,
+              "z": 5.7376
+            },
+            "deltaZ": -1.2624
+          },
+          {
+            "name": "Elephant_Ferrule_Tip_R",
+            "worldCenter": {
+              "x": 6.784,
+              "y": 1.0332,
+              "z": 5.7376
+            },
+            "deltaZ": -1.2624
+          }
+        ]
+      }
+    },
+    {
+      "square": "A8",
+      "team": "Black",
+      "rootPos": {
+        "x": -7,
+        "y": 0,
+        "z": -7
+      },
+      "physicalBodySize": {
+        "width_X": 1.3983,
+        "height_Y": 2.86,
+        "length_Z": 2.288
+      },
+      "tacticalWidthCheck": {
+        "width_X": 1.3983,
+        "limit_1_72m": 1.72,
+        "fits_limit": true,
+        "lateralSafetyMarginOnTile_m": 0.3008
+      },
+      "grounding": {
+        "minY": 0,
+        "isGroundedExact": true
+      },
+      "perimeterClearance": {
+        "strictlyInsideBoard": true,
+        "marginToRimMinX": 0.3008,
+        "marginToRimMaxX": 14.3008,
+        "marginToRimMinZ": 0.164,
+        "marginToRimMaxZ": 13.548
+      },
+      "tacticalClearance": {
+        "lateralMarginInsideTile": 0.3008,
+        "lateralOverhang": 0,
+        "clearanceToAdjacentKnight_m": 0.8702,
+        "clearanceToAdjacentPawn_m": 0.2796
+      },
+      "tusks": {
+        "count": 8,
+        "pointingTowardEnemy": true,
+        "tipSamples": [
+          {
+            "name": "Elephant_Tusk_L",
+            "worldCenter": {
+              "x": -7.1993,
+              "y": 1.0502,
+              "z": -5.856
+            },
+            "deltaZ": 1.144
+          },
+          {
+            "name": "Elephant_Tusk_R",
+            "worldCenter": {
+              "x": -6.8007,
+              "y": 1.0502,
+              "z": -5.856
+            },
+            "deltaZ": 1.144
+          },
+          {
+            "name": "Elephant_Ferrule_Tip_L",
+            "worldCenter": {
+              "x": -7.216,
+              "y": 1.0332,
+              "z": -5.7376
+            },
+            "deltaZ": 1.2624
+          },
+          {
+            "name": "Elephant_Ferrule_Tip_R",
+            "worldCenter": {
+              "x": -6.784,
+              "y": 1.0332,
+              "z": -5.7376
+            },
+            "deltaZ": 1.2624
+          }
+        ]
+      }
+    },
+    {
+      "square": "H8",
+      "team": "Black",
+      "rootPos": {
+        "x": 7,
+        "y": 0,
+        "z": -7
+      },
+      "physicalBodySize": {
+        "width_X": 1.3983,
+        "height_Y": 2.86,
+        "length_Z": 2.288
+      },
+      "tacticalWidthCheck": {
+        "width_X": 1.3983,
+        "limit_1_72m": 1.72,
+        "fits_limit": true,
+        "lateralSafetyMarginOnTile_m": 0.3008
+      },
+      "grounding": {
+        "minY": 0,
+        "isGroundedExact": true
+      },
+      "perimeterClearance": {
+        "strictlyInsideBoard": true,
+        "marginToRimMinX": 14.3008,
+        "marginToRimMaxX": 0.3008,
+        "marginToRimMinZ": 0.164,
+        "marginToRimMaxZ": 13.548
+      },
+      "tacticalClearance": {
+        "lateralMarginInsideTile": 0.3008,
+        "lateralOverhang": 0,
+        "clearanceToAdjacentKnight_m": 0.7608,
+        "clearanceToAdjacentPawn_m": 0.2796
+      },
+      "tusks": {
+        "count": 8,
+        "pointingTowardEnemy": true,
+        "tipSamples": [
+          {
+            "name": "Elephant_Tusk_L",
+            "worldCenter": {
+              "x": 6.8007,
+              "y": 1.0502,
+              "z": -5.856
+            },
+            "deltaZ": 1.144
+          },
+          {
+            "name": "Elephant_Tusk_R",
+            "worldCenter": {
+              "x": 7.1993,
+              "y": 1.0502,
+              "z": -5.856
+            },
+            "deltaZ": 1.144
+          },
+          {
+            "name": "Elephant_Ferrule_Tip_L",
+            "worldCenter": {
+              "x": 6.784,
+              "y": 1.0332,
+              "z": -5.7376
+            },
+            "deltaZ": 1.2624
+          },
+          {
+            "name": "Elephant_Ferrule_Tip_R",
+            "worldCenter": {
+              "x": 7.216,
+              "y": 1.0332,
+              "z": -5.7376
+            },
+            "deltaZ": 1.2624
+          }
+        ]
+      }
+    }
+  ],
+  "archetypePhysicalSizes": {
+    "Rook_Elephant": {
+      "width_X": 1.3983,
+      "height_Y": 2.86,
+      "length_Z": 2.288
+    },
+    "samplePawn": {
+      "x": 1.3012,
+      "y": 2.2054,
+      "z": 0.6686
+    },
+    "sampleKnight": {
+      "x": 0.9706,
+      "y": 2.72,
+      "z": 3.2682
+    },
+    "sampleBishop": {
+      "x": 1.957,
+      "y": 2.265,
+      "z": 2.0534
+    },
+    "sampleQueen": {
+      "x": 1.0564,
+      "y": 2.1116,
+      "z": 0.9088
+    },
+    "sampleKing": {
+      "x": 1.448,
+      "y": 3.4394,
+      "z": 1.502
+    }
+  }
+}

@@ -46,9 +46,9 @@ async function testVercelFixed() {
   await new Promise(r => setTimeout(r, 4500));
 
   await send('Runtime.evaluate', {
-    expression: 'if (typeof skipIntroCinematic === "function") skipIntroCinematic();'
+    expression: 'if (typeof startGameNow === "function") startGameNow(); if (typeof skipOpeningCinematic === "function") skipOpeningCinematic();'
   });
-  await new Promise(r => setTimeout(r, 1500));
+  await new Promise(r => setTimeout(r, 2000));
 
   console.log('Network errors on fixed Vercel:', networkErrors);
 

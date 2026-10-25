@@ -1,0 +1,97 @@
+{
+  "file": "C:\\Users\\Jeevan\\Downloads\\ranabhoomi\\assets\\gajadhvaja.glb",
+  "total_mesh_objects": 40,
+  "total_vertices": 8558,
+  "total_faces": 16632,
+  "smooth_ratio": 0.973545,
+  "unfrozen_scales": [],
+  "global_bbox": {
+    "min": [
+      -0.794502,
+      -1.649999,
+      0.0
+    ],
+    "max": [
+      0.794502,
+      0.949999,
+      3.25
+    ],
+    "dimensions": {
+      "width_X": 1.589005,
+      "length_Y": 2.599998,
+      "height_Z": 3.25
+    }
+  },
+  "grounding": {
+    "Z_min": 0.0,
+    "footpad_zmins": {
+      "Elephant_Leg_FL": 0.0,
+      "Elephant_Leg_FR": 0.0,
+      "Elephant_Leg_BL": 0.0,
+      "Elephant_Leg_BR": 0.0
+    },
+    "exact_zero_grounding": true
+  },
+  "howdah": {
+    "meshes": [
+      "Howdah_Base",
+      "Howdah_Pillar_0",
+      "Howdah_Pillar_1",
+      "Howdah_Pillar_2",
+      "Howdah_Pillar_3",
+      "Howdah_Dome",
+      "Howdah_Finial"
+    ],
+    "howdah_base_zmin": 1.88,
+    "jhul_zmax": 2.46225,
+    "torso_zmax": 2.442774,
+    "vertical_gap_m": -0.58225
+  },
+  "tusks": {
+    "tusk_L": {
+      "verts": 290,
+      "faces": 576,
+      "min": [
+        -0.284564,
+        -1.649999,
+        1.035485
+      ],
+      "max": [
+        -0.168413,
+        -0.949999,
+        1.35137
+      ],
+      "dim": [
+        0.116151,
+        0.7,
+        0.315885
+      ]
+    },
+    "tusk_R": {
+      "verts": 290,
+      "faces": 576,
+      "min": [
+        0.168413,
+        -1.649999,
+        1.035485
+      ],
+      "max": [
+        0.284564,
+        -0.949999,
+        1.35137
+      ],
+      "dim": [
+        0.116151,
+        0.7,
+        0.315885
+      ]
+    },
+    "forward_pointing_negY": true
+  },
+  "tactical_bounds_check": {
+    "half_width_X": 0.7945024967193604,
+    "limit_0_86m": 0.86,
+    "fits_within_0_86m": true,
+    "margin_to_edge_m": 0.065498
+  }
+}

@@ -1,0 +1,747 @@
+{
+  "totalUnits": 32,
+  "facingFailures": 0,
+  "widthFailures": 8,
+  "groundingFailures": 2,
+  "allPass": false,
+  "allUnitsSummary": [
+    {
+      "cell": "Unit_0",
+      "team": "White",
+      "type": "Rook",
+      "width": 1.82,
+      "widthPass": false,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_1",
+      "team": "White",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_2",
+      "team": "Black",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_3",
+      "team": "Black",
+      "type": "Rook",
+      "width": 1.82,
+      "widthPass": false,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_4",
+      "team": "White",
+      "type": "Knight",
+      "width": 1.62,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_5",
+      "team": "White",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_6",
+      "team": "Black",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_7",
+      "team": "Black",
+      "type": "Knight",
+      "width": 1.62,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_8",
+      "team": "White",
+      "type": "Bishop",
+      "width": 1.957,
+      "widthPass": false,
+      "minY": 0.002,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_9",
+      "team": "White",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_10",
+      "team": "Black",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_11",
+      "team": "Black",
+      "type": "Bishop",
+      "width": 1.957,
+      "widthPass": false,
+      "minY": 0.002,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_12",
+      "team": "White",
+      "type": "Queen",
+      "width": 1.3,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_13",
+      "team": "White",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_14",
+      "team": "Black",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_15",
+      "team": "Black",
+      "type": "Queen",
+      "width": 1.3,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_16",
+      "team": "White",
+      "type": "King",
+      "width": 1.448,
+      "widthPass": true,
+      "minY": -0.005,
+      "groundingPass": false,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_17",
+      "team": "White",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_18",
+      "team": "Black",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_19",
+      "team": "Black",
+      "type": "King",
+      "width": 1.448,
+      "widthPass": true,
+      "minY": -0.005,
+      "groundingPass": false,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_20",
+      "team": "White",
+      "type": "Bishop",
+      "width": 1.957,
+      "widthPass": false,
+      "minY": 0.002,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_21",
+      "team": "White",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_22",
+      "team": "Black",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_23",
+      "team": "Black",
+      "type": "Bishop",
+      "width": 1.957,
+      "widthPass": false,
+      "minY": 0.002,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_24",
+      "team": "White",
+      "type": "Knight",
+      "width": 1.62,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_25",
+      "team": "White",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_26",
+      "team": "Black",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_27",
+      "team": "Black",
+      "type": "Knight",
+      "width": 1.62,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_28",
+      "team": "White",
+      "type": "Rook",
+      "width": 1.82,
+      "widthPass": false,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_29",
+      "team": "White",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 3.1416,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_30",
+      "team": "Black",
+      "type": "Pawn",
+      "width": 1.4017,
+      "widthPass": true,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    },
+    {
+      "cell": "Unit_31",
+      "team": "Black",
+      "type": "Rook",
+      "width": 1.82,
+      "widthPass": false,
+      "minY": 0,
+      "groundingPass": true,
+      "rotY": 0,
+      "frontCorrect": true
+    }
+  ],
+  "cornerRooks": [
+    {
+      "square": "A1",
+      "team": "White",
+      "rootPos": {
+        "x": -7,
+        "y": 0,
+        "z": 7
+      },
+      "rotY": 3.1416,
+      "worldBox": {
+        "min": {
+          "x": -7.91,
+          "y": 0,
+          "z": 5.548
+        },
+        "max": {
+          "x": -6.09,
+          "y": 2.86,
+          "z": 7.91
+        }
+      },
+      "dimensions": {
+        "width_X": 1.82,
+        "height_Y": 2.86,
+        "length_Z": 2.362
+      },
+      "tileBounds": {
+        "centerX": -7,
+        "centerZ": 7,
+        "minX": -8,
+        "maxX": -6,
+        "minZ": 6,
+        "maxZ": 8
+      },
+      "perimeterClearance": {
+        "minX_to_boardRim": 0.09,
+        "maxX_to_boardRim": 14.09,
+        "minZ_to_boardRim": 13.548,
+        "maxZ_to_boardRim": 0.09,
+        "insideBoardPerimeter": true
+      },
+      "tacticalTileClearance": {
+        "widthFitsWithinTileWidth": true,
+        "widthFitsWithin0_86mHalfLimit": false,
+        "lateralClearanceToTileEdge_m": 0.09,
+        "lateralOverhang_m": 0,
+        "clearanceToAdjacentKnight_m": 0.28,
+        "clearanceToAdjacentPawn_m": -0.102
+      },
+      "grounding": {
+        "minY": 0,
+        "isGroundedExact": true
+      },
+      "tusks": {
+        "count": 8,
+        "pointingTowardEnemy": true,
+        "samples": [
+          {
+            "name": "Elephant_Tusk_L",
+            "worldCenter": {
+              "x": -6.8007,
+              "y": 1.0502,
+              "z": 5.856
+            },
+            "deltaZFromRoot": -1.144
+          },
+          {
+            "name": "Elephant_Tusk_R",
+            "worldCenter": {
+              "x": -7.1993,
+              "y": 1.0502,
+              "z": 5.856
+            },
+            "deltaZFromRoot": -1.144
+          },
+          {
+            "name": "Elephant_Ferrule_L",
+            "worldCenter": {
+              "x": -6.8053,
+              "y": 0.9645,
+              "z": 6.1289
+            },
+            "deltaZFromRoot": -0.8711
+          },
+          {
+            "name": "Elephant_Ferrule_Mid_L",
+            "worldCenter": {
+              "x": -6.7937,
+              "y": 0.9672,
+              "z": 5.9003
+            },
+            "deltaZFromRoot": -1.0997
+          }
+        ]
+      }
+    },
+    {
+      "square": "H1",
+      "team": "White",
+      "rootPos": {
+        "x": 7,
+        "y": 0,
+        "z": 7
+      },
+      "rotY": 3.1416,
+      "worldBox": {
+        "min": {
+          "x": 6.09,
+          "y": 0,
+          "z": 5.548
+        },
+        "max": {
+          "x": 7.91,
+          "y": 2.86,
+          "z": 7.91
+        }
+      },
+      "dimensions": {
+        "width_X": 1.82,
+        "height_Y": 2.86,
+        "length_Z": 2.362
+      },
+      "tileBounds": {
+        "centerX": 7,
+        "centerZ": 7,
+        "minX": 6,
+        "maxX": 8,
+        "minZ": 6,
+        "maxZ": 8
+      },
+      "perimeterClearance": {
+        "minX_to_boardRim": 14.09,
+        "maxX_to_boardRim": 0.09,
+        "minZ_to_boardRim": 13.548,
+        "maxZ_to_boardRim": 0.09,
+        "insideBoardPerimeter": true
+      },
+      "tacticalTileClearance": {
+        "widthFitsWithinTileWidth": true,
+        "widthFitsWithin0_86mHalfLimit": false,
+        "lateralClearanceToTileEdge_m": 0.09,
+        "lateralOverhang_m": 0,
+        "clearanceToAdjacentKnight_m": 0.28,
+        "clearanceToAdjacentPawn_m": -0.102
+      },
+      "grounding": {
+        "minY": 0,
+        "isGroundedExact": true
+      },
+      "tusks": {
+        "count": 8,
+        "pointingTowardEnemy": true,
+        "samples": [
+          {
+            "name": "Elephant_Tusk_L",
+            "worldCenter": {
+              "x": 7.1993,
+              "y": 1.0502,
+              "z": 5.856
+            },
+            "deltaZFromRoot": -1.144
+          },
+          {
+            "name": "Elephant_Tusk_R",
+            "worldCenter": {
+              "x": 6.8007,
+              "y": 1.0502,
+              "z": 5.856
+            },
+            "deltaZFromRoot": -1.144
+          },
+          {
+            "name": "Elephant_Ferrule_L",
+            "worldCenter": {
+              "x": 7.1947,
+              "y": 0.9645,
+              "z": 6.1289
+            },
+            "deltaZFromRoot": -0.8711
+          },
+          {
+            "name": "Elephant_Ferrule_Mid_L",
+            "worldCenter": {
+              "x": 7.2063,
+              "y": 0.9672,
+              "z": 5.9003
+            },
+            "deltaZFromRoot": -1.0997
+          }
+        ]
+      }
+    },
+    {
+      "square": "A8",
+      "team": "Black",
+      "rootPos": {
+        "x": -7,
+        "y": 0,
+        "z": -7
+      },
+      "rotY": 0,
+      "worldBox": {
+        "min": {
+          "x": -7.91,
+          "y": 0,
+          "z": -7.91
+        },
+        "max": {
+          "x": -6.09,
+          "y": 2.86,
+          "z": -5.548
+        }
+      },
+      "dimensions": {
+        "width_X": 1.82,
+        "height_Y": 2.86,
+        "length_Z": 2.362
+      },
+      "tileBounds": {
+        "centerX": -7,
+        "centerZ": -7,
+        "minX": -8,
+        "maxX": -6,
+        "minZ": -8,
+        "maxZ": -6
+      },
+      "perimeterClearance": {
+        "minX_to_boardRim": 0.09,
+        "maxX_to_boardRim": 14.09,
+        "minZ_to_boardRim": 0.09,
+        "maxZ_to_boardRim": 13.548,
+        "insideBoardPerimeter": true
+      },
+      "tacticalTileClearance": {
+        "widthFitsWithinTileWidth": true,
+        "widthFitsWithin0_86mHalfLimit": false,
+        "lateralClearanceToTileEdge_m": 0.09,
+        "lateralOverhang_m": 0,
+        "clearanceToAdjacentKnight_m": 0.28,
+        "clearanceToAdjacentPawn_m": -0.102
+      },
+      "grounding": {
+        "minY": 0,
+        "isGroundedExact": true
+      },
+      "tusks": {
+        "count": 8,
+        "pointingTowardEnemy": true,
+        "samples": [
+          {
+            "name": "Elephant_Tusk_L",
+            "worldCenter": {
+              "x": -7.1993,
+              "y": 1.0502,
+              "z": -5.856
+            },
+            "deltaZFromRoot": 1.144
+          },
+          {
+            "name": "Elephant_Tusk_R",
+            "worldCenter": {
+              "x": -6.8007,
+              "y": 1.0502,
+              "z": -5.856
+            },
+            "deltaZFromRoot": 1.144
+          },
+          {
+            "name": "Elephant_Ferrule_L",
+            "worldCenter": {
+              "x": -7.1947,
+              "y": 0.9645,
+              "z": -6.1289
+            },
+            "deltaZFromRoot": 0.8711
+          },
+          {
+            "name": "Elephant_Ferrule_Mid_L",
+            "worldCenter": {
+              "x": -7.2063,
+              "y": 0.9672,
+              "z": -5.9003
+            },
+            "deltaZFromRoot": 1.0997
+          }
+        ]
+      }
+    },
+    {
+      "square": "H8",
+      "team": "Black",
+      "rootPos": {
+        "x": 7,
+        "y": 0,
+        "z": -7
+      },
+      "rotY": 0,
+      "worldBox": {
+        "min": {
+          "x": 6.09,
+          "y": 0,
+          "z": -7.91
+        },
+        "max": {
+          "x": 7.91,
+          "y": 2.86,
+          "z": -5.548
+        }
+      },
+      "dimensions": {
+        "width_X": 1.82,
+        "height_Y": 2.86,
+        "length_Z": 2.362
+      },
+      "tileBounds": {
+        "centerX": 7,
+        "centerZ": -7,
+        "minX": 6,
+        "maxX": 8,
+        "minZ": -8,
+        "maxZ": -6
+      },
+      "perimeterClearance": {
+        "minX_to_boardRim": 14.09,
+        "maxX_to_boardRim": 0.09,
+        "minZ_to_boardRim": 0.09,
+        "maxZ_to_boardRim": 13.548,
+        "insideBoardPerimeter": true
+      },
+      "tacticalTileClearance": {
+        "widthFitsWithinTileWidth": true,
+        "widthFitsWithin0_86mHalfLimit": false,
+        "lateralClearanceToTileEdge_m": 0.09,
+        "lateralOverhang_m": 0,
+        "clearanceToAdjacentKnight_m": 0.28,
+        "clearanceToAdjacentPawn_m": -0.102
+      },
+      "grounding": {
+        "minY": 0,
+        "isGroundedExact": true
+      },
+      "tusks": {
+        "count": 8,
+        "pointingTowardEnemy": true,
+        "samples": [
+          {
+            "name": "Elephant_Tusk_L",
+            "worldCenter": {
+              "x": 6.8007,
+              "y": 1.0502,
+              "z": -5.856
+            },
+            "deltaZFromRoot": 1.144
+          },
+          {
+            "name": "Elephant_Tusk_R",
+            "worldCenter": {
+              "x": 7.1993,
+              "y": 1.0502,
+              "z": -5.856
+            },
+            "deltaZFromRoot": 1.144
+          },
+          {
+            "name": "Elephant_Ferrule_L",
+            "worldCenter": {
+              "x": 6.8053,
+              "y": 0.9645,
+              "z": -6.1289
+            },
+            "deltaZFromRoot": 0.8711
+          },
+          {
+            "name": "Elephant_Ferrule_Mid_L",
+            "worldCenter": {
+              "x": 6.7937,
+              "y": 0.9672,
+              "z": -5.9003
+            },
+            "deltaZFromRoot": 1.0997
+          }
+        ]
+      }
+    }
+  ]
+}

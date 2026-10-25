@@ -248,3 +248,71 @@ Integrity mode: development
 ### Stability & Verification
 - [ ] 60/60 automated E2E tests pass in `tests/run_e2e_tests.js`.
 - [ ] Vercel deployment verified live and responsive.
+
+
+## 2026-10-25T08:00:35Z
+
+# Teamwork Project: AAA Dark Mythic Fantasy Graphics & Visual Overhaul
+
+> Status: Launched
+> Requested team: Full multi-agent team (Visual Director, Shader Engineer, Blender Sculptor, Reviewers, Challengers, Forensic Auditor)
+> Integrity mode: development
+> Visual Style: Dark Mythic Fantasy (Elden Ring / God of War aesthetic)
+
+Transform Royal Ranbhoomi from an under-par prototype into a captivating, graphics-centered AAA dark mythic battle experience:
+1. Implement Three.js EffectComposer pipeline with selective UnrealBloomPass for glowing runes, weapons, braziers, and sacred crystals; filmic vignette; and dramatic high-contrast rim lighting outlining warriors against deep slate/volcanic shadows.
+2. Atmospheric depth: ground-level drifting mist, floating ember motes, desaturated volcanic stone arena, and stormy overcast sky dome.
+3. Completely replace the geometric pot-and-cylinder War Elephant (Rook / Gajraj) with a continuous organic 3D Baahubali armored war beast in Blender 4.2 CLI with authentic wrinkled pachyderm anatomy, dual brow lobes, flapping temple ears with Shringar paint, forward ivory tusks, carved Sandalwood Rajput fortress howdah with domed Chhatri canopy, and 0-height ground contact (y = 0.000m).
+4. Ensure all 32 pieces, terrain, and post-processing sustain 60 FPS and pass 100% of the 60 E2E tests.
+
+Working directory: c:\Users\Jeevan\Downloads\ranabhoomi
+Integrity mode: development
+
+## Requirements
+
+### R1. Cinematic Post-Processing & Dark Mythic Lighting
+- Integrate Three.js EffectComposer with selective UnrealBloomPass (threshold ~0.85, strength ~0.65, radius ~0.4) so that only emissive runes, glowing eyes, crystals, and fatal impact flashes bloom ethereally without blowing out dark shadows.
+- Add filmic vignette and ACES Filmic Tone Mapping with balanced exposure to achieve an Elden Ring / God of War atmospheric depth.
+- Re-architect lighting into a dramatic 4-point chiaroscuro rig: deep cool slate ambient, sharp specular key light, and high-intensity warm amber/gold and cool cyan rim lights that silhouette dark characters crisply against the background.
+- Floating fire ember particles rising from braziers and dual-layer ground mist.
+
+### R2. Continuous Organic Gajraj War Elephant Sculpt (Blender 4.2 CLI)
+- Completely eradicate the geometric pot body, lathe columns, cylinder trunk segments, and floating toruses from assets/gajadhvaja.glb and index.html.
+- Sculpt a continuous organic elephant mesh using Blender 4.2 (C:\Users\Jeevan\blender-4.2.0-windows-x64\blender.exe): deep wrinkled barrel ribcage, muscular withers, anatomical column legs with broad footpads kissing the floor at y = 0.000000m.
+- Sculpt authentic Indian elephant head features: prominent twin brow domes, broad fan-shaped flapping temple ears with Shringar vermilion designs, forward-curving ivory tusks anchored directly to front cheek bones with 24K gold ferrules, and an anatomical tapered trunk with nostrils.
+- Mount a carved Sandalwood / stone architectural battlement Howdah tower directly atop an embroidered crimson silk Jhul blanket with gold fringe tassels, sitting snugly on the withers with zero floating gaps.
+- Scale the elephant to commanding colossal stature (H ~ 3.25m, W ~ 1.72m, L ~ 2.95m), remaining strictly within tactical tile boundaries (|X| <= 0.86m <= 0.88m).
+
+### R3. Advanced PBR Shading & Material Depth Across All Pieces
+- PBR textures with genuine surface detail: weathered basalt fissures, beaten 24K gold foil, damascus folded steel, wrinkled pachyderm hide, and pleated silk dhoti/jhul cloth.
+- Pulsing emissive runic energy veins with dynamic intensity breathing during idle stance.
+- Ensure all other pieces (Bishop Chariot, Queen, King, Pawn) blend seamlessly with the dark mythic fantasy aesthetic.
+
+### R4. Biomechanical 4-Beat Tectonic Pacing Locomotion & Seismic Combat
+- Bind the 4 anatomical shoulder and hip pivots (Elephant_Leg_FL, FR, BL, BR) to rig.quadLegs for genuine 4-beat diagonal pacing gait.
+- Incorporate dynamic trunk S-curve wave articulation and gentle temple ear flutters during movement.
+- Ensure strict tangential ground contact (Y_min >= 0.000m) during all walking frames with zero floor dipping and zero hovering at rest.
+- Multi-stage capture execution in executeSynchronizedKillSequence:
+  - Stage 1: Elephant charges near to victim (1.35m) with 4-legged running cadence and trunk curled back in rage.
+  - Stage 2: Rears up dynamically (-0.72 rad) with skyward trunk trumpet and conch audio.
+  - Stage 3: Violent downward crushing trunk slam & forward tusk gore launching defender into 0.16x bullet-time dilation, camera shake, and 34-octahedron polyhedral shatter physics.
+  - Stage 4: Powerful 4-footpad tectonic trample recovery with radial ground tremor shockwave.
+
+### R5. Regression & Automated Verification
+- Pass 100% of the 60 E2E tests in tests/run_e2e_tests.js.
+- Verify 0-height ground contact and non-clipping across all 64 tiles at rest and throughout locomotion.
+- Certify via empirical challenger suite and independent forensic auditor check.
+- Deploy to Vercel production (https://ranabhoomi.vercel.app).
+
+## Acceptance Criteria
+
+### Visual & Atmospheric Polish
+- [ ] Selective UnrealBloomPass active on glowing runes, crystals, and fatal impact flashes.
+- [ ] Dramatic theatrical chiaroscuro lighting with crisp rim highlights and deep contact shadows.
+- [ ] Complete absence of primitive geometric spheres, cylinders, lathe columns, and floating rings on all units.
+- [ ] Lifelike organic War Elephant with authentic head anatomy, tusks, ears, and snug Howdah.
+
+### Performance & Stability
+- [ ] 60 FPS sustained on desktop and smooth touch responsiveness on mobile.
+- [ ] 60/60 automated E2E tests pass.
+- [ ] Live Vercel deployment verified.
