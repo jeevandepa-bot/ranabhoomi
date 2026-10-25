@@ -609,110 +609,251 @@ def build_organic_gajadhvaja():
     export_glb("assets/gajadhvaja.glb")
 
 # ==============================================================================
-# 3. ASHVAROHI (KNIGHT) — MARWARI WARHORSE & KSHATRIYA DRAGOON ARCHER
+# 3. ASHVAROHI (KNIGHT) — MARWARI WARHORSE & KSHATRIYA COUCHED LANCE DRAGOON
 # ==============================================================================
 def build_organic_ashvarohi():
     clear_scene()
     print("Building Ashvarohi (Knight)...")
+
+    # Materials
     horse_mat = create_pbr_material("MarwariCoat", (0.88, 0.85, 0.80, 1), 0.15, 0.45)
+    hoof_mat = create_pbr_material("HoofHorn", (0.12, 0.10, 0.08, 1), 0.10, 0.60)
     gold_mat = create_pbr_material("SaddleGold", (0.95, 0.78, 0.22, 1), 0.88, 0.20, os.path.join(TEXTURE_DIR, 'kavacha_gold.png'))
     silk_mat = create_pbr_material("SaffronSilk", (0.95, 0.55, 0.12, 1), 0.10, 0.50, os.path.join(TEXTURE_DIR, 'dhoti_silk.png'))
-    steel_mat = create_pbr_material("LanceSteel", (0.20, 0.22, 0.28, 1), 0.80, 0.30, os.path.join(TEXTURE_DIR, 'damascus_steel.png'))
+    crimson_mat = create_pbr_material("CrimsonJhul", (0.65, 0.08, 0.14, 1), 0.20, 0.40, os.path.join(TEXTURE_DIR, 'elephant_jhul.png'))
+    steel_mat = create_pbr_material("LanceSteel", (0.20, 0.22, 0.28, 1), 0.85, 0.25, os.path.join(TEXTURE_DIR, 'damascus_steel.png'))
     skin_mat = create_pbr_material("RiderSkin", (0.76, 0.52, 0.38, 1), 0.05, 0.55)
+    dark_mat = create_pbr_material("ManeDark", (0.10, 0.08, 0.06, 1), 0.05, 0.70)
 
-    # 1. Import horse mesh from assets/horse.glb
-    horse_path = os.path.abspath("assets/horse.glb")
-    if os.path.exists(horse_path):
-        bpy.ops.import_scene.gltf(filepath=horse_path)
-        for obj in bpy.context.scene.objects:
-            if obj.type == 'MESH':
-                obj.name = "Horse_Body"
-                obj.location = (0, 0, 0)
-                obj.scale = (0.0070, 0.0070, 0.0070)
-                bpy.context.view_layer.objects.active = obj
-                bpy.ops.object.transform_apply(location=True, rotation=False, scale=True)
-                if obj.data.shape_keys:
-                    obj.shape_key_clear()
-                obj.data.materials.clear()
-                obj.data.materials.append(horse_mat)
-                for poly in obj.data.polygons:
-                    poly.use_smooth = True
+    # 1. Muscular Marwari Torso Barrel (Centered along Y, facing -Y)
+    barrel_rings = [
+        (1.42, 0.32, 0.34, 0.0,  0.68), # Croup / Rump
+        (1.45, 0.36, 0.38, 0.0,  0.42), # Flank / Haunches
+        (1.40, 0.38, 0.40, 0.0,  0.05), # Mid-barrel / Saddle seat
+        (1.44, 0.39, 0.42, 0.0, -0.32), # Deep Chest / Girth
+        (1.50, 0.34, 0.36, 0.0, -0.62), # Withers / Shoulder base
+    ]
+    create_organic_lofted_mesh("Horse_Body", barrel_rings, num_segments=20, material=horse_mat, subsurf_levels=1, cap_bottom=True, cap_top=True)
 
-    # 2. Inward-curving Marwari Lyre Ears
-    for ex, side_label in [(-0.06, "L"), (0.06, "R")]:
+    # 2. Arched Marwari Crest & High-Curved Neck (Sweeping from shoulder up and forward to head)
+    neck_spine = [
+        Vector((0.0, -0.58, 1.48)),
+        Vector((0.0, -0.72, 1.75)),
+        Vector((0.0, -0.82, 2.05)),
+        Vector((0.0, -0.88, 2.22))
+    ]
+    create_swept_tube("Horse_Neck", neck_spine, [0.26, 0.22, 0.18, 0.15], num_segments=16, material=horse_mat, subsurf_levels=1)
+
+    # Mane ridge
+    mane_spine = [
+        Vector((0.0, -0.54, 1.55)),
+        Vector((0.0, -0.68, 1.85)),
+        Vector((0.0, -0.78, 2.15)),
+        Vector((0.0, -0.82, 2.30))
+    ]
+    create_swept_tube("Horse_Mane", mane_spine, [0.06, 0.07, 0.06, 0.04], num_segments=12, material=dark_mat, subsurf_levels=1)
+
+    # 3. Refined Sculpted Desert Head & Muzzle (Facing -Y)
+    head_rings = [
+        (2.20, 0.14, 0.15, 0.0, -0.88), # Poll / Forehead
+        (2.05, 0.12, 0.18, 0.0, -1.02), # Cheek / Jawline
+        (1.88, 0.09, 0.14, 0.0, -1.18), # Bridge of nose
+        (1.76, 0.065, 0.08, 0.0, -1.28) # Flared muzzle / nostrils
+    ]
+    create_organic_lofted_mesh("Horse_Head", head_rings, num_segments=16, material=horse_mat, subsurf_levels=1, cap_top=True)
+
+    # Inward-curving Marwari Lyre-Ears (Hallmark signature, tips touching)
+    for ex, side_label in [(-0.07, "L"), (0.07, "R")]:
         ear_spine = [
-            Vector((ex, -0.76, 1.25)),
-            Vector((ex * 0.95, -0.78, 1.35)),
-            Vector((ex * 0.40, -0.80, 1.42))  # tips curving inward
+            Vector((ex, -0.85, 2.22)),
+            Vector((ex * 1.10, -0.88, 2.38)),
+            Vector((ex * 0.35, -0.90, 2.48))  # Lyre tips curving inward
         ]
-        create_swept_tube(f"Horse_LyreEar_{side_label}", ear_spine, [0.032, 0.022, 0.005], num_segments=10, material=horse_mat, subsurf_levels=1)
+        create_swept_tube(f"Horse_LyreEar_{side_label}", ear_spine, [0.038, 0.026, 0.006], num_segments=10, material=horse_mat, subsurf_levels=1)
 
-    # 3. High-Relief Saddle Cloth (Jhul) & Stirrups
-    saddle_rings = [
-        (1.00, 0.28, 0.38, 0.0, 0.00),
-        (1.12, 0.30, 0.36, 0.0, 0.00),
-        (1.18, 0.26, 0.32, 0.0, 0.00)
+    # Chamfron (Golden forehead & nose armor plate)
+    chamfron_rings = [
+        (1.85, 0.075, 0.090, 0.0, -1.19),
+        (2.04, 0.105, 0.115, 0.0, -1.04),
+        (2.18, 0.120, 0.125, 0.0, -0.90)
     ]
-    create_organic_lofted_mesh("Horse_Saddle", saddle_rings, num_segments=16, material=gold_mat, subsurf_levels=1)
+    create_organic_lofted_mesh("Horse_Chamfron", chamfron_rings, num_segments=16, material=gold_mat, subsurf_levels=1)
 
-    # 4. Mounted Kshatriya Dragoon Rider seated astride facing forward (-Y)
-    # Rider Legs in Stirrups
-    for lx, side_label in [(-0.20, "L"), (0.20, "R")]:
-        leg_spine = [
-            Vector((lx * 0.70, -0.05, 1.15)),
-            Vector((lx * 1.10, -0.08, 0.92)),
-            Vector((lx * 1.00, -0.05, 0.72))
+    # Peytral (Golden chest barding plate)
+    peytral_rings = [
+        (1.30, 0.35, 0.22, 0.0, -0.48),
+        (1.44, 0.37, 0.24, 0.0, -0.55),
+        (1.52, 0.33, 0.20, 0.0, -0.62)
+    ]
+    create_organic_lofted_mesh("Horse_Peytral", peytral_rings, num_segments=16, material=gold_mat, subsurf_levels=1)
+
+    # 4. Four Articulated Muscular Equine Legs (Grounding at exact Z = 0.000m)
+    leg_configs = [
+        ("FL", -0.28, -0.42, False),
+        ("FR",  0.28, -0.42, False),
+        ("BL", -0.26,  0.55, True),
+        ("BR",  0.26,  0.55, True)
+    ]
+
+    for label, lx, ly, is_hind in leg_configs:
+        if not is_hind:
+            rings = [
+                (0.00, 0.095, 0.100, lx, ly - 0.05), # Hoof sole on ground (Z = 0.0000m)
+                (0.05, 0.080, 0.085, lx, ly - 0.04), # Hoof coronet band
+                (0.12, 0.065, 0.070, lx, ly - 0.03), # Pastern
+                (0.20, 0.075, 0.080, lx, ly - 0.02), # Fetlock joint
+                (0.40, 0.062, 0.068, lx, ly - 0.015), # Cannon bone
+                (0.68, 0.085, 0.090, lx, ly - 0.01), # Carpus / Knee
+                (0.95, 0.110, 0.115, lx, ly - 0.015), # Forearm
+                (1.15, 0.135, 0.135, lx, ly - 0.01), # Elbow
+                (1.35, 0.155, 0.160, lx, ly)         # Shoulder
+            ]
+        else:
+            rings = [
+                (0.00, 0.098, 0.102, lx, ly - 0.02), # Hoof sole on ground (Z = 0.0000m)
+                (0.05, 0.082, 0.088, lx, ly - 0.01), # Hoof coronet band
+                (0.14, 0.068, 0.072, lx, ly + 0.01), # Pastern
+                (0.22, 0.078, 0.085, lx, ly + 0.04), # Fetlock joint
+                (0.45, 0.065, 0.070, lx, ly + 0.08), # Cannon bone
+                (0.70, 0.095, 0.120, lx, ly + 0.14), # Hock
+                (0.98, 0.130, 0.140, lx, ly + 0.08), # Gaskin
+                (1.18, 0.160, 0.165, lx, ly + 0.03), # Stifle
+                (1.35, 0.180, 0.185, lx, ly)         # Hip / Haunch
+            ]
+
+        create_organic_lofted_mesh(f"Horse_Leg_{label}", rings, num_segments=16, material=horse_mat, subsurf_levels=1, cap_bottom=True, cap_top=True)
+
+        # Golden Kada / Ankle Bangle on fetlock
+        fz = 0.14 if is_hind else 0.13
+        fy = ly + 0.02 if is_hind else ly - 0.02
+        kada_spine = [Vector((lx, fy, fz)), Vector((lx, fy, fz + 0.07))]
+        create_swept_tube(f"Horse_Kada_{label}", kada_spine, [0.088, 0.088], num_segments=12, material=gold_mat, subsurf_levels=0)
+
+    # 5. Flowing Tail
+    tail_spine = [
+        Vector((0.0, 0.72, 1.40)),
+        Vector((0.0, 0.88, 1.25)),
+        Vector((0.0, 0.96, 0.85)),
+        Vector((0.0, 0.92, 0.42))
+    ]
+    create_swept_tube("Horse_Tail", tail_spine, [0.08, 0.11, 0.09, 0.03], num_segments=12, material=dark_mat, subsurf_levels=1)
+
+    # 6. Saddle Cloth (Jhul) & Saddle Seat
+    saddle_jhul_rings = [
+        (1.22, 0.42, 0.44, 0.0, 0.05, 8, 0.06),
+        (1.42, 0.44, 0.46, 0.0, 0.05, 8, 0.04),
+        (1.52, 0.38, 0.40, 0.0, 0.05)
+    ]
+    create_organic_lofted_mesh("Horse_SaddleJhul", saddle_jhul_rings, num_segments=16, material=crimson_mat, subsurf_levels=1)
+
+    saddle_seat_rings = [
+        (1.48, 0.28, 0.34, 0.0, 0.02),
+        (1.55, 0.30, 0.32, 0.0, 0.02),
+        (1.58, 0.26, 0.28, 0.0, 0.02)
+    ]
+    create_organic_lofted_mesh("Horse_Saddle", saddle_seat_rings, num_segments=16, material=gold_mat, subsurf_levels=1)
+
+    # 7. Mounted Kshatriya Warrior (Dragoon) Seated Astride
+    # Legs in Stirrups
+    for rx, side_label in [(-0.32, "L"), (0.32, "R")]:
+        rleg_spine = [
+            Vector((rx * 0.75, -0.05, 1.50)), # Thigh at hip
+            Vector((rx * 1.15, -0.15, 1.20)), # Knee wrapped around flank
+            Vector((rx * 1.05, -0.10, 0.85))  # Boot in stirrup
         ]
-        create_swept_tube(f"Dragoon_Leg_{side_label}", leg_spine, [0.085, 0.075, 0.065], num_segments=12, material=silk_mat, subsurf_levels=1)
+        create_swept_tube(f"Rider_Leg_{side_label}", rleg_spine, [0.11, 0.095, 0.08], num_segments=12, material=silk_mat, subsurf_levels=1)
 
-    # Rider Torso in Surya Kavacha
-    rider_torso_rings = [
-        (1.18, 0.20, 0.15, 0.0, -0.02),
-        (1.36, 0.24, 0.17, 0.0, -0.04),
-        (1.54, 0.26, 0.19, 0.0, -0.05),
-        (1.66, 0.22, 0.15, 0.0, -0.03)
+        # Stirrup
+        stirrup_spine = [Vector((rx * 1.05, -0.10, 0.84)), Vector((rx * 1.05, -0.10, 0.78))]
+        create_swept_tube(f"Rider_Stirrup_{side_label}", stirrup_spine, [0.085, 0.085], num_segments=10, material=gold_mat, subsurf_levels=0)
+
+    # Rider Torso in Surya Kavacha Armor (Named riderTorso)
+    torso_rings = [
+        (1.52, 0.26, 0.20, 0.0, -0.02),
+        (1.74, 0.30, 0.22, 0.0, -0.04),
+        (1.96, 0.33, 0.24, 0.0, -0.05),
+        (2.12, 0.28, 0.19, 0.0, -0.03)
     ]
-    create_organic_lofted_mesh("Dragoon_Torso", rider_torso_rings, num_segments=16, material=gold_mat, subsurf_levels=1)
+    create_organic_lofted_mesh("riderTorso", torso_rings, num_segments=16, material=gold_mat, subsurf_levels=1)
 
-    # Head and Crested Pagri
+    # Surya Sun Medallion on Chest
+    sun_rings = [
+        (1.88, 0.09, 0.02, 0.0, -0.27),
+        (1.88, 0.01, 0.01, 0.0, -0.28)
+    ]
+    create_organic_lofted_mesh("Rider_SunMedallion", sun_rings, num_segments=12, material=gold_mat, subsurf_levels=0, cap_top=True)
+
+    # Pauldrons (Shoulder guards)
+    for px, side_label in [(-0.30, "L"), (0.30, "R")]:
+        pauldron_spine = [Vector((px, -0.04, 2.02)), Vector((px * 1.15, -0.04, 1.95))]
+        create_swept_tube(f"Rider_Pauldron_{side_label}", pauldron_spine, [0.12, 0.10], num_segments=12, material=gold_mat, subsurf_levels=1)
+
+    # Left Arm Holding Reins
+    arm_l_spine = [
+        Vector((-0.30, -0.04, 2.02)),
+        Vector((-0.26, -0.32, 1.82)),
+        Vector((-0.12, -0.48, 1.68))
+    ]
+    create_swept_tube("Rider_Arm_L", arm_l_spine, [0.075, 0.065, 0.055], num_segments=10, material=silk_mat, subsurf_levels=1)
+
+    # Right Arm Couching Lance
+    arm_r_spine = [
+        Vector((0.30, -0.04, 2.02)),
+        Vector((0.38, -0.05, 1.88)),
+        Vector((0.42, -0.15, 2.02))
+    ]
+    create_swept_tube("Rider_Arm_R", arm_r_spine, [0.075, 0.070, 0.060], num_segments=10, material=gold_mat, subsurf_levels=1)
+
+    # Rider Head & Face (Named riderHead)
     rhead_rings = [
-        (1.68, 0.10, 0.11, 0.0, -0.04),
-        (1.78, 0.12, 0.13, 0.0, -0.05),
-        (1.88, 0.11, 0.11, 0.0, -0.03)
+        (2.14, 0.12, 0.13, 0.0, -0.04),
+        (2.26, 0.14, 0.15, 0.0, -0.05),
+        (2.38, 0.13, 0.13, 0.0, -0.03)
     ]
-    create_organic_lofted_mesh("Dragoon_Head", rhead_rings, num_segments=16, material=skin_mat, subsurf_levels=1)
+    create_organic_lofted_mesh("riderHead", rhead_rings, num_segments=16, material=skin_mat, subsurf_levels=1)
 
+    # Royal Rajput Mukuta / Pagri
     pagri_rings = [
-        (1.84, 0.14, 0.15, 0.0, -0.03),
-        (1.94, 0.16, 0.17, 0.0, -0.02),
-        (2.04, 0.13, 0.13, 0.0, -0.01),
-        (2.10, 0.04, 0.04, 0.0, 0.00)
+        (2.34, 0.16, 0.18, 0.0, -0.03),
+        (2.46, 0.19, 0.20, 0.0, -0.02),
+        (2.58, 0.16, 0.16, 0.0, -0.01),
+        (2.68, 0.05, 0.05, 0.0,  0.00)
     ]
-    create_organic_lofted_mesh("Dragoon_Pagri", pagri_rings, num_segments=16, material=silk_mat, subsurf_levels=1)
+    create_organic_lofted_mesh("Rider_Pagri", pagri_rings, num_segments=16, material=silk_mat, subsurf_levels=1, cap_top=True)
 
-    # 5. Ornate Recurved Indian Longbow (Dhanush) held in heroic firing posture
-    bow_spine = [
-        Vector((-0.25, -0.32, 1.05)),
-        Vector((-0.22, -0.38, 1.35)),
-        Vector((-0.20, -0.42, 1.62)),
-        Vector((-0.22, -0.38, 1.88)),
-        Vector((-0.25, -0.32, 2.15))
+    # Sarpech Jewel & Plume
+    sarpech_spine = [Vector((0.0, -0.20, 2.48)), Vector((0.0, -0.22, 2.58)), Vector((0.0, -0.20, 2.72))]
+    create_swept_tube("Rider_Sarpech", sarpech_spine, [0.022, 0.028, 0.005], num_segments=8, material=gold_mat, subsurf_levels=1)
+
+    # 8. 3.2m Heavy Cavalry Pennant Lance (Bhala)
+    # Couched in right hand: from rear balance butt (Y = +0.95, Z = 1.95) to tip (Y = -2.25, Z = 2.15)
+    lance_spine = [
+        Vector((0.42,  0.95, 1.95)), # Butt / counterweight pommel
+        Vector((0.42,  0.05, 2.02)), # Grip inside hand
+        Vector((0.42, -0.25, 2.04)), # Vamplate handguard position
+        Vector((0.42, -1.85, 2.12)), # Collar before blade
+        Vector((0.42, -2.25, 2.15))  # Piercing spearhead tip
     ]
-    create_swept_tube("Dhanush_Bow", bow_spine, [0.018, 0.024, 0.028, 0.024, 0.018], num_segments=12, material=gold_mat, subsurf_levels=1)
+    create_swept_tube("Lance_Shaft", lance_spine, [0.024, 0.022, 0.020, 0.016, 0.004], num_segments=12, material=steel_mat, subsurf_levels=1)
 
-    # Bowstring
-    string_spine = [Vector((-0.25, -0.31, 1.06)), Vector((-0.25, -0.31, 2.14))]
-    create_swept_tube("Dhanush_String", string_spine, [0.005, 0.005], num_segments=6, material=steel_mat, subsurf_levels=0)
+    # Lance Vamplate Guard
+    vamplate_spine = [Vector((0.42, -0.22, 2.04)), Vector((0.42, -0.28, 2.04))]
+    create_swept_tube("Lance_Vamplate", vamplate_spine, [0.12, 0.12], num_segments=16, material=gold_mat, subsurf_levels=0)
 
-    # 6. Golden Quiver (Tarkash) with Fletched Arrows slung across rider's back
-    quiver_spine = [Vector((0.18, 0.14, 1.25)), Vector((0.18, 0.12, 1.75))]
-    create_swept_tube("Tarkash_Quiver", quiver_spine, [0.065, 0.075], num_segments=12, material=gold_mat, subsurf_levels=1)
+    # Lance Silk Swallowtail Pennant
+    pennant_spine = [
+        Vector((0.42, -1.85, 2.12)),
+        Vector((0.42, -1.55, 2.24)),
+        Vector((0.42, -1.15, 2.30))
+    ]
+    create_swept_tube("Lance_Pennant", pennant_spine, [0.08, 0.14, 0.02], num_segments=8, material=silk_mat, subsurf_levels=1)
 
-    # 4 Fletched Arrows
-    for a in range(4):
-        ao = (a - 1.5) * 0.032
-        arr_spine = [Vector((0.18 + ao, 0.12, 1.70)), Vector((0.18 + ao, 0.12, 2.05))]
-        create_swept_tube(f"Tarkash_Arrow_{a}", arr_spine, [0.010, 0.010], num_segments=6, material=steel_mat, subsurf_levels=0)
+    # Lance Tip (Named Lance_Tip)
+    tip_spine = [
+        Vector((0.42, -2.22, 2.148)),
+        Vector((0.42, -2.25, 2.150))
+    ]
+    create_swept_tube("Lance_Tip", tip_spine, [0.012, 0.002], num_segments=8, material=steel_mat, subsurf_levels=0)
 
     export_glb("assets/ashvarohi.glb")
 

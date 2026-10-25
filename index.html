@@ -1708,78 +1708,84 @@
 
     function buildPuranicKnight(rig, mats, team) {
       const model = cloneModelWithSkeleton(ModelManager.models.ashvarohi.scene);
-      model.scale.setScalar(0.86); // Equal scale 0.86 on both sides for balanced equestrian majesty
-      model.rotation.y = 0; // Model naturally faces +Z; aligns horse heading with riderGroup (+Z)
-      model.position.set(0, 0.36, 0); // Ground contact alignment (hooves strictly grounded on stone)
+      model.scale.setScalar(1.0); // Imperial cavalry scale (1.0)
+      model.rotation.y = 0; // Model naturally faces +Z; rig.root applies army facing (PI for White, 0 for Black)
+      model.position.set(0, 0, 0); // Exact ground contact y=0.000m (hooves strictly grounded on stone)
       applyPuranicTheme(model, team);
 
       model.traverse(child => {
         const n = child.name || '';
-        // Hide crude geometric cylinder rider and crude lance so the lifelike sculpted Dragoon takes full prominence
-        if (n.includes('Rider') || n.includes('Lance') || n.includes('Cube') || n.includes('Pedestal') || n.includes('Rune') || n.includes('Torus') || n.includes('Disc')) {
+        if (n.includes('Cube') || n.includes('Pedestal') || n.includes('Rune') || n.includes('Torus') || n.includes('Disc')) {
           child.visible = false;
         }
       });
 
-      // Sculpted Kshatriya Dragoon Warrior Mounted on Horse (Snug & Anatomical)
-      const riderGroup = new THREE.Group();
-      riderGroup.position.set(0, 0.12, -0.02);
+      // Anatomical limb pivots for articulated 4-legged equine locomotion:
+      // Foreleg shoulder pivots at y = 1.35m, z = 0.425m
+      // Hindleg hip pivots at y = 1.35m, z = -0.591m
+      // Ground contact is mathematically guaranteed: y = 1.35*(1 - cos(theta)) >= 0, kissing floor at theta = 0
+      const legPivots = [
+        { name: 'Horse_Leg_FL', px: -0.28, py: 1.35, pz: 0.425, kadaName: 'Horse_Kada_FL' },
+        { name: 'Horse_Leg_FR', px:  0.28, py: 1.35, pz: 0.425, kadaName: 'Horse_Kada_FR' },
+        { name: 'Horse_Leg_BL', px: -0.26, py: 1.35, pz: -0.591, kadaName: 'Horse_Kada_BL' },
+        { name: 'Horse_Leg_BR', px:  0.26, py: 1.35, pz: -0.591, kadaName: 'Horse_Kada_BR' }
+      ];
 
-      // 1. Dhoti Legs Seated Astride Saddle with Booted Feet in Stirrups
-      [-0.16, 0.16].forEach(lx => {
-        const legCurve = new THREE.CatmullRomCurve3([
-          new THREE.Vector3(lx * 0.85, 1.05, 0.02),
-          new THREE.Vector3(lx * 1.15, 0.88, 0.14),
-          new THREE.Vector3(lx * 1.05, 0.68, 0.08)
-        ]);
-        const legMesh = new THREE.Mesh(new THREE.TubeGeometry(legCurve, 8, 0.075, 8, false), mats.armor);
-        const boot = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.048, 0.22, 8), mats.dark);
-        boot.position.set(lx * 1.05, 0.58, 0.08);
-        const stirrup = new THREE.Mesh(new THREE.TorusGeometry(0.065, 0.012, 8, 12), mats.trim);
-        stirrup.position.set(lx * 1.05, 0.52, 0.08);
-        stirrup.rotation.x = Math.PI / 2;
-        riderGroup.add(legMesh, boot, stirrup);
+      rig.quadLegs = [];
+      legPivots.forEach(lp => {
+        const pivot = new THREE.Group();
+        pivot.name = lp.name;
+        pivot.position.set(lp.px, lp.py, lp.pz);
+
+        const legMesh = model.getObjectByName(lp.name);
+        const kadaMesh = model.getObjectByName(lp.kadaName);
+
+        if (legMesh) {
+          legMesh.position.set(-lp.px, -lp.py, -lp.pz);
+          pivot.add(legMesh);
+        }
+        if (kadaMesh) {
+          kadaMesh.position.set(-lp.px, -lp.py, -lp.pz);
+          pivot.add(kadaMesh);
+        }
+
+        model.add(pivot);
+        rig.quadLegs.push(pivot);
       });
 
-      // 2. Muscular Torso & 24K Surya Kavacha Cuirass
-      const cuirassGeo = new THREE.CylinderGeometry(0.24, 0.19, 0.48, 12);
-      cuirassGeo.scale(1.15, 1.0, 0.85);
-      const cuirass = new THREE.Mesh(cuirassGeo, mats.trim);
-      cuirass.position.set(0, 1.15, 0.04);
-      // Surya Sun Medallion on Chest
-      const sunMedallion = new THREE.Mesh(new THREE.CircleGeometry(0.09, 12), mats.glow);
-      sunMedallion.position.set(0, 1.20, 0.21);
-      // Pauldrons (Shoulder Guards)
-      [-0.26, 0.26].forEach(px => {
-        const pauldron = new THREE.Mesh(new THREE.SphereGeometry(0.12, 10, 8, 0, Math.PI * 2, 0, Math.PI * 0.6), mats.trim);
-        pauldron.position.set(px, 1.32, 0.04);
-        riderGroup.add(pauldron);
-      });
-      riderGroup.add(cuirass, sunMedallion);
+      // Bind tail pivot for dynamic equine locomotion
+      const tailMesh = model.getObjectByName('Horse_Tail');
+      if (tailMesh) {
+        const tailPivot = new THREE.Group();
+        tailPivot.name = 'Horse_Tail_Pivot';
+        tailPivot.position.set(0, 1.40, -0.70);
+        tailMesh.position.set(0, -1.40, 0.70);
+        tailPivot.add(tailMesh);
+        model.add(tailPivot);
+        rig.tail = tailPivot;
+      }
 
-      // 3. Warrior Head & Crested Royal Mukuta / Pagri
-      const head = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 12), mats.armor);
-      head.position.set(0, 1.48, 0.06);
-      const crown = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.26, 12), mats.trim);
-      crown.position.set(0, 1.62, 0.06);
-      const sarpechGem = new THREE.Mesh(new THREE.OctahedronGeometry(0.045, 0), mats.glow);
-      sarpechGem.position.set(0, 1.60, 0.18);
-      const plume = new THREE.Mesh(new THREE.ConeGeometry(0.03, 0.18, 6), mats.armor);
-      plume.position.set(0, 1.76, 0.12);
-      plume.rotation.x = -0.35;
-      riderGroup.add(head, crown, sarpechGem, plume);
+      // Bind neck pivot for natural neck flexion
+      const neckMesh = model.getObjectByName('Horse_Neck');
+      if (neckMesh) {
+        const neckPivot = new THREE.Group();
+        neckPivot.name = 'Horse_Neck_Pivot';
+        neckPivot.position.set(0, 1.42, 0.42);
+        neckMesh.position.set(0, -1.42, -0.42);
+        neckPivot.add(neckMesh);
+        model.add(neckPivot);
+        rig.neck = neckPivot;
+      }
 
-      // 4. Arms in Heroic Archer Firing Stance
-      const armL = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.042, 0.42, 8), mats.armor);
-      armL.position.set(-0.20, 1.26, 0.22);
-      armL.rotation.set(Math.PI / 3, 0.2, -0.4);
-      const armR = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.042, 0.38, 8), mats.armor);
-      armR.position.set(0.18, 1.22, 0.08);
-      armR.rotation.set(-0.2, 0.1, 0.5);
-      riderGroup.add(armL, armR);
+      rig.head = model.getObjectByName('Horse_Head') || rig.head;
+      rig.lance = model.getObjectByName('Lance_Shaft');
+      const lanceTip = model.getObjectByName('Lance_Tip');
+      if (lanceTip) {
+        rig.weaponTip = lanceTip;
+      }
 
       rig.torso.position.set(0, 0, 0);
-      rig.torso.add(model, riderGroup);
+      rig.torso.add(model);
       rig.bodyRoot.add(rig.torso);
       rig.isRealistic = true;
     }
@@ -2068,7 +2074,7 @@
         howdahGroup.add(mast, bannerMesh);
         rig.torso.add(howdahGroup);
       }
-      else if (type === PIECE_KNIGHT) {
+      else if (type === PIECE_KNIGHT && !ModelManager.isLoaded) {
         // =====================================================================
         // 3. KNIGHT (Ashvarohi Dragoon Archer):
         //    - Ornate Recurved Indian Long Bow (Dhanush) in Heroic Firing Stance
@@ -3212,6 +3218,8 @@
           rig.legR.rotation.set(0, 0, 0);
           if (rig.quadLegs) rig.quadLegs.forEach(ql => ql.rotation.set(0, 0, 0));
           if (rig.trunkSegs) rig.trunkSegs.forEach(ts => ts.rotation.set(0, 0, 0));
+          if (rig.tail) rig.tail.rotation.set(0, 0, 0);
+          if (rig.neck) rig.neck.rotation.set(0, 0, 0);
           return;
         }
 
@@ -3226,8 +3234,44 @@
           // Chariot wheel rotation strictly proportional to locomotion speed
           rig.wheels.forEach(wh => { wh.rotation.x += dt * 14.0 * w; });
         } else if (rig.type === PIECE_KNIGHT) {
-          // Dragoon mount gallop sway
-          rig.torso.rotation.x = Math.sin(p) * 0.042 * w;
+          // Biomechanical 2-Beat Diagonal Trot Kinematics (Ashvarohi)
+          const phi = p;
+          const s = Math.sin(phi);
+          const c = Math.cos(phi);
+
+          // Diagonal limb pairs (Trot):
+          // Pair A: legFL (0) + legBR (3) swing in phase
+          // Pair B: legFR (1) + legBL (2) swing in opposite phase
+          if (rig.quadLegs && rig.quadLegs.length === 4) {
+            rig.quadLegs[0].rotation.x =  s * 0.50 * w; // FL
+            rig.quadLegs[1].rotation.x = -s * 0.50 * w; // FR
+            rig.quadLegs[2].rotation.x = -s * 0.50 * w; // BL
+            rig.quadLegs[3].rotation.x =  s * 0.50 * w; // BR
+          }
+
+          // Natural trot pitch (s * 0.012 rad) & roll (sin(2*phi) * 0.010 rad) aligned with stride dynamics
+          const pitch = s * 0.012 * w;
+          const roll = Math.sin(phi * 2) * 0.010 * w;
+          const groundComp = (Math.max(0, 0.425 * pitch, -0.591 * pitch) + Math.abs(roll) * 0.28 + 0.072) * Math.abs(s) * w;
+
+          // Pure nominal spine vertical bob on torso (|sin(phi)| * 0.038m):
+          rig.torso.position.y = Math.abs(s) * 0.038 * w;
+          // Floor-clearance suspension on bodyRoot:
+          rig.bodyRoot.position.y = groundComp;
+
+          // Torso pitch & roll:
+          rig.torso.rotation.x = pitch;
+          rig.torso.rotation.z = roll;
+
+          // Neck flexion & head nod:
+          if (rig.neck) rig.neck.rotation.x = -c * 0.065 * w;
+          if (rig.head && rig.head !== rig.neck) rig.head.rotation.x = Math.sin(phi * 2) * 0.040 * w;
+
+          // Tail sway:
+          if (rig.tail) {
+            rig.tail.rotation.y = Math.sin(phi - 0.55) * 0.14 * w;
+            rig.tail.rotation.x = Math.cos(phi * 2) * 0.05 * w;
+          }
         } else {
           // Kshatriya Foot Soldier / King / Queen: martial stride torso counter-twist
           const s = Math.sin(p);
@@ -5722,15 +5766,46 @@
               }
             }
             else if (rig.type === PIECE_KNIGHT) {
-              // 2. ASHVAROHI: Equestrian Ground Canter / Trot
-              const hStride = Math.sin(elapsed * 12.0);
-              rig.torso.rotation.x = hStride * 0.085;
-              rig.bodyRoot.position.y = Math.abs(hStride) * 0.095;
+              // 2. ASHVAROHI: Biomechanical 2-Beat Diagonal Trot Kinematics
+              const phi = elapsed * 11.5;
+              const hStride = Math.sin(phi);
+              const hCos = Math.cos(phi);
+
+              // Diagonal limb pairs (Trot):
+              // Pair A: legFL (0) + legBR (3) swing in phase
+              // Pair B: legFR (1) + legBL (2) swing in opposite phase
               if (rig.quadLegs && rig.quadLegs.length === 4) {
-                rig.quadLegs[0].rotation.x = hStride * 0.55;
-                rig.quadLegs[1].rotation.x = -hStride * 0.55;
-                rig.quadLegs[2].rotation.x = -hStride * 0.55;
-                rig.quadLegs[3].rotation.x = hStride * 0.55;
+                rig.quadLegs[0].rotation.x =  hStride * 0.50; // FL
+                rig.quadLegs[1].rotation.x = -hStride * 0.50; // FR
+                rig.quadLegs[2].rotation.x = -hStride * 0.50; // BL
+                rig.quadLegs[3].rotation.x =  hStride * 0.50; // BR
+              }
+
+              const pitch = hStride * 0.012;
+              const roll = Math.sin(phi * 2) * 0.010;
+              const groundComp = (Math.max(0, 0.425 * pitch, -0.591 * pitch) + Math.abs(roll) * 0.28 + 0.072) * Math.abs(hStride);
+
+              // Pure nominal spine vertical bob on torso:
+              rig.torso.position.y = Math.abs(hStride) * 0.038;
+              // Floor-clearance suspension on bodyRoot:
+              rig.bodyRoot.position.y = groundComp;
+
+              // Torso pitch & roll:
+              rig.torso.rotation.x = pitch;
+              rig.torso.rotation.z = roll;
+
+              // Neck flexion & tail sway:
+              if (rig.neck) rig.neck.rotation.x = -hCos * 0.065;
+              if (rig.head && rig.head !== rig.neck) rig.head.rotation.x = Math.sin(phi * 2) * 0.040;
+              if (rig.tail) {
+                rig.tail.rotation.y = Math.sin(phi - 0.55) * 0.14;
+                rig.tail.rotation.x = Math.cos(phi * 2) * 0.05;
+              }
+
+              if (elapsed - lastStepSound > 0.18) {
+                lastStepSound = elapsed;
+                sfx.playStep(PIECE_KNIGHT);
+                spawnFootstepDustPuff(rig.root.position, hStride > 0 ? 0.25 : -0.25, 0.65);
               }
             }
             else if (rig.type === PIECE_BISHOP) {
@@ -5798,6 +5873,8 @@
             rig.bodyRoot.position.set(0, 0, 0);
             rig.quadLegs.forEach(ql => ql.rotation.set(0, 0, 0));
             if (rig.trunkSegs) rig.trunkSegs.forEach(ts => ts.rotation.set(0, 0, 0));
+            if (rig.tail) rig.tail.rotation.set(0, 0, 0);
+            if (rig.neck) rig.neck.rotation.set(0, 0, 0);
             rig.walkWeight = 0;
 
             // All units always face opponent upon finishing movement (White faces -Z = Math.PI, Black faces +Z = 0)
@@ -5982,6 +6059,8 @@
             rig.torso.position.set(0, 0, 0);
             rig.bodyRoot.position.set(0, 0, 0);
             if (rig.quadLegs) rig.quadLegs.forEach(ql => ql.rotation.set(0, 0, 0));
+            if (rig.tail) rig.tail.rotation.set(0, 0, 0);
+            if (rig.neck) rig.neck.rotation.set(0, 0, 0);
             rig.walkWeight = 0;
 
             if (!landingTriggered) {
@@ -6006,20 +6085,28 @@
         const glowHex = isWhite ? 0xfef08a : 0xf43f5e;
         const headMat = new THREE.MeshBasicMaterial({ color: glowHex });
         const steelMat = new THREE.MeshStandardMaterial({ color: 0x22242b, roughness: 0.3, metalness: 0.8 });
-        const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 1.35, 6), steelMat);
-        shaft.rotation.x = Math.PI / 2;
-        const tip = new THREE.Mesh(new THREE.ConeGeometry(0.055, 0.28, 6), headMat);
-        tip.rotation.x = -Math.PI / 2;
-        tip.position.z = 0.75;
-        const fletch1 = new THREE.Mesh(new THREE.BoxGeometry(0.005, 0.16, 0.28), headMat);
-        fletch1.position.z = -0.52;
-        const fletch2 = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.005, 0.28), headMat);
-        fletch2.position.z = -0.52;
-        const arrowLight = new THREE.PointLight(glowHex, 2.2, 4.0);
-        arrowLight.position.z = 0.75;
-        arrowGroup.add(shaft, tip, fletch1, fletch2, arrowLight);
+        const pennantMat = new THREE.MeshStandardMaterial({ color: isWhite ? 0xd97706 : 0x991b1b, roughness: 0.4 });
 
-        // Arrow originates from warrior's drawn bow position
+        // Authentic 3.2m Couched Pennant Lance Projectile
+        const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.028, 3.20, 8), steelMat);
+        shaft.rotation.x = Math.PI / 2;
+        const tip = new THREE.Mesh(new THREE.ConeGeometry(0.065, 0.42, 8), headMat);
+        tip.rotation.x = -Math.PI / 2;
+        tip.position.z = 1.60;
+
+        // Golden Surya Spiral Runic Ring
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(0.055, 0.012, 6, 12), headMat);
+        ring.position.z = 1.35;
+
+        // Flowing Crimson/Gold Battle Pennant Streamer
+        const pennant = new THREE.Mesh(new THREE.BoxGeometry(0.005, 0.28, 0.75), pennantMat);
+        pennant.position.set(0, 0.14, 0.95);
+
+        const arrowLight = new THREE.PointLight(glowHex, 2.8, 5.0);
+        arrowLight.position.z = 1.60;
+        arrowGroup.add(shaft, tip, ring, pennant, arrowLight);
+
+        // Lance originates from warrior's couched lance position
         const start = fromPos.clone().add(new THREE.Vector3(0, 1.85, 0));
         // Aimed directly at the victim's chest / heart height
         const end = toPos.clone().add(new THREE.Vector3(0, 1.15, 0));
@@ -6045,7 +6132,7 @@
               timeScale = 0.16;
               document.body.classList.add('slowmo-impact-active');
               const killCoords = document.getElementById('killCamCoords');
-              if (killCoords) killCoords.textContent = 'BULLET-TIME 0.16X // ARROW PIERCING TRAJECTORY';
+              if (killCoords) killCoords.textContent = 'BULLET-TIME 0.16X // 3.2M LANCE IMPALE';
               camera.fov = 28;
               camera.updateProjectionMatrix();
               ambientLight.intensity = 0.45;
@@ -6131,6 +6218,9 @@
       const stagingStopDist = stopDistMap[attackerRig.type] || 1.6;
       const stagingPos = targetWorldPos.clone().addScaledVector(attackDir, -stagingStopDist);
       const defTargetYaw = Math.atan2(-attackDir.x, -attackDir.z);
+      const atkTargetYaw = Math.atan2(attackDir.x, attackDir.z);
+      attackerRig.root.rotation.y = atkTargetYaw;
+      defenderRig.root.rotation.y = defTargetYaw;
 
       // Non-blocking defender turn so attack advance begins immediately without initial stall
       const defTurnPromise = animateWeightTransferTurn(defenderRig, defTargetYaw, 0.20);
@@ -6575,40 +6665,36 @@
             }
           }
           else if (attackerRig.type === PIECE_KNIGHT) {
-            // INNOVATIVE FATAL STRIKE: ASHVAROHI REARING STEED & SOLAR LONGBOW HEART STRIKE
-            // Rapid zero-lag release: instant rearing (~100ms), swift draw (~80ms), hypersonic arrow release at ~180ms
-            if (t < 0.12) {
-              // Phase 1: Rapid dynamic equestrian rear (0 - 0.10s)
-              const p1 = t / 0.12;
+            // AUTHENTIC PURANIC ASHVAROHI: 3.2M SPIRAL PENNANT LANCE IMPALE COMBAT
+            if (t < 0.16) {
+              // Phase 1: Rapid equestrian rear onto hind legs (-0.65 rad)
+              const p1 = t / 0.16;
               const rearEase = Math.sin(p1 * (Math.PI / 2));
-              attackerRig.bodyRoot.rotation.x = -0.82 * rearEase;
-              attackerRig.bodyRoot.position.y = 0.95 * rearEase;
+              attackerRig.bodyRoot.rotation.x = -0.65 * rearEase;
+              attackerRig.bodyRoot.position.y = 0.88 * rearEase;
               if (attackerRig.quadLegs && attackerRig.quadLegs.length === 4) {
-                attackerRig.quadLegs[0].rotation.x = -0.95 * rearEase;
-                attackerRig.quadLegs[1].rotation.x = -0.75 * rearEase;
+                attackerRig.quadLegs[0].rotation.x = -0.85 * rearEase;
+                attackerRig.quadLegs[1].rotation.x = -0.65 * rearEase;
+                attackerRig.quadLegs[2].rotation.x =  0.22 * rearEase;
+                attackerRig.quadLegs[3].rotation.x =  0.22 * rearEase;
               }
-              if (attackerRig.bowWeapon) {
-                attackerRig.bowWeapon.rotation.set(-0.35 * rearEase, 0.45 * rearEase, -0.25);
-                attackerRig.bowWeapon.position.set(-0.20, 1.65 + 0.25 * rearEase, 0.45);
-              }
-              attackerRig.armR.position.set(0.15, 0.65, -0.45 * rearEase);
-            } else if (t < 0.22) {
-              // Phase 2: Instant solar draw & target lock (0.10s - 0.18s)
-              const p2 = (t - 0.12) / 0.10;
-              attackerRig.bodyRoot.rotation.x = -0.82 + Math.sin(p2 * Math.PI) * 0.05;
-              attackerRig.bodyRoot.position.y = 0.95 + Math.sin(p2 * Math.PI) * 0.03;
+              if (attackerRig.neck) attackerRig.neck.rotation.x = 0.22 * rearEase;
+              if (attackerRig.tail) attackerRig.tail.rotation.x = -0.35 * rearEase;
+              if (attackerRig.armR) attackerRig.armR.position.set(0.15, 0.65, -0.45 * rearEase);
+            } else if (t < 0.26) {
+              // Phase 2: Couched 3.2m Pennant Lance Target Lock onto victim's core
+              const p2 = (t - 0.16) / 0.10;
+              attackerRig.bodyRoot.rotation.x = -0.65 + Math.sin(p2 * Math.PI) * 0.04;
+              attackerRig.bodyRoot.position.y = 0.88 + Math.sin(p2 * Math.PI) * 0.02;
               if (Math.floor(elapsed * 40) % 2 === 0) {
                 spawnRunicGlintTrail(attackerRig.root.position.clone().add(new THREE.Vector3(0, 1.8, 0)), attackerRig.team);
               }
-              defenderRig.torso.rotation.x = -0.25 * p2;
-              defenderRig.head.rotation.x = 0.20 * p2;
-            } else if (t < 0.45) {
-              // Phase 3: ARROW RELEASE & HYPERSONIC HEART STRIKE (Triggers immediately at ~180ms)
-              const p3 = (t - 0.22) / 0.23;
-              if (attackerRig.bowWeapon) {
-                attackerRig.bowWeapon.rotation.x = -0.15;
-              }
-              attackerRig.armR.position.set(0.15, 0.65, 0.25 * p3);
+              defenderRig.torso.rotation.x = -0.28 * p2;
+              defenderRig.head.rotation.x = 0.22 * p2;
+            } else if (t < 0.48) {
+              // Phase 3: Explosive Lance Thrust & 3.2m Pennant Lance Impale
+              const p3 = (t - 0.26) / 0.22;
+              if (attackerRig.armR) attackerRig.armR.position.set(0.15, 0.65, 0.25 * p3);
               if (!attackerRig.arrowShot) {
                 attackerRig.arrowShot = true;
                 sfx.playHit();
@@ -6618,14 +6704,18 @@
               }
             } else {
               // Phase 4: Warhorse lands powerfully back on 4 hooves, dust puff on landing
-              const p4 = (t - 0.45) / 0.55;
+              const p4 = (t - 0.48) / 0.52;
               const landEase = p4 * p4;
-              attackerRig.bodyRoot.rotation.x = -0.82 * (1 - landEase);
-              attackerRig.bodyRoot.position.y = 0.95 * (1 - landEase);
+              attackerRig.bodyRoot.rotation.x = -0.65 * (1 - landEase);
+              attackerRig.bodyRoot.position.y = 0.88 * (1 - landEase);
               if (attackerRig.quadLegs && attackerRig.quadLegs.length === 4) {
-                attackerRig.quadLegs[0].rotation.x = -0.95 * (1 - landEase);
-                attackerRig.quadLegs[1].rotation.x = -0.75 * (1 - landEase);
+                attackerRig.quadLegs[0].rotation.x = -0.85 * (1 - landEase);
+                attackerRig.quadLegs[1].rotation.x = -0.65 * (1 - landEase);
+                attackerRig.quadLegs[2].rotation.x =  0.22 * (1 - landEase);
+                attackerRig.quadLegs[3].rotation.x =  0.22 * (1 - landEase);
               }
+              if (attackerRig.neck) attackerRig.neck.rotation.x = 0.22 * (1 - landEase);
+              if (attackerRig.tail) attackerRig.tail.rotation.x = -0.35 * (1 - landEase);
               if (p4 > 0.45 && !attackerRig.horseLanded) {
                 attackerRig.horseLanded = true;
                 sfx.playHorseLanding();

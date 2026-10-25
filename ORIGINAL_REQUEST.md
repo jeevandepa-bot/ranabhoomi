@@ -153,3 +153,98 @@ Integrity mode: development
 - [ ] Opening cinematic sequence introduces both clans with sweeping camera fly-through and conch fanfare.
 - [ ] Combat kills execute full choreography with victim stagger and polyhedral destruction across piece captures.
 - [ ] Automated Chrome DevTools verification confirms sustained 60 FPS and zero console exceptions.
+
+
+## 2026-10-24T04:52:42Z
+
+Comprehensive performance optimization of the Royal Ranbhoomi 3D ancient Indian battle chess application to eliminate runtime lag, rendering stutter, and frame drops on Vercel, delivering sustained 60 FPS gameplay across mobile and desktop devices.
+
+Working directory: `c:\Users\Jeevan\Downloads\ranabhoomi`
+Integrity mode: development
+Requested team: Full multi-agent team
+
+## Requirements
+
+### R1. Render Loop & Draw-Call Optimization
+Profile and eliminate rendering bottlenecks across the Three.js scene graph. Optimize the 1,500+ temple and canyon ruin meshes (e.g., geometry merging, static mesh flags, freezing shadow map updates for static scenery, or frustum culling) to drastically reduce draw calls and CPU/GPU overhead per frame.
+
+### R2. Fluid 60 FPS Combat & Bullet-Time Choreography
+Optimize combat sequences, slow-motion bullet time, particle emitters, dynamic lighting pulses, and 34-shard physics explosions so that executions (Padati sword cleaves, Gajraj charges, Ashvarohi leaps) execute at sustained 55–60 FPS without stutter or frame hitching.
+
+### R3. Mobile GPU & Memory Profile
+Optimize mobile viewport performance (specifically landscape mode on iOS Safari and Android Chrome):
+- Cap `devicePixelRatio` safely (e.g. max 1.5x on mobile) to eliminate heavy fill-rate and fragment shader bottlenecks on high-DPI screens.
+- Avoid redundant per-frame allocations or garbage collection spikes in `requestAnimationFrame`.
+- Ensure zero frame stalls (>16.6ms) during touch camera rotation, piece dragging, and AI move deliberation.
+
+### R4. Regression Integrity & Deployment
+Preserve all gameplay mechanics, 3D character geometries, weapon alignments, board visibility, minimal mobile HUD with corner options drawer, and ensure 100% of the 60 E2E tests in `tests/run_e2e_tests.js` pass. Deploy and verify live on Vercel production (`https://ranabhoomi.vercel.app`).
+
+## Acceptance Criteria
+
+### Performance & Frame Rate
+- [ ] Sustained >= 55–60 FPS during normal board view, piece selection, and continuous camera orbit on both desktop and mobile viewports.
+- [ ] Sustained >= 50–60 FPS during peak combat kill sequences, slow-motion bullet time, and shard explosions.
+- [ ] Frame time variance <= 16.6ms on average, with zero hitching spikes > 25ms.
+- [ ] WebGL draw calls and shadow calculations reduced significantly for static scenery.
+
+### Verification & Stability
+- [ ] All 60 automated E2E tests in `tests/run_e2e_tests.js` pass 100% with zero console errors.
+- [ ] Mobile options drawer, fullscreen mode, and turn indicators function with 0px overlap.
+- [ ] Production deployment on Vercel returns HTTP 200 and verified smooth via live telemetry.
+
+
+## 2026-10-25T04:18:59Z
+
+# Teamwork Project: Re-engineering Royal Ranbhoomi Ashvarohi (Knight)
+
+Re-engineer the Royal Ranbhoomi Ashvarohi (Knight) from the ground up: eliminate hovering/floating legs so hooves make firm ground contact at y = 0.000m, increase the horse's size and physical presence to imperial scale (~35-40% increase), rebuild the mount and mounted Kshatriya dragoon into an authentic organic 3D sculpture using Blender 4.2 (`C:\Users\Jeevan\blender-4.2.0-windows-x64\blender.exe`) and AI concept generation (eliminating all primitive cylinders and floating rings), and implement natural 4-legged trotting, parabolic L-jump kinematics, and a cinematic Heavy Cavalry Lance Impale kill sequence.
+
+Working directory: `c:\Users\Jeevan\Downloads\ranabhoomi`
+Integrity mode: development
+
+## Requirements
+
+### R1. Grounding, Scale & Organic Anatomical Modeling
+- Eliminate all hovering meshes, floating pink rings, and primitive geometric stacking (cylinders/spheres) on both the horse and mounted Kshatriya rider.
+- Ground all four hooves firmly on the stone tiles at exact height `y = 0.000m` in idle rest stance.
+- Increase horse scale by ~35%–40% to achieve commanding imperial cavalry stature proportionate to the board tiles and neighboring units.
+- Use AI image generation for reference concepts and Blender 4.2 (`C:\Users\Jeevan\blender-4.2.0-windows-x64\blender.exe`) to sculpt/export a continuous organic GLB model with realistic Marwari lyre-curved ears, armored barding, saddle cloth (Jhul), and anatomical Kshatriya warrior with ornate pagri/mukuta.
+
+### R2. Biomechanical 4-Leg Equine Walking & Canter Gait
+- Implement an articulated 4-legged walking/trotting gait during standard piece movement with proper diagonal limb pairs (trot) or 4-beat pacing, natural spine bob, neck flexion, and tail sway.
+- Ground contact must remain strictly tangential to $y = 0.000\text{m}$ during hoof-down phases without clipping into the floor or floating in the air.
+
+### R3. Parabolic L-Jump Vault & Landing Shockwave
+- Modernize the Knight's signature L-shape movement:
+  - Phase 1: Powerful rear-leg launch with rearing wind-up and takeoff dust burst.
+  - Phase 2: Parabolic ballistic trajectory vaulting over intervening pieces with tucked forelegs and trailing hindlegs.
+  - Phase 3: Dynamic mid-air banking roll turning into the destination square.
+  - Phase 4: Grounded 4-hoof landing with suspension compression and radial shockwave.
+
+### R4. Heavy Cavalry Lance Impale Combat & Slow-Motion Bullet-Time
+- Re-choreograph the Knight's capture sequence into the Heavy Cavalry Lance Impale:
+  - Stage 1: Knight rears up on hind legs (-0.65 rad) locking target with sacred-geometry reticle and conch/war-horn audio.
+  - Stage 2: Explosive galloping charge closing distance with camera dolly-zoom tracking.
+  - Stage 3: Point-blank 3.2m pennant lance thrust through defender's core with 0.16x bullet-time dilation, slow-mo speed lines, and 34-octahedron polyhedral shatter physics.
+
+### R5. Regression & Automated Verification
+- Pass 100% of the 60 E2E tests in `tests/run_e2e_tests.js`.
+- Verify 0-height ground contact and non-clipping across all 64 tiles.
+- Deploy to Vercel production (`https://ranabhoomi.vercel.app`) and verify live gameplay.
+
+## Acceptance Criteria
+
+### Grounding & Scale
+- [ ] Absolute ground contact for horse hooves at $y = 0.000\text{m}$ (0px hovering, zero floating primitive rings).
+- [ ] Horse dimensions scaled up ~35–40% to fill tactical tile proportions cleanly without overflowing adjacent tiles (|x|, |z| <= 0.88 * tile radius).
+- [ ] Continuous organic anatomy with PBR textures, eliminating primitive geometric cylinders/spheres.
+
+### Locomotion & Combat
+- [ ] Natural 4-legged leg articulation during walk, trot, and L-jump.
+- [ ] Smooth parabolic vaulting arc with zero floor clipping.
+- [ ] Multi-stage Heavy Cavalry Lance Impale kill sequence with slow-motion bullet time and 34-shard explosion.
+
+### Stability & Verification
+- [ ] 60/60 automated E2E tests pass in `tests/run_e2e_tests.js`.
+- [ ] Vercel deployment verified live and responsive.

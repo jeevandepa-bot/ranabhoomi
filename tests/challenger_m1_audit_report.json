@@ -1,0 +1,500 @@
+{
+  "glb_path": "C:\\Users\\Jeevan\\Downloads\\ranabhoomi\\assets\\ashvarohi.glb",
+  "glb_exists": true,
+  "glb_size_bytes": 1112068,
+  "test_results": {
+    "criterion_1_hoof_grounding": {
+      "global_min_z": 0.0,
+      "global_max_z": 2.7200002670288086,
+      "hoof_metrics": {
+        "Horse_Leg_FL": {
+          "min_z": 0.0,
+          "contact_vert_count": 1,
+          "total_vert_count": 610,
+          "sole_width_x": 0.0,
+          "sole_length_y": 0.0,
+          "sole_center": [
+            -0.28,
+            -0.47
+          ]
+        },
+        "Horse_Leg_FR": {
+          "min_z": 0.0,
+          "contact_vert_count": 1,
+          "total_vert_count": 610,
+          "sole_width_x": 0.0,
+          "sole_length_y": 0.0,
+          "sole_center": [
+            0.28,
+            -0.47
+          ]
+        },
+        "Horse_Leg_BL": {
+          "min_z": 0.0,
+          "contact_vert_count": 1,
+          "total_vert_count": 610,
+          "sole_width_x": 0.0,
+          "sole_length_y": 0.0,
+          "sole_center": [
+            -0.26,
+            0.53
+          ]
+        },
+        "Horse_Leg_BR": {
+          "min_z": 0.0,
+          "contact_vert_count": 1,
+          "total_vert_count": 610,
+          "sole_width_x": 0.0,
+          "sole_length_y": 0.0,
+          "sole_center": [
+            0.26,
+            0.53
+          ]
+        }
+      },
+      "penetrating_meshes": [],
+      "ground_touching_meshes": [
+        "Horse_Leg_FL",
+        "Horse_Leg_FR",
+        "Horse_Leg_BL",
+        "Horse_Leg_BR"
+      ],
+      "support_polygon_area_m2": 0.54,
+      "status": "PASS"
+    },
+    "criterion_2_lyre_ears": {
+      "left_ear": {
+        "side": "L",
+        "vert_count": 142,
+        "z_range": [
+          2.2195,
+          2.48
+        ],
+        "base_center": [
+          -0.0707,
+          -0.8528,
+          2.235
+        ],
+        "mid_center": [
+          -0.0671,
+          -0.8783,
+          2.37
+        ],
+        "tip_center": [
+          -0.0294,
+          -0.8981,
+          2.4706
+        ],
+        "base_lateral_dist": 0.0707,
+        "mid_lateral_dist": 0.0671,
+        "tip_lateral_dist": 0.0294,
+        "max_lateral_dist": 0.1012,
+        "inward_vector_x": 0.0376,
+        "is_inward_pointing": true,
+        "tip_closer_than_mid": true,
+        "tip_closer_than_base": true
+      },
+      "right_ear": {
+        "side": "R",
+        "vert_count": 142,
+        "z_range": [
+          2.2195,
+          2.48
+        ],
+        "base_center": [
+          0.0707,
+          -0.8528,
+          2.235
+        ],
+        "mid_center": [
+          0.0671,
+          -0.8783,
+          2.37
+        ],
+        "tip_center": [
+          0.0294,
+          -0.8981,
+          2.4706
+        ],
+        "base_lateral_dist": 0.0707,
+        "mid_lateral_dist": 0.0671,
+        "tip_lateral_dist": 0.0294,
+        "max_lateral_dist": 0.1012,
+        "inward_vector_x": -0.0376,
+        "is_inward_pointing": true,
+        "tip_closer_than_mid": true,
+        "tip_closer_than_base": true
+      },
+      "inter_base_distance_m": 0.1414,
+      "inter_mid_distance_m": 0.1342,
+      "inter_tip_distance_m": 0.0588,
+      "tip_convergence_ratio": 0.4158,
+      "status": "PASS"
+    },
+    "criterion_3_lance": {
+      "nodes_present": {
+        "Lance_Shaft": true,
+        "Lance_Tip": true,
+        "Lance_Vamplate": true,
+        "Lance_Pennant": true
+      },
+      "lance_meshes": [
+        "Lance_Shaft",
+        "Lance_Tip",
+        "Lance_Vamplate",
+        "Lance_Pennant"
+      ],
+      "shaft_vert_count": 266,
+      "tip_vert_count": 18,
+      "butt_point": [
+        0.42,
+        0.95,
+        1.95
+      ],
+      "tip_point": [
+        0.42,
+        -2.2501,
+        2.148
+      ],
+      "lance_y_span_m": 3.2001,
+      "lance_euclidean_len_m": 3.2063,
+      "tip_node_center": [
+        0.42,
+        -2.235,
+        2.149
+      ],
+      "tip_to_shaft_gap_m": 0.015,
+      "lance_ground_clearance_min_z_m": 1.9375,
+      "status": "PASS"
+    },
+    "criterion_4_organic_vs_primitives": {
+      "primitive_name_matches": [],
+      "mesh_topologies": {
+        "Horse_Body": {
+          "verts": 442,
+          "faces": 880,
+          "eval_verts": 442,
+          "eval_faces": 880,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Neck": {
+          "verts": 290,
+          "faces": 576,
+          "eval_verts": 290,
+          "eval_faces": 576,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Mane": {
+          "verts": 218,
+          "faces": 432,
+          "eval_verts": 218,
+          "eval_faces": 432,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Head": {
+          "verts": 257,
+          "faces": 480,
+          "eval_verts": 257,
+          "eval_faces": 480,
+          "smooth_ratio": 1.0
+        },
+        "Horse_LyreEar_L": {
+          "verts": 142,
+          "faces": 280,
+          "eval_verts": 142,
+          "eval_faces": 280,
+          "smooth_ratio": 1.0
+        },
+        "Horse_LyreEar_R": {
+          "verts": 142,
+          "faces": 280,
+          "eval_verts": 142,
+          "eval_faces": 280,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Chamfron": {
+          "verts": 160,
+          "faces": 256,
+          "eval_verts": 160,
+          "eval_faces": 256,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Peytral": {
+          "verts": 160,
+          "faces": 256,
+          "eval_verts": 160,
+          "eval_faces": 256,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Leg_FL": {
+          "verts": 610,
+          "faces": 1216,
+          "eval_verts": 610,
+          "eval_faces": 1216,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Kada_FL": {
+          "verts": 26,
+          "faces": 48,
+          "eval_verts": 26,
+          "eval_faces": 48,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Leg_FR": {
+          "verts": 610,
+          "faces": 1216,
+          "eval_verts": 610,
+          "eval_faces": 1216,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Kada_FR": {
+          "verts": 26,
+          "faces": 48,
+          "eval_verts": 26,
+          "eval_faces": 48,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Leg_BL": {
+          "verts": 610,
+          "faces": 1216,
+          "eval_verts": 610,
+          "eval_faces": 1216,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Kada_BL": {
+          "verts": 26,
+          "faces": 48,
+          "eval_verts": 26,
+          "eval_faces": 48,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Leg_BR": {
+          "verts": 610,
+          "faces": 1216,
+          "eval_verts": 610,
+          "eval_faces": 1216,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Kada_BR": {
+          "verts": 26,
+          "faces": 48,
+          "eval_verts": 26,
+          "eval_faces": 48,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Tail": {
+          "verts": 218,
+          "faces": 432,
+          "eval_verts": 218,
+          "eval_faces": 432,
+          "smooth_ratio": 1.0
+        },
+        "Horse_SaddleJhul": {
+          "verts": 160,
+          "faces": 256,
+          "eval_verts": 160,
+          "eval_faces": 256,
+          "smooth_ratio": 1.0
+        },
+        "Horse_Saddle": {
+          "verts": 160,
+          "faces": 256,
+          "eval_verts": 160,
+          "eval_faces": 256,
+          "smooth_ratio": 1.0
+        },
+        "Rider_Leg_L": {
+          "verts": 170,
+          "faces": 336,
+          "eval_verts": 170,
+          "eval_faces": 336,
+          "smooth_ratio": 1.0
+        },
+        "Rider_Stirrup_L": {
+          "verts": 22,
+          "faces": 40,
+          "eval_verts": 22,
+          "eval_faces": 40,
+          "smooth_ratio": 1.0
+        },
+        "Rider_Leg_R": {
+          "verts": 170,
+          "faces": 336,
+          "eval_verts": 170,
+          "eval_faces": 336,
+          "smooth_ratio": 1.0
+        },
+        "Rider_Stirrup_R": {
+          "verts": 22,
+          "faces": 40,
+          "eval_verts": 22,
+          "eval_faces": 40,
+          "smooth_ratio": 1.0
+        },
+        "riderTorso": {
+          "verts": 224,
+          "faces": 384,
+          "eval_verts": 224,
+          "eval_faces": 384,
+          "smooth_ratio": 1.0
+        },
+        "Rider_SunMedallion": {
+          "verts": 25,
+          "faces": 36,
+          "eval_verts": 25,
+          "eval_faces": 36,
+          "smooth_ratio": 0.0
+        },
+        "Rider_Pauldron_L": {
+          "verts": 122,
+          "faces": 240,
+          "eval_verts": 122,
+          "eval_faces": 240,
+          "smooth_ratio": 1.0
+        },
+        "Rider_Pauldron_R": {
+          "verts": 122,
+          "faces": 240,
+          "eval_verts": 122,
+          "eval_faces": 240,
+          "smooth_ratio": 1.0
+        },
+        "Rider_Arm_L": {
+          "verts": 142,
+          "faces": 280,
+          "eval_verts": 142,
+          "eval_faces": 280,
+          "smooth_ratio": 1.0
+        },
+        "Rider_Arm_R": {
+          "verts": 142,
+          "faces": 280,
+          "eval_verts": 142,
+          "eval_faces": 280,
+          "smooth_ratio": 1.0
+        },
+        "riderHead": {
+          "verts": 160,
+          "faces": 256,
+          "eval_verts": 160,
+          "eval_faces": 256,
+          "smooth_ratio": 1.0
+        },
+        "Rider_Pagri": {
+          "verts": 257,
+          "faces": 480,
+          "eval_verts": 257,
+          "eval_faces": 480,
+          "smooth_ratio": 1.0
+        },
+        "Rider_Sarpech": {
+          "verts": 114,
+          "faces": 224,
+          "eval_verts": 114,
+          "eval_faces": 224,
+          "smooth_ratio": 1.0
+        },
+        "Lance_Shaft": {
+          "verts": 266,
+          "faces": 528,
+          "eval_verts": 266,
+          "eval_faces": 528,
+          "smooth_ratio": 1.0
+        },
+        "Lance_Vamplate": {
+          "verts": 34,
+          "faces": 64,
+          "eval_verts": 34,
+          "eval_faces": 64,
+          "smooth_ratio": 1.0
+        },
+        "Lance_Pennant": {
+          "verts": 114,
+          "faces": 224,
+          "eval_verts": 114,
+          "eval_faces": 224,
+          "smooth_ratio": 1.0
+        },
+        "Lance_Tip": {
+          "verts": 18,
+          "faces": 32,
+          "eval_verts": 18,
+          "eval_faces": 32,
+          "smooth_ratio": 1.0
+        }
+      },
+      "smooth_faces_total": 13424,
+      "flat_faces_total": 36,
+      "subsurf_evaluated_ratio": 0.0,
+      "anatomical_components": {
+        "horse_body": {
+          "present": [
+            "Horse_Body",
+            "Horse_Neck",
+            "Horse_Head",
+            "Horse_Mane",
+            "Horse_Tail"
+          ],
+          "missing": []
+        },
+        "horse_barding": {
+          "present": [
+            "Horse_Chamfron",
+            "Horse_Peytral",
+            "Horse_SaddleJhul",
+            "Horse_Saddle"
+          ],
+          "missing": []
+        },
+        "rider_anatomy": {
+          "present": [
+            "riderTorso",
+            "riderHead",
+            "Rider_Leg_L",
+            "Rider_Leg_R",
+            "Rider_Arm_L",
+            "Rider_Arm_R"
+          ],
+          "missing": []
+        },
+        "rider_regalia": {
+          "present": [
+            "Rider_Pagri",
+            "Rider_Sarpech",
+            "Rider_SunMedallion"
+          ],
+          "missing": []
+        }
+      },
+      "smooth_ratio_overall": 0.9973,
+      "obsolete_bows": [],
+      "floating_rings": [],
+      "status": "PASS"
+    },
+    "criterion_5_scale_clearance": {
+      "bbox_min": [
+        -0.4306,
+        -2.2501,
+        0.0
+      ],
+      "bbox_max": [
+        0.54,
+        1.0181,
+        2.72
+      ],
+      "width_x_m": 0.9706,
+      "length_y_m": 3.2682,
+      "height_z_m": 2.72,
+      "max_lateral_half_width_m": 0.54,
+      "status": "PASS"
+    }
+  },
+  "failures": [],
+  "warnings": [
+    "Hoof Horse_Leg_FL has fewer than 4 contact vertices (1)",
+    "Hoof Horse_Leg_FR has fewer than 4 contact vertices (1)",
+    "Hoof Horse_Leg_BL has fewer than 4 contact vertices (1)",
+    "Hoof Horse_Leg_BR has fewer than 4 contact vertices (1)"
+  ],
+  "verdict": "APPROVE"
+}

@@ -1,0 +1,157 @@
+{
+  "timestamp": "2026-10-25T07:08:35.294Z",
+  "suite1_64tiles_rest": {
+    "totalSquareAudits": 128,
+    "totalHoofAudits": 512,
+    "rootElevationPass": 128,
+    "hoofElevationPass": 512,
+    "zeroPenetrationPass": 512,
+    "zeroHoverPass": 512,
+    "allPassed": true,
+    "sampleCorners": [
+      {
+        "tile": "a1",
+        "team": "White",
+        "wp": {
+          "x": -7,
+          "y": 0,
+          "z": 7
+        },
+        "rootY": 0,
+        "torsoY": 0,
+        "hoofHeights": {
+          "Horse_Leg_FL": 0,
+          "Horse_Leg_FR": 0,
+          "Horse_Leg_BL": 0,
+          "Horse_Leg_BR": 0
+        },
+        "pass": true
+      },
+      {
+        "tile": "h1",
+        "team": "White",
+        "wp": {
+          "x": 7,
+          "y": 0,
+          "z": 7
+        },
+        "rootY": 0,
+        "torsoY": 0,
+        "hoofHeights": {
+          "Horse_Leg_FL": 0,
+          "Horse_Leg_FR": 0,
+          "Horse_Leg_BL": 0,
+          "Horse_Leg_BR": 0
+        },
+        "pass": true
+      },
+      {
+        "tile": "a8",
+        "team": "Black",
+        "wp": {
+          "x": -7,
+          "y": 0,
+          "z": -7
+        },
+        "rootY": 0,
+        "torsoY": 0,
+        "hoofHeights": {
+          "Horse_Leg_FL": 0,
+          "Horse_Leg_FR": 0,
+          "Horse_Leg_BL": 0,
+          "Horse_Leg_BR": 0
+        },
+        "pass": true
+      },
+      {
+        "tile": "h8",
+        "team": "Black",
+        "wp": {
+          "x": 7,
+          "y": 0,
+          "z": -7
+        },
+        "rootY": 0,
+        "torsoY": 0,
+        "hoofHeights": {
+          "Horse_Leg_FL": 0,
+          "Horse_Leg_FR": 0,
+          "Horse_Leg_BL": 0,
+          "Horse_Leg_BR": 0
+        },
+        "pass": true
+      }
+    ]
+  },
+  "suite2_dynamic_trot_cycle": {
+    "sampleCount": 720,
+    "minObservedY": -0.00002,
+    "maxObservedY": 0.22636,
+    "penetrationCount": 0,
+    "downPhaseTouchdowns": 11,
+    "downPhasePassCount": 11,
+    "symmetryCheck": true,
+    "maxSpineBob": 0.038,
+    "zeroPenetration": true,
+    "firmGroundKissOnDown": true,
+    "allPassed": true,
+    "profileSample": {
+      "deg0": {
+        "FL": 0,
+        "FR": 0,
+        "BL": 0,
+        "BR": 0
+      },
+      "deg90": {
+        "FL": 0.214,
+        "FR": 0.2015,
+        "BL": 0.1892,
+        "BR": 0.2011
+      },
+      "deg180": {
+        "FL": 0,
+        "FR": 0,
+        "BL": 0,
+        "BR": 0
+      },
+      "deg270": {
+        "FL": 0.2263,
+        "FR": 0.2136,
+        "BL": 0.1774,
+        "BR": 0.1885
+      }
+    }
+  },
+  "suite3_rest_recovery": {
+    "torsoPosZero": true,
+    "torsoRotZero": true,
+    "legRotsZero": true,
+    "neckRotZero": true,
+    "tailRotZero": true,
+    "allHoovesGrounded": true,
+    "hoofMinYs": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "allPassed": true
+  },
+  "suite4_scale_and_equipment": {
+    "dimensions": {
+      "width": 1.62,
+      "length": 3.268,
+      "height": 2.72
+    },
+    "widthWithinBounds": true,
+    "heightWithinBounds": true,
+    "hasLyreEars": true,
+    "hasLanceShaft": true,
+    "hasLanceTip": true,
+    "hasProceduralBow": false,
+    "hasProceduralQuiver": false,
+    "equipmentClean": true,
+    "allPassed": true
+  },
+  "consoleErrors": []
+}

@@ -33,12 +33,12 @@
     "forbidden_weapons_found": [],
     "dhal_bounds": {
       "min": [
-        -0.7159,
+        0.0041,
         -0.22,
         0.5941
       ],
       "max": [
-        -0.0041,
+        0.7159,
         -0.18,
         1.3059
       ],
@@ -63,12 +63,12 @@
     "center_boss_count": 1,
     "khanda_blade_bounds": {
       "min": [
-        0.3319,
+        -0.4281,
         -0.2648,
         1.13
       ],
       "max": [
-        0.4281,
+        -0.3319,
         -0.1443,
         2.08
       ],
@@ -228,26 +228,46 @@
   "ashvarohi": {
     "object_names": [
       "Horse_Body",
+      "Horse_Neck",
+      "Horse_Mane",
+      "Horse_Head",
       "Horse_LyreEar_L",
       "Horse_LyreEar_R",
+      "Horse_Chamfron",
+      "Horse_Peytral",
+      "Horse_Leg_FL",
+      "Horse_Kada_FL",
+      "Horse_Leg_FR",
+      "Horse_Kada_FR",
+      "Horse_Leg_BL",
+      "Horse_Kada_BL",
+      "Horse_Leg_BR",
+      "Horse_Kada_BR",
+      "Horse_Tail",
+      "Horse_SaddleJhul",
       "Horse_Saddle",
-      "Dragoon_Leg_L",
-      "Dragoon_Leg_R",
-      "Dragoon_Torso",
-      "Dragoon_Head",
-      "Dragoon_Pagri",
-      "Dhanush_Bow",
-      "Dhanush_String",
-      "Tarkash_Quiver",
-      "Tarkash_Arrow_0",
-      "Tarkash_Arrow_1",
-      "Tarkash_Arrow_2",
-      "Tarkash_Arrow_3"
+      "Rider_Leg_L",
+      "Rider_Stirrup_L",
+      "Rider_Leg_R",
+      "Rider_Stirrup_R",
+      "riderTorso",
+      "Rider_SunMedallion",
+      "Rider_Pauldron_L",
+      "Rider_Pauldron_R",
+      "Rider_Arm_L",
+      "Rider_Arm_R",
+      "riderHead",
+      "Rider_Pagri",
+      "Rider_Sarpech",
+      "Lance_Shaft",
+      "Lance_Vamplate",
+      "Lance_Pennant",
+      "Lance_Tip"
     ],
-    "mesh_count": 16,
-    "bow_found": true,
-    "quiver_found": true,
-    "arrow_count": 4
+    "mesh_count": 36,
+    "bow_found": false,
+    "quiver_found": false,
+    "arrow_count": 0
   },
   "ratha": {
     "object_names": [
@@ -256,35 +276,18 @@
       "Chariot_Flagstaff",
       "Surya_Banner",
       "Chakra_Wheel_L",
-      "Chakra_Spoke_L_0",
-      "Chakra_Spoke_L_1",
-      "Chakra_Spoke_L_2",
-      "Chakra_Spoke_L_3",
-      "Chakra_Spoke_L_4",
-      "Chakra_Spoke_L_5",
-      "Chakra_Spoke_L_6",
-      "Chakra_Spoke_L_7",
-      "Chakra_Hub_L",
       "Chakra_Wheel_R",
-      "Chakra_Spoke_R_0",
-      "Chakra_Spoke_R_1",
-      "Chakra_Spoke_R_2",
-      "Chakra_Spoke_R_3",
-      "Chakra_Spoke_R_4",
-      "Chakra_Spoke_R_5",
-      "Chakra_Spoke_R_6",
-      "Chakra_Spoke_R_7",
-      "Chakra_Hub_R",
+      "Chakra_Axle",
       "Sage_Dhoti",
       "Sage_Head",
       "Prabhamandala",
       "Gandiva_Bow"
     ],
-    "mesh_count": 28,
+    "mesh_count": 11,
     "wheel_l": true,
     "wheel_r": true,
-    "spoke_count": 16,
-    "hub_scythe_count": 2,
+    "spoke_count": 0,
+    "hub_scythe_count": 0,
     "prabhamandala": true,
     "gandiva_bow": true
   },
@@ -326,7 +329,7 @@
     },
     "ashvarohi": {
       "min_z": 0.0,
-      "grounding_mesh": "Horse_Body"
+      "grounding_mesh": "Horse_Leg_FL"
     },
     "ratha": {
       "min_z": 0.0,
@@ -341,5 +344,7 @@
       "grounding_mesh": "Samrat_Boot_L"
     }
   },
-  "failures": []
+  "failures": [
+    "Ashvarohi: Jousting lance detected: ['Lance_Shaft', 'Lance_Vamplate', 'Lance_Pennant', 'Lance_Tip']"
+  ]
 }
