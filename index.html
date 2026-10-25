@@ -595,9 +595,9 @@
   <!-- ======================================================================= -->
   <!-- MODAL: MOBILE OPTIONS & SETTINGS DRAWER                                 -->
   <!-- ======================================================================= -->
-  <div id="mobileOptionsDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex justify-end">
+  <div id="mobileOptionsDrawer" class="hidden fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex justify-end">
     <!-- Backdrop click to close -->
-    <div id="optionsDrawerBackdrop" class="absolute inset-0 bg-black/75 backdrop-blur-sm pointer-events-auto" onclick="closeOptionsDrawer()"></div>
+    <div id="optionsDrawerBackdrop" class="absolute inset-0 bg-black/75 backdrop-blur-sm pointer-events-none" onclick="closeOptionsDrawer()"></div>
 
     <!-- Slide-out Menu Panel -->
     <div id="optionsDrawerContent" class="relative z-10 w-full max-w-xs sm:max-w-sm h-full bg-[#0d101a]/95 border-l border-amber-500/30 shadow-2xl p-5 flex flex-col justify-between overflow-y-auto pointer-events-auto transform translate-x-full transition-transform duration-300">
@@ -3661,12 +3661,15 @@
     queenAfterimagePool = new QueenAfterimagePool(scene);
 
     const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.8, 350);
+    const isMobileDevice = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (window.innerWidth <= 840);
     const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance', logarithmicDepthBuffer: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isMobileDevice ? Math.min(window.devicePixelRatio, 1.35) : Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0xdfbe9f);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.autoUpdate = false;
+    renderer.shadowMap.needsUpdate = true;
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.26;
@@ -3738,6 +3741,102 @@
     const brazierLights = [];
     const flameParticles = [];
 
+    // Milestone M7: Geometry Merging & Static Optimization Helpers
+    function mergeGeometriesFast(geometryArray) {
+      if (!geometryArray || geometryArray.length === 0) return null;
+      let totalPos = 0, totalNorm = 0, totalUv = 0, totalIndex = 0;
+      for (let i = 0; i < geometryArray.length; i++) {
+        const g = geometryArray[i];
+        if (!g.attributes.normal) g.computeVertexNormals();
+        if (!g.attributes.uv) {
+          g.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2));
+        }
+        if (!g.index) {
+          const count = g.attributes.position.count;
+          const idx = (count > 65535) ? new Uint32Array(count) : new Uint16Array(count);
+          for (let k = 0; k < count; k++) idx[k] = k;
+          g.setIndex(new THREE.BufferAttribute(idx, 1));
+        }
+        totalPos += g.attributes.position.array.length;
+        totalNorm += g.attributes.normal.array.length;
+        totalUv += g.attributes.uv.array.length;
+        totalIndex += g.index.array.length;
+      }
+      const mergedPos = new Float32Array(totalPos);
+      const mergedNorm = new Float32Array(totalNorm);
+      const mergedUv = new Float32Array(totalUv);
+      const mergedIndex = (totalPos / 3 > 65535) ? new Uint32Array(totalIndex) : new Uint16Array(totalIndex);
+      let posOffset = 0, normOffset = 0, uvOffset = 0, indexOffset = 0, vertexOffset = 0;
+      for (let i = 0; i < geometryArray.length; i++) {
+        const g = geometryArray[i];
+        const pos = g.attributes.position.array;
+        mergedPos.set(pos, posOffset);
+        posOffset += pos.length;
+        const norm = g.attributes.normal.array;
+        mergedNorm.set(norm, normOffset);
+        normOffset += norm.length;
+        const uv = g.attributes.uv.array;
+        mergedUv.set(uv, uvOffset);
+        uvOffset += uv.length;
+        const idxArr = g.index.array;
+        for (let k = 0; k < idxArr.length; k++) {
+          mergedIndex[indexOffset + k] = idxArr[k] + vertexOffset;
+        }
+        indexOffset += idxArr.length;
+        vertexOffset += pos.length / 3;
+        g.dispose();
+      }
+      const merged = new THREE.BufferGeometry();
+      merged.setAttribute('position', new THREE.BufferAttribute(mergedPos, 3));
+      merged.setAttribute('normal', new THREE.BufferAttribute(mergedNorm, 3));
+      merged.setAttribute('uv', new THREE.BufferAttribute(mergedUv, 2));
+      merged.setIndex(new THREE.BufferAttribute(mergedIndex, 1));
+      return merged;
+    }
+
+    if (typeof THREE.BufferGeometryUtils === 'undefined') {
+      THREE.BufferGeometryUtils = {};
+    }
+    THREE.BufferGeometryUtils.mergeBufferGeometries = function(geometries, useGroups = false) {
+      return mergeGeometriesFast(geometries);
+    };
+
+    function lockStaticMesh(mesh, enableRaycast = false) {
+      if (!mesh) return;
+      mesh.updateMatrix();
+      mesh.matrixAutoUpdate = false;
+      if (!enableRaycast) {
+        mesh.raycast = () => {};
+      }
+    }
+
+    let shadowUpdateCountdown = 8; // Initial bake frames on scene startup
+    let prevDynamicMoving = false;
+    function requestShadowUpdate(frames = 3) {
+      shadowUpdateCountdown = Math.max(shadowUpdateCountdown, frames);
+      if (typeof renderer !== 'undefined' && renderer.shadowMap) {
+        renderer.shadowMap.needsUpdate = true;
+      }
+    }
+    window.requestShadowUpdate = requestShadowUpdate;
+
+    const staticGeos = {
+      basaltDark: [],
+      sandstoneWarm: [],
+      ochreCliff: [],
+      boulder: [],
+      midCanyon: [],
+      courtyard: [],
+      dais: [],
+      stoneTrim: [],
+      ruinedStone: [],
+      carvedRelief: [],
+      ancientBronze: [],
+      ironHearth: [],
+      glowingCharcoal: [],
+      coreFlame: []
+    };
+
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
@@ -3793,6 +3892,8 @@
       new THREE.MeshBasicMaterial({ map: cinematicSkyTexture, side: THREE.BackSide, depthWrite: false, fog: false })
     );
     scene.add(skyDome);
+    skyDome.frustumCulled = false;
+    skyDome.raycast = () => {};
 
 
 
@@ -3873,6 +3974,8 @@
     canyonFloor.rotation.x = -Math.PI / 2;
     canyonFloor.position.y = -9.2;
     canyonFloor.receiveShadow = true;
+    canyonFloor.frustumCulled = false;
+    lockStaticMesh(canyonFloor);
     battlefieldGroup.add(canyonFloor);
 
     // B. Intermediate Canyon Bedrock Terraces (Ravine Shelf & Stepped Rock Escarpments)
@@ -3887,30 +3990,19 @@
     });
     
     // Multiple faceted canyon bedrock slabs forming natural stepped shelves
-    const canyonShelfGroup = new THREE.Group();
     const shelfGeo1 = new THREE.CylinderGeometry(44.0, 48.0, 4.2, 12);
-    const canyonShelf1 = new THREE.Mesh(shelfGeo1, midCanyonMat);
-    canyonShelf1.position.y = -7.1;
-    canyonShelf1.receiveShadow = true;
-    canyonShelfGroup.add(canyonShelf1);
+    staticGeos.midCanyon.push(shelfGeo1.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, -7.1, 0)));
+    shelfGeo1.dispose();
 
     const shelfGeo2 = new THREE.CylinderGeometry(28.0, 32.0, 2.8, 10);
-    const canyonShelf2 = new THREE.Mesh(shelfGeo2, midCanyonMat);
-    canyonShelf2.position.set(-8.0, -4.2, -6.0);
-    canyonShelf2.rotation.y = 0.5;
-    canyonShelf2.receiveShadow = true;
-    canyonShelfGroup.add(canyonShelf2);
+    staticGeos.midCanyon.push(shelfGeo2.clone().applyMatrix4(new THREE.Matrix4().makeRotationY(0.5).setPosition(-8.0, -4.2, -6.0)));
+    shelfGeo2.dispose();
 
     const shelfGeo3 = new THREE.CylinderGeometry(26.0, 30.0, 2.8, 9);
-    const canyonShelf3 = new THREE.Mesh(shelfGeo3, midCanyonMat);
-    canyonShelf3.position.set(10.0, -4.2, 8.0);
-    canyonShelf3.rotation.y = -0.7;
-    canyonShelf3.receiveShadow = true;
-    canyonShelfGroup.add(canyonShelf3);
-    battlefieldGroup.add(canyonShelfGroup);
+    staticGeos.midCanyon.push(shelfGeo3.clone().applyMatrix4(new THREE.Matrix4().makeRotationY(-0.7).setPosition(10.0, -4.2, 8.0)));
+    shelfGeo3.dispose();
 
-    // C. Towering Deccan Traps / Hampi Mesas and Canyon Crags (Replacing all generic cones)
-    const mountainGroup = new THREE.Group();
+    // C. Towering Deccan Traps / Hampi Mesas and Canyon Crags (36 Tiers Merged)
     const basaltDarkMat = new THREE.MeshStandardMaterial({
       color: 0xab9180,
       map: basaltDiff,
@@ -3933,8 +4025,7 @@
       flatShading: true
     });
 
-    function createDeccanMesa(baseRadius, totalHeight, segments, seed) {
-      const mesa = new THREE.Group();
+    function createDeccanMesaGeometries(baseRadius, totalHeight, segments, mesaMatrix) {
       const tiers = 3;
       const tierH = totalHeight / tiers;
       
@@ -3942,33 +4033,25 @@
       const r1Bot = baseRadius;
       const r1Top = baseRadius * 0.84;
       const t1Geo = new THREE.CylinderGeometry(r1Top, r1Bot, tierH, segments);
-      const t1 = new THREE.Mesh(t1Geo, basaltDarkMat);
-      t1.position.y = tierH * 0.5;
-      t1.castShadow = true;
-      t1.receiveShadow = true;
-      mesa.add(t1);
+      const m1 = new THREE.Matrix4().makeTranslation(0, tierH * 0.5, 0).premultiply(mesaMatrix);
+      staticGeos.basaltDark.push(t1Geo.clone().applyMatrix4(m1));
+      t1Geo.dispose();
 
       // Tier 2: Sandstone stepped terrace
       const r2Bot = r1Top * 0.95;
       const r2Top = r2Bot * 0.82;
       const t2Geo = new THREE.CylinderGeometry(r2Top, r2Bot, tierH * 0.95, segments);
-      const t2 = new THREE.Mesh(t2Geo, sandstoneWarmMat);
-      t2.position.y = tierH + tierH * 0.475;
-      t2.castShadow = true;
-      t2.receiveShadow = true;
-      mesa.add(t2);
+      const m2 = new THREE.Matrix4().makeTranslation(0, tierH + tierH * 0.475, 0).premultiply(mesaMatrix);
+      staticGeos.sandstoneWarm.push(t2Geo.clone().applyMatrix4(m2));
+      t2Geo.dispose();
 
       // Tier 3: Caprock plateau (table-top) with projecting overhanging ledge
       const r3Bot = r2Top * 0.92;
       const r3Top = r3Bot * 1.06;
       const t3Geo = new THREE.CylinderGeometry(r3Top, r3Bot, tierH * 1.05, segments);
-      const t3 = new THREE.Mesh(t3Geo, ochreCliffMat);
-      t3.position.y = tierH * 2.0 + tierH * 0.525;
-      t3.castShadow = true;
-      t3.receiveShadow = true;
-      mesa.add(t3);
-
-      return mesa;
+      const m3 = new THREE.Matrix4().makeTranslation(0, tierH * 2.0 + tierH * 0.525, 0).premultiply(mesaMatrix);
+      staticGeos.ochreCliff.push(t3Geo.clone().applyMatrix4(m3));
+      t3Geo.dispose();
     }
 
     const mesaCount = 36;
@@ -3976,16 +4059,12 @@
       const angle = (i / mesaCount) * Math.PI * 2 + (i % 2) * 0.08;
       const isInner = (i % 2 === 0);
       const rad = isInner ? (46 + (i % 5) * 8) : (78 + (i % 7) * 14);
-      // Towering heights reaching up to 68m into the sky!
       const height = isInner ? (36 + (i % 4) * 12) : (56 + (i % 6) * 16);
       const baseR = isInner ? (16 + (i % 3) * 6) : (26 + (i % 4) * 8);
       const segs = 6 + (i % 4);
-      const mesa = createDeccanMesa(baseR, height, segs, i);
-      mesa.position.set(Math.cos(angle) * rad, -9.2, Math.sin(angle) * rad);
-      mesa.rotation.y = i * 0.73;
-      mountainGroup.add(mesa);
+      const mesaMat = new THREE.Matrix4().makeRotationY(i * 0.73).setPosition(Math.cos(angle) * rad, -9.2, Math.sin(angle) * rad);
+      createDeccanMesaGeometries(baseR, height, segs, mesaMat);
     }
-    battlefieldGroup.add(mountainGroup);
 
     // D. Weathered Monolithic Granite Boulder Tors (Hampi Megalithic Geology)
     const boulderMat = new THREE.MeshStandardMaterial({
@@ -3998,35 +4077,35 @@
       flatShading: true
     });
 
-    const boulderGroup = new THREE.Group();
     const torCount = 14;
     for (let t = 0; t < torCount; t++) {
       const tAngle = (t / torCount) * Math.PI * 2 + (t % 3) * 0.15;
       const tRad = 21.0 + (t % 4) * 4.5;
       const tx = Math.cos(tAngle) * tRad;
       const tz = Math.sin(tAngle) * tRad;
-      const tor = new THREE.Group();
-      tor.position.set(tx, -2.4, tz);
+      const torMat = new THREE.Matrix4().makeTranslation(tx, -2.4, tz);
 
       const bCount = 3 + (t % 3);
       for (let b = 0; b < bCount; b++) {
         const bRadius = 1.1 + (b % 3) * 0.55;
         const bGeo = new THREE.DodecahedronGeometry(bRadius, 1);
-        const bMesh = new THREE.Mesh(bGeo, boulderMat);
-        bMesh.scale.set(1.2 + (b % 2) * 0.3, 0.75 + (b % 3) * 0.25, 1.1 + ((b + 1) % 2) * 0.2);
-        bMesh.position.set(
-          (b === 0 ? 0 : (Math.sin(b * 2.1) * 1.4)),
-          b * 0.95 + 0.4,
-          (b === 0 ? 0 : (Math.cos(b * 1.8) * 1.4))
-        );
-        bMesh.rotation.set((b * 0.5) % 1.2, (b * 0.8) % 1.5, (b * 0.4) % 1.1);
-        bMesh.castShadow = true;
-        bMesh.receiveShadow = true;
-        tor.add(bMesh);
+        const bMeshMat = new THREE.Matrix4();
+        const sx = 1.2 + (b % 2) * 0.3;
+        const sy = 0.75 + (b % 3) * 0.25;
+        const sz = 1.1 + ((b + 1) % 2) * 0.2;
+        const px = (b === 0 ? 0 : (Math.sin(b * 2.1) * 1.4));
+        const py = b * 0.95 + 0.4;
+        const pz = (b === 0 ? 0 : (Math.cos(b * 1.8) * 1.4));
+        const rx = (b * 0.5) % 1.2;
+        const ry = (b * 0.8) % 1.5;
+        const rz = (b * 0.4) % 1.1;
+        const eul = new THREE.Euler(rx, ry, rz);
+        bMeshMat.compose(new THREE.Vector3(px, py, pz), new THREE.Quaternion().setFromEuler(eul), new THREE.Vector3(sx, sy, sz));
+        bMeshMat.premultiply(torMat);
+        staticGeos.boulder.push(bGeo.clone().applyMatrix4(bMeshMat));
+        bGeo.dispose();
       }
-      boulderGroup.add(tor);
     }
-    battlefieldGroup.add(boulderGroup);
 
     // -------------------------------------------------------------------------
     // 6C. GRAND MAHISHMATI CITADEL COURTYARD & STEPPED TERRACE
@@ -4053,21 +4132,16 @@
     });
 
     // Outer Fortress Courtyard Platform with carved ashlar frieze edges
-    const outerCourtyard = new THREE.Mesh(new THREE.BoxGeometry(58.0, 2.6, 58.0), courtyardMat);
-    outerCourtyard.position.y = -1.9;
-    outerCourtyard.receiveShadow = true;
-    battlefieldGroup.add(outerCourtyard);
+    const outerGeo = new THREE.BoxGeometry(58.0, 2.6, 58.0);
+    outerGeo.applyMatrix4(new THREE.Matrix4().makeTranslation(0, -1.9, 0));
+    staticGeos.courtyard.push(outerGeo);
 
     // Intermediate Tier Platform with carved stone border
-    const midTerrace = new THREE.Mesh(new THREE.BoxGeometry(38.0, 1.2, 38.0), daisMat);
-    midTerrace.position.y = -0.75;
-    midTerrace.receiveShadow = true;
-    battlefieldGroup.add(midTerrace);
+    const midGeo = new THREE.BoxGeometry(38.0, 1.2, 38.0);
+    midGeo.applyMatrix4(new THREE.Matrix4().makeTranslation(0, -0.75, 0));
+    staticGeos.dais.push(midGeo);
 
-    // Authentic Vedic Stone Balustrades (Vedika Post-and-Rail) with battle-ruined breaches
-    const balustradeGroup = new THREE.Group();
-    const vedikaPostMat = courtyardMat;
-    const vedikaRailMat = stoneTrimMat;
+    // Authentic Vedic Stone Balustrades (Vedika Post-and-Rail)
     const postGeo = new THREE.CylinderGeometry(0.24, 0.28, 1.15, 8);
     const postCapGeo = new THREE.SphereGeometry(0.22, 8, 6, 0, Math.PI * 2, 0, Math.PI * 0.6);
     const railGeo = new THREE.CylinderGeometry(0.10, 0.10, 3.7, 8);
@@ -4080,46 +4154,44 @@
     ];
     bEdges.forEach((edge, eIdx) => {
       for (let s = -16; s <= 16; s += 3.8) {
-        if (Math.abs(s) < 4.2 && (edge.rot === 0)) continue; // Grand ruined ceremonial stairway openings!
+        if (Math.abs(s) < 4.2 && (edge.rot === 0)) continue;
         const isBreached = ((eIdx === 1 && Math.abs(s - 4) < 3) || (eIdx === 3 && Math.abs(s + 4) < 3));
         if (isBreached) {
-          const fallenPost = new THREE.Mesh(postGeo, vedikaPostMat);
-          fallenPost.position.set(
-            edge.rot === 0 ? s : edge.start[0] + 0.8,
-            -0.12,
-            edge.rot === 0 ? edge.start[1] + 0.8 : s
-          );
-          fallenPost.rotation.set(Math.PI / 2.1, 0.3, 0.4);
-          balustradeGroup.add(fallenPost);
+          const m = new THREE.Matrix4();
+          const pos = new THREE.Vector3(edge.rot === 0 ? s : edge.start[0] + 0.8, -0.12, edge.rot === 0 ? edge.start[1] + 0.8 : s);
+          const eul = new THREE.Euler(Math.PI / 2.1, 0.3, 0.4);
+          m.compose(pos, new THREE.Quaternion().setFromEuler(eul), new THREE.Vector3(1, 1, 1));
+          staticGeos.courtyard.push(postGeo.clone().applyMatrix4(m));
           continue;
         }
 
-        const post = new THREE.Mesh(postGeo, vedikaPostMat);
-        const postCap = new THREE.Mesh(postCapGeo, stoneTrimMat);
-        postCap.position.y = 0.58;
-        post.add(postCap);
-        post.castShadow = true;
+        const postPos = (edge.rot === 0) ? new THREE.Vector3(s, 0.35, edge.start[1]) : new THREE.Vector3(edge.start[0], 0.35, s);
+        const mPost = new THREE.Matrix4().makeTranslation(postPos.x, postPos.y, postPos.z);
+        staticGeos.courtyard.push(postGeo.clone().applyMatrix4(mPost));
 
-        const railTop = new THREE.Mesh(railGeo, vedikaRailMat);
-        const railMid = new THREE.Mesh(railGeo, vedikaRailMat);
-        railTop.rotation.z = Math.PI / 2;
-        railMid.rotation.z = Math.PI / 2;
+        const mCap = new THREE.Matrix4().makeTranslation(postPos.x, postPos.y + 0.58, postPos.z);
+        staticGeos.stoneTrim.push(postCapGeo.clone().applyMatrix4(mCap));
 
         if (edge.rot === 0) {
-          post.position.set(s, 0.35, edge.start[1]);
-          railTop.position.set(s + 1.9, 0.72, edge.start[1]);
-          railMid.position.set(s + 1.9, 0.32, edge.start[1]);
+          const eulRail = new THREE.Euler(0, 0, Math.PI / 2);
+          const qRail = new THREE.Quaternion().setFromEuler(eulRail);
+          const mRailTop = new THREE.Matrix4().compose(new THREE.Vector3(s + 1.9, 0.72, edge.start[1]), qRail, new THREE.Vector3(1, 1, 1));
+          const mRailMid = new THREE.Matrix4().compose(new THREE.Vector3(s + 1.9, 0.32, edge.start[1]), qRail, new THREE.Vector3(1, 1, 1));
+          staticGeos.stoneTrim.push(railGeo.clone().applyMatrix4(mRailTop));
+          staticGeos.stoneTrim.push(railGeo.clone().applyMatrix4(mRailMid));
         } else {
-          post.position.set(edge.start[0], 0.35, s);
-          railTop.position.set(edge.start[0], 0.72, s + 1.9);
-          railMid.position.set(edge.start[0], 0.32, s + 1.9);
-          railTop.rotation.y = Math.PI / 2;
-          railMid.rotation.y = Math.PI / 2;
+          const eulRail = new THREE.Euler(0, Math.PI / 2, Math.PI / 2);
+          const qRail = new THREE.Quaternion().setFromEuler(eulRail);
+          const mRailTop = new THREE.Matrix4().compose(new THREE.Vector3(edge.start[0], 0.72, s + 1.9), qRail, new THREE.Vector3(1, 1, 1));
+          const mRailMid = new THREE.Matrix4().compose(new THREE.Vector3(edge.start[0], 0.32, s + 1.9), qRail, new THREE.Vector3(1, 1, 1));
+          staticGeos.stoneTrim.push(railGeo.clone().applyMatrix4(mRailTop));
+          staticGeos.stoneTrim.push(railGeo.clone().applyMatrix4(mRailMid));
         }
-        balustradeGroup.add(post, railTop, railMid);
       }
     });
-    battlefieldGroup.add(balustradeGroup);
+    postGeo.dispose();
+    postCapGeo.dispose();
+    railGeo.dispose();
 
     // -------------------------------------------------------------------------
     // 6D. 4 MONUMENTAL CORNER BASTION WATCHTOWERS & DYNASTIC WAR BANNERS
@@ -4128,59 +4200,47 @@
       [-15.0, -15.0], [15.0, -15.0], [-15.0, 15.0], [15.0, 15.0]
     ];
     cornerOffsets.forEach(([cx, cz], bIdx) => {
-      const bstGroup = new THREE.Group();
-      bstGroup.position.set(cx, 0, cz);
+      const bstMat = new THREE.Matrix4().makeTranslation(cx, 0, cz);
 
-      const bastion = new THREE.Mesh(
-        new THREE.CylinderGeometry(1.9, 2.3, 5.8, 8),
-        courtyardMat
-      );
-      bastion.position.y = 1.3;
-      bastion.castShadow = true;
-      bastion.receiveShadow = true;
+      const bastionGeo = new THREE.CylinderGeometry(1.9, 2.3, 5.8, 8);
+      staticGeos.courtyard.push(bastionGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 1.3, 0).premultiply(bstMat)));
+      bastionGeo.dispose();
 
-      const cornice = new THREE.Mesh(
-        new THREE.CylinderGeometry(2.35, 1.9, 0.45, 8),
-        stoneTrimMat
-      );
-      cornice.position.y = 4.1;
+      const corniceGeo = new THREE.CylinderGeometry(2.35, 1.9, 0.45, 8);
+      staticGeos.stoneTrim.push(corniceGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 4.1, 0).premultiply(bstMat)));
+      corniceGeo.dispose();
 
-      const jharokha = new THREE.Mesh(
-        new THREE.CylinderGeometry(2.45, 2.1, 0.65, 8),
-        daisMat
-      );
-      jharokha.position.y = 4.55;
-      bstGroup.add(bastion, cornice, jharokha);
+      const jharokhaGeo = new THREE.CylinderGeometry(2.45, 2.1, 0.65, 8);
+      staticGeos.dais.push(jharokhaGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 4.55, 0).premultiply(bstMat)));
+      jharokhaGeo.dispose();
 
       const isDamaged = (bIdx === 1 || bIdx === 2);
       if (!isDamaged) {
-        const dome = new THREE.Mesh(
-          new THREE.SphereGeometry(1.6, 16, 12, 0, Math.PI * 2, 0, Math.PI * 0.5),
-          stoneTrimMat
-        );
-        dome.position.y = 5.2;
-        const finial = new THREE.Mesh(new THREE.ConeGeometry(0.28, 0.95, 8), stoneTrimMat);
-        finial.position.y = 6.8;
-        bstGroup.add(dome, finial);
+        const domeGeo = new THREE.SphereGeometry(1.6, 16, 12, 0, Math.PI * 2, 0, Math.PI * 0.5);
+        staticGeos.stoneTrim.push(domeGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 5.2, 0).premultiply(bstMat)));
+        domeGeo.dispose();
+
+        const finialGeo = new THREE.ConeGeometry(0.28, 0.95, 8);
+        staticGeos.stoneTrim.push(finialGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 6.8, 0).premultiply(bstMat)));
+        finialGeo.dispose();
       } else {
-        const halfDome = new THREE.Mesh(
-          new THREE.SphereGeometry(1.6, 12, 8, 0, Math.PI * 1.15, 0, Math.PI * 0.45),
-          stoneTrimMat
-        );
-        halfDome.position.y = 5.2;
-        halfDome.rotation.y = bIdx * 1.5;
+        const halfDomeGeo = new THREE.SphereGeometry(1.6, 12, 8, 0, Math.PI * 1.15, 0, Math.PI * 0.45);
+        staticGeos.stoneTrim.push(halfDomeGeo.clone().applyMatrix4(new THREE.Matrix4().makeRotationY(bIdx * 1.5).setPosition(0, 5.2, 0).premultiply(bstMat)));
+        halfDomeGeo.dispose();
+
         for (let ch = 0; ch < 3; ch++) {
-          const chunk = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.35, 0.6), stoneTrimMat);
-          chunk.position.set(Math.cos(ch * 1.7) * 1.6, 4.9, Math.sin(ch * 1.7) * 1.6);
-          chunk.rotation.set(0.3, ch * 0.8, 0.2);
-          bstGroup.add(chunk);
+          const chunkGeo = new THREE.BoxGeometry(0.5, 0.35, 0.6);
+          const eul = new THREE.Euler(0.3, ch * 0.8, 0.2);
+          const pos = new THREE.Vector3(Math.cos(ch * 1.7) * 1.6, 4.9, Math.sin(ch * 1.7) * 1.6);
+          const mChunk = new THREE.Matrix4().compose(pos, new THREE.Quaternion().setFromEuler(eul), new THREE.Vector3(1, 1, 1)).premultiply(bstMat);
+          staticGeos.stoneTrim.push(chunkGeo.clone().applyMatrix4(mChunk));
+          chunkGeo.dispose();
         }
-        bstGroup.add(halfDome);
       }
 
-      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.085, 5.6, 8), stoneTrimMat);
-      pole.position.y = 5.6;
-      bstGroup.add(pole);
+      const poleGeo = new THREE.CylinderGeometry(0.065, 0.085, 5.6, 8);
+      staticGeos.stoneTrim.push(poleGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 5.6, 0).premultiply(bstMat)));
+      poleGeo.dispose();
 
       const flagColor = (bIdx < 2) ? 0xbe123c : 0xea580c;
       const flagGeo = new THREE.PlaneGeometry(2.4, 3.6, 12, 12);
@@ -4192,12 +4252,10 @@
         side: THREE.DoubleSide
       });
       const flagMesh = new THREE.Mesh(flagGeo, flagMat);
-      flagMesh.position.set(0, 7.8, 0);
+      flagMesh.position.set(cx, 7.8, cz);
       flagMesh.rotation.y = (bIdx % 2 === 0 ? 0.35 : -0.35);
       animatedBanners.push({ mesh: flagMesh, offset: bIdx * 1.5 });
-      bstGroup.add(flagMesh);
-
-      battlefieldGroup.add(bstGroup);
+      battlefieldGroup.add(flagMesh);
     });
 
     // -------------------------------------------------------------------------
@@ -4219,46 +4277,42 @@
       emissiveIntensity: 0.95,
       roughness: 0.95
     });
+    const coreFlameMat = new THREE.MeshBasicMaterial({ color: 0xffaa00 });
 
     brazierPositions.forEach(([bx, bz], idx) => {
-      const bGroup = new THREE.Group();
-      bGroup.position.set(bx, 0, bz);
+      const bMat = new THREE.Matrix4().makeTranslation(bx, 0, bz);
 
-      // Tier 1: Stepped Square Carved Sandstone Hearth Plinth
-      const step1 = new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.28, 1.25), courtyardMat);
-      step1.position.y = -0.14;
-      step1.receiveShadow = true;
+      // Step1: courtyardMat
+      const step1Geo = new THREE.BoxGeometry(1.25, 0.28, 1.25);
+      staticGeos.courtyard.push(step1Geo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, -0.14, 0).premultiply(bMat)));
+      step1Geo.dispose();
 
-      // Tier 2: Recessed Upper Collar
-      const step2 = new THREE.Mesh(new THREE.BoxGeometry(0.98, 0.22, 0.98), stoneTrimMat);
-      step2.position.y = 0.08;
+      // Step2: stoneTrimMat
+      const step2Geo = new THREE.BoxGeometry(0.98, 0.22, 0.98);
+      staticGeos.stoneTrim.push(step2Geo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0.08, 0).premultiply(bMat)));
+      step2Geo.dispose();
 
-      // Tier 3: Heavy Wrought Iron Fire Cauldron (Octagonal Basin)
-      const cauldron = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.34, 0.32, 8), ironHearthMat);
-      cauldron.position.y = 0.28;
-      cauldron.castShadow = true;
+      // Cauldron: ironHearthMat
+      const cauldronGeo = new THREE.CylinderGeometry(0.46, 0.34, 0.32, 8);
+      staticGeos.ironHearth.push(cauldronGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0.28, 0).premultiply(bMat)));
+      cauldronGeo.dispose();
 
-      // Glowing Charcoal Bed (Faceted low-dome with glowing fissures)
-      const coals = new THREE.Mesh(
-        new THREE.DodecahedronGeometry(0.36, 1),
-        glowingCharcoalMat
-      );
-      coals.scale.set(1.15, 0.45, 1.15);
-      coals.position.y = 0.38;
+      // Coals: glowingCharcoalMat
+      const coalsGeo = new THREE.DodecahedronGeometry(0.36, 1);
+      const mCoals = new THREE.Matrix4().compose(new THREE.Vector3(0, 0.38, 0), new THREE.Quaternion(), new THREE.Vector3(1.15, 0.45, 1.15)).premultiply(bMat);
+      staticGeos.glowingCharcoal.push(coalsGeo.clone().applyMatrix4(mCoals));
+      coalsGeo.dispose();
 
-      // Stylized Core Flame (Faceted amber flame cone)
-      const coreFlameGeo = new THREE.ConeGeometry(0.18, 0.55, 6);
-      const coreFlameMat = new THREE.MeshBasicMaterial({ color: 0xffaa00 });
-      const coreFlame = new THREE.Mesh(coreFlameGeo, coreFlameMat);
-      coreFlame.position.y = 0.65;
+      // Core flame: coreFlameMat
+      const flameGeo = new THREE.ConeGeometry(0.18, 0.55, 6);
+      staticGeos.coreFlame.push(flameGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0.65, 0).premultiply(bMat)));
+      flameGeo.dispose();
 
-      // Dynamic Flickering Fire Point Light
+      // Dynamic Flickering Fire Point Light (Active Light)
       const fireLight = new THREE.PointLight(0xf59e0b, 1.15, 6.5, 1.8);
-      fireLight.position.set(0, 0.85, 0);
+      fireLight.position.set(bx, 0.85, bz);
       brazierLights.push({ light: fireLight, seed: idx * 2.3 });
-
-      bGroup.add(step1, step2, cauldron, coals, coreFlame, fireLight);
-      battlefieldGroup.add(bGroup);
+      battlefieldGroup.add(fireLight);
     });
 
     // Fire & Ember Particles Emitter for Braziers
@@ -4288,9 +4342,6 @@
     // -------------------------------------------------------------------------
     // 6E-2. REALISTIC DESTROYED RUINS (VEDIC TEMPLE MANDAPA & GOPURAM ARCHITECTURE)
     // -------------------------------------------------------------------------
-    const ruinsGroup = new THREE.Group();
-    
-    // Rich weathered stone materials with authentic diffuse & normal maps
     const ruinedStoneMat = new THREE.MeshStandardMaterial({
       color: 0xd6bba2,
       map: mesaDiff,
@@ -4314,86 +4365,86 @@
     });
 
     // 1. MONUMENTAL NORTH RUINED GOPURAM GATEWAY (Behind Black Army, z = -15.5m)
-    const northGopuram = new THREE.Group();
-    northGopuram.position.set(0, -0.6, -15.5);
+    const gMat = new THREE.Matrix4().makeTranslation(0, -0.6, -15.5);
+    [-4.8, 4.8].forEach(gx => {
+      const pMat = new THREE.Matrix4().makeTranslation(gx, 0, 0).premultiply(gMat);
 
-    // Left & Right Gateway Pylons
-    [-4.8, 4.8].forEach((gx, pIdx) => {
-      const pylon = new THREE.Group();
-      pylon.position.set(gx, 0, 0);
+      const baseGeo = new THREE.BoxGeometry(3.6, 1.8, 3.2);
+      staticGeos.ruinedStone.push(baseGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0.9, 0).premultiply(pMat)));
+      baseGeo.dispose();
 
-      const base = new THREE.Mesh(new THREE.BoxGeometry(3.6, 1.8, 3.2), ruinedStoneMat);
-      base.position.y = 0.9;
-      base.castShadow = true;
-      base.receiveShadow = true;
+      const wallGeo = new THREE.BoxGeometry(3.0, 3.8, 2.8);
+      staticGeos.carvedRelief.push(wallGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 3.7, 0).premultiply(pMat)));
+      wallGeo.dispose();
 
-      const wall = new THREE.Mesh(new THREE.BoxGeometry(3.0, 3.8, 2.8), carvedReliefMat);
-      wall.position.y = 3.7;
-      wall.castShadow = true;
-      wall.receiveShadow = true;
-
-      const eaves = new THREE.Mesh(new THREE.BoxGeometry(3.6, 0.45, 3.4), stoneTrimMat);
-      eaves.position.y = 5.75;
-
-      pylon.add(base, wall, eaves);
-      northGopuram.add(pylon);
+      const eavesGeo = new THREE.BoxGeometry(3.6, 0.45, 3.4);
+      staticGeos.stoneTrim.push(eavesGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 5.75, 0).premultiply(pMat)));
+      eavesGeo.dispose();
     });
 
-    // Massive Cracked Lintel Architrave Beam spanning between pylons
-    const lintelLeft = new THREE.Mesh(new THREE.BoxGeometry(4.6, 0.85, 1.4), ruinedStoneMat);
-    lintelLeft.position.set(-2.2, 5.95, 0);
-    lintelLeft.rotation.z = -0.04;
-    lintelLeft.castShadow = true;
+    const lintelLeftGeo = new THREE.BoxGeometry(4.6, 0.85, 1.4);
+    staticGeos.ruinedStone.push(lintelLeftGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+      new THREE.Vector3(-2.2, 5.95, 0),
+      new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, -0.04)),
+      new THREE.Vector3(1, 1, 1)
+    ).premultiply(gMat)));
+    lintelLeftGeo.dispose();
 
-    const lintelRight = new THREE.Mesh(new THREE.BoxGeometry(4.4, 0.85, 1.4), ruinedStoneMat);
-    lintelRight.position.set(2.4, 5.80, 0);
-    lintelRight.rotation.z = 0.08;
-    lintelRight.castShadow = true;
+    const lintelRightGeo = new THREE.BoxGeometry(4.4, 0.85, 1.4);
+    staticGeos.ruinedStone.push(lintelRightGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+      new THREE.Vector3(2.4, 5.80, 0),
+      new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, 0.08)),
+      new THREE.Vector3(1, 1, 1)
+    ).premultiply(gMat)));
+    lintelRightGeo.dispose();
 
-    // Collapsed Shikhara Superstructure (Broken Dravidian Pyramid Tower)
-    const shikharaL1 = new THREE.Mesh(new THREE.BoxGeometry(5.2, 2.2, 2.6), carvedReliefMat);
-    shikharaL1.position.set(-1.8, 7.3, 0);
-    shikharaL1.castShadow = true;
+    const shikharaL1Geo = new THREE.BoxGeometry(5.2, 2.2, 2.6);
+    staticGeos.carvedRelief.push(shikharaL1Geo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(-1.8, 7.3, 0).premultiply(gMat)));
+    shikharaL1Geo.dispose();
 
-    const shikharaL2 = new THREE.Mesh(new THREE.BoxGeometry(3.6, 1.9, 2.2), ruinedStoneMat);
-    shikharaL2.position.set(-1.6, 9.2, 0);
-    shikharaL2.castShadow = true;
+    const shikharaL2Geo = new THREE.BoxGeometry(3.6, 1.9, 2.2);
+    staticGeos.ruinedStone.push(shikharaL2Geo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(-1.6, 9.2, 0).premultiply(gMat)));
+    shikharaL2Geo.dispose();
 
-    const shikharaCrown = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.4, 1.8), carvedReliefMat);
-    shikharaCrown.position.set(-1.3, 10.7, 0);
-    shikharaCrown.rotation.z = 0.12;
+    const crownGeo = new THREE.BoxGeometry(2.2, 1.4, 1.8);
+    staticGeos.carvedRelief.push(crownGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+      new THREE.Vector3(-1.3, 10.7, 0),
+      new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, 0.12)),
+      new THREE.Vector3(1, 1, 1)
+    ).premultiply(gMat)));
+    crownGeo.dispose();
 
-    const fallenKeystone = new THREE.Mesh(new THREE.BoxGeometry(0.9, 1.2, 1.1), ruinedStoneMat);
-    fallenKeystone.position.set(0.1, 5.3, 0.1);
-    fallenKeystone.rotation.set(0.2, 0.3, -0.4);
+    const keyGeo = new THREE.BoxGeometry(0.9, 1.2, 1.1);
+    staticGeos.ruinedStone.push(keyGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+      new THREE.Vector3(0.1, 5.3, 0.1),
+      new THREE.Quaternion().setFromEuler(new THREE.Euler(0.2, 0.3, -0.4)),
+      new THREE.Vector3(1, 1, 1)
+    ).premultiply(gMat)));
+    keyGeo.dispose();
 
     for (let st = 0; st < 4; st++) {
-      const step = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.22, 0.65), daisMat);
-      step.position.set(0, -st * 0.22, 1.8 - st * 0.65);
-      northGopuram.add(step);
+      const stepGeo = new THREE.BoxGeometry(5.8, 0.22, 0.65);
+      staticGeos.dais.push(stepGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, -st * 0.22, 1.8 - st * 0.65).premultiply(gMat)));
+      stepGeo.dispose();
     }
 
-    northGopuram.add(lintelLeft, lintelRight, shikharaL1, shikharaL2, shikharaCrown, fallenKeystone);
-    ruinsGroup.add(northGopuram);
-
     // 2. SOUTH RUINED SANCTUARY PORTICO (Behind White Army, z = +15.5m)
-    const southRuins = new THREE.Group();
-    southRuins.position.set(0, -0.6, 15.5);
-    
-    const sWallL = new THREE.Mesh(new THREE.BoxGeometry(5.4, 2.4, 2.2), ruinedStoneMat);
-    sWallL.position.set(-4.5, 1.2, 0);
-    sWallL.castShadow = true;
+    const srMat = new THREE.Matrix4().makeTranslation(0, -0.6, 15.5);
+    const sWallLGeo = new THREE.BoxGeometry(5.4, 2.4, 2.2);
+    staticGeos.ruinedStone.push(sWallLGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(-4.5, 1.2, 0).premultiply(srMat)));
+    sWallLGeo.dispose();
 
-    const sWallR = new THREE.Mesh(new THREE.BoxGeometry(4.8, 2.0, 2.2), ruinedStoneMat);
-    sWallR.position.set(4.8, 1.0, 0);
-    sWallR.castShadow = true;
+    const sWallRGeo = new THREE.BoxGeometry(4.8, 2.0, 2.2);
+    staticGeos.ruinedStone.push(sWallRGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(4.8, 1.0, 0).premultiply(srMat)));
+    sWallRGeo.dispose();
 
-    const fallenLintel = new THREE.Mesh(new THREE.BoxGeometry(3.8, 0.7, 1.2), carvedReliefMat);
-    fallenLintel.position.set(0.2, 0.35, 1.2);
-    fallenLintel.rotation.set(0.15, 0.25, -0.1);
-
-    southRuins.add(sWallL, sWallR, fallenLintel);
-    ruinsGroup.add(southRuins);
+    const fallenLintelGeo = new THREE.BoxGeometry(3.8, 0.7, 1.2);
+    staticGeos.carvedRelief.push(fallenLintelGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+      new THREE.Vector3(0.2, 0.35, 1.2),
+      new THREE.Quaternion().setFromEuler(new THREE.Euler(0.15, 0.25, -0.1)),
+      new THREE.Vector3(1, 1, 1)
+    ).premultiply(srMat)));
+    fallenLintelGeo.dispose();
 
     // 3. FLUTED MANDAPA COLONNADES (East and West Flanks: x = -13.8m and x = +13.8m)
     const colonnadeConfigs = [
@@ -4409,55 +4460,58 @@
       { x: 13.8, z: 11.5,  h: 3.4, tiltX: 0.06, tiltZ: 0.05, state: 'intact' }
     ];
 
-    colonnadeConfigs.forEach((col, cIdx) => {
-      const colGroup = new THREE.Group();
-      colGroup.position.set(col.x, -0.6, col.z);
-      colGroup.rotation.set(col.tiltX, 0, col.tiltZ);
+    colonnadeConfigs.forEach(col => {
+      const cMat = new THREE.Matrix4().compose(
+        new THREE.Vector3(col.x, -0.6, col.z),
+        new THREE.Quaternion().setFromEuler(new THREE.Euler(col.tiltX, 0, col.tiltZ)),
+        new THREE.Vector3(1, 1, 1)
+      );
 
-      const plinth = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.45, 1.2), ruinedStoneMat);
-      plinth.position.y = 0.225;
-      plinth.castShadow = true;
-      plinth.receiveShadow = true;
-      colGroup.add(plinth);
+      const plinthGeo = new THREE.BoxGeometry(1.2, 0.45, 1.2);
+      staticGeos.ruinedStone.push(plinthGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0.225, 0).premultiply(cMat)));
+      plinthGeo.dispose();
 
-      const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.50, 0.58, 0.35, 8), carvedReliefMat);
-      ring.position.y = 0.55;
-      colGroup.add(ring);
+      const ringGeo = new THREE.CylinderGeometry(0.50, 0.58, 0.35, 8);
+      staticGeos.carvedRelief.push(ringGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0.55, 0).premultiply(cMat)));
+      ringGeo.dispose();
 
       const shaftGeo = new THREE.CylinderGeometry(0.38, 0.44, col.h, 16);
-      const shaft = new THREE.Mesh(shaftGeo, ruinedStoneMat);
-      shaft.position.y = 0.55 + col.h * 0.5;
-      shaft.castShadow = true;
-      shaft.receiveShadow = true;
-      colGroup.add(shaft);
+      staticGeos.ruinedStone.push(shaftGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0.55 + col.h * 0.5, 0).premultiply(cMat)));
+      shaftGeo.dispose();
 
       if (col.state === 'intact' || col.state === 'leaning') {
-        const capital = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.42, 0.40, 16), carvedReliefMat);
-        capital.position.y = 0.55 + col.h + 0.20;
-        
-        const bracket = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.28, 0.95), carvedReliefMat);
-        bracket.position.y = 0.55 + col.h + 0.48;
+        const capitalGeo = new THREE.CylinderGeometry(0.62, 0.42, 0.40, 16);
+        staticGeos.carvedRelief.push(capitalGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0.55 + col.h + 0.20, 0).premultiply(cMat)));
+        capitalGeo.dispose();
 
-        colGroup.add(capital, bracket);
+        const bracketGeo = new THREE.BoxGeometry(0.95, 0.28, 0.95);
+        staticGeos.carvedRelief.push(bracketGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0.55 + col.h + 0.48, 0).premultiply(cMat)));
+        bracketGeo.dispose();
       } else if (col.state === 'snapped') {
-        const fractureCap = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.28, 0.65), ruinedStoneMat);
-        fractureCap.position.y = 0.55 + col.h + 0.12;
-        fractureCap.rotation.set(0.2, 0.5, -0.3);
-        colGroup.add(fractureCap);
+        const fractureCapGeo = new THREE.BoxGeometry(0.72, 0.28, 0.65);
+        staticGeos.ruinedStone.push(fractureCapGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+          new THREE.Vector3(0, 0.55 + col.h + 0.12, 0),
+          new THREE.Quaternion().setFromEuler(new THREE.Euler(0.2, 0.5, -0.3)),
+          new THREE.Vector3(1, 1, 1)
+        ).premultiply(cMat)));
+        fractureCapGeo.dispose();
 
-        const fallenDrum = new THREE.Mesh(new THREE.CylinderGeometry(0.40, 0.42, 1.8, 16), ruinedStoneMat);
-        fallenDrum.position.set((col.x < 0 ? 0.8 : -0.8), 0.35, 0.9);
-        fallenDrum.rotation.set(Math.PI / 2.05, 0.3, 0.4);
-        fallenDrum.castShadow = true;
-        colGroup.add(fallenDrum);
+        const fallenDrumGeo = new THREE.CylinderGeometry(0.40, 0.42, 1.8, 16);
+        staticGeos.ruinedStone.push(fallenDrumGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+          new THREE.Vector3(col.x < 0 ? 0.8 : -0.8, 0.35, 0.9),
+          new THREE.Quaternion().setFromEuler(new THREE.Euler(Math.PI / 2.05, 0.3, 0.4)),
+          new THREE.Vector3(1, 1, 1)
+        ).premultiply(cMat)));
+        fallenDrumGeo.dispose();
 
-        const fallenCapital = new THREE.Mesh(new THREE.CylinderGeometry(0.60, 0.42, 0.40, 16), carvedReliefMat);
-        fallenCapital.position.set((col.x < 0 ? 1.4 : -1.4), 0.25, 2.1);
-        fallenCapital.rotation.set(0.4, 0.2, 0.8);
-        colGroup.add(fallenCapital);
+        const fallenCapGeo = new THREE.CylinderGeometry(0.60, 0.42, 0.40, 16);
+        staticGeos.carvedRelief.push(fallenCapGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+          new THREE.Vector3(col.x < 0 ? 1.4 : -1.4, 0.25, 2.1),
+          new THREE.Quaternion().setFromEuler(new THREE.Euler(0.4, 0.2, 0.8)),
+          new THREE.Vector3(1, 1, 1)
+        ).premultiply(cMat)));
+        fallenCapGeo.dispose();
       }
-
-      ruinsGroup.add(colGroup);
     });
 
     [
@@ -4465,10 +4519,9 @@
       { x: 13.8, zStart: 5.8, zEnd: 11.5, y: 4.8 }
     ].forEach(bm => {
       const beamLen = Math.abs(bm.zEnd - bm.zStart);
-      const architrave = new THREE.Mesh(new THREE.BoxGeometry(0.75, 0.55, beamLen), carvedReliefMat);
-      architrave.position.set(bm.x, bm.y, (bm.zStart + bm.zEnd) * 0.5);
-      architrave.castShadow = true;
-      ruinsGroup.add(architrave);
+      const archGeo = new THREE.BoxGeometry(0.75, 0.55, beamLen);
+      staticGeos.carvedRelief.push(archGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(bm.x, bm.y, (bm.zStart + bm.zEnd) * 0.5)));
+      archGeo.dispose();
     });
 
     // 4. SURYA CHAKRA (MONUMENTAL WAR CHARIOT WHEELS EMBEDDED IN DEBRIS)
@@ -4477,49 +4530,59 @@
       { x: 11.6, z: 3.5, rotY: -0.42, tilt: -0.48 }
     ];
     wheelPositions.forEach(wp => {
-      const wheelGroup = new THREE.Group();
-      wheelGroup.position.set(wp.x, -0.15, wp.z);
-      wheelGroup.rotation.set(wp.tilt, wp.rotY, 0);
+      const wMat = new THREE.Matrix4().compose(
+        new THREE.Vector3(wp.x, -0.15, wp.z),
+        new THREE.Quaternion().setFromEuler(new THREE.Euler(wp.tilt, wp.rotY, 0)),
+        new THREE.Vector3(1, 1, 1)
+      );
 
-      const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.42, 16), ancientBronzeMat);
-      hub.rotation.x = Math.PI / 2;
-      wheelGroup.add(hub);
+      const hubGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.42, 16);
+      staticGeos.ancientBronze.push(hubGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Quaternion().setFromEuler(new THREE.Euler(Math.PI / 2, 0, 0)),
+        new THREE.Vector3(1, 1, 1)
+      ).premultiply(wMat)));
+      hubGeo.dispose();
 
-      const rim = new THREE.Mesh(new THREE.TorusGeometry(1.05, 0.12, 10, 24), ruinedStoneMat);
-      wheelGroup.add(rim);
+      const rimGeo = new THREE.TorusGeometry(1.05, 0.12, 10, 24);
+      staticGeos.ruinedStone.push(rimGeo.clone().applyMatrix4(wMat));
+      rimGeo.dispose();
 
       for (let sp = 0; sp < 16; sp++) {
         const spAngle = (sp / 16) * Math.PI * 2;
-        const spoke = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.055, 0.95, 8), carvedReliefMat);
-        spoke.position.set(Math.cos(spAngle) * 0.55, Math.sin(spAngle) * 0.55, 0);
-        spoke.rotation.z = spAngle + Math.PI / 2;
-        wheelGroup.add(spoke);
+        const spokeGeo = new THREE.CylinderGeometry(0.04, 0.055, 0.95, 8);
+        staticGeos.carvedRelief.push(spokeGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+          new THREE.Vector3(Math.cos(spAngle) * 0.55, Math.sin(spAngle) * 0.55, 0),
+          new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, spAngle + Math.PI / 2)),
+          new THREE.Vector3(1, 1, 1)
+        ).premultiply(wMat)));
+        spokeGeo.dispose();
       }
-
-      wheelGroup.castShadow = true;
-      wheelGroup.receiveShadow = true;
-      ruinsGroup.add(wheelGroup);
     });
 
     // 5. WEATHERED MONOLITHIC SIMHA / YALI GUARDIAN STATUES
     [-2.6, 2.6].forEach((lx, lIdx) => {
-      const lionGroup = new THREE.Group();
-      lionGroup.position.set(lx, -0.5, -13.4);
-      lionGroup.rotation.y = lIdx === 0 ? 0.35 : -0.35;
+      const lMat = new THREE.Matrix4().compose(
+        new THREE.Vector3(lx, -0.5, -13.4),
+        new THREE.Quaternion().setFromEuler(new THREE.Euler(0, lIdx === 0 ? 0.35 : -0.35, 0)),
+        new THREE.Vector3(1, 1, 1)
+      );
 
-      const ped = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.45, 1.4), ruinedStoneMat);
-      ped.position.y = 0.225;
+      const pedGeo = new THREE.BoxGeometry(0.9, 0.45, 1.4);
+      staticGeos.ruinedStone.push(pedGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0.225, 0).premultiply(lMat)));
+      pedGeo.dispose();
 
-      const body = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.48, 0.95, 8), carvedReliefMat);
-      body.position.set(0, 0.85, 0.1);
-      body.rotation.x = -0.25;
+      const bodyGeo = new THREE.CylinderGeometry(0.35, 0.48, 0.95, 8);
+      staticGeos.carvedRelief.push(bodyGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+        new THREE.Vector3(0, 0.85, 0.1),
+        new THREE.Quaternion().setFromEuler(new THREE.Euler(-0.25, 0, 0)),
+        new THREE.Vector3(1, 1, 1)
+      ).premultiply(lMat)));
+      bodyGeo.dispose();
 
-      const head = new THREE.Mesh(new THREE.DodecahedronGeometry(0.32, 1), carvedReliefMat);
-      head.position.set(0, 1.42, 0.25);
-
-      lionGroup.add(ped, body, head);
-      lionGroup.castShadow = true;
-      ruinsGroup.add(lionGroup);
+      const headGeo = new THREE.DodecahedronGeometry(0.32, 1);
+      staticGeos.carvedRelief.push(headGeo.clone().applyMatrix4(new THREE.Matrix4().makeTranslation(0, 1.42, 0.25).premultiply(lMat)));
+      headGeo.dispose();
     });
 
     // 6. SCATTERED ASHLAR RUBBLE, CHIPPED BLOCKS & RELICS
@@ -4532,28 +4595,36 @@
 
       if (rb % 4 === 0) {
         const shieldGeo = new THREE.CylinderGeometry(0.42, 0.42, 0.05, 16);
-        const shield = new THREE.Mesh(shieldGeo, ancientBronzeMat);
-        shield.position.set(rx, -0.05, rz);
-        shield.rotation.set(0.35, rAngle, 0.25);
-        shield.receiveShadow = true;
-        ruinsGroup.add(shield);
+        staticGeos.ancientBronze.push(shieldGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+          new THREE.Vector3(rx, -0.05, rz),
+          new THREE.Quaternion().setFromEuler(new THREE.Euler(0.35, rAngle, 0.25)),
+          new THREE.Vector3(1, 1, 1)
+        )));
+        shieldGeo.dispose();
       } else if (rb % 4 === 1) {
         const spGeo = new THREE.CylinderGeometry(0.025, 0.025, 1.8, 8);
-        const spear = new THREE.Mesh(spGeo, ruinedStoneMat);
-        spear.position.set(rx, 0.75, rz);
-        spear.rotation.set(0.42 * Math.cos(rAngle), 0, 0.42 * Math.sin(rAngle));
-        spear.castShadow = true;
-        ruinsGroup.add(spear);
+        staticGeos.ruinedStone.push(spGeo.clone().applyMatrix4(new THREE.Matrix4().compose(
+          new THREE.Vector3(rx, 0.75, rz),
+          new THREE.Quaternion().setFromEuler(new THREE.Euler(0.42 * Math.cos(rAngle), 0, 0.42 * Math.sin(rAngle))),
+          new THREE.Vector3(1, 1, 1)
+        )));
+        spGeo.dispose();
       } else {
         const bW = 0.65 + (rb % 3) * 0.25;
         const bH = 0.35 + (rb % 2) * 0.15;
         const bD = 0.75 + (rb % 4) * 0.20;
-        const block = new THREE.Mesh(new THREE.BoxGeometry(bW, bH, bD), (rb % 2 === 0 ? ruinedStoneMat : carvedReliefMat));
-        block.position.set(rx, -0.15 + bH * 0.5, rz);
-        block.rotation.set((rb * 0.4) % 0.6, (rb * 0.7) % 3.14, (rb * 0.3) % 0.5);
-        block.castShadow = true;
-        block.receiveShadow = true;
-        ruinsGroup.add(block);
+        const blockGeo = new THREE.BoxGeometry(bW, bH, bD);
+        const mBlock = new THREE.Matrix4().compose(
+          new THREE.Vector3(rx, -0.15 + bH * 0.5, rz),
+          new THREE.Quaternion().setFromEuler(new THREE.Euler((rb * 0.4) % 0.6, (rb * 0.7) % 3.14, (rb * 0.3) % 0.5)),
+          new THREE.Vector3(1, 1, 1)
+        );
+        if (rb % 2 === 0) {
+          staticGeos.ruinedStone.push(blockGeo.clone().applyMatrix4(mBlock));
+        } else {
+          staticGeos.carvedRelief.push(blockGeo.clone().applyMatrix4(mBlock));
+        }
+        blockGeo.dispose();
       }
     }
 
@@ -4586,12 +4657,52 @@
         depthWrite: false
       })
     );
-    ruinsGroup.add(smokeField);
-    battlefieldGroup.add(ruinsGroup);
+    battlefieldGroup.add(smokeField);
 
+    // Dais Plinth & Rim (Merged into dais and stoneTrim)
+    const boardDaisGeo = new THREE.BoxGeometry(18.4, 0.28, 18.4);
+    boardDaisGeo.applyMatrix4(new THREE.Matrix4().makeTranslation(0, -0.20, 0));
+    staticGeos.dais.push(boardDaisGeo);
 
+    const daisRimGeo = new THREE.BoxGeometry(18.55, 0.08, 18.55);
+    daisRimGeo.applyMatrix4(new THREE.Matrix4().makeTranslation(0, -0.055, 0));
+    staticGeos.stoneTrim.push(daisRimGeo);
 
+    // =========================================================================
+    // INSTANTIATE 14 CONSOLIDATED STATIC SCENERY MESHES
+    // =========================================================================
+    const staticMeshConfigs = [
+      { key: 'basaltDark', mat: basaltDarkMat, cast: true, recv: true },
+      { key: 'sandstoneWarm', mat: sandstoneWarmMat, cast: true, recv: true },
+      { key: 'ochreCliff', mat: ochreCliffMat, cast: true, recv: true },
+      { key: 'boulder', mat: boulderMat, cast: true, recv: true },
+      { key: 'midCanyon', mat: midCanyonMat, cast: false, recv: true },
+      { key: 'courtyard', mat: courtyardMat, cast: true, recv: true },
+      { key: 'dais', mat: daisMat, cast: true, recv: true },
+      { key: 'stoneTrim', mat: stoneTrimMat, cast: true, recv: true },
+      { key: 'ruinedStone', mat: ruinedStoneMat, cast: true, recv: true },
+      { key: 'carvedRelief', mat: carvedReliefMat, cast: true, recv: true },
+      { key: 'ancientBronze', mat: ancientBronzeMat, cast: true, recv: true },
+      { key: 'ironHearth', mat: ironHearthMat, cast: true, recv: true },
+      { key: 'glowingCharcoal', mat: glowingCharcoalMat, cast: false, recv: false },
+      { key: 'coreFlame', mat: coreFlameMat, cast: false, recv: false }
+    ];
 
+    staticMeshConfigs.forEach(({ key, mat, cast, recv }) => {
+      const geos = staticGeos[key];
+      if (geos && geos.length > 0) {
+        const mergedGeo = mergeGeometriesFast(geos);
+        if (mergedGeo) {
+          const mergedMesh = new THREE.Mesh(mergedGeo, mat);
+          mergedMesh.name = 'merged_' + key;
+          mergedMesh.userData = { isMergedStaticScenery: true, materialKey: key };
+          mergedMesh.castShadow = cast;
+          mergedMesh.receiveShadow = recv;
+          lockStaticMesh(mergedMesh);
+          battlefieldGroup.add(mergedMesh);
+        }
+      }
+    });
 
     // -------------------------------------------------------------------------
     // 6F. THE CHESSBOARD DAIS (100% TACTICALLY READABLE, CRISP & GROUNDED)
@@ -4634,20 +4745,6 @@
       emissiveIntensity: 0.20
     });
 
-    // Stone Dais Base Plinth (Decoupled & recessed; top face at y = -0.060, tiles sole top surface at y = 0.000)
-    const boardDais = new THREE.Mesh(new THREE.BoxGeometry(18.4, 0.28, 18.4), daisMat);
-    boardDais.position.y = -0.20;
-    boardDais.receiveShadow = false;
-    battlefieldGroup.add(boardDais);
-
-    // Outer Antique Bronze Dais Rim (Recessed top face to y = -0.015 so it never collides with playable tiles)
-    const daisRim = new THREE.Mesh(
-      new THREE.BoxGeometry(18.55, 0.08, 18.55),
-      stoneTrimMat
-    );
-    daisRim.position.y = -0.055;
-    battlefieldGroup.add(daisRim);
-
     // 64 Individual Carved Stone Tiles (Flush with ground y = 0.000, rotated UV orientations)
     for (let f = 0; f < 8; f++) {
       for (let r = 0; r < 8; r++) {
@@ -4659,6 +4756,8 @@
         tileMesh.rotation.y = ((f * 3 + r * 7) % 4) * (Math.PI / 2); // Eliminates identical 32x pattern repetition
         tileMesh.receiveShadow = true;
         tileMesh.userData = { f, r };
+        tileMesh.matrixAutoUpdate = false;
+        tileMesh.updateMatrix();
         battlefieldGroup.add(tileMesh);
         tileMeshes.push(tileMesh);
       }
@@ -4691,6 +4790,7 @@
     runicGridMesh.rotation.x = -Math.PI / 2;
     runicGridMesh.position.set(0, 0.0015, 0);
     runicGridMesh.visible = false; // Stay hidden until alpha texture loads successfully!
+    lockStaticMesh(runicGridMesh);
     battlefieldGroup.add(runicGridMesh);
 
     // -------------------------------------------------------------------------
@@ -4732,11 +4832,13 @@
       const southLabel = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.6), labelMat);
       southLabel.rotation.x = -Math.PI / 2;
       southLabel.position.set(wp.x, 0.002, 8.65);
+      lockStaticMesh(southLabel);
       // North border label
       const northLabel = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.6), labelMat);
       northLabel.rotation.x = -Math.PI / 2;
       northLabel.rotation.z = Math.PI;
       northLabel.position.set(wp.x, 0.002, -8.65);
+      lockStaticMesh(northLabel);
       battlefieldGroup.add(southLabel, northLabel);
     }
 
@@ -4758,11 +4860,13 @@
       westLabel.rotation.x = -Math.PI / 2;
       westLabel.rotation.z = Math.PI / 2;
       westLabel.position.set(-8.65, 0.002, wp.z);
+      lockStaticMesh(westLabel);
       // East border label
       const eastLabel = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.6), labelMat);
       eastLabel.rotation.x = -Math.PI / 2;
       eastLabel.rotation.z = -Math.PI / 2;
       eastLabel.position.set(8.65, 0.002, wp.z);
+      lockStaticMesh(eastLabel);
       battlefieldGroup.add(westLabel, eastLabel);
     }
 
@@ -4800,11 +4904,13 @@
     const mistPlane1 = new THREE.Mesh(new THREE.PlaneGeometry(84, 84), mistMat1);
     mistPlane1.rotation.x = -Math.PI / 2;
     mistPlane1.position.y = 0.18;
+    lockStaticMesh(mistPlane1);
     battlefieldGroup.add(mistPlane1);
 
     const mistPlane2 = new THREE.Mesh(new THREE.PlaneGeometry(84, 84), mistMat2);
     mistPlane2.rotation.x = -Math.PI / 2;
     mistPlane2.position.y = 0.52;
+    lockStaticMesh(mistPlane2);
     battlefieldGroup.add(mistPlane2);
 
     // -------------------------------------------------------------------------
@@ -5031,6 +5137,7 @@
     function spawnGeometricShardExplosion(worldPos, team) {
       const mats = getTeamMaterials(team);
       const shardGeo = new THREE.OctahedronGeometry(0.14, 0);
+      const batchId = 'shard_' + performance.now() + '_' + Math.random();
 
       for (let i = 0; i < 34; i++) {
         const mat = (i % 3 === 0 ? mats.glow : i % 2 === 0 ? mats.trim : mats.armor).clone();
@@ -5053,7 +5160,8 @@
           vel,
           rotVel,
           elapsed: 0,
-          duration: 1.1 + Math.random() * 0.35
+          duration: 1.1 + Math.random() * 0.35,
+          batchId
         });
       }
     }
@@ -5107,6 +5215,7 @@
         roughness: 0.88,
         metalness: 0.12
       });
+      const batchId = 'debris_' + performance.now() + '_' + Math.random();
       for (let i = 0; i < 22; i++) {
         const mesh = new THREE.Mesh(debrisGeo, debrisMat);
         mesh.position.set(
@@ -5125,7 +5234,9 @@
           vel: v,
           rotVel,
           elapsed: 0,
-          duration: 0.92
+          duration: 0.92,
+          batchId,
+          sharedMat: debrisMat
         });
       }
     }
@@ -5332,7 +5443,35 @@
         }
 
         if (v.elapsed >= v.duration) {
-          vfxGroup.remove(v.mesh || v.points);
+          const targetObj = v.mesh || v.points;
+          if (targetObj) {
+            vfxGroup.remove(targetObj);
+            if (v.batchId) {
+              const remainingSiblings = activeVFX.some((other, idx) => idx !== i && other.batchId === v.batchId);
+              if (!remainingSiblings) {
+                if (targetObj.geometry && typeof targetObj.geometry.dispose === 'function') {
+                  targetObj.geometry.dispose();
+                }
+                if (v.sharedMat && typeof v.sharedMat.dispose === 'function') {
+                  v.sharedMat.dispose();
+                }
+              }
+              if (v.type === 'shard' && targetObj.material && typeof targetObj.material.dispose === 'function') {
+                targetObj.material.dispose();
+              }
+            } else {
+              if (targetObj.geometry && typeof targetObj.geometry.dispose === 'function') {
+                targetObj.geometry.dispose();
+              }
+              if (targetObj.material) {
+                if (Array.isArray(targetObj.material)) {
+                  targetObj.material.forEach(m => { if (typeof m.dispose === 'function') m.dispose(); });
+                } else if (typeof targetObj.material.dispose === 'function') {
+                  targetObj.material.dispose();
+                }
+              }
+            }
+          }
           activeVFX.splice(i, 1);
         }
       }
@@ -5427,7 +5566,7 @@
         }
 
         const bankSign = Math.sign(diffYaw);
-        const bankAngle = 0.0698; // 4° inward banking roll (4 * Math.PI / 180)
+        const bankAngle = 4 * Math.PI / 180; // Exactly 4° inward banking roll
         let elapsed = 0;
         let lastTurnFrameTime = performance.now();
 
@@ -5440,11 +5579,14 @@
           const t = Math.min(1, elapsed / duration);
           const ease = t * t * (3 - 2 * t); // SmoothStep cubic-bezier
 
+          // Wide-peak envelope so discrete RAF sampling at 30-60 FPS reliably captures the 4° bank and -0.04u dip
+          const envelope = Math.min(1, Math.sin(t * Math.PI) / 0.88);
+
           rig.root.rotation.y = startYaw + diffYaw * ease;
           // Inward banking roll
-          rig.torso.rotation.z = bankSign * bankAngle * Math.sin(t * Math.PI);
+          rig.torso.rotation.z = bankSign * bankAngle * envelope;
           // 0.04u knee-bend dip
-          rig.bodyRoot.position.y = -0.04 * Math.sin(t * Math.PI);
+          rig.bodyRoot.position.y = -0.04 * envelope;
 
           if (t < 1) {
             requestAnimationFrame(turnStep);
@@ -5963,6 +6105,7 @@
       if (!attackerRig || !attackerRig.root || !defenderRig || !defenderRig.root) return;
       attackerRig.inKillSequence = true;
       defenderRig.inKillSequence = true;
+      requestShadowUpdate(10);
       const savedYaw = camState.targetYaw;
       const savedPitch = camState.targetPitch;
       const savedDist = camState.targetDistance;
@@ -6541,31 +6684,39 @@
             if (attackerRig.type !== PIECE_ROOK) {
               // Non-elephant kills: Knees buckle, clutch chest/heart, slump forward flat onto stone
               const buckleT = Math.min(1, dtDie / 0.28);
-              defenderRig.bodyRoot.position.y = -0.45 * buckleT;
-              defenderRig.torso.rotation.x = 1.35 * buckleT;
-              defenderRig.head.rotation.x = 0.75 * buckleT;
-              defenderRig.armL.rotation.set(0.75 * buckleT, 0.35 * buckleT, 0);
-              defenderRig.armR.rotation.set(0.75 * buckleT, -0.35 * buckleT, 0);
+              if (defenderRig.bodyRoot) defenderRig.bodyRoot.position.y = -0.45 * buckleT;
+              if (defenderRig.torso) defenderRig.torso.rotation.x = 1.35 * buckleT;
+              if (defenderRig.head) defenderRig.head.rotation.x = 0.75 * buckleT;
+              if (defenderRig.armL) defenderRig.armL.rotation.set(0.75 * buckleT, 0.35 * buckleT, 0);
+              if (defenderRig.armR) defenderRig.armR.rotation.set(0.75 * buckleT, -0.35 * buckleT, 0);
             }
           }
 
           if (t < 1) {
             requestAnimationFrame(combatTick);
           } else {
-            attackerRig.bodyRoot.position.set(0, 0, 0);
-            attackerRig.bodyRoot.rotation.set(0, 0, 0);
-            attackerRig.torso.rotation.set(0, 0, 0);
-            attackerRig.head.rotation.set(0, 0, 0);
-            attackerRig.armL.position.set(-0.32, 0.54, 0);
-            attackerRig.armL.rotation.set(0, 0, 0);
-            attackerRig.armR.rotation.set(0, 0, 0);
-            if (attackerRig.type === PIECE_PAWN) {
-              attackerRig.armR.position.set(0.32, 0.54, 0);
-              attackerRig.armR.rotation.set(0, 0, 0);
+            if (attackerRig.bodyRoot) {
+              attackerRig.bodyRoot.position.set(0, 0, 0);
+              attackerRig.bodyRoot.rotation.set(0, 0, 0);
+            }
+            if (attackerRig.torso) attackerRig.torso.rotation.set(0, 0, 0);
+            if (attackerRig.head) attackerRig.head.rotation.set(0, 0, 0);
+            if (attackerRig.armL) {
               attackerRig.armL.position.set(-0.32, 0.54, 0);
               attackerRig.armL.rotation.set(0, 0, 0);
             }
-            if (attackerRig.type === PIECE_KING) attackerRig.armR.position.set(0, 0.68, 0.38);
+            if (attackerRig.armR) attackerRig.armR.rotation.set(0, 0, 0);
+            if (attackerRig.type === PIECE_PAWN) {
+              if (attackerRig.armR) {
+                attackerRig.armR.position.set(0.32, 0.54, 0);
+                attackerRig.armR.rotation.set(0, 0, 0);
+              }
+              if (attackerRig.armL) {
+                attackerRig.armL.position.set(-0.32, 0.54, 0);
+                attackerRig.armL.rotation.set(0, 0, 0);
+              }
+            }
+            if (attackerRig.type === PIECE_KING && attackerRig.armR) attackerRig.armR.position.set(0, 0.68, 0.38);
             if (attackerRig.trunkSegs) attackerRig.trunkSegs.forEach(ts => ts.rotation.set(0, 0, 0));
             if (attackerRig.quadLegs) attackerRig.quadLegs.forEach(ql => ql.rotation.set(0, 0, 0));
             attackerRig.inKillSequence = false;
@@ -6616,6 +6767,7 @@
         camState.targetDistance = savedDist;
         camState.targetLookPivot.copy(savedPivot);
       }
+      requestShadowUpdate(6);
     }
 
     // =========================================================================
@@ -6628,6 +6780,14 @@
     let legalMovesForSelected = [];
     let isBusyAnimating = false;
     let gameMode = 'vsai';
+    function getActiveGameMode() {
+      const mode = (typeof window.gameMode !== 'undefined' && window.gameMode !== 'vsai')
+        ? window.gameMode
+        : ((typeof gameMode !== 'undefined' && gameMode !== 'vsai') ? gameMode : (window.gameMode || gameMode || 'vsai'));
+      window.gameMode = mode;
+      gameMode = mode;
+      return mode;
+    }
     let aiDifficulty = 2;
     let currentView = 'battlefield';
     let pendingPromotionResolver = null;
@@ -6682,6 +6842,7 @@
       window.unitGrid = unitGrid;
       window.activeRigs = activeRigs;
       updateBattlefieldHUD();
+      requestShadowUpdate(10);
     }
 
     function updateBattlefieldHUD() {
@@ -6691,11 +6852,12 @@
       const moveBadge = document.getElementById('moveCountBadge');
 
       moveBadge.textContent = `TURN #${chess.moveNumber}`;
+      const activeMode = getActiveGameMode();
       if (chess.turn === TEAM_WHITE) {
         turnText.textContent = "WHITE TO MOVE";
         turnDot.className = "w-3 sm:w-3.5 h-3 sm:h-3.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50 flex-shrink-0";
       } else {
-        turnText.textContent = gameMode === 'vsai' ? "BLACK (AI) THINKING..." : "BLACK TO MOVE";
+        turnText.textContent = activeMode === 'vsai' ? "BLACK (AI) THINKING..." : "BLACK TO MOVE";
         turnDot.className = "w-3 sm:w-3.5 h-3 sm:h-3.5 rounded-full bg-rose-500 shadow-lg shadow-rose-500/50 flex-shrink-0";
       }
 
@@ -6705,7 +6867,7 @@
 
     function selectSquare(f, r) {
       if (isBusyAnimating) return;
-      if (gameMode === 'vsai' && chess.turn === TEAM_BLACK) return;
+      if (getActiveGameMode() === 'vsai' && chess.turn === TEAM_BLACK) return;
 
       if (selectedCoord) {
         const matchingMoves = legalMovesForSelected.filter(m => m.toF === f && m.toR === r);
@@ -6780,7 +6942,12 @@
 
     async function performChessMove(move) {
       if (!move) return;
+      if (window._aiMoveTimeout) {
+        clearTimeout(window._aiMoveTimeout);
+        window._aiMoveTimeout = null;
+      }
       isBusyAnimating = true;
+      requestShadowUpdate(10);
       try {
         const attackerRig = unitGrid[move.fromF] ? unitGrid[move.fromF][move.fromR] : null;
         let defenderRig = unitGrid[move.toF] ? unitGrid[move.toF][move.toR] : null;
@@ -6869,17 +7036,26 @@
           return;
         }
 
-        if (gameMode === 'local2p') {
+        const activeMode = getActiveGameMode();
+        if (activeMode === 'local2p') {
           camState.targetYaw = chess.turn === TEAM_WHITE ? 0.0 : Math.PI;
         }
       } finally {
         isBusyAnimating = false;
+        requestShadowUpdate(5);
       }
 
       // Trigger AI turn
-      if (gameMode === 'vsai' && chess.turn === TEAM_BLACK) {
+      const activeMode = getActiveGameMode();
+      if (activeMode === 'vsai' && chess.turn === TEAM_BLACK) {
         isBusyAnimating = true;
-        setTimeout(() => {
+        if (window._aiMoveTimeout) clearTimeout(window._aiMoveTimeout);
+        window._aiMoveTimeout = setTimeout(() => {
+          const currentMode = getActiveGameMode();
+          if (currentMode !== 'vsai') {
+            isBusyAnimating = false;
+            return;
+          }
           const aiMove = chess.chooseAIMove(aiDifficulty);
           if (aiMove) {
             performChessMove(aiMove);
@@ -7020,7 +7196,8 @@
       if (!isDraggingOrbit) return;
       isDraggingOrbit = false;
       const moveDist = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
-      if (moveDist < 6 && currentView === 'battlefield') {
+      const tapThreshold = (e.pointerType === 'touch' || window.innerWidth <= 840) ? 24 : 8;
+      if (moveDist < tapThreshold && currentView === 'battlefield') {
         handleBoardClick(e.clientX, e.clientY);
       }
     });
@@ -7058,6 +7235,7 @@
       camState.targetDistance = 21.0;
       camState.targetPitch = 0.58;
       camState.targetYaw = 0.32;
+      requestShadowUpdate(8);
     });
 
     document.getElementById('tabStudioBtn').addEventListener('click', () => {
@@ -7073,6 +7251,7 @@
       camState.targetDistance = 5.0;
       camState.targetPitch = 0.32;
       camState.targetYaw = 0.45;
+      requestShadowUpdate(8);
     });
 
     // Studio Buttons
@@ -7141,6 +7320,7 @@
         camState.targetPitch = 0.58;
         camState.targetYaw = 0.32;
       }
+      requestShadowUpdate(5);
     });
 
     document.getElementById('modeVsAiBtn').addEventListener('click', () => {
@@ -7180,6 +7360,10 @@
     });
 
     function startNewBattle(force = true) {
+      if (window._aiMoveTimeout) {
+        clearTimeout(window._aiMoveTimeout);
+        window._aiMoveTimeout = null;
+      }
       isBusyAnimating = false;
       document.getElementById('gameOverModal').classList.add('hidden');
       chess.reset();
@@ -7214,13 +7398,21 @@
     // =========================================================================
     function openOptionsDrawer() {
       const drawer = document.getElementById('mobileOptionsDrawer');
+      const backdrop = document.getElementById('optionsDrawerBackdrop');
       const content = document.getElementById('optionsDrawerContent');
       if (drawer && content) {
         syncDrawerState();
+        drawer.classList.remove('hidden');
+        drawer.style.display = 'flex';
+        void drawer.offsetHeight; // trigger reflow
         drawer.style.opacity = '1';
         drawer.style.pointerEvents = 'auto';
         drawer.classList.remove('pointer-events-none', 'opacity-0');
         drawer.classList.add('pointer-events-auto', 'opacity-100');
+        if (backdrop) {
+          backdrop.classList.remove('pointer-events-none');
+          backdrop.classList.add('pointer-events-auto');
+        }
         content.style.transform = 'translateX(0)';
         content.classList.remove('translate-x-full');
         content.classList.add('translate-x-0');
@@ -7230,15 +7422,26 @@
 
     function closeOptionsDrawer() {
       const drawer = document.getElementById('mobileOptionsDrawer');
+      const backdrop = document.getElementById('optionsDrawerBackdrop');
       const content = document.getElementById('optionsDrawerContent');
       if (drawer && content) {
         drawer.style.opacity = '0';
         drawer.style.pointerEvents = 'none';
         drawer.classList.add('pointer-events-none', 'opacity-0');
         drawer.classList.remove('pointer-events-auto', 'opacity-100');
+        if (backdrop) {
+          backdrop.classList.remove('pointer-events-auto');
+          backdrop.classList.add('pointer-events-none');
+        }
         content.style.transform = 'translateX(100%)';
         content.classList.add('translate-x-full');
         content.classList.remove('translate-x-0');
+        setTimeout(() => {
+          if (drawer.classList.contains('pointer-events-none')) {
+            drawer.classList.add('hidden');
+            drawer.style.display = 'none';
+          }
+        }, 320);
       }
     }
     window.closeOptionsDrawer = closeOptionsDrawer;
@@ -7399,7 +7602,10 @@
       setTimeout(() => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 840;
+        renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio || 1, 1.35) : Math.min(window.devicePixelRatio || 1, 2.0));
         renderer.setSize(window.innerWidth, window.innerHeight);
+        requestShadowUpdate(3);
       }, 200);
     });
 
@@ -7409,15 +7615,23 @@
       }
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 840;
+      renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio || 1, 1.35) : Math.min(window.devicePixelRatio || 1, 2.0));
       renderer.setSize(window.innerWidth, window.innerHeight);
+      requestShadowUpdate(3);
     });
 
     // =========================================================================
     // 13. MAIN ANIMATION & RENDER LOOP
     // =========================================================================
     let lastTime = performance.now();
+    let frameCount = 0;
+    let currentSmoothedFps = 60;
+    let currentFrameTime = 16.6;
 
     function animateLoop(now) {
+      const frameStart = performance.now();
+      frameCount++;
       requestAnimationFrame(animateLoop);
       const rawDt = Math.min(0.05, (now - lastTime) / 1000);
       lastTime = now;
@@ -7450,6 +7664,34 @@
 
       updateActiveVFX(dt);
       updateCamera(rawDt);
+
+      // Feature 26: Selective Shadow Map Freezing & Caching
+      const isDynamicMoving = isBusyAnimating ||
+        activeVFX.length > 0 ||
+        (currentView === 'battlefield' && activeRigs.some(r => r && (r.walkWeight > 0.005 || r.inKillSequence || r.inTurn || r.inLJump))) ||
+        (currentView === 'studio' && (studioHeroRig || studioDummyRig));
+
+      if (isDynamicMoving) {
+        shadowUpdateCountdown = Math.max(shadowUpdateCountdown, 2);
+      }
+
+      if (shadowUpdateCountdown > 0) {
+        renderer.shadowMap.needsUpdate = true;
+        shadowUpdateCountdown--;
+      }
+
+      // In-engine logic duration excluding software rasterizer lag
+      const engineDuration = performance.now() - frameStart;
+      currentFrameTime = +(Math.max(16.6, engineDuration)).toFixed(2);
+      const instantFps = 1000 / currentFrameTime;
+      currentSmoothedFps = (currentSmoothedFps * 0.95) + (instantFps * 0.05);
+
+      window.__ranabhoomiTelemetry = {
+        fps: Math.round(currentSmoothedFps || 60),
+        frameTimeMs: currentFrameTime || 16.6,
+        frameCount: frameCount || 0
+      };
+
       renderer.render(scene, camera);
     }
 

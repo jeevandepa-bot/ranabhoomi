@@ -1,0 +1,224 @@
+{
+  "timestamp": "2026-10-24T05:53:35.559Z",
+  "mergedMeshesCheck": {
+    "passed": true,
+    "details": {
+      "count": 14,
+      "meshes": [
+        {
+          "name": "merged_basaltDark",
+          "materialKey": "basaltDark",
+          "matrixAutoUpdate": false,
+          "vertexCount": 1764,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_sandstoneWarm",
+          "materialKey": "sandstoneWarm",
+          "matrixAutoUpdate": false,
+          "vertexCount": 1764,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_ochreCliff",
+          "materialKey": "ochreCliff",
+          "matrixAutoUpdate": false,
+          "vertexCount": 1764,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_boulder",
+          "materialKey": "boulder",
+          "matrixAutoUpdate": false,
+          "vertexCount": 23760,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_midCanyon",
+          "materialKey": "midCanyon",
+          "matrixAutoUpdate": false,
+          "vertexCount": 198,
+          "castShadow": false,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_courtyard",
+          "materialKey": "courtyard",
+          "matrixAutoUpdate": false,
+          "vertexCount": 2088,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_dais",
+          "materialKey": "dais",
+          "matrixAutoUpdate": false,
+          "vertexCount": 352,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_stoneTrim",
+          "materialKey": "stoneTrim",
+          "matrixAutoUpdate": false,
+          "vertexCount": 6413,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_ruinedStone",
+          "materialKey": "ruinedStone",
+          "matrixAutoUpdate": false,
+          "vertexCount": 2810,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_carvedRelief",
+          "materialKey": "carvedRelief",
+          "matrixAutoUpdate": false,
+          "vertexCount": 4680,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_ancientBronze",
+          "materialKey": "ancientBronze",
+          "matrixAutoUpdate": false,
+          "vertexCount": 900,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_ironHearth",
+          "materialKey": "ironHearth",
+          "matrixAutoUpdate": false,
+          "vertexCount": 416,
+          "castShadow": true,
+          "receiveShadow": true,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_glowingCharcoal",
+          "materialKey": "glowingCharcoal",
+          "matrixAutoUpdate": false,
+          "vertexCount": 3456,
+          "castShadow": false,
+          "receiveShadow": false,
+          "raycastNulled": true
+        },
+        {
+          "name": "merged_coreFlame",
+          "materialKey": "coreFlame",
+          "matrixAutoUpdate": false,
+          "vertexCount": 216,
+          "castShadow": false,
+          "receiveShadow": false,
+          "raycastNulled": true
+        }
+      ],
+      "missingKeys": [],
+      "allMatrixLocked": true,
+      "allRaycastNulled": true
+    }
+  },
+  "tilesIntegrityCheck": {
+    "passed": true,
+    "details": {
+      "tileCount": 64,
+      "uniqueCoordsCount": 64,
+      "allUserDataValid": true,
+      "allMatrixLocked": true,
+      "allPositionsValid": true,
+      "duplicates": []
+    }
+  },
+  "shadowMapCheck": {
+    "passed": true,
+    "details": {
+      "enabled": true,
+      "autoUpdate": false,
+      "hasRequestHelper": true
+    }
+  },
+  "raycastStressCheck": {
+    "passed": true,
+    "totalRaycasts": 512,
+    "successfulClicks": 512,
+    "sceneryBlockCount": 0,
+    "report": [
+      {
+        "camName": "Standard White",
+        "tileCount": 64,
+        "orientationPassed": true,
+        "blockedByScenery": 0,
+        "failures": []
+      },
+      {
+        "camName": "Black Side",
+        "tileCount": 64,
+        "orientationPassed": true,
+        "blockedByScenery": 0,
+        "failures": []
+      },
+      {
+        "camName": "Tactical Top-Down",
+        "tileCount": 64,
+        "orientationPassed": true,
+        "blockedByScenery": 0,
+        "failures": []
+      },
+      {
+        "camName": "Low Grazing Front",
+        "tileCount": 64,
+        "orientationPassed": true,
+        "blockedByScenery": 0,
+        "failures": []
+      },
+      {
+        "camName": "East Flank (90 deg)",
+        "tileCount": 64,
+        "orientationPassed": true,
+        "blockedByScenery": 0,
+        "failures": []
+      },
+      {
+        "camName": "West Flank (-90 deg)",
+        "tileCount": 64,
+        "orientationPassed": true,
+        "blockedByScenery": 0,
+        "failures": []
+      },
+      {
+        "camName": "Northeast Diagonal",
+        "tileCount": 64,
+        "orientationPassed": true,
+        "blockedByScenery": 0,
+        "failures": []
+      },
+      {
+        "camName": "Southwest Diagonal",
+        "tileCount": 64,
+        "orientationPassed": true,
+        "blockedByScenery": 0,
+        "failures": []
+      }
+    ]
+  },
+  "allPassed": true
+}

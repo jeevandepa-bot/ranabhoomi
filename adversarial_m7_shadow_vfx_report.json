@@ -1,0 +1,356 @@
+{
+  "timestamp": "2026-10-24T05:58:20.385Z",
+  "tests": [
+    {
+      "description": "renderer.shadowMap.autoUpdate is strictly false in idle state",
+      "status": "PASS",
+      "details": {
+        "autoUpdate": false
+      }
+    },
+    {
+      "description": "shadowUpdateCountdown remains exactly 0 across 9 consecutive idle render calls",
+      "status": "PASS",
+      "details": {
+        "allCountdownZero": true,
+        "maxCountdown": 0
+      }
+    },
+    {
+      "description": "renderer.shadowMap.needsUpdate is strictly false during 100% of 9 idle render calls",
+      "status": "PASS",
+      "details": {
+        "allNeedsUpdateFalse": true,
+        "anyNeedsUpdateTrue": false
+      }
+    },
+    {
+      "description": "isBusyAnimating is set to true immediately upon initiating piece move",
+      "status": "PASS",
+      "details": {
+        "countdown": 10,
+        "needsUpdate": true,
+        "isBusy": true
+      }
+    },
+    {
+      "description": "shadowUpdateCountdown > 0 immediately upon initiating piece move",
+      "status": "PASS",
+      "details": {
+        "countdown": 10
+      }
+    },
+    {
+      "description": "renderer.shadowMap.needsUpdate === true immediately upon initiating piece move",
+      "status": "PASS",
+      "details": {
+        "needsUpdate": true
+      }
+    },
+    {
+      "description": "renderer.shadowMap.needsUpdate was true on 47 render passes during locomotion",
+      "status": "PASS",
+      "details": {
+        "totalRenders": 47,
+        "rendersWithShadowNeedsUpdateTrue": 47
+      }
+    },
+    {
+      "description": "isBusyAnimating resets to false after piece locomotion completes",
+      "status": "PASS",
+      "details": {
+        "frameCount": 5,
+        "isBusy": false,
+        "allCountdownZero": true,
+        "allNeedsUpdateFalse": true
+      }
+    },
+    {
+      "description": "shadowUpdateCountdown returns to 0 after post-move countdown frames settle",
+      "status": "PASS",
+      "details": {
+        "allCountdownZero": true
+      }
+    },
+    {
+      "description": "renderer.shadowMap.needsUpdate returns to false across all post-move render passes",
+      "status": "PASS",
+      "details": {
+        "allNeedsUpdateFalse": true
+      }
+    },
+    {
+      "description": "Units have inKillSequence = true upon combat trigger",
+      "status": "PASS",
+      "details": {
+        "countdown": 10,
+        "needsUpdate": true,
+        "attackerInKill": true,
+        "defenderInKill": true
+      }
+    },
+    {
+      "description": "shadowUpdateCountdown > 0 upon combat trigger",
+      "status": "PASS",
+      "details": {
+        "countdown": 10
+      }
+    },
+    {
+      "description": "renderer.shadowMap.needsUpdate === true upon combat trigger",
+      "status": "PASS",
+      "details": {
+        "needsUpdate": true
+      }
+    },
+    {
+      "description": "renderer.shadowMap.needsUpdate was true on 76 render passes during combat choreography",
+      "status": "PASS",
+      "details": {
+        "totalRenders": 76,
+        "rendersWithShadowNeedsUpdateTrue": 76
+      }
+    },
+    {
+      "description": "All combat VFX (shocks, debris, smoke plume, ground decal) completely cleared from activeVFX",
+      "status": "PASS",
+      "details": {
+        "activeVFXCount": 0
+      }
+    },
+    {
+      "description": "shadowUpdateCountdown returns to 0 after combat sequence and all VFX resolve",
+      "status": "PASS",
+      "details": {
+        "allCountdownZero": true
+      }
+    },
+    {
+      "description": "renderer.shadowMap.needsUpdate returns to false across all post-combat render passes",
+      "status": "PASS",
+      "details": {
+        "allNeedsUpdateFalse": true
+      }
+    },
+    {
+      "description": "spawnShockwaveRing adds mesh to vfxGroup during active duration",
+      "status": "PASS",
+      "details": {
+        "initChildren": 0,
+        "midChildren": 1,
+        "finalChildren": 0,
+        "inVfxGroup": false,
+        "geoDisposed": true,
+        "matDisposed": true
+      }
+    },
+    {
+      "description": "spawnShockwaveRing removes mesh from vfxGroup upon duration expiry",
+      "status": "PASS",
+      "details": {
+        "initChildren": 0,
+        "midChildren": 1,
+        "finalChildren": 0,
+        "inVfxGroup": false,
+        "geoDisposed": true,
+        "matDisposed": true
+      }
+    },
+    {
+      "description": "spawnShockwaveRing calls geometry.dispose() on expired mesh",
+      "status": "PASS",
+      "details": {
+        "geoDisposed": true
+      }
+    },
+    {
+      "description": "spawnShockwaveRing calls material.dispose() on expired mesh",
+      "status": "PASS",
+      "details": {
+        "matDisposed": true
+      }
+    },
+    {
+      "description": "spawnVerticalLightPillar cleanly removed from vfxGroup upon expiry",
+      "status": "PASS",
+      "details": {
+        "inVfxGroup": false,
+        "finalChildren": 0,
+        "initChildren": 0,
+        "geoDisposed": true,
+        "matDisposed": true
+      }
+    },
+    {
+      "description": "spawnVerticalLightPillar calls geometry.dispose() and material.dispose()",
+      "status": "PASS",
+      "details": {
+        "inVfxGroup": false,
+        "finalChildren": 0,
+        "initChildren": 0,
+        "geoDisposed": true,
+        "matDisposed": true
+      }
+    },
+    {
+      "description": "spawnBladeRibbonArc properly removes mesh and disposes geometry & material",
+      "status": "PASS",
+      "details": {
+        "inVfxGroup": false,
+        "finalChildren": 0,
+        "initChildren": 0,
+        "geoDisposed": true,
+        "matDisposed": true
+      }
+    },
+    {
+      "description": "spawnGeometricShardExplosion spawns exactly 34 shard meshes",
+      "status": "PASS",
+      "details": {
+        "spawnedCount": 34
+      }
+    },
+    {
+      "description": "All 34 shards removed from vfxGroup with zero memory leakage",
+      "status": "PASS",
+      "details": {
+        "remainingInGroup": 0,
+        "finalChildren": 0
+      }
+    },
+    {
+      "description": "Shared OctahedronGeometry was disposed on expiration",
+      "status": "PASS",
+      "details": {
+        "geoDisposeCalls": 34
+      }
+    },
+    {
+      "description": "All 34 shard cloned materials were explicitly disposed",
+      "status": "PASS",
+      "details": {
+        "matDisposeCalls": 34
+      }
+    },
+    {
+      "description": "Multi-material mesh removed from vfxGroup upon expiry",
+      "status": "PASS",
+      "details": {
+        "inVfxGroup": false,
+        "finalChildren": 0,
+        "initChildren": 0,
+        "geoDisposed": true,
+        "mat1Disposed": true,
+        "mat2Disposed": true
+      }
+    },
+    {
+      "description": "Array.isArray(material) branch disposes every material in the array",
+      "status": "PASS",
+      "details": {
+        "inVfxGroup": false,
+        "finalChildren": 0,
+        "initChildren": 0,
+        "geoDisposed": true,
+        "mat1Disposed": true,
+        "mat2Disposed": true
+      }
+    },
+    {
+      "description": "Mass spawn reached >= 100 concurrent active VFX objects in vfxGroup",
+      "status": "PASS",
+      "details": {
+        "baselineChildren": 0,
+        "baselineActive": 0,
+        "peakChildren": 100,
+        "peakActive": 100,
+        "finalChildren": 0,
+        "finalActive": 0
+      }
+    },
+    {
+      "description": "vfxGroup.children cleanly returns to baseline after mass concurrent VFX expiration",
+      "status": "PASS",
+      "details": {
+        "baselineChildren": 0,
+        "peakChildren": 100,
+        "finalChildren": 0
+      }
+    },
+    {
+      "description": "activeVFX array cleanly clears all expired elements",
+      "status": "PASS",
+      "details": {
+        "baselineActive": 0,
+        "peakActive": 100,
+        "finalActive": 0
+      }
+    },
+    {
+      "description": "Switching to Studio view requests shadow update (countdown > 0, needsUpdate = true)",
+      "status": "PASS",
+      "details": {
+        "studioCountdown": 8,
+        "studioNeedsUpdate": true,
+        "bfieldCountdown": 8,
+        "bfieldNeedsUpdate": true,
+        "resetCamCountdown": 7,
+        "resetCamNeedsUpdate": true,
+        "settledCountdown": 0,
+        "settledNeedsUpdate": false
+      }
+    },
+    {
+      "description": "Switching to Battlefield view requests shadow update (countdown > 0, needsUpdate = true)",
+      "status": "PASS",
+      "details": {
+        "studioCountdown": 8,
+        "studioNeedsUpdate": true,
+        "bfieldCountdown": 8,
+        "bfieldNeedsUpdate": true,
+        "resetCamCountdown": 7,
+        "resetCamNeedsUpdate": true,
+        "settledCountdown": 0,
+        "settledNeedsUpdate": false
+      }
+    },
+    {
+      "description": "Clicking Reset Camera requests shadow update (countdown > 0, needsUpdate = true)",
+      "status": "PASS",
+      "details": {
+        "studioCountdown": 8,
+        "studioNeedsUpdate": true,
+        "bfieldCountdown": 8,
+        "bfieldNeedsUpdate": true,
+        "resetCamCountdown": 7,
+        "resetCamNeedsUpdate": true,
+        "settledCountdown": 0,
+        "settledNeedsUpdate": false
+      }
+    },
+    {
+      "description": "Shadow map returns to frozen state (countdown = 0, needsUpdate = false) after UI operations complete",
+      "status": "PASS",
+      "details": {
+        "studioCountdown": 8,
+        "studioNeedsUpdate": true,
+        "bfieldCountdown": 8,
+        "bfieldNeedsUpdate": true,
+        "resetCamCountdown": 7,
+        "resetCamNeedsUpdate": true,
+        "settledCountdown": 0,
+        "settledNeedsUpdate": false
+      }
+    },
+    {
+      "description": "Zero browser console errors or unhandled exceptions encountered throughout test execution",
+      "status": "PASS",
+      "details": {
+        "browserErrors": []
+      }
+    }
+  ],
+  "passed": 38,
+  "failed": 0,
+  "errors": []
+}
