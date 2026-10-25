@@ -1023,115 +1023,224 @@ def build_organic_ashvarohi():
 # ==============================================================================
 def build_organic_ratha():
     clear_scene()
-    print("Building Ratha (Bishop)...")
-    wood_mat = create_pbr_material("Sandalwood", (0.55, 0.35, 0.18, 1), 0.15, 0.70, os.path.join(TEXTURE_DIR, 'sandalwood_chariot.png'))
-    gold_mat = create_pbr_material("ChakraGold", (0.95, 0.78, 0.22, 1), 0.88, 0.20, os.path.join(TEXTURE_DIR, 'kavacha_gold.png'))
-    steel_mat = create_pbr_material("ScytheSteel", (0.20, 0.22, 0.28, 1), 0.80, 0.30, os.path.join(TEXTURE_DIR, 'damascus_steel.png'))
-    halo_mat = create_pbr_material("CelestialHalo", (1.0, 0.90, 0.30, 1), 0.90, 0.10, emissive_color=(1.0, 0.85, 0.20, 1), emissive_intensity=2.2)
-    robe_mat = create_pbr_material("ArcherRobe", (0.92, 0.88, 0.80, 1), 0.10, 0.50, os.path.join(TEXTURE_DIR, 'dhoti_silk.png'))
-    skin_mat = create_pbr_material("ArcherSkin", (0.76, 0.52, 0.38, 1), 0.05, 0.55)
+    print("Building Puranic Wizard Bishop (Harry Potter Reference Sculpt)...")
+    stone_mat = create_pbr_material("BishopStone", (0.58, 0.56, 0.54, 1.0), 0.08, 0.65, os.path.join(TEXTURE_DIR, 'damascus_steel.png'))
+    gold_mat  = create_pbr_material("BishopGold", (0.92, 0.76, 0.22, 1.0), 0.88, 0.22, os.path.join(TEXTURE_DIR, 'kavacha_gold.png'))
+    stole_mat = create_pbr_material("BishopStole", (0.42, 0.38, 0.35, 1.0), 0.12, 0.60, os.path.join(TEXTURE_DIR, 'dhoti_silk.png'))
+    glow_mat  = create_pbr_material("BishopRunicGlow", (0.2, 0.9, 1.0, 1.0), 0.5, 0.1, emissive_color=(0.15, 0.85, 1.0, 1.0), emissive_intensity=2.8)
 
-    # 1. Carved Sandalwood Chariot Hull
-    chassis_rings = [
-        (0.25, 0.65, 0.95, 0.0, 0.00),
-        (0.55, 0.72, 1.05, 0.0, -0.05),
-        (0.85, 0.75, 1.10, 0.0, -0.10)
+    # 1. Stepped Octagonal Carved Stone Pedestal (Plinth) grounded at Z = 0.000m
+    pedestal_rings = [
+        (0.00, 0.44, 0.44, 0.0, 0.0, 8, 0.06),
+        (0.08, 0.43, 0.43, 0.0, 0.0, 8, 0.06),
+        (0.10, 0.38, 0.38, 0.0, 0.0, 8, 0.04),
+        (0.16, 0.36, 0.36, 0.0, 0.0, 8, 0.03),
+        (0.20, 0.40, 0.40, 0.0, 0.0, 8, 0.04),
+        (0.26, 0.38, 0.38, 0.0, 0.0, 8, 0.04),
     ]
-    create_organic_lofted_mesh("Chariot_Hull", chassis_rings, num_segments=16, material=wood_mat, subsurf_levels=1)
+    create_organic_lofted_mesh("Bishop_Pedestal_Stone", pedestal_rings, num_segments=24, material=stone_mat, subsurf_levels=1, cap_bottom=True, cap_top=True)
 
-    # Protective Varutha Shield Prow sweeping forward (-Y)
-    varutha_rings = [
-        (0.55, 0.68, 0.45, 0.0, -0.65),
-        (0.95, 0.72, 0.48, 0.0, -0.72),
-        (1.25, 0.65, 0.42, 0.0, -0.78)
-    ]
-    create_organic_lofted_mesh("Chariot_Varutha", varutha_rings, num_segments=16, material=wood_mat, subsurf_levels=1)
-
-    # Rear Flagstaff & Surya Sun Banner
-    mast_spine = [Vector((0.45, 0.65, 0.85)), Vector((0.45, 0.65, 2.35))]
-    create_swept_tube("Chariot_Flagstaff", mast_spine, [0.022, 0.018], num_segments=8, material=gold_mat, subsurf_levels=0)
-
-    banner_rings = [
-        (2.05, 0.01, 0.40, 0.45, 0.45),
-        (2.30, 0.01, 0.35, 0.45, 0.45)
-    ]
-    create_organic_lofted_mesh("Surya_Banner", banner_rings, num_segments=8, material=robe_mat, subsurf_levels=1)
-
-    # 2. Dual 8-Spoked Surya Chakra Wheels (Radius 0.48m, centered at X = +-0.75m, Z = 0.48m)
-    for wx, side_label in [(-0.75, "L"), (0.75, "R")]:
-        # Outer Rim
-        rim_spine = []
-        for i in range(25):
-            ang = (2.0 * math.pi * i) / 24
-            rim_spine.append(Vector((wx, 0.48 * math.sin(ang), 0.48 + 0.48 * math.cos(ang))))
-        create_swept_tube(f"Chakra_Wheel_{side_label}", rim_spine, [0.042] * 25, num_segments=12, material=gold_mat, subsurf_levels=1, cap_ends=False)
-
-        # 8 Tapered Spokes
-        for s in range(8):
-            sang = s * (math.pi / 4.0)
-            spoke_spine = [
-                Vector((wx, 0.0, 0.48)),
-                Vector((wx, 0.45 * math.sin(sang), 0.48 + 0.45 * math.cos(sang)))
-            ]
-            create_swept_tube(f"Chakra_Spoke_{side_label}_{s}", spoke_spine, [0.025, 0.018], num_segments=8, material=gold_mat, subsurf_levels=0)
-
-        # Central Hub Scythe pointing outward along X
-        out_x = wx + (0.28 if wx > 0 else -0.28)
-        scythe_spine = [Vector((wx, 0.0, 0.48)), Vector((out_x, 0.0, 0.48))]
-        create_swept_tube(f"Chakra_Hub_{side_label}", scythe_spine, [0.065, 0.005], num_segments=12, material=steel_mat, subsurf_levels=1)
-
-        # Consolidate wheel meshes and set origin to axle center (wx, 0.0, 0.48) for pure rolling rotation on axis
-        wheel_parts = [bpy.data.objects.get(f"Chakra_Wheel_{side_label}"), bpy.data.objects.get(f"Chakra_Hub_{side_label}")]
-        for s in range(8):
-            sp = bpy.data.objects.get(f"Chakra_Spoke_{side_label}_{s}")
-            if sp: wheel_parts.append(sp)
-        wheel_parts = [p for p in wheel_parts if p]
-        bpy.ops.object.select_all(action='DESELECT')
-        for p in wheel_parts:
-            p.select_set(True)
-        bpy.context.view_layer.objects.active = wheel_parts[0]
-        bpy.ops.object.join()
-        wheel_combined = bpy.context.active_object
-        wheel_combined.name = f"Chakra_Wheel_{side_label}"
-        bpy.context.scene.cursor.location = Vector((wx, 0.0, 0.48))
-        bpy.ops.object.origin_set(type='ORIGIN_CURSOR')
-
-    # 2b. Solid Transverse Axle Rod connecting left and right wheel hubs
-    axle_spine = [Vector((-0.75, 0.0, 0.48)), Vector((0.75, 0.0, 0.48))]
-    create_swept_tube("Chakra_Axle", axle_spine, [0.038, 0.038], num_segments=16, material=gold_mat, subsurf_levels=0)
-
-    # 3. Standing Celestial Sage Archer facing -Y
-    robe_rings = [
-        (0.45, 0.28, 0.22, 0.0, 0.00, 8, 0.12),
-        (0.85, 0.32, 0.24, 0.0, -0.01, 8, 0.10),
-        (1.15, 0.30, 0.22, 0.0, -0.02, 6, 0.06),
-        (1.45, 0.32, 0.24, 0.0, -0.02)
-    ]
-    create_organic_lofted_mesh("Sage_Dhoti", robe_rings, num_segments=16, material=robe_mat, subsurf_levels=1)
-
-    ahead_rings = [
-        (1.48, 0.11, 0.12, 0.0, -0.03),
-        (1.58, 0.13, 0.14, 0.0, -0.04),
-        (1.70, 0.12, 0.13, 0.0, -0.02)
-    ]
-    create_organic_lofted_mesh("Sage_Head", ahead_rings, num_segments=16, material=skin_mat, subsurf_levels=1)
-
-    # Radiant Prabhamandala Halo Disc mounted behind head (+Y)
-    halo_spine = []
+    waist_spine = []
     for i in range(25):
         ang = (2.0 * math.pi * i) / 24
-        halo_spine.append(Vector((0.34 * math.cos(ang), 0.10, 1.68 + 0.34 * math.sin(ang))))
-    create_swept_tube("Prabhamandala", halo_spine, [0.032] * 25, num_segments=12, material=halo_mat, subsurf_levels=1, cap_ends=False)
+        waist_spine.append(Vector((0.365 * math.cos(ang), 0.365 * math.sin(ang), 0.16)))
+    create_swept_tube("Pedestal_Gold_Ring", waist_spine, [0.016] * 25, num_segments=12, material=gold_mat, subsurf_levels=0, cap_ends=False)
 
-    # Gandiva Recurve Greatbow
-    bow_spine = [
-        Vector((0.28, -0.32, 1.10)),
-        Vector((0.32, -0.40, 1.45)),
-        Vector((0.28, -0.32, 1.80))
+    # 2. Armored Sabatons / Boots
+    for x_side, side_label in [(-0.13, "L"), (0.13, "R")]:
+        foot_rings = [
+            (0.26, 0.065, 0.12, x_side, -0.04),
+            (0.32, 0.055, 0.09, x_side, -0.02),
+            (0.42, 0.060, 0.07, x_side, 0.00),
+            (0.58, 0.070, 0.08, x_side, 0.01),
+        ]
+        create_organic_lofted_mesh(f"Bishop_Foot_{side_label}", foot_rings, num_segments=12, material=stone_mat, subsurf_levels=1)
+
+    # 3. Flowing Liturgical Cassock & Draped Stone Mantle
+    robe_rings = [
+        (0.28, 0.32, 0.28, 0.0, 0.02, 10, 0.16),
+        (0.48, 0.30, 0.26, 0.0, 0.01, 8, 0.14),
+        (0.72, 0.27, 0.23, 0.0, 0.00, 6, 0.10),
+        (0.96, 0.25, 0.21, 0.0, -0.01, 4, 0.06),
     ]
-    create_swept_tube("Gandiva_Bow", bow_spine, [0.022, 0.032, 0.022], num_segments=12, material=gold_mat, subsurf_levels=1)
+    create_organic_lofted_mesh("Bishop_Robe_Mantle", robe_rings, num_segments=20, material=stone_mat, subsurf_levels=1)
+
+    cape_spine_l = [Vector((-0.24, 0.12, 1.35)), Vector((-0.27, 0.18, 0.85)), Vector((-0.28, 0.22, 0.30))]
+    cape_spine_r = [Vector((0.24, 0.12, 1.35)), Vector((0.27, 0.18, 0.85)), Vector((0.28, 0.22, 0.30))]
+    create_swept_tube("Mantle_Edge_L", cape_spine_l, [0.035, 0.045, 0.050], num_segments=8, material=stone_mat, subsurf_levels=1)
+    create_swept_tube("Mantle_Edge_R", cape_spine_r, [0.035, 0.045, 0.050], num_segments=8, material=stone_mat, subsurf_levels=1)
+
+    # 4. Central Engraved Stole / Tabard
+    stole_rings = [
+        (0.30, 0.09, 0.025, 0.0, -0.27),
+        (0.55, 0.09, 0.028, 0.0, -0.25),
+        (0.85, 0.09, 0.030, 0.0, -0.23),
+        (1.10, 0.095, 0.032, 0.0, -0.21),
+        (1.35, 0.10, 0.035, 0.0, -0.19),
+    ]
+    create_organic_lofted_mesh("Bishop_Stole_Silk", stole_rings, num_segments=16, material=stole_mat, subsurf_levels=1)
+
+    runic_spine = [Vector((0.0, -0.29, 0.32)), Vector((0.0, -0.23, 1.32))]
+    create_swept_tube("Stole_Runic_Relief", runic_spine, [0.016, 0.018], num_segments=8, material=glow_mat, subsurf_levels=0)
+
+    chakra_ring = []
+    for i in range(25):
+        ang = (2.0 * math.pi * i) / 24
+        chakra_ring.append(Vector((0.055 * math.cos(ang), -0.225, 1.18 + 0.055 * math.sin(ang))))
+    create_swept_tube("Surya_Chakra_Emblem", chakra_ring, [0.012] * 25, num_segments=8, material=gold_mat, subsurf_levels=1, cap_ends=False)
+
+    # 5. Armored Cuirass & Segmented Torso
+    torso_rings = [
+        (0.95, 0.24, 0.19, 0.0, -0.01),
+        (1.10, 0.26, 0.20, 0.0, -0.02),
+        (1.25, 0.28, 0.21, 0.0, -0.02),
+        (1.38, 0.26, 0.19, 0.0, -0.01),
+        (1.44, 0.17, 0.15, 0.0, 0.00),
+    ]
+    create_organic_lofted_mesh("Bishop_Cuirass", torso_rings, num_segments=20, material=stone_mat, subsurf_levels=1)
+
+    for bz, by, bx in [(1.05, -0.19, 0.24), (1.18, -0.20, 0.26), (1.30, -0.20, 0.27)]:
+        band_spine = [Vector((-bx * 0.9, by, bz)), Vector((0.0, by - 0.01, bz)), Vector((bx * 0.9, by, bz))]
+        create_swept_tube(f"Cuirass_Gold_Band_{int(bz*100)}", band_spine, [0.012, 0.015, 0.012], num_segments=8, material=gold_mat, subsurf_levels=0)
+
+    # 6. Flared Layered Pauldrons
+    p_left_rings = [
+        (1.28, 0.09, 0.09, -0.28, -0.02),
+        (1.38, 0.13, 0.12, -0.32, -0.03),
+        (1.46, 0.11, 0.10, -0.30, -0.02),
+    ]
+    create_organic_lofted_mesh("Bishop_Pauldron_L", p_left_rings, num_segments=16, material=stone_mat, subsurf_levels=1)
+
+    p_right_rings = [
+        (1.28, 0.09, 0.09, 0.28, -0.02),
+        (1.38, 0.13, 0.12, 0.32, -0.03),
+        (1.46, 0.11, 0.10, 0.30, -0.02),
+    ]
+    create_organic_lofted_mesh("Bishop_Pauldron_R", p_right_rings, num_segments=16, material=stone_mat, subsurf_levels=1)
+
+    # 7. Left Arm & Hand
+    left_arm_spine = [
+        Vector((-0.30, -0.02, 1.38)),
+        Vector((-0.33, -0.06, 1.25)),
+        Vector((-0.34, -0.09, 1.12)),
+        Vector((-0.36, -0.16, 1.18)),
+    ]
+    create_swept_tube("Bishop_Arm_L", left_arm_spine, [0.075, 0.070, 0.065, 0.060], num_segments=12, material=stone_mat, subsurf_levels=1)
+
+    gauntlet_rings = [
+        (1.14, 0.055, 0.055, -0.37, -0.17),
+        (1.22, 0.060, 0.060, -0.37, -0.17),
+    ]
+    create_organic_lofted_mesh("Bishop_Gauntlet_L_Gold", gauntlet_rings, num_segments=12, material=gold_mat, subsurf_levels=1)
+
+    # 8. Grand Bishop's Crozier
+    staff_x = -0.38
+    staff_y = -0.18
+    staff_spine = [
+        Vector((staff_x, staff_y, 0.08)),
+        Vector((staff_x, staff_y, 0.65)),
+        Vector((staff_x, staff_y, 1.18)),
+        Vector((staff_x, staff_y, 1.65)),
+        Vector((staff_x, staff_y, 1.95)),
+    ]
+    create_swept_tube("Crozier_Shaft", staff_spine, [0.022, 0.024, 0.022, 0.020, 0.022], num_segments=12, material=stone_mat, subsurf_levels=1)
+
+    for fz in [0.12, 0.65, 1.12, 1.24, 1.65, 1.95]:
+        ring_pts = []
+        for i in range(17):
+            ang = (2.0 * math.pi * i) / 16
+            ring_pts.append(Vector((staff_x + 0.032 * math.cos(ang), staff_y + 0.032 * math.sin(ang), fz)))
+        create_swept_tube(f"Crozier_Ferrule_{int(fz*100)}", ring_pts, [0.010] * 17, num_segments=8, material=gold_mat, subsurf_levels=0, cap_ends=False)
+
+    crook_spine = []
+    crook_radii = []
+    num_crook_steps = 32
+    for i in range(num_crook_steps + 1):
+        t = i / num_crook_steps
+        theta = t * 1.65 * math.pi
+        r_spiral = 0.16 * (1.0 - 0.45 * t)
+        center_x = staff_x - 0.02
+        center_z = 2.12
+        cx = center_x + r_spiral * math.sin(theta)
+        cz = center_z + r_spiral * math.cos(theta)
+        cy = staff_y + 0.02 * math.sin(t * math.pi)
+        crook_spine.append(Vector((cx, cy, cz)))
+        crook_radii.append(0.024 * (1.0 - 0.35 * t))
+
+    create_swept_tube("Crozier_Crook_Gold", crook_spine, crook_radii, num_segments=12, material=gold_mat, subsurf_levels=1)
+
+    jewel_spine = [
+        Vector((staff_x - 0.02, staff_y, 2.10)),
+        Vector((staff_x - 0.02, staff_y, 2.14))
+    ]
+    create_swept_tube("Crozier_Runic_Gem", jewel_spine, [0.032, 0.032], num_segments=12, material=glow_mat, subsurf_levels=1)
+
+    # 9. Right Arm & Hand (Blessing Mudra)
+    right_arm_spine = [
+        Vector((0.30, -0.02, 1.38)),
+        Vector((0.33, -0.05, 1.25)),
+        Vector((0.34, -0.08, 1.12)),
+        Vector((0.33, -0.12, 1.28)),
+        Vector((0.31, -0.15, 1.40)),
+    ]
+    create_swept_tube("Bishop_Arm_R", right_arm_spine, [0.075, 0.070, 0.065, 0.058, 0.052], num_segments=12, material=stone_mat, subsurf_levels=1)
+
+    palm_rings = [
+        (1.40, 0.045, 0.035, 0.31, -0.15),
+        (1.46, 0.048, 0.038, 0.31, -0.15),
+    ]
+    create_organic_lofted_mesh("Bishop_Gauntlet_R_Gold", palm_rings, num_segments=12, material=gold_mat, subsurf_levels=1)
+
+    finger_l_spine = [Vector((0.30, -0.15, 1.46)), Vector((0.30, -0.15, 1.55))]
+    finger_r_spine = [Vector((0.32, -0.15, 1.46)), Vector((0.32, -0.15, 1.54))]
+    create_swept_tube("Blessing_Finger_Index_Gold", finger_l_spine, [0.012, 0.009], num_segments=8, material=gold_mat, subsurf_levels=1)
+    create_swept_tube("Blessing_Finger_Middle_Gold", finger_r_spine, [0.012, 0.009], num_segments=8, material=gold_mat, subsurf_levels=1)
+
+    thumb_spine = [Vector((0.28, -0.14, 1.42)), Vector((0.29, -0.16, 1.45))]
+    create_swept_tube("Blessing_Thumb_Gold", thumb_spine, [0.013, 0.010], num_segments=8, material=gold_mat, subsurf_levels=1)
+
+    # 10. Head, Visor & Pointed Mitre Headdress
+    neck_rings = [
+        (1.42, 0.12, 0.12, 0.0, -0.01),
+        (1.50, 0.11, 0.11, 0.0, -0.01),
+    ]
+    create_organic_lofted_mesh("Bishop_Neck_Gorget", neck_rings, num_segments=16, material=stone_mat, subsurf_levels=1)
+
+    head_rings = [
+        (1.50, 0.13, 0.14, 0.0, -0.02),
+        (1.60, 0.15, 0.16, 0.0, -0.03),
+        (1.68, 0.14, 0.15, 0.0, -0.02),
+    ]
+    create_organic_lofted_mesh("Bishop_Visor_Helm", head_rings, num_segments=16, material=stone_mat, subsurf_levels=1)
+
+    slit_spine = [Vector((0.0, -0.18, 1.56)), Vector((0.0, -0.18, 1.66))]
+    create_swept_tube("Visor_Central_Slit_Rune", slit_spine, [0.008, 0.008], num_segments=8, material=glow_mat, subsurf_levels=0)
+    for sx in [-0.04, 0.04]:
+        s_spine = [Vector((sx, -0.175, 1.58)), Vector((sx, -0.175, 1.64))]
+        create_swept_tube(f"Visor_Side_Slit_Rune_{'L' if sx < 0 else 'R'}", s_spine, [0.006, 0.006], num_segments=8, material=glow_mat, subsurf_levels=0)
+
+    brow_ring = []
+    for i in range(25):
+        ang = (2.0 * math.pi * i) / 24
+        brow_ring.append(Vector((0.148 * math.cos(ang), -0.02 + 0.158 * math.sin(ang), 1.68)))
+    create_swept_tube("Mitre_Gold_Circlet", brow_ring, [0.014] * 25, num_segments=12, material=gold_mat, subsurf_levels=0, cap_ends=False)
+
+    mitre_rings = [
+        (1.68, 0.145, 0.155, 0.0, -0.02),
+        (1.78, 0.140, 0.145, 0.0, -0.02, 2, 0.08),
+        (1.88, 0.125, 0.130, 0.0, -0.02, 2, 0.12),
+        (1.98, 0.085, 0.090, 0.0, -0.02, 2, 0.16),
+        (2.05, 0.020, 0.025, 0.0, -0.02),
+    ]
+    create_organic_lofted_mesh("Bishop_Mitre_Peak", mitre_rings, num_segments=20, material=stone_mat, subsurf_levels=1, cap_top=True)
+
+    mitre_cross_v = [Vector((0.0, -0.165, 1.74)), Vector((0.0, -0.115, 1.98))]
+    mitre_cross_h = [Vector((-0.06, -0.15, 1.86)), Vector((0.06, -0.15, 1.86))]
+    create_swept_tube("Mitre_Gold_Cross_V", mitre_cross_v, [0.010, 0.008], num_segments=8, material=gold_mat, subsurf_levels=0)
+    create_swept_tube("Mitre_Gold_Cross_H", mitre_cross_h, [0.008, 0.008], num_segments=8, material=gold_mat, subsurf_levels=0)
 
     export_glb("assets/ratha.glb")
+    export_glb("assets/bishop.glb")
 
 # ==============================================================================
 # 5. MAHARANI (QUEEN) — SUPREME WARRIOR QUEEN (TWIN KHANDA BLADES, SILK MANTLE)

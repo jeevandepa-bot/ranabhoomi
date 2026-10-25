@@ -501,7 +501,7 @@
         <button data-piece="1" class="studio-unit-btn mg-btn mg-btn-active px-3 py-1.5 rounded-lg text-xs font-kinetic font-semibold uppercase border border-transparent">🛡️ Padati (Pawn)</button>
         <button data-piece="4" class="studio-unit-btn mg-btn px-3 py-1.5 rounded-lg text-xs font-kinetic font-semibold uppercase text-slate-300 border border-transparent">🐘 Gajraj (Rook)</button>
         <button data-piece="2" class="studio-unit-btn mg-btn px-3 py-1.5 rounded-lg text-xs font-kinetic font-semibold uppercase text-slate-300 border border-transparent">🐎 Ashvarohi (Knight)</button>
-        <button data-piece="3" class="studio-unit-btn mg-btn px-3 py-1.5 rounded-lg text-xs font-kinetic font-semibold uppercase text-slate-300 border border-transparent">🏹 Ratha (Bishop)</button>
+        <button data-piece="3" class="studio-unit-btn mg-btn px-3 py-1.5 rounded-lg text-xs font-kinetic font-semibold uppercase text-slate-300 border border-transparent">⚡ याजक (Bishop)</button>
         <button data-piece="5" class="studio-unit-btn mg-btn px-3 py-1.5 rounded-lg text-xs font-kinetic font-semibold uppercase text-slate-300 border border-transparent">⚡ Maharani (Queen)</button>
         <button data-piece="6" class="studio-unit-btn mg-btn px-3 py-1.5 rounded-lg text-xs font-kinetic font-semibold uppercase text-slate-300 border border-transparent">👑 Samrat (King)</button>
       </div>
@@ -570,8 +570,8 @@
           <span class="text-xs font-regal font-bold text-amber-200">GAJRAJ (Rook)</span>
         </button>
         <button data-promo="3" class="promo-choice-btn mg-btn p-3 rounded-xl bg-slate-900 border border-amber-500/30 hover:border-amber-400 flex flex-col items-center gap-1">
-          <span class="text-2xl">🏹</span>
-          <span class="text-xs font-regal font-bold text-amber-200">RATHA (Bishop)</span>
+          <span class="text-2xl">⚡</span>
+          <span class="text-xs font-regal font-bold text-amber-200">YAJAKA (Bishop)</span>
         </button>
         <button data-promo="2" class="promo-choice-btn mg-btn p-3 rounded-xl bg-slate-900 border border-amber-500/30 hover:border-amber-400 flex flex-col items-center gap-1">
           <span class="text-2xl">🐎</span>
@@ -751,7 +751,7 @@
       [PIECE_PAWN]: "पदाति (Phalanx Sentinel)",
       [PIECE_ROOK]: "गज (War Elephant)",
       [PIECE_KNIGHT]: "अश्व (Lancer Cavalry)",
-      [PIECE_BISHOP]: "रथ (Astral Chariot)",
+      [PIECE_BISHOP]: "याजक (Sage Bishop)",
       [PIECE_QUEEN]: "महारानी (Supreme Warrior Queen)",
       [PIECE_KING]: "सम्राट (Sovereign Monarch)"
     };
@@ -788,14 +788,14 @@
         killDesc: "Stage 1: Rears -0.55 rad while locking a sacred-geometry reticle onto target. Stage 2: High-speed helical vortex charge. Stage 3: 0.16x slow-mo lance impale & spark cone."
       },
       [PIECE_BISHOP]: {
-        name: "Ratha Maharathi",
-        sanskrit: "रथ महारथी // VEDIC WAR CHARIOT",
-        role: "BISHOP // CELESTIAL ARTILLERY CHARIOT",
-        rig: "Winged Sandalwood Chariot & Sage Archer",
-        killTitle: "GANDIVA TRIPLE LIGHT ARROW SALVO",
-        design: "Carved Indian sandalwood winged chariot with dual 12-spoked bronze Surya sun-wheels, hub scythes, and standing Celestial Sage Archer with radiant Prabhamandala halo and Gandiva recurve bow.",
-        walkDesc: "Proportional sun-wheel rotation with banked diagonal chassis roll and glowing tread ribbons.",
-        killDesc: "Stage 1: Full Gandiva celestial bow draw. Stage 2: 3 parabolic Bezier light arrows. Stage 3: 0.16x slow-mo 9m vertical light pillar eruption."
+        name: "Yajaka Archpriest",
+        sanskrit: "याजक महापुरोहित // SACRED WIZARD BISHOP",
+        role: "BISHOP // PURANIC WIZARD ARCHPRIEST",
+        rig: "Harry Potter Franchise Reference Living Stone Sculpt",
+        killTitle: "CROZIER STAFF SLAM & DIVINE PILLAR",
+        design: "Carved ancient Ellora stone statue with stepped octagonal plinth, flowing liturgical vestments, central engraved stole with Surya Chakra emblem, pointed Mitre helmet with glowing visor slits, and a grand 2.38m spiral Crozier staff.",
+        walkDesc: "Imposing upright stone glide across the battlefield with solemn dignity and ground runes.",
+        killDesc: "Stage 1: Lifts grand spiral Crozier staff and channels celestial judgment. Stage 2: Earth-shattering downward staff slam. Stage 3: 0.16x slow-mo vertical light pillar eruption & 34-octahedron shatter."
       },
       [PIECE_QUEEN]: {
         name: "Maharani Veerangana",
@@ -1067,7 +1067,7 @@
           { key: 'padati', url: 'assets/padati.glb?v=3.2' },
           { key: 'gajadhvaja', url: 'assets/gajadhvaja.glb?v=3.2' },
           { key: 'ashvarohi', url: 'assets/ashvarohi.glb?v=3.2' },
-          { key: 'ratha', url: 'assets/ratha.glb?v=3.2' },
+          { key: 'ratha', url: 'assets/ratha.glb?v=4.0' },
           { key: 'maharani', url: 'assets/maharani.glb?v=3.2' },
           { key: 'samrat', url: 'assets/samrat.glb?v=3.2' }
         ];
@@ -1907,99 +1907,27 @@
 
     function buildPuranicBishop(rig, mats, team) {
       const model = cloneModelWithSkeleton(ModelManager.models.ratha.scene);
-      model.scale.setScalar(0.95); // Scaled up for grand chariot presence
-      model.rotation.y = 0; // Model naturally faces +Z; aligns chariot prow with archerGroup (+Z)
-      model.position.set(0, 0.0145, 0); // Exact ground contact y=0.000 (wheels touch stone floor at y=0.000m)
+      model.scale.setScalar(0.96); // Scaled for majestic, statuesque presence
+      model.rotation.y = 0; // Model naturally faces +Z; aligns front stole, crozier, and visor forward (+Z)
+      model.position.set(0, 0, 0); // Exact ground contact y=0.000m (stepped plinth base sits flush at y=0)
       applyPuranicTheme(model, team);
 
-      // Register chariot wheels for rolling locomotion on their exact axle axis
+      // Clean empty wheels array (zero spinning wheels on a stone statue)
       rig.wheels = [];
-      const wheelL = model.getObjectByName('Chakra_Wheel_L');
-      const wheelR = model.getObjectByName('Chakra_Wheel_R');
 
-      if (wheelL && wheelR) {
-        // Dedicated axle pivot groups centered at the wheel hubs (X = +-0.75, Y = 0.517, Z = 0.0)
-        const pivotL = new THREE.Group();
-        pivotL.name = 'Chakra_Wheel_Pivot_L';
-        pivotL.position.set(-0.75, 0.517, 0.0);
+      // Hook up limbs & accessories for dynamic gestures and combat choreography
+      const crozierShaft = model.getObjectByName('Crozier_Shaft');
+      const armR         = model.getObjectByName('Bishop_Arm_R');
+      const armL         = model.getObjectByName('Bishop_Arm_L');
+      const visorHelm    = model.getObjectByName('Bishop_Visor_Helm');
 
-        const pivotR = new THREE.Group();
-        pivotR.name = 'Chakra_Wheel_Pivot_R';
-        pivotR.position.set(0.75, 0.517, 0.0);
-
-        // Position wheel inside pivot so wheel hub aligns exactly at (0, 0, 0) of the pivot
-        // Note: Do NOT mutate shared wheel geometry!
-        wheelL.position.set(0.75, -0.517, 0.0);
-        pivotL.add(wheelL);
-
-        wheelR.position.set(-0.75, -0.517, 0.0);
-        pivotR.add(wheelR);
-
-        model.add(pivotL, pivotR);
-        rig.wheels.push(pivotL, pivotR);
-      } else {
-        model.traverse(child => {
-          if (child.isMesh && child.material && (child.name.includes('Wheel') || child.name.includes('Chakra'))) {
-            rig.wheels.push(child);
-          }
-        });
-      }
-
-      const suryaBanner = model.getObjectByName('Surya_Banner');
-      if (suryaBanner) {
-        animatedBanners.push({ mesh: suryaBanner, offset: Math.random() * 3.0 });
-      }
-
-      model.traverse(child => {
-        if (child.isMesh) {
-          const n = child.name || '';
-          if (n.includes('Archer_Robe') || n.includes('Archer_Head') || n.includes('Prabhamandala') ||
-              n.includes('Cone') || n.includes('Pedestal') || n.includes('Rune')) {
-            child.visible = false;
-          }
-        }
-      });
-
-      // Sculpted Vedic Maharathi Archer standing heroically inside chariot
-      const archerGroup = new THREE.Group();
-      archerGroup.position.set(0, 0.35, -0.05);
-
-      // 1. Pleated Silk Robed Lower Body
-      const robeGeo = new THREE.CylinderGeometry(0.24, 0.30, 0.65, 12);
-      robeGeo.scale(1.0, 1.0, 0.85);
-      const robe = new THREE.Mesh(robeGeo, mats.armor);
-      robe.position.set(0, 0.55, 0);
-
-      // 2. Surya Kavacha Breastplate & Medallion
-      const cuirassGeo = new THREE.CylinderGeometry(0.22, 0.18, 0.42, 12);
-      cuirassGeo.scale(1.1, 1.0, 0.85);
-      const cuirass = new THREE.Mesh(cuirassGeo, mats.trim);
-      cuirass.position.set(0, 1.02, 0.02);
-      const sunMedallion = new THREE.Mesh(new THREE.CircleGeometry(0.08, 12), mats.glow);
-      sunMedallion.position.set(0, 1.06, 0.18);
-      archerGroup.add(robe, cuirass, sunMedallion);
-
-      // 3. Sagely Head with Classical Ushnisha Turban
-      const head = new THREE.Mesh(new THREE.SphereGeometry(0.11, 12, 12), mats.armor);
-      head.position.set(0, 1.32, 0.04);
-      const pagri = new THREE.Mesh(new THREE.SphereGeometry(0.13, 12, 10), mats.trim);
-      pagri.position.set(0, 1.40, 0.04);
-      pagri.scale.set(1.0, 0.85, 1.0);
-      const sarpech = new THREE.Mesh(new THREE.OctahedronGeometry(0.038), mats.glow);
-      sarpech.position.set(0, 1.44, 0.14);
-      archerGroup.add(head, pagri, sarpech);
-
-      // 4. Arms Holding Gandiva Greatbow
-      const armL = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.038, 0.38, 8), mats.armor);
-      armL.position.set(-0.18, 1.12, 0.18);
-      armL.rotation.set(Math.PI / 3, 0.2, -0.35);
-      const armR = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.038, 0.35, 8), mats.armor);
-      armR.position.set(0.16, 1.08, 0.06);
-      armR.rotation.set(-0.15, 0.1, 0.45);
-      archerGroup.add(armL, armR);
+      if (armR) rig.armR = armR;
+      if (armL) rig.armL = armL;
+      if (visorHelm) rig.head = visorHelm;
+      if (crozierShaft) rig.staff = crozierShaft;
 
       rig.torso.position.set(0, 0, 0);
-      rig.torso.add(model, archerGroup);
+      rig.torso.add(model);
       rig.bodyRoot.add(rig.torso);
       rig.isRealistic = true;
     }
@@ -3402,8 +3330,10 @@
           rig.torso.position.y = 0;
           rig.bodyRoot.position.y = groundComp;
         } else if (rig.type === PIECE_BISHOP) {
-          // Chariot wheel rotation strictly proportional to locomotion speed
-          rig.wheels.forEach(wh => { wh.rotation.x += dt * 14.0 * w; });
+          // Living stone statue locomotion: steady upright glide across the board
+          if (rig.wheels && rig.wheels.length > 0) {
+            rig.wheels.forEach(wh => { wh.rotation.x += dt * 14.0 * w; });
+          }
         } else if (rig.type === PIECE_KNIGHT) {
           // Biomechanical 2-Beat Diagonal Trot Kinematics (Ashvarohi)
           const phi = p;
@@ -3454,7 +3384,7 @@
 
       if (w <= 0.01 && !rig.inKillSequence && !rig.inTurn) {
         // Procedural Idle: Grounded, steady posture with zero body swinging/swaying
-        rig.torso.position.y = (rig.type === PIECE_ROOK ? 0.95 : rig.type === PIECE_KNIGHT ? 0.86 : rig.type === PIECE_BISHOP ? 0.418 : rig.type === PIECE_KING ? 0.82 : 0.68);
+        rig.torso.position.y = rig.isRealistic ? 0 : (rig.type === PIECE_ROOK ? 0.95 : rig.type === PIECE_KNIGHT ? 0.86 : rig.type === PIECE_BISHOP ? 0.418 : rig.type === PIECE_KING ? 0.82 : 0.68);
         rig.torso.rotation.set(0, 0, 0);
         if (rig.head) rig.head.rotation.set(0, 0, 0);
         rig.legL.rotation.set(0, 0, 0);
@@ -3507,10 +3437,12 @@
         rig.bodyRoot.position.y = Math.abs(s) * 0.11 * w;
       }
       else if (rig.type === PIECE_BISHOP) {
-        // Proportional wheel rotation (ω = 9.5 rad/s) + banked diagonal chassis roll (sin(p) * 0.09)
-        rig.wheels.forEach(wh => { wh.rotation.x += dt * 9.5 * w; });
-        rig.torso.rotation.z = s * 0.09 * w;
-        rig.torso.rotation.x = 0.08 * w;
+        // Living stone statue glide: perfectly upright, solemn and steady with zero swaying
+        if (rig.wheels && rig.wheels.length > 0) {
+          rig.wheels.forEach(wh => { wh.rotation.x += dt * 9.5 * w; });
+        }
+        rig.torso.rotation.z = 0;
+        rig.torso.rotation.x = 0;
       }
       else if (rig.type === PIECE_QUEEN) {
         // Predatory glide (±sin(p) * 0.62) with phase-lagged floating wings
@@ -7127,16 +7059,20 @@
             }
           }
           else if (attackerRig.type === PIECE_BISHOP) {
-            // RATHA: Celestial Astra Barrage & Chariot Scythe Thrust
+            // YAJAKA / BISHOP: Liturgical Crozier Staff Slam & Divine Judgment Pillar
             if (t < 0.55) {
-              attackerRig.armR.position.z = 0.36 - (t / 0.55) * 0.28;
-              attackerRig.torso.rotation.x = -0.22 * (t / 0.55);
+              const pWindup = t / 0.55;
+              attackerRig.torso.rotation.x = -0.22 * pWindup;
+              if (attackerRig.armR) attackerRig.armR.rotation.x = -0.38 * pWindup;
+              if (attackerRig.armL) attackerRig.armL.rotation.x = -0.28 * pWindup;
               if (Math.floor(elapsed * 30) % 4 === 0) {
                 spawnRunicGlintTrail(attackerRig.root.position, attackerRig.team);
               }
             } else {
-              attackerRig.armR.position.z = 0.36;
-              attackerRig.torso.rotation.x = 0;
+              const pRecoil = 1.0 - ((t - 0.55) / 0.45);
+              attackerRig.torso.rotation.x = -0.22 * pRecoil;
+              if (attackerRig.armR) attackerRig.armR.rotation.x = -0.38 * pRecoil;
+              if (attackerRig.armL) attackerRig.armL.rotation.x = -0.28 * pRecoil;
             }
           }
           else if (attackerRig.type === PIECE_QUEEN) {
